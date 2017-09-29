@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试fb-bs</title>
+
+	<!-- 基本 -->
+	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+	<script src="vendor/jquery/jquery-1.9.1.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- html和json格式化插件 -->
+	<script src="vendor/html_formater/htmlformat.js"></script>
+	<script src="vendor/html_formater/jsformat.js"></script>
+
+	<!-- 校验 -->
+	<script src="vendor/jquery-validation/jquery.validate.js"></script>
+	<script src="vendor/jquery-validation/localization/messages_zh.min.js"></script>
+	<script src="vendor/jquery-validation/localization/messages_zh_fieldname.js"></script>
+
+	<!-- 日期选择控件 -->
+	<link href="vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+	<script src="vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+	<!-- 特殊radio和checkbox样式 -->
+	<link rel="stylesheet" href="vendor/styles-radio-checkbox.css">
+
+	<!-- 下拉复选插件 -->
+	<link href="vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
+	<script src="vendor/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+
+	<!-- ==================== 以下为自己的东西 ==================== -->
+	<style>
+		* {
+			font-family: '微软雅黑'!important;
+		}
+	</style>
+
+	<!-- fb 组件 -->
+	<script src="assets/fb-bs/src/js/fb.baseComponents.js"></script>
+	<script src="assets/fb-bs/src/js/components/text.js"></script>
+	<script src="assets/fb-bs/src/js/components/select.js"></script>
+
+	<!-- fb 核心文件 -->
+	<script src="assets/fb-bs/src/js/fb.core.js"></script>
+
+</head>
+<body>
+	<h1 style="text-indent: 20px;">测试自动表单2.0 - Bootstrap</h1>
+	<hr>
+	<form id="testForm"></form>
+	<script>
+		$(document).ready(function() {
+			$.ajax({
+				url: '/data/jsonConf.json',
+				dataType: 'JSON',
+				success: function(jsonConf) {
+					$('#testForm').renderForm(jsonConf);
+				},
+				error: function(r) {
+					$('#testForm').html('Ops... Something must be wrong, check it');
+				}
+			});
+		});
+	</script>
+</body>
+</html>
