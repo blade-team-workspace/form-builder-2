@@ -14,10 +14,7 @@
 		// params
 		this.$node = undefined;
 		this.$container = undefined;	// 容器对象，是否用到还不清楚……联动时使用？？
-		this.defaultOpts = {
-			'opts': {},
-			'rule': {}
-		};
+		this.defaultOpts = {};
 		this.template = '<div>THIS IS BASE-COMPONENT TEMPLATE</div>';
 		this.opts = undefined;
 		this.rule = undefined;
@@ -32,7 +29,7 @@
 		}
 		this.__init = function(kargs) {
 			// 合并配置参数
-			this.opts = $.extend({}, this.defaultOpts, kargs.opts,
+			this.opts = $.extend({}, this.defaultOpts, kargs,
 				{readonly: kargs.global_isRead}, {steamLayout: kargs.global_isSteam});
 			// 合并规则
 			this.rule = $.extend({}, kargs.rule);
@@ -45,8 +42,8 @@
 			// do nothing, not necessary
 			console.log('after init');
 			console.log('opts', this.opts);
-			console.log('rule', this.rule);
-			console.log('value', this.value);
+			// console.log('rule', this.rule);
+			// console.log('value', this.value);
 		}
 		this.init = function(kargs) {
 			this.__beforeInit(kargs);
