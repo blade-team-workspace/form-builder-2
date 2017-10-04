@@ -1,0 +1,97 @@
+;(function (factory) {
+	'use strict';
+	if (typeof define === 'function' && define.amd) {
+		define(['Dom7'], factory);
+	} else {
+		factory(window.Dom7);
+	}
+}(function ($, undefined) {
+	$.formb = $.formb || {};
+
+	// 基本组件类
+	var baseContainer = function(kargs) {
+		var that = this;
+		// params
+		this.$node = undefined;
+		this.defaultOpts = {
+			'label': '容器LABEL',
+			'type': 'base-container'
+		};
+		this.template = '<div>THIS IS BASE-CONTAINER TEMPLATE</div>';
+		this.opts = undefined;
+		this.groupId = undefined;
+
+
+		// 初始化(实例化默认调用)
+		this.__beforeInit = function(kargs) {
+			// do nothing, not necessary
+			console.log('before init');
+		}
+		this.__init = function(kargs) {
+			// 合并配置参数
+			this.opts = $.extend({}, this.defaultOpts, kargs,
+				{readonly: kargs.global_isRead}, {steamLayout: kargs.global_isSteam});
+			// 取groupId
+			this.groupId = kargs.groupId || undefined;
+			this.$node = kargs.$node || undefined;
+		}
+		this.__afterInit = function() {
+			// do nothing, not necessary
+			console.log('after init');
+			console.log('opts', this.opts);
+			// console.log('groupId', this.groupId);
+		}
+		this.init = function(kargs) {
+			this.__beforeInit(kargs);
+			this.__init(kargs);
+			this.__afterInit(kargs);
+		}
+		// 自动实例化
+		this.init(kargs);
+
+
+
+		// 渲染元素的方法
+		this.__beforeRender = function() {
+			// do nothing, not necessary
+			console.log('before render');
+		}
+		this.__render = function() {
+			// TODO
+			console.error('Must be rewritten.');
+		}
+		this.__afterRender = function() {
+			// do nothing, not necessary
+			console.log('after render');
+		}
+		this.render = function() {
+			this.__beforeRender();
+			this.__render();
+			this.__afterRender();
+		}
+
+
+
+		// 向父元素添加对象的方法
+		this.__beforeAppend = function(childComponent) {
+			// do nothing, not necessary
+			console.log('before Append');
+		}
+		this.__append = function(childComponent) {
+			// DO
+			console.error('__append() must be rewritten.');
+		}
+		this.__afterAppend = function(childComponent) {
+			// do nothing, not necessary
+			console.log('after Append');
+		}
+		this.append = function(childComponent) {
+			this.__beforeAppend(childComponent);
+			this.__append(childComponent);
+			this.__afterAppend(childComponent);
+		};
+	}
+
+	$.formb.baseContainer = baseContainer;
+
+}));

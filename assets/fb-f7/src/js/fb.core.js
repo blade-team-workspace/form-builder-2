@@ -7,8 +7,7 @@
 	}
 }(function ($, undefined) {
 	$.formb = $.formb || {};
-
-	var cpts = $.formb.components;
+	$.formb.components = $.formb.components || {};
 
 
 	$.fn.renderForm = function(jsonConf) {
@@ -17,7 +16,9 @@
 		// initValidator($form);
 
 		// 渲染生成form
-		renderJson($form, jsonConf);
+		// renderJson($form, jsonConf);
+
+		render($form, jsonConf);
 
 		// 加校验
 		// afterAllAjaxCompleteDo(deferredObjectList, setFormRules, [$form]);
@@ -31,7 +32,7 @@
 
 
 	// 针对容器才有的方法和变量，如果做multimedia控件，也需要实现下以下方法。
-	var labelTemplate =
+	/*var labelTemplate =
 			'<li>' +
 				'<a href="#" class="item-with-addon">' +
 					'<div class="item-content">' +
@@ -131,12 +132,23 @@
 
 		$formGroupItem.find('ul').append($label);
 		$formGroupItem.find('ul').append($content);
+	}*/
+
+
+	function render($form, jsonConf) {
+		var opt = $.extend({}, jsonConf, {'$node': $form});
+		var Component = $.formb.components[opt.type];
+		if (Component === undefined) {
+			console.error('组件或容器[{type}]未找到对应的class定义'.format({type: opt.type}));
+		}
+		var component = new Component(opt);
+		component.render();
+		// component.appendTo($form);
 	}
 
 
-
 	// 根据json渲染form的内容
-	function renderJson($form, jsonConf) {
+	/*function renderJson($form, jsonConf) {
 		var json_opts = jsonConf['items'] || [];
 		var json_rules = jsonConf['rules'] || {};
 		var json_values = jsonConf['values'] || {};
@@ -179,7 +191,7 @@
 			}
 			
 		});
-	}
+	}*/
 
 
 	// 给表单赋值的方法
