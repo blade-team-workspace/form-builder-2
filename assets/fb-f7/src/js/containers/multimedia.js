@@ -30,6 +30,26 @@
 							'</div>' +
 						'</div>' +
 					'</a>' +
+					
+					'<div class="popover addon-popover">' +
+						'<div class="popover-inner">' +
+							'<div class="icons-container">' +
+								'<a class="addon-text" href="javascript:void(0);"><i class="f7-icons size-smallest">compose</i></a>' +
+								'<a class="addon-images" href="javascript:void(0);"><i class="f7-icons size-smallest">camera</i></a>' +
+								'<a class="addon-audio" href="javascript:void(0);"><i class="f7-icons size-smallest">mic</i></a>' +
+								'<a class="addon-time" href="javascript:void(0);"><i class="f7-icons size-smallest">time</i></a>' +
+							'</div>' +
+						'</div>' +
+					'</div>' +
+
+					'<span class="addon-items-popover">' +
+						// height -> 0, console.log <<< $('#a').offset()
+						'<div class="addon-items-container" id="a">' +
+							'<a class="addon-text" href="javascript:void(0);"><i class="f7-icons size-smallest">compose</i></a>' +
+							// '<a class="addon-images" href="javascript:void(0);"><i class="f7-icons size-smallest">camera</i></a>' +
+						'</div>' +
+						'<div class="addon-items-popover-angle"></div>' +
+					'</span>' +
 				'</li>';
 		this.contentTemplate =
 				'<li class="swipeout">' +
@@ -75,10 +95,18 @@
 			// 渲染label >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $label = $(this.labelTemplate.format(that.opts));
 			this.$node = [$label];
+			// 定制化点击addon的特殊操作
+			$label.find('.addon-edit').on('click', function(e) {
+				var clickedLink = this;
+				var popoverHTML = $label.find('.popover.addon-popover')[0].outerHTML;
+				var popoverNode = $label.find('.popover.addon-popover');
+				myApp.popover(popoverNode, clickedLink);
+				// $('.addon-popover').data('$source', $(e.target).closest('.list-block'));
+			});
 
 
 
-			$label.find('.addon-edit').on('click', childComponent.editCallback);
+			// $label.find('.addon-edit').on('click', childComponent.editCallback);
 
 			// 渲染content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $content = $(this.contentTemplate.format(opts));

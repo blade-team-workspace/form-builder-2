@@ -47,6 +47,16 @@
 					"type": "textarea"
 				}
 			]
+		},
+		{
+			"label": "[未设置] 多行-6",
+			"type": "form-group",
+			"items": [
+				{
+					"name": "ta6",
+					"type": "textarea"
+				}
+			]
 		}
 	],
 	"rules": {
