@@ -87,13 +87,13 @@
 }
 .navbar-btn {
 	background: rgba(0,0,0,0.25);
-    display: block;
-    padding: 0 12px;
-    height: 24px;
-    line-height: 24px;
-    font-size: 13px;
-    border-radius: 20px;
-    position: relative;
+	display: block;
+	padding: 0 12px;
+	height: 24px;
+	line-height: 24px;
+	font-size: 13px;
+	border-radius: 20px;
+	position: relative;
 }
 .navbar-btn.nbg {
 	background: transparent;
@@ -137,14 +137,16 @@
 
 /* addon按钮 */
 .addon-popover {
-	width: 139px;
+	width: initial;
 	border-radius: 20px;
 	margin-top: 8px;
 }
-.addon-popover .popover-angle:after {
+.addon-popover .popover-angle.on-bottom:after {
 	width: 20px;
 	height: 20px;
-	margin-left: 6px;
+}
+.addon-popover .popover-angle.on-bottom {
+	margin-left: 6px!important;
 }
 .addon-popover .icons-container {
 	height: 28px;
@@ -174,6 +176,56 @@
 	padding-right: 4px;
 	border-right: none;
 }
+
+/* 新addon */
+.addon-items-popover {
+	position: absolute;
+	right: 6px;
+	top: -25px;
+	z-index: 1000;
+}
+.addon-items-popover .addon-items-container {
+	background: #fff;
+	border: solid 1px lightgray;
+	border-radius: 30px;
+	overflow: hidden;
+}
+.addon-items-popover .addon-items-container a {
+	display: inline-block;
+	width: 30px;
+	line-height: 28px;
+	text-align: center;
+	box-sizing: content-box;
+	border-right: solid 1px #ddd;
+	color: #40BC87;
+	background: #fff;
+}
+.addon-items-popover .addon-items-container a.active-state {
+	background: #40BC87;
+	color: #fff;
+}
+.addon-items-popover .addon-items-container a:first-child {
+	width: 34px;
+	padding-left: 4px;
+}
+.addon-items-popover .addon-items-container a:last-child{
+	width: 34px;
+	padding-right: 4px;
+	border-right: none;
+}
+.addon-items-popover .addon-items-popover-angle {
+	position: absolute;
+	display: inline;
+	background: transparent;
+	right: 17px;
+	height: 0;
+	width: 0;
+	border-top: solid 5px #ddd;
+	border-left: solid 5px transparent;
+	border-right: solid 5px transparent;
+	border-bottom: solid 0px transparent;
+}
+
 
 
 /* 图片上传 */
