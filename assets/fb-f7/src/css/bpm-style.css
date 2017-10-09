@@ -182,11 +182,15 @@
 	position: absolute;
 	right: 6px;
 	top: -25px;
-	z-index: 1000;
+	z-index: 15000;
+	opacity: 0;
+}
+.addon-items-popover.show {
+    transition-duration: .3s;
+    opacity: 1;
 }
 .addon-items-popover .addon-items-container {
 	background: #fff;
-	border: solid 1px lightgray;
 	border-radius: 30px;
 	overflow: hidden;
 }
@@ -220,7 +224,7 @@
 	right: 17px;
 	height: 0;
 	width: 0;
-	border-top: solid 5px #ddd;
+	border-top: solid 5px #fff;
 	border-left: solid 5px transparent;
 	border-right: solid 5px transparent;
 	border-bottom: solid 0px transparent;

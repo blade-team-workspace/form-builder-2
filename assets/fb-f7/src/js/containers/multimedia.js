@@ -31,22 +31,22 @@
 						'</div>' +
 					'</a>' +
 					
-					'<div class="popover addon-popover">' +
-						'<div class="popover-inner">' +
-							'<div class="icons-container">' +
-								'<a class="addon-text" href="javascript:void(0);"><i class="f7-icons size-smallest">compose</i></a>' +
-								'<a class="addon-images" href="javascript:void(0);"><i class="f7-icons size-smallest">camera</i></a>' +
-								'<a class="addon-audio" href="javascript:void(0);"><i class="f7-icons size-smallest">mic</i></a>' +
-								'<a class="addon-time" href="javascript:void(0);"><i class="f7-icons size-smallest">time</i></a>' +
-							'</div>' +
-						'</div>' +
-					'</div>' +
+					// '<div class="popover addon-popover">' +
+					// 	'<div class="popover-inner">' +
+					// 		'<div class="icons-container">' +
+					// 			'<a class="addon-text" href="javascript:void(0);"><i class="f7-icons size-smallest">compose</i></a>' +
+					// 			'<a class="addon-images" href="javascript:void(0);"><i class="f7-icons size-smallest">camera</i></a>' +
+					// 			'<a class="addon-audio" href="javascript:void(0);"><i class="f7-icons size-smallest">mic</i></a>' +
+					// 			'<a class="addon-time" href="javascript:void(0);"><i class="f7-icons size-smallest">time</i></a>' +
+					// 		'</div>' +
+					// 	'</div>' +
+					// '</div>' +
 
 					'<span class="addon-items-popover">' +
 						// height -> 0, console.log <<< $('#a').offset()
-						'<div class="addon-items-container" id="a">' +
+						'<div class="addon-items-container">' +
 							'<a class="addon-text" href="javascript:void(0);"><i class="f7-icons size-smallest">compose</i></a>' +
-							// '<a class="addon-images" href="javascript:void(0);"><i class="f7-icons size-smallest">camera</i></a>' +
+							'<a class="addon-images" href="javascript:void(0);"><i class="f7-icons size-smallest">camera</i></a>' +
 						'</div>' +
 						'<div class="addon-items-popover-angle"></div>' +
 					'</span>' +
@@ -97,11 +97,37 @@
 			this.$node = [$label];
 			// 定制化点击addon的特殊操作
 			$label.find('.addon-edit').on('click', function(e) {
-				var clickedLink = this;
-				var popoverHTML = $label.find('.popover.addon-popover')[0].outerHTML;
-				var popoverNode = $label.find('.popover.addon-popover');
-				myApp.popover(popoverNode, clickedLink);
-				// $('.addon-popover').data('$source', $(e.target).closest('.list-block'));
+				/*var clickedLink = this;
+				var popoverNode = $(e.target).closest('li').find('.addon-items-popover');
+				myApp.popover(popoverNode, clickedLink);*/
+				// // $('.addon-popover').data('$source', $(e.target).closest('.list-block'));
+
+				// ------------------------------------------------------------------
+				var left = $(e.target).offset().left;
+				var top = $(e.target).offset().top;
+
+				// $('body').append($('#s'));
+				var $parent = $(e.target).closest('li');
+				var $modal = $parent.find('.addon-items-popover');
+				var $overlay = $('<div class="modal-overlay modal-overlay-visible"></div>');
+
+				function resetAddon() {
+					$modal.removeClass('show');
+					$parent.append($modal);
+					$overlay.remove();
+				}
+
+				$modal.css({
+					top: top - 37 + 'px'
+				});
+				$modal.addClass('show');
+				$('body').append($modal);
+
+				$modal.on('click', resetAddon);
+				$overlay.on('click', resetAddon);
+
+				$('body').append($overlay);
+
 			});
 
 
