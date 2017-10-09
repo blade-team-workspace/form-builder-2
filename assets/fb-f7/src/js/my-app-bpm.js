@@ -164,11 +164,11 @@ myApp.init();
 
 // 绑定编辑文本的事件 
 // TODEL: 报错请无视，待删除
-$('body').on('click', '.addon-text', function(e) {
+/*$('body').on('click', '.addon-text', function(e) {
 	myApp.closeModal();
 	var $source = $(e.target).closest('.addon-popover').data('$source');
 	$source.editText();
-});
+});*/
 /**
  * 文本编辑的实现方法
  *     使用$obj.editText(initValue, $nodeToReplace)

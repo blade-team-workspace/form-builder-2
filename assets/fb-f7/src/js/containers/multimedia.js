@@ -42,7 +42,7 @@
 					// 	'</div>' +
 					// '</div>' +
 
-					'<span class="addon-items-popover">' +
+					'<span class="addon-items-popover" style="display: none;">' +
 						// height -> 0, console.log <<< $('#a').offset()
 						'<div class="addon-items-container">' +
 							'<a class="addon-text" href="javascript:void(0);"><i class="f7-icons size-smallest">compose</i></a>' +
@@ -103,6 +103,7 @@
 				// // $('.addon-popover').data('$source', $(e.target).closest('.list-block'));
 
 				// ------------------------------------------------------------------
+
 				var left = $(e.target).offset().left;
 				var top = $(e.target).offset().top;
 
@@ -113,13 +114,13 @@
 
 				function resetAddon() {
 					$modal.removeClass('show');
+					$modal.css({top: 'initial', display: 'none'});
 					$parent.append($modal);
 					$overlay.remove();
+					$('.modal-overlay').remove();
 				}
 
-				$modal.css({
-					top: top - 37 + 'px'
-				});
+				$modal.css({top: top - 37 + 'px', display: 'initial'});
 				$modal.addClass('show');
 				$('body').append($modal);
 
