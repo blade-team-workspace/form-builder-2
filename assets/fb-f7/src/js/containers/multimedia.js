@@ -30,23 +30,10 @@
 							'</div>' +
 						'</div>' +
 					'</a>' +
-					
-					// '<div class="popover addon-popover">' +
-					// 	'<div class="popover-inner">' +
-					// 		'<div class="icons-container">' +
-					// 			'<a class="addon-text" href="javascript:void(0);"><i class="f7-icons size-smallest">compose</i></a>' +
-					// 			'<a class="addon-images" href="javascript:void(0);"><i class="f7-icons size-smallest">camera</i></a>' +
-					// 			'<a class="addon-audio" href="javascript:void(0);"><i class="f7-icons size-smallest">mic</i></a>' +
-					// 			'<a class="addon-time" href="javascript:void(0);"><i class="f7-icons size-smallest">time</i></a>' +
-					// 		'</div>' +
-					// 	'</div>' +
-					// '</div>' +
-
 					'<span class="addon-items-popover" style="display: none;">' +
-						// height -> 0, console.log <<< $('#a').offset()
 						'<div class="addon-items-container">' +
-							'<a class="addon-text" href="javascript:void(0);"><i class="f7-icons size-smallest">compose</i></a>' +
-							'<a class="addon-images" href="javascript:void(0);"><i class="f7-icons size-smallest">camera</i></a>' +
+							/*'<a><i class="f7-icons size-smallest">compose</i></a>' +
+							'<a><i class="f7-icons size-smallest">camera</i></a>' +*/
 						'</div>' +
 						'<div class="addon-items-popover-angle"></div>' +
 					'</span>' +
@@ -73,6 +60,10 @@
 			}
 			// 渲染内部items
 			var opt = undefined;
+			var appendData = {
+				label: this.opts.label,
+				components: []				// 用于存放所有渲染完毕的components
+			};
 			$.each(this.opts.items, function(idx){
 				opt = that.opts.items[idx];
 
@@ -80,34 +71,23 @@
 				if (Component === undefined) {
 					console.error('组件或容器[{type}]未找到对应的class定义'.format({type: opt.type}));
 				}
-				opt.label = that.opts.label;
+				opt.label = that.opts.label;	// textarea需要用到作为弹出的标题（扶额）
 				var component = new Component(opt);
 				component.render();
-				that.append(component);
+				appendData.components.push(component);
 			});
+			this.append(appendData);
 		}
 
-		this.__append = function(childComponent) {
-			
-			// 渲染formGroupItem >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-			var opts = childComponent.opts;
-
+		this.__append = function(appendData) {
 			// 渲染label >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-			var $label = $(this.labelTemplate.format(that.opts));
+			var $label = $(this.labelTemplate.format({label: appendData.label}));
 			this.$node = [$label];
-			// 定制化点击addon的特殊操作
+
+			// 点击addon的特殊操作，弹出气泡(未使用popover方法，原因：定位不准确)
 			$label.find('.addon-edit').on('click', function(e) {
-				/*var clickedLink = this;
-				var popoverNode = $(e.target).closest('li').find('.addon-items-popover');
-				myApp.popover(popoverNode, clickedLink);*/
-				// // $('.addon-popover').data('$source', $(e.target).closest('.list-block'));
-
-				// ------------------------------------------------------------------
-
-				var left = $(e.target).offset().left;
 				var top = $(e.target).offset().top;
 
-				// $('body').append($('#s'));
 				var $parent = $(e.target).closest('li');
 				var $modal = $parent.find('.addon-items-popover');
 				var $overlay = $('<div class="modal-overlay modal-overlay-visible"></div>');
@@ -128,40 +108,45 @@
 				$overlay.on('click', resetAddon);
 
 				$('body').append($overlay);
-
 			});
-
-
-
-			// $label.find('.addon-edit').on('click', childComponent.editCallback);
 
 			// 渲染content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-			var $content = $(this.contentTemplate.format(opts));
-			// 给当前content暴露childComponent对象，方便以后操作
-			$content.data('component', childComponent);
-			$content.find('.item-after').append(childComponent.$node);
-			// 清空当前对象的按钮
-			$content.find('.swipeout-clean').on('click', function(e) {
-				var el = $(e.target).closest('.swipeout');
-				// 模仿swipe删除操作
-				if (el.length === 0)
-					return;
-				if (el.length > 1)
-					el = $(el[0]);
-				el.css({height: el.outerHeight() + 'px'});
-				var clientLeft = el[0].clientLeft;
-				el.css({height: 0 + 'px'}).addClass('deleting transitioning').transitionEnd(function () {
-					// 删除完毕操作
-					el.removeClass('deleting transitioning swipeout-opened');
-					el.find('.swipeout-content').css('transform', 'initial');
-					el.find('.swipeout-actions-opened').removeClass('swipeout-actions-opened').children().css('transform', 'initial');
-					
-				});
-				// 清空数据
-				el.data('component').setValue('');
-			});
+			$.each(appendData.components, function(idx) {
+				var childComponent = appendData.components[idx];
+				var opts = childComponent.opts;
 
-			// , $content];
+				var $content = $(that.contentTemplate.format(opts));
+				// 给当前content暴露childComponent对象，方便以后操作
+				$content.data('component', childComponent);
+				$content.find('.item-after').append(childComponent.$node);
+				// 清空当前对象的按钮
+				$content.find('.swipeout-clean').on('click', function(e) {
+					var el = $(e.target).closest('.swipeout');
+					// 模仿swipe删除操作
+					if (el.length === 0)
+						return;
+					if (el.length > 1)
+						el = $(el[0]);
+					el.css({height: el.outerHeight() + 'px'});
+					var clientLeft = el[0].clientLeft;
+					el.css({height: 0 + 'px'}).addClass('deleting transitioning').transitionEnd(function () {
+						// 删除完毕操作
+						el.removeClass('deleting transitioning swipeout-opened');
+						el.find('.swipeout-content').css('transform', 'initial');
+						el.find('.swipeout-actions-opened').removeClass('swipeout-actions-opened').children().css('transform', 'initial');
+						
+					});
+					// 清空数据
+					el.data('component').setValue('');
+				});
+
+				that.$node.push($content);
+
+				// 给addon添加对应按钮
+				var $editBtn = $('<a><i class="f7-icons size-smallest">{f7-icon}</i></a>'.format(opts));
+				$editBtn.on('click', childComponent.editCallback);
+				$label.find('.addon-items-container').append($editBtn);
+			});
 		}
 	}
 

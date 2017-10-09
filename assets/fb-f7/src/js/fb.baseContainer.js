@@ -73,22 +73,22 @@
 
 
 		// 向父元素添加对象的方法
-		this.__beforeAppend = function(childComponent) {
+		this.__beforeAppend = function(obj) {
 			// do nothing, not necessary
 			console.log('before Append');
 		}
-		this.__append = function(childComponent) {
+		this.__append = function(obj) {
 			// DO
 			console.error('__append() must be rewritten.');
 		}
-		this.__afterAppend = function(childComponent) {
+		this.__afterAppend = function(obj) {
 			// do nothing, not necessary
 			console.log('after Append');
 		}
-		this.append = function(childComponent) {
-			this.__beforeAppend(childComponent);
-			this.__append(childComponent);
-			this.__afterAppend(childComponent);
+		this.append = function(obj) {
+			this.__beforeAppend(obj);
+			this.__append(obj);
+			this.__afterAppend(obj);
 		};
 	}
 

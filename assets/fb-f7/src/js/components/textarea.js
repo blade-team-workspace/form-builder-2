@@ -12,7 +12,8 @@
 	var baseComponent = $.formb.baseComponent;
 
 	var component_textarea = function(kargs) {
-		baseComponent.apply(this, arguments);
+		kargs['f7-icon'] = 'compose';			// 定义图标
+		baseComponent.apply(this, arguments);	// 执行基类的初始化
 
 		var that = this;
 

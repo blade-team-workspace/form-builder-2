@@ -136,7 +136,7 @@
 }
 
 /* addon按钮 */
-.addon-popover {
+/* .addon-popover {
 	width: initial;
 	border-radius: 20px;
 	margin-top: 8px;
@@ -175,7 +175,7 @@
 	width: 34px;
 	padding-right: 4px;
 	border-right: none;
-}
+} */
 
 /* 新addon */
 .addon-items-popover {

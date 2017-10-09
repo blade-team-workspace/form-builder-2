@@ -14,7 +14,9 @@
 		// params
 		this.$node = undefined;
 		this.$container = undefined;	// 容器对象，是否用到还不清楚……联动时使用？？
-		this.defaultOpts = {};
+		this.defaultOpts = {
+			'f7-icon': 'star'
+		};
 		this.template = '<div>THIS IS BASE-COMPONENT TEMPLATE</div>';
 		this.opts = undefined;
 		this.rule = undefined;
