@@ -84,7 +84,7 @@
 			// 渲染content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $content = $(this.contentTemplate.format(opts));
 			// 给当前content暴露childComponent对象，方便以后操作
-			// $content.data('component', childComponent);
+			$content.data('component', childComponent);
 			$content.find('.item-after').append(childComponent.$node);
 			// 清空当前对象的按钮
 			$content.find('.swipeout-clean').on('click', function(e) {
@@ -104,7 +104,7 @@
 					
 				});
 				// 清空数据
-				// el.data('component').setValue('');
+				el.data('component').setValue('');
 			});
 
 			this.$node = [$label, $content];
