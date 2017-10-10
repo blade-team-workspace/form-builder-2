@@ -124,10 +124,14 @@
 			} else {
 				$input.val('');
 			}
+
+			// TODO: 检查下这里的逻辑，写的时候有点儿混乱
+			that.value = $input.val();
+			that.checkViewStatus();
 		}
 
 		this.__setValue = function(value) {
-			// console.log('textarea / this.__setValue(' + value + ')');
+			console.log('image / this.__setValue(' + value + ')');
 
 			// console.log(this.$node.find('input'));
 

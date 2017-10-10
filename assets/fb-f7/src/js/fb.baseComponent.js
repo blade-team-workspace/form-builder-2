@@ -78,7 +78,7 @@
 			// 给$node绑定获取component对象的方法
 			// this.$node.data('component', that);
 
-			
+
 		}
 
 
@@ -95,6 +95,18 @@
 			// do nothing, not necessary
 		}
 
+
+		// 改变显示状态
+		this.checkViewStatus = function() {
+			if (this.value === undefined ||
+				this.value === null ||
+				this.value === '' ||
+				this.value.length == 0) {
+				this.$node.closest('li.swipeout').css('height', '0px');
+			} else {
+				this.$node.closest('li.swipeout').css('height', 'initial');
+			}
+		}
 		
 
 		// 赋值的实现
@@ -113,14 +125,7 @@
 			this.__setValue(value);
 			this.value = value;
 			this.__afterSetValue();
-			if (this.value === undefined ||
-				this.value === null ||
-				this.value === '' ||
-				this.value.length == 0) {
-				this.$node.closest('li.swipeout').css('height', '0px');
-			} else {
-				this.$node.closest('li.swipeout').css('height', 'initial');
-			}
+			this.checkViewStatus();
 		}
 
 		// 编辑当前对象的回调
