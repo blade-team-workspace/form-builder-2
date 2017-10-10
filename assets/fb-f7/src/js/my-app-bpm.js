@@ -59,6 +59,17 @@ function customizedHistoryBack() {
 	}
 }
 
+// [图片、音频]预上传回调
+function preUploadCallback(data) {
+	$$('form#{formId} [name={name}]'.format(data)).closest('.media-node').data('preUpload')(data);
+}
+
+// [图片、音频]上传完毕回调
+function uploadedCallback(data) {
+	$$('form#{formId} [name={name}]'.format(data)).closest('.media-node').data('uploaded')(data);
+}
+
+
 var serviceType = $$('#serviceType').val();
 var formInsideId = $$('#formInsideId').val();
 var groupId = $$('#groupId').val();
@@ -143,32 +154,6 @@ myApp.onPageBeforeInit('mainPage', function (page) {
 myApp.init();
 
 
-// 给加号添加popover
-/*$('.addon.multimedia').on('click', function(e) {
-	var clickedLink = this;
-	var popoverHTML = 
-			'<div class="popover addon-popover">' +
-				'<div class="popover-inner">' +
-					'<div class="icons-container">' +
-						'<a class="addon-text" href="javascript:void(0);"><i class="f7-icons size-smallest">compose</i></a>' +
-						'<a class="addon-images" href="javascript:void(0);"><i class="f7-icons size-smallest">camera</i></a>' +
-						'<a class="addon-audio" href="javascript:void(0);"><i class="f7-icons size-smallest">mic</i></a>' +
-						'<a class="addon-time" href="javascript:void(0);"><i class="f7-icons size-smallest">time</i></a>' +
-					'</div>' +
-				'</div>' +
-			'</div>';
-	myApp.popover(popoverHTML, clickedLink);
-	$('.addon-popover').data('$source', $(e.target).closest('.list-block'));
-});*/
-
-
-// 绑定编辑文本的事件 
-// TODEL: 报错请无视，待删除
-/*$('body').on('click', '.addon-text', function(e) {
-	myApp.closeModal();
-	var $source = $(e.target).closest('.addon-popover').data('$source');
-	$source.editText();
-});*/
 /**
  * 文本编辑的实现方法
  *     使用$obj.editText(initValue, $nodeToReplace)
@@ -176,7 +161,7 @@ myApp.init();
  *     initValue:      初始的文本框中的值，修改模式使用
  *     $nodeToReplace: 修改完毕后替换的对象，修改模式使用
  */
-$.fn.editText = function(initValue, $nodeToReplace) {
+/*$.fn.editText = function(initValue, $nodeToReplace) {
 	myApp.closeModal();
 
 	var $source = this;
@@ -273,12 +258,12 @@ $.fn.editText = function(initValue, $nodeToReplace) {
 		}
 		console.log('Submit');
 	});
-}
+}*/
 
 
 
 // 编辑图片的事件
-$('body').on('click', '.addon-images', function(e) {
+/*$('body').on('click', '.addon-images', function(e) {
 	myApp.closeModal();
 
 	var $source = $(e.target).closest('.addon-popover').data('$source');
@@ -295,7 +280,7 @@ $.fn.editText = function(initValue, $nodeToReplace) {
 		title: '作业批改'
 	};
 	
-}
+}*/
 
 /*$(document).on('page:afteranimation', function(e) {
 	console.log('page:afteranimation');
@@ -444,6 +429,42 @@ function initPageBindEvent() {
 		
 		window.location = url;
 	});
+
+	var myPhotoBrowser = undefined;
+
+	// 查看已上传图片的方法
+	$$('body').on('click', '.openPhotoBrowser', function(e) {
+		var nowUrl = e.target.getAttribute('src');
+		var urlList = $$(e.target).closest('.item-content').find('input').val().match(/images:\[(.*)\]/)[1].split(',');
+		var nowIndex = urlList.indexOf(nowUrl);
+
+		myPhotoBrowser = myApp.photoBrowser({
+			photos: urlList,
+			onOpen: function(photobrowser) {
+				console.log('opened', photobrowser);
+				$$('.photo-browser').find('i.icon').addClass('color-white').addClass('icon-white');
+			}
+		});
+
+		// 加载失败的图片不响应打开相册操作
+		if (nowIndex != -1) {
+			myPhotoBrowser.open(nowIndex); // open photo browser
+		}
+	});
 }
 
 initPageBindEvent();
+
+setTimeout(function() {
+	preUploadCallback({formId: 'testForm', name: 'i1', groupId:  0, count: 3});
+}, 1000);
+
+setTimeout(function() {
+	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 0, url: "http://192.168.10.123:9999/data/a.jpg"});
+}, 2000);
+setTimeout(function() {
+	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 1, url: "http://192.168.10.123:9999/data/b.png"});
+}, 2500);
+setTimeout(function() {
+	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 2, url: "http://192.168.10.123:9999/data/you-cant-find-me.gif"});
+}, 3000);

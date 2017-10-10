@@ -74,6 +74,11 @@
 			this.__beforeRender();
 			this.__render();
 			this.__afterRender();
+
+			// 给$node绑定获取component对象的方法
+			// this.$node.data('component', that);
+
+			
 		}
 
 

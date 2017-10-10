@@ -140,11 +140,10 @@ html.ios.with-statusbar-overlay .framework7-root .panel {
 	font-size: 26px;
 }
 .thumbnail.waiting {
-	border: solid 2px #bbb;
 	background-color: #bbb;
 }
 .thumbnail.waiting .preloader{
-	margin: 13px;
+	margin: 32.5px;
 	display: block;
 }
 .thumbnail .delete {

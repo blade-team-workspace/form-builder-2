@@ -18,21 +18,35 @@
 		var that = this;
 
 		this.template =
-			'<span class="images-group">' +
+			'<span class="media-node">' +
 				'<input type="hidden" name="{name}" />' +
-				'<span class="showValue"></span>' +
+				'<div class="thumbnails-container">' +
+				'</div>' +
 			'</span>';
+		this.thumbnailTemplate =
+			'<div class="thumbnail">' +
+				'<div class="delete">' +
+					'<i class="f7-icons">delete_round_fill</i>' +
+				'</div>' +
+				'<a class="openPhotoBrowser" href="javascript:void(0);">' +
+					'<div class="image-container">' +
+						'<img src="{url}" onerror="onerror=null; src=\'/assets/fb-f7/img/error.jpg\'"/>' +
+					'</div>' +
+				'</a>' +
+			'</div>';
+		this.waitingTemplate =
+			'<div class="thumbnail waiting">' +
+				'<div class="delete">' +
+					'<i class="f7-icons">delete_round_fill</i>' +
+				'</div>' +
+				'<div class="preloader"></div>' +
+			'</div>';
 
 		this.__beforeRender = function() {
-			this.opts.addonIconClass = 'right';
 		}
 
 		this.__render = function() {
 			this.$node = $(this.template.format(this.opts));
-			this.$node.attr('placeholder', this.opts.placeholder);
-			this.$node.attr('onfocus', 'this.placeholder=""');
-			this.$node.attr('onblur', 'this.placeholder="' + this.opts.placeholder + '"');
-			// this.$node.attr('readonly', this.opts.readonly || false);
 
 			// 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
 			this.$node.find('input').on('change', function(e) {
@@ -41,7 +55,75 @@
 				that.setValue(value);
 			});
 
-			this.$node.on('click', this.editCallback);
+			// 点击当前节点进入编辑模式 TODEL
+			// this.$node.on('click', this.editCallback);
+
+			// 预上传回调
+			this.$node.data('preUpload', function(data) {
+				var groupId = data.groupId;
+				var count = data.count;
+				for (var i = 0; i < count; i++) {
+					var $waiting = $(that.waitingTemplate);
+					// 绑定删除上传中的方法
+					$waiting.find('.delete').on('click', function(e){
+						$delBtn = $(e.target).closest('.delete');
+						$delBtn.closest('.thumbnail').remove();
+					});
+					$waiting.addClass('groupId_' + groupId);
+					$waiting.addClass('index_' + i);
+					that.$node.find('.thumbnails-container').append($waiting);
+					// $waiting.insertBefore($addBtn);
+				}
+			});
+
+			// 上传完毕回调
+			this.$node.data('uploaded', function(imageData) {
+				var $item = $(that.thumbnailTemplate.format(imageData));
+				// 绑定删除当前图片的方法
+				$item.find('.delete').on('click', function(e) {
+					$delBtn = $(e.target).closest('.delete');
+					$delBtn.closest('.thumbnail').remove();
+
+					// 更新urls表单数据
+					_updateImgUrls(imageData);
+
+					// TODO: 弹出上限提示
+					// 判断总thumbnail数量是否小于了max
+					/*if (this.$node.find('.thumbnails-container').find('.thumbnail').length < this.opts.maxNumber) {
+						this.$node.find('.thumbnails-container').find('.thumbnail.add').css('display', 'inline-block');
+					}*/
+				});
+				// 替换对应的等待对象
+				$waiting = that.$node.find(
+						'.thumbnail.waiting.groupId_' + imageData.groupId + '.index_' + imageData.index);
+				$item.insertBefore($waiting);
+				$waiting.remove();
+
+				// 更新urls表单数据
+				_updateImgUrls(imageData);
+
+				// TODO: 弹出上限提示
+				// 判断总thumbnail数量是否超过了max
+				/*if (this.$node.find('.thumbnails-container').find('.thumbnail').length >= this.opts.maxNumber) {
+					this.$node.find('.thumbnails-container').find('.thumbnail.add').hide();
+				}*/
+			});
+		}
+
+		// 更新指定的表单项的值
+		function _updateImgUrls(data) {
+			var $input = $('form#{formId} input[name={name}]'.format(data));
+			var $node = $input.closest('.item-content');
+			var urlList = [];
+			var $imgs = $node.find('img');
+			$.each($imgs, function(idx) {
+				urlList.push($imgs[idx].getAttribute('src'));
+			});
+			if (urlList.length > 0) {
+				$input.val('images:[' + urlList.join(',') + ']');
+			} else {
+				$input.val('');
+			}
 		}
 
 		this.__setValue = function(value) {
@@ -51,74 +133,64 @@
 
 			this.$node.find('input').val(value);
 			this.$node.find('.showValue').html(value);
+
+			// -----------------------------------------------------------
+
+			var urlList = value.match(/images:\[(.*)\]/)[1].split(',');
+			$.each(urlList, function(idx) {
+				var $item = $(that.thumbnailTemplate.format({url: urlList[idx]}));
+				// 绑定删除当前图片的方法
+				$item.find('.delete').on('click', function(e) {
+					$delBtn = $(e.target).closest('.delete');
+					$delBtn.closest('.thumbnail').remove();
+
+					var imageData = {
+						formId: that.$node.closest('form').attr('id'),
+						name: that.opts.name
+					};
+
+					// 更新urls表单数据
+					_updateImgUrls(imageData);
+
+					// 判断总thumbnail数量是否小于了max
+					// if (that.$node.find('.thumbnails-container').find('.thumbnail:not(.add)').length < that.opts.maxNumber) {
+					// 	that.$node.find('.thumbnails-container').find('.thumbnail.add').css('display', 'inline-block');
+					// }
+				});
+				// 放置
+				// $item.insertBefore($addBtn);
+				that.$node.find('.thumbnails-container').append($item);
+			});
+				
+			// 判断总thumbnail数量是否超过了max
+			// if (this.$node.find('.thumbnails-container').find('.thumbnail:not(.add)').length >= this.opts.maxNumber) {
+			// 	this.$node.find('.thumbnails-container').find('.thumbnail.add').hide();
+			// }
 		}
 
 		this.editCallback = function(e) {
 			myApp.closeModal();
 
-			var popupTemplate =
-					'<div class="popup textarea-popup view">'+
-						'<div class="navbar">' +
-							'<div class="navbar-inner">' +
-								'<div class="left">' +
-									'<a href="#" class="close-popup">' +
-										'<span>' +
-											'<div class="navbar-btn nbg">取消</div>' +
-										'</span>' +
-									'</a>' +
-								'</div>' +
-								'<div class="center sliding lessonTitle">{title}</div>' +
-								'<div class="right submitBtn disabled">' +
-									'<a href="#" class="link close-popup textarea-popup-submit">' +
-										'<span>' +
-											'<div class="navbar-btn">完成</div>' +
-										'</span>' +
-									'</a>' +
-								'</div>' +
-							'</div>' +
-						'</div>' +
-						
-						'<div class="navbar-through">' +
-							'<div class="page-content">' +
-								'<div class="list-block">' +
-									'<ul>' +
-										'<li class="align-top">' +
-											'<div class="item-content">' +
-												'<div class="item-inner">' +
-													'<div class="item-input">' +
-														'<textarea id="textEdit">{value}</textarea>' +
-													'</div>' +
-												'</div>' +
-											'</div>' +
-										'</li>' +
-									'</ul>' +
-								'</div>' +
-							'</div>' +
-						'</div>' +
-					'</div>';
+			if (that.fileGroupId === undefined) {
+				that.fileGroupId = 0;
+			}
 
-			myApp.popup(popupTemplate.format({
-				title: that.opts.label,
-				value: that.value || ""
-			}));
-
-			// 联动事件绑定
-			$('#textEdit').on('input', function(e) {
-				// console.log('input');
-				// if ($(e.target).val().trim().length > 0) {
-				// 	$(e.target).closest('.textarea-popup').find('.submitBtn').removeClass('disabled');
-				// } else {
-				// 	$(e.target).closest('.textarea-popup').find('.submitBtn').addClass('disabled');
-				// }
-				$(e.target).closest('.textarea-popup').find('.submitBtn').removeClass('disabled');
-			});
-
-			// 提交事件绑定
-			$('.textarea-popup-submit').on('click', function() {
-				var value = $('#textEdit').val();
-				that.setValue(value);
-			});
-				
+			// 根据当前已存在的缩略图，调整max和min
+			var nowCount = that.$node.find('.thumbnails-container').find('.thumbnail').length;
+			var max = that.opts.maxNumber - nowCount;
+			var min = (((that.opts.minNumber - nowCount) >= 0) ? (that.opts.minNumber - nowCount) : 0);
+			
+			var data = {
+				type: 'image',
+				formId: that.$node.closest('form').attr('id'),
+				name: that.opts.name,
+				max: max,
+				min: min,
+				groupId: that.fileGroupId
+			};
+			that.fileGroupId = that.fileGroupId + 1;
+			var urlParam = $.param(data);
+			window.location = '/upload?' + urlParam;
 		}
 	}
 

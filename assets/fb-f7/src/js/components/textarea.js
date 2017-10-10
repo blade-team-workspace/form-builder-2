@@ -24,14 +24,13 @@
 			'</span>';
 
 		this.__beforeRender = function() {
-			this.opts.addonIconClass = 'right';
 		}
 
 		this.__render = function() {
-			this.$node = $(this.template.format(this.opts));
+			this.$node = $(this.template.format(this.opts));/*
 			this.$node.attr('placeholder', this.opts.placeholder);
 			this.$node.attr('onfocus', 'this.placeholder=""');
-			this.$node.attr('onblur', 'this.placeholder="' + this.opts.placeholder + '"');
+			this.$node.attr('onblur', 'this.placeholder="' + this.opts.placeholder + '"');*/
 			// this.$node.attr('readonly', this.opts.readonly || false);
 
 			// 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
