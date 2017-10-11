@@ -32,7 +32,7 @@
 					'</a>' +
 				'</li>';
 		this.contentTemplate =
-				'<li class="swipeout">' +
+				'<li class="swipeout" style="height: 0px;">' +
 					'<div class="swipeout-content item-content">' +
 						'<div class="item-inner">' +
 							'<div class="item-after"></div>' +

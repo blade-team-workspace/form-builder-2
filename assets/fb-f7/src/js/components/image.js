@@ -30,7 +30,7 @@
 				'</div>' +
 				'<a class="openPhotoBrowser" href="javascript:void(0);">' +
 					'<div class="image-container">' +
-						'<img src="{url}" onerror="onerror=null; src=\'/assets/fb-f7/img/error.jpg\'"/>' +
+						'<img src="{url}" onerror="onerror=null; style=\'background: url(/assets/fb-f7/img/error.jpg) 0% 0% / 100% 100% no-repeat #000;\'"/>' +
 					'</div>' +
 				'</a>' +
 			'</div>';

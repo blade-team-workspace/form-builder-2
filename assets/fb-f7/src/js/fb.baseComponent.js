@@ -77,8 +77,6 @@
 
 			// 给$node绑定获取component对象的方法
 			// this.$node.data('component', that);
-
-
 		}
 
 
@@ -103,8 +101,10 @@
 				this.value === '' ||
 				this.value.length == 0) {
 				this.$node.closest('li.swipeout').css('height', '0px');
+				return false;
 			} else {
 				this.$node.closest('li.swipeout').css('height', 'initial');
+				return true;
 			}
 		}
 		
