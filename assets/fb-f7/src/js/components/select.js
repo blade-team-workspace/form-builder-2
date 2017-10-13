@@ -12,7 +12,7 @@
 	var baseComponent = $.formb.baseComponent;
 
 	var component_select = function(kargs) {
-		kargs['f7-icon'] = 'compose';			// 定义图标
+		kargs['f7-icon'] = 'list';			// 定义图标
 		baseComponent.apply(this, arguments);	// 执行基类的初始化
 
 		var that = this;
@@ -26,7 +26,6 @@
 			'</span>';
 
 		this.__beforeRender = function() {
-			this.opts.addonIconClass = 'right';
 		}
 
 		this.__render = function() {
