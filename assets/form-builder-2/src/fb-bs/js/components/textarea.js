@@ -13,21 +13,20 @@
 	$.formb.components = $.formb.components || {};
 	var baseComponent = $.formb.baseComponent;
 
-	var component_input = function(kargs) {
+	var component_textarea = function(kargs) {
 		baseComponent.apply(this, arguments);
 
 		this.template =
-				'<input type="text" name="{name}" class="form-control coreInput"/>';
+				'<textarea name="{name}" class="form-control" rows="{rows}"></textarea>';
 
 		this.__render = function() {
 			this.$node = $(this.template.format(this.opts));
-			this.$node.attr('placeholder', this.opts.placeholder);
-			this.$node.attr('onfocus', 'this.placeholder=""');
-			this.$node.attr('onblur', 'this.placeholder="' + this.opts.placeholder + '"');
-			this.$node.attr('readonly', this.opts.readonly || false);
+			this.$node.css({
+				resize: this.opts.resize || "none"
+			})
 		}
 	}
 
-	$.formb.components.text = component_input;
+	$.formb.components.textarea = component_textarea;
 
 }));

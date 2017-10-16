@@ -36,31 +36,68 @@
 		* {
 			font-family: '微软雅黑'!important;
 		}
+		body {
+			background: #eee;
+		}
+		.card {
+			border: solid 1px #ddd;
+			background: #fff;
+			float: left;
+			width: 80%;
+			margin: 0 10% 30px 10%;
+			padding: 20px;
+		}
 	</style>
 
 	<!-- fb 组件 -->
-	<script src="assets/fb-bs/src/js/fb.baseComponents.js"></script>
-	<script src="assets/fb-bs/src/js/components/text.js"></script>
-	<script src="assets/fb-bs/src/js/components/select.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/fb.baseContainer.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/containers/form.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/containers/form-group.js"></script>
+
+	<script src="assets/form-builder-2/src/fb-bs/js/fb.baseComponent.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/components/textarea.js"></script>
+	<!-- <script src="assets/form-builder-2/src/fb-bs/js/components/text.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/components/select.js"></script> -->
 
 	<!-- fb 核心文件 -->
-	<script src="assets/fb-bs/src/js/fb.core.js"></script>
+	<link href="assets/form-builder-2/src/fb-bs/css/bpm-style.css" rel="stylesheet" type="text/css"/>
+	<script src="assets/form-builder-2/src/fb-bs/js/fb.core.js"></script>
 
 </head>
 <body>
 	<h1 style="text-indent: 20px;">测试自动表单2.0 - Bootstrap</h1>
-	<hr>
-	<form id="testForm"></form>
+	<hr style="border-color: #ddd;">
+	<div class="card">
+		<h3 style="border-left: solid 5px darkgreen; text-indent: 1em;">测试表单 - #testForm</h3>
+		<hr>
+		<form id="testForm"></form>
+	</div>
+	<div class="card">
+		<h3 style="border-left: solid 5px darkgreen; text-indent: 1em;">测试表单2 - #testForm2</h3>
+		<hr>
+		<form id="testForm2"></form>
+	</div>
 	<script>
 		$(document).ready(function() {
 			$.ajax({
-				url: '/data/jsonConf.json',
+				url: '/data/getbyid_newFormat.json',
 				dataType: 'JSON',
 				success: function(jsonConf) {
 					$('#testForm').renderForm(jsonConf);
 				},
 				error: function(r) {
 					$('#testForm').html('Ops... Something must be wrong, check it');
+				}
+			});
+
+			$.ajax({
+				url: '/data/getbyid_newFormat_bak.json',
+				dataType: 'JSON',
+				success: function(jsonConf) {
+					$('#testForm2').renderForm(jsonConf);
+				},
+				error: function(r) {
+					$('#testForm2').html('Ops... Something must be wrong, check it');
 				}
 			});
 		});

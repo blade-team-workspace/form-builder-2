@@ -1,0 +1,14 @@
+* .formGroupItem {
+    float: left;
+    width: 100%;
+    border-top: solid 1px #eee;
+    padding-top: 20px;
+    padding-bottom: 6px;
+}
+* .formGroupItem:first-child {
+    border-top: none;
+    padding-top: 0px;
+}
+* .formGroupItem:last-child {
+    padding-bottom: 0px;
+}
