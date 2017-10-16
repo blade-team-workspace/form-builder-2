@@ -33,10 +33,11 @@
 				'</div>' +
 				'<a class="openPhotoBrowser" href="javascript:void(0);">' +
 					'<div class="image-container">' +
-						'<img src="{url}" onerror="onerror=null; style=\'background: url(/assets/fb-f7/img/error.jpg) 0% 0% / 100% 100% no-repeat #000;\'"/>' +
+						'<img src="{url}" onerror="onerror=null;" />' +
 					'</div>' +
 				'</a>' +
 			'</div>';
+			// style=\'background: url(../../img/error.jpg) 0% 0% / 100% 100% no-repeat #000;\'
 		this.waitingTemplate =
 			'<div class="thumbnail waiting">' +
 				'<div class="delete">' +
