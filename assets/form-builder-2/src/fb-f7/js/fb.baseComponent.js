@@ -1,8 +1,10 @@
 ;(function (factory) {
 	'use strict';
 	if (typeof define === 'function' && define.amd) {
+		// AMD模式
 		define(['Dom7'], factory);
 	} else {
+		// 全局模式
 		factory(window.Dom7);
 	}
 }(function ($, undefined) {
