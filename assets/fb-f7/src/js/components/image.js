@@ -12,7 +12,10 @@
 	var baseComponent = $.formb.baseComponent;
 
 	var component_image = function(kargs) {
-		kargs['f7-icon'] = 'camera';			// 定义图标
+		// 定义默认图标
+		this.componentDefaultOpts = {
+			'f7-icon': 'camera'
+		};
 		baseComponent.apply(this, arguments);	// 执行基类的初始化
 
 		var that = this;

@@ -30,6 +30,8 @@
 			console.log('before init');
 		}
 		this.__init = function(kargs) {
+			// 合并默认参数
+			this.defaultOpts = $.extend({}, this.defaultOpts, this.componentDefaultOpts);
 			// 合并配置参数
 			this.opts = $.extend({}, this.defaultOpts, kargs,
 				{readonly: kargs.global_isRead}, {steamLayout: kargs.global_isSteam});

@@ -12,7 +12,10 @@
 	var baseComponent = $.formb.baseComponent;
 
 	var component_select = function(kargs) {
-		kargs['f7-icon'] = 'list';			// 定义图标
+		// 定义默认图标
+		this.componentDefaultOpts = {
+			'f7-icon': 'list'
+		};
 		baseComponent.apply(this, arguments);	// 执行基类的初始化
 
 		var that = this;
