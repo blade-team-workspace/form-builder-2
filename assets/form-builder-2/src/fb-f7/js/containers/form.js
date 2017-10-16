@@ -31,7 +31,8 @@
 		this.__render = function() {
 			// 如果没有，从模板新建form
 			if (this.$node === undefined) {
-				this.$node = $(this.template.format(this.opts));
+				// TODO: 改成ERROR函数
+				console.error('没有指定$node对象');
 			}
 			// 渲染全部items
 			$.each(this.opts.items, function(idx){

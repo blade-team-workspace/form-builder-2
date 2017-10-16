@@ -47,10 +47,6 @@
 		}
 
 		this.__render = function() {
-			// 如果没有，从模板新建form
-			if (this.$node === undefined) {
-				this.$node = $(this.labelTemplate.format(this.opts));
-			}
 			// 渲染内部items
 			var opt = undefined;
 			if (this.opts && this.opts.items) {
