@@ -1,3 +1,4 @@
+/* 容器分组用 */
 * .formGroupItem {
     float: left;
     width: 100%;
@@ -11,4 +12,9 @@
 }
 * .formGroupItem:last-child {
     padding-bottom: 0px;
+}
+
+/* 多媒体容器 */
+.childComponent * + * {
+	margin-top: 8px;
 }

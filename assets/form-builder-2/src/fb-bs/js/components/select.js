@@ -1,4 +1,3 @@
-'use strict';
 ;(function (factory) {
 	'use strict';
 	if (typeof define === "function" && define.amd) {
@@ -14,19 +13,19 @@
 	$.formb.components = $.formb.components || {};
 	var baseComponent = $.formb.baseComponent;
 
-	var component_input = function(kargs) {
+	var component_select = function(kargs) {
+		// 定义默认图标
+		this.componentDefaultOpts = {
+			'placeholder': '--请选择--'
+		};
 		baseComponent.apply(this, arguments);
 
 		this.template =
-				'<select name="{name}" class="form-control coreInput"></select>';
+				'<select name="{name}" class="form-control"></select>';
 
 		this.__render = function() {
 			var that = this;
 			that.$node = $(that.template.format(that.opts));
-			/*that.$node.attr('placeholder', that.opts.placeholder);
-			that.$node.attr('onfocus', 'that.placeholder=""');
-			that.$node.attr('onblur', 'that.placeholder="' + that.opts.placeholder + '"');
-			that.$node.attr('readonly', that.opts.readonly || false);*/
 
 			if (that.opts.placeholder) {
 				that.$node.append('<option value="">' + that.opts.placeholder + '</option>')
@@ -55,6 +54,6 @@
 		}
 	}
 
-	$.formb.components.select = component_input;
+	$.formb.components.select = component_select;
 
 }));

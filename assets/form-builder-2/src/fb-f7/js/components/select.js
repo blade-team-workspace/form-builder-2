@@ -14,7 +14,8 @@
 	var component_select = function(kargs) {
 		// 定义默认图标
 		this.componentDefaultOpts = {
-			'f7-icon': 'list'
+			'f7-icon': 'list',
+			'placeholder': '--请选择--'
 		};
 		baseComponent.apply(this, arguments);	// 执行基类的初始化
 
@@ -33,7 +34,7 @@
 
 		this.__render = function() {
 			var option='<option value="{value}">{label}</option>';
-			var optionshtml='<option value="">--请选择--</option>';
+			var optionshtml='<option value="">' + that.opts.placeholder + '</option>';
 			this.optionsMap = {};
 			for (var i = 0; i < that.opts.options.length; i++) {
 				optionshtml+=option.format({

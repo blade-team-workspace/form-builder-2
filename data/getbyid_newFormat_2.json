@@ -6,10 +6,17 @@
 			"label": "[group0] 多行-1",
 			"type": "form-group",
 			"groupId": "group0",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
 			"items": [
 				{
 					"name": "ta1",
-					"type": "textarea"
+					"type": "textarea",
+					"rows": 3,
+					"resize": "none"
 				}
 			]
 		},
@@ -17,6 +24,11 @@
 			"label": "[group0] 下拉单选-1",
 			"type": "form-group",
 			"groupId": "group0",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+			
 			"items": [
 				{
 					"name": "s1",
@@ -37,26 +49,49 @@
 		{
 			"label": "[未设置] 多行-2",
 			"type": "form-group",
+			
+			"outerWidth": "col-sm-6",
+			"labelWidth": "col-sm-4",
+			"contentWidth": "col-sm-8",
+
 			"items": [
 				{
 					"name": "ta2",
-					"type": "textarea"
+					"type": "textarea",
+					"rows": 3,
+					"resize": "none"
+				}
+			]
+		},
+		{
+			"label": "[未设置] 多行-3",
+			"type": "form-group",
+			
+			"outerWidth": "col-sm-6",
+			"labelWidth": "col-sm-4",
+			"contentWidth": "col-sm-8",
+
+			"items": [
+				{
+					"name": "ta3",
+					"type": "textarea",
+					"rows": 3,
+					"resize": "none"
 				}
 			]
 		},
 		{
 			"label": "[未设置] 多媒体",
 			"type": "multimedia",
+			
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
 			"items": [
 				{
-					"name": "ta3",
+					"name": "ta4",
 					"type": "textarea"
-				}, 
-				{
-					"name": "i1",
-					"type": "image",
-					"maxNumber": 3,
-					"minNumber": 0
 				},
 				{
 					"name": "s2",
@@ -73,28 +108,15 @@
 					}]
 				}
 			]
-		},
-		{
-			"label": "[未设置] 多行-3",
-			"type": "form-group",
-			"items": [
-				{
-					"name": "ta3",
-					"type": "textarea"
-				}
-			]
 		}
 	],
 	"rules": {
 	},
 	"events": [],
 	"values": {
-		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。",
-		"ta2": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。",
-		"ta3": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。",
-		"s1": "1"
+		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。"
 	},
 	"isSteam": false,
 	"isRead": false,
-	"groupDefaultSplit": true
+	"groupDefaultSplit": false
 }

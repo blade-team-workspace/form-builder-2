@@ -31,9 +31,6 @@
 					'</div>' +
 				'</div>';
 
-		this.__beforeRender = function() {
-		}
-
 		this.__render = function() {
 			// 渲染内部items
 			var opt = undefined;
@@ -50,7 +47,6 @@
 			if (Component === undefined) {
 				console.error('组件或容器[{type}]未找到对应的class定义'.format({type: opt.type}));
 			}
-			opt.label = this.opts.label;
 			var component = new Component(opt);
 			component.render();
 			this.append(component);

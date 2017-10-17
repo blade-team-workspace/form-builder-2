@@ -53,14 +53,16 @@
 	<script src="assets/form-builder-2/src/fb-bs/js/fb.baseContainer.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/containers/form.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/containers/form-group.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/containers/multimedia.js"></script>
 
 	<script src="assets/form-builder-2/src/fb-bs/js/fb.baseComponent.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/textarea.js"></script>
-	<!-- <script src="assets/form-builder-2/src/fb-bs/js/components/text.js"></script>
-	<script src="assets/form-builder-2/src/fb-bs/js/components/select.js"></script> -->
+	<script src="assets/form-builder-2/src/fb-bs/js/components/text.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/components/select.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/components/image.js"></script>
 
 	<!-- fb 核心文件 -->
-	<link href="assets/form-builder-2/src/fb-bs/css/bpm-style.css" rel="stylesheet" type="text/css"/>
+	<link href="assets/form-builder-2/src/fb-bs/css/form-builder-2.css" rel="stylesheet" type="text/css"/>
 	<script src="assets/form-builder-2/src/fb-bs/js/fb.core.js"></script>
 
 </head>
@@ -72,15 +74,15 @@
 		<hr>
 		<form id="testForm"></form>
 	</div>
-	<div class="card">
+	<!-- <div class="card">
 		<h3 style="border-left: solid 5px darkgreen; text-indent: 1em;">测试表单2 - #testForm2</h3>
 		<hr>
 		<form id="testForm2"></form>
-	</div>
+	</div> -->
 	<script>
 		$(document).ready(function() {
 			$.ajax({
-				url: '/data/getbyid_newFormat.json',
+				url: '/data/getbyid_newFormat_2.json',
 				dataType: 'JSON',
 				success: function(jsonConf) {
 					$('#testForm').renderForm(jsonConf);
@@ -90,7 +92,7 @@
 				}
 			});
 
-			$.ajax({
+			/*$.ajax({
 				url: '/data/getbyid_newFormat_bak.json',
 				dataType: 'JSON',
 				success: function(jsonConf) {
@@ -99,7 +101,7 @@
 				error: function(r) {
 					$('#testForm2').html('Ops... Something must be wrong, check it');
 				}
-			});
+			});*/
 		});
 	</script>
 </body>
