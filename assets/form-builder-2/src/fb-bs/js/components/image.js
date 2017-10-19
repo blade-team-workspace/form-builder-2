@@ -23,19 +23,21 @@
 		var that = this;
 
 		this.template =
-			'<span class="media-node">' +
+			'<div class="media-node">' +
 				'<input type="hidden" name="{name}" />' +
 				'<div class="thumbnails-container">' +
 				'</div>' +
-			'</span>';
+			'</div>';
 		this.addTemplate =
-			'<button type="button" class="button thumbnail add">' +
-				'<i class="f7-icons">add</i>' +
-			'</button>';
+			'<span class="button thumbnail add fake-file-btn" title="点击上传图片">' +
+				'<i class="fa fa-picture-o"></i>' +
+				'<input class="ignore" type="file" multiple="true" ' +
+						'accept="image/x-png, image/gif, image/jpeg, image/bmp">' +
+			'</span>';
 		this.thumbnailTemplate =
 			'<div class="thumbnail">' +
 				'<div class="delete">' +
-					'<i class="f7-icons">delete_round_fill</i>' +
+					'<i class="fa fa-minus"></i>' +
 				'</div>' +
 				'<a class="openPhotoBrowser" href="javascript:void(0);">' +
 					'<div class="image-container">' +
@@ -47,16 +49,161 @@
 		this.waitingTemplate =
 			'<div class="thumbnail waiting">' +
 				'<div class="delete">' +
-					'<i class="f7-icons">delete_round_fill</i>' +
+					'<i class="fa fa-minus"></i>' +
 				'</div>' +
 				'<div class="preloader"></div>' +
 			'</div>';
 
-		this.__beforeRender = function() {
-		}
-
 		this.__render = function() {
 			this.$node = $(this.template.format(this.opts));
+
+			var $imageUrls = this.$node.find('input');
+			var $container = this.$node.find('.thumbnails-container');
+			
+			var $addBtn = $(this.addTemplate);
+			$container.append($addBtn);
+
+			// 给添加图片按钮绑定上传方法
+			var $files = $addBtn.find('input[type=file]');
+
+			$files.on('change', function() {
+				if ($(this).val() == '') {
+					return;
+				}
+				var formId = $(this).closest('form').attr('id');
+				var name = $(this).closest('.item-input-image').find('input[type=hidden]').attr('name');
+
+				// 更新已存值
+				var imageData = {
+					formId: formId,
+					name: name
+				};
+
+				var groupId = $addBtn.data('groupId') || 0;
+				// 定义表单变量	
+				var files = $(this)[0].files;
+				// 新建一个FormData对象	
+				var formData = new FormData();
+				// 追加文件数据	
+				for (var i = 0; i < files.length; i++) {
+					 formData.append("file[" + i + "]", files[i]);
+				}
+				formData.append("groupId", groupId);
+				// formData.append("file", files[0]);
+
+				// 计算现在可上传文件的个数
+				var nowCount = $addBtn.closest('.thumbnails-container').find('.thumbnail:not(.add)').length;
+				var maxNow = that.opts.maxNumber - nowCount;
+				
+				// 判断符合条件，立刻上传
+				if (files.length <= maxNow && files.length >= that.opts.minNumber) {
+
+					// 放置占位图
+					$.each(files, function(idx) {
+						var $waiting = $(that.waitingTemplate);
+
+						// 绑定删除上传中的方法
+						_bindDelete($waiting);
+
+						$waiting.addClass('groupId_' + groupId);
+						$addBtn.before($waiting)
+					});
+
+					// 上传
+					$.ajax({
+						// type: 'POST',
+						url: "data/multipleUploadReturn.json",
+						timeout: 30 * 1000,
+						data: formData,
+						processData: false,
+						contentType: false,
+						dataType: "json",
+						success: function(r) {
+							var $addBtn = $('form#{formId} input[name={name}]'.format(imageData)).closest('.item-input-image').find('.thumbnail.add');
+							var $node = $addBtn.closest('.drag_item');
+
+							$.each(r.urls, function(idx) {
+								var url = r.urls[idx];
+								var $item = $(sub.image.item.format({url: url}));
+
+								// 绑定删除的方法
+								_bindDelete($item);
+
+								$addBtn.before($item);
+							});
+
+							// 删掉占位图
+							var placeholders = $addBtn.closest('.thumbnails-container').find('.groupId_' + groupId);
+							if (placeholders.length > 0) {
+								placeholders.remove();
+							}
+
+							// 判断总thumbnail数量是否超过了max，超过就隐藏
+							var nowCount = $addBtn.closest('.thumbnails-container').find('.thumbnail:not(.add)').length;
+							if (nowCount >= $node.data('opts').maxNumber) {
+								$addBtn.closest('.thumbnails-container').find('.thumbnail.add').hide();
+							}
+
+							_updateImageItemUrls(imageData);
+						},
+						error: function(r) {
+							// TODO: 完成错误提示
+							alert('上传图片失败！'+ r.status + ' ' + r.statusText);
+						},
+						complete: function() {
+							// 删掉占位图
+							var placeholders = $addBtn.closest('.thumbnails-container').find('.groupId_' + groupId);
+							if (placeholders.length > 0) {
+								placeholders.remove();
+							}
+						}
+					});
+				} else {
+					if (files.length > maxNow) {
+						alert('应选择不超过{maxNow}个，现选择{count}个，超过最大个数限制！'.format({
+							maxNow: maxNow,
+							count: files.length
+						}));
+					} else if (files.length < that.opts.minNumber) {
+						alert('应选择不少于{min}个，现选择{count}个，少于最小个数限制！'.format({
+							min: that.opts.minNumber,
+							count: files.length
+						}));
+					} else {
+						alert('未知错误，现选择{count}个！'.format({
+							count: files.length
+						}));
+					}
+				}
+
+				$addBtn.data('groupId', groupId + 1);
+
+				$(this).val('');
+			});
+
+			// 给对象绑定点击删除的方法
+			function _bindDelete($obj) {
+				$obj.find('.delete').on('click', function(e) {
+					var $delBtn = $(e.target).closest('.delete');
+					// 先定位到addBtn，然后再删掉delBtn对应的缩略图
+					var $addBtn = $delBtn.closest('.item-input-image').find('.add');
+					$delBtn.closest('.thumbnail').remove();
+
+					var $node = $addBtn.closest('.drag_item');
+					// 判断总thumbnail数量是否小于了max，小于则显示上传按钮
+					if ($addBtn.closest('.thumbnails-container').find('.thumbnail:not(.add)').length < $node.data('opts').maxNumber) {
+						$addBtn.closest('.thumbnails-container').find('.thumbnail.add').css('display', 'inline-block');
+					}
+
+					// 更新已存值
+					var imageData = {
+						formId: $node.closest('form').attr('id'),
+						name: $node.data('opts').name
+					};
+					_updateImageItemUrls(imageData);
+				});
+			}
+
 
 			// 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
 			this.$node.find('input').on('change', function(e) {
