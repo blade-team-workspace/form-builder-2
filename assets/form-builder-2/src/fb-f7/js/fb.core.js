@@ -8,6 +8,7 @@
 }(function ($, undefined) {
 	$.formb = $.formb || {};
 	$.formb.components = $.formb.components || {};
+	$.formb.groupRules = $.formb.groupRules || {};
 
 
 	$.fn.renderForm = function(jsonConf) {
@@ -21,6 +22,7 @@
 		render($form, jsonConf);
 
 		// 加校验
+		setFormRules($form, jsonConf);
 		// afterAllAjaxCompleteDo(deferredObjectList, setFormRules, [$form]);
 
 		// 加联动
@@ -41,6 +43,45 @@
 		component.render();
 		// component.appendTo($form);
 	}
+
+
+	// 加规则
+	function setFormRules($form, jsonConf) {
+		// 加普通校验
+		var rules = jsonConf.rules;
+		$.each(rules, function(name){
+			var rule = rules[name];
+			var $targets = $form.find('[name=' + name + ']');
+			$.each(rule, function(ruleKey){
+				var ruleValue = rule[ruleKey];
+				var idx = ['true', 'false'].indexOf(ruleValue);
+				if (idx != -1) {
+					ruleValue = [true, false][idx];
+				}
+				if (ruleKey == 'required') {
+					$targets.prop(ruleKey, ruleValue);
+				} else {
+					$targets.attr(ruleKey, ruleValue);
+				}
+			});
+		});
+
+		// 加分组校验
+		var groupRules = jsonConf.groupRules;
+		// TODO: 做成类似组件的模块化的结构
+		$.each(groupRules, function(ruleName) {
+			var groupRuleValidatingFunction = $.formb.groupRules[ruleName];
+			if (groupRuleValidatingFunction === undefined) {
+				console.error('分组校验/[{ruleName}]未找到对应的定义'.format({ruleName: ruleName}));
+			} else {
+				groupRuleValidatingFunction($form, groupRules[ruleName]);
+			}
+		});
+	}
+
+
+
+
 
 
 	// 给表单赋值的方法
