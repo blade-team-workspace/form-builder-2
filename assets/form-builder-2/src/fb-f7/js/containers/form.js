@@ -25,6 +25,9 @@
 					'</ul>' +
 				'</div>';
 
+		this.containers = [];
+		this.components = [];
+
 		this.__beforeRender = function() {
 		}
 
@@ -34,9 +37,13 @@
 				// TODO: 改成ERROR函数
 				console.error('没有指定$node对象');
 			}
+			this.$node.data('fb-form', that);
 			// 渲染全部items
 			$.each(this.opts.items, function(idx){
 				var opt = that.opts.items[idx];
+
+				// 将当前$form传入下一层参数
+				opt.$form = that.$form;
 
 				// 确定groupId
 				if (opt.groupId === undefined) {
@@ -63,7 +70,7 @@
 			var $lastChildNode = $parent.find('.list-block.formGroupItem:last-child');
 			var $formGroupItem = undefined;
 
-			console.log('-------', childComponent.opts.label, (
+			/*console.log('-------', childComponent.opts.label, (
 				// 上一个子节点不存在 或
 				($lastChildNode.length == 0) || 
 				// 上一个子节点不是list-block 或
@@ -74,7 +81,7 @@
 				($lastChildNode.attr('groupid') === specialGroupId)
 			), '>', ($lastChildNode.length == 0), (!$lastChildNode.is('.list-block.formGroupItem')), ($lastChildNode.attr('groupid') != childComponent.groupId), ($lastChildNode.attr('groupid') === specialGroupId));
 
-			console.log("lastAttr=", $lastChildNode.attr('groupid'), "childGroupId=", childComponent.groupId);
+			console.log("lastAttr=", $lastChildNode.attr('groupid'), "childGroupId=", childComponent.groupId);*/
 
 			if (
 				// 上一个子节点不存在 或
@@ -87,7 +94,7 @@
 				($lastChildNode.attr('groupid') === specialGroupId)
 			) {
 				$formGroupItem = $(this.formGroupTemplate);
-				console.log('set this.groupid>>>', this.groupId);
+				// console.log('set this.groupid>>>', this.groupId);
 				$formGroupItem.attr('groupid', childComponent.groupId);
 				$parent.append($formGroupItem);
 			} else {

@@ -29,7 +29,7 @@
 		// 初始化(实例化默认调用)
 		this.__beforeInit = function(kargs) {
 			// do nothing, not necessary
-			console.log('before init');
+			// console.log('before init');
 		}
 		this.__init = function(kargs) {
 			// 合并默认参数
@@ -43,11 +43,13 @@
 			this.value = kargs.value || undefined;
 			// 取groupId
 			this.groupId = kargs.groupId || 'default';
+			// 如果指定了$node就用指定的
+			this.$node = kargs.$node || undefined;
 		}
 		this.__afterInit = function() {
 			// do nothing, not necessary
-			console.log('after init');
-			console.log('opts', this.opts);
+			// console.log('after init');
+			// console.log('opts', this.opts);
 			// console.log('rule', this.rule);
 			// console.log('value', this.value);
 		}
@@ -64,7 +66,7 @@
 		// 渲染元素的方法
 		this.__beforeRender = function() {
 			// do nothing, not necessary
-			console.log('before render');
+			// console.log('before render');
 		}
 		this.__render = function() {
 			// TODO
@@ -72,7 +74,7 @@
 		}
 		this.__afterRender = function() {
 			// do nothing, not necessary
-			console.log('after render');
+			// console.log('after render');
 		}
 		this.render = function() {
 			this.__beforeRender();

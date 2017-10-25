@@ -13,6 +13,7 @@
 		var that = this;
 		// params
 		this.$node = undefined;
+		this.$form = undefined;		// 自动表单的表单对象，绑定许多参数和事件用，方便调度
 		this.defaultOpts = {
 			'label': '容器LABEL',
 			'type': 'base-container'
@@ -25,7 +26,7 @@
 		// 初始化(实例化默认调用)
 		this.__beforeInit = function(kargs) {
 			// do nothing, not necessary
-			console.log('before init');
+			// console.log('before init');
 		}
 		this.__init = function(kargs) {
 			// 合并配置参数
@@ -33,12 +34,14 @@
 				{readonly: kargs.global_isRead}, {steamLayout: kargs.global_isSteam});
 			// 取groupId
 			this.groupId = kargs.groupId || undefined;
+			// 如果指定了$node和$form就用指定的（除了form在渲染时会指定，一般不会，$form上层有会传到下一层）
 			this.$node = kargs.$node || undefined;
+			this.$form = kargs.$form || undefined;
 		}
 		this.__afterInit = function() {
 			// do nothing, not necessary
-			console.log('after init');
-			console.log('opts', this.opts);
+			// console.log('after init');
+			// console.log('opts', this.opts);
 			// console.log('groupId', this.groupId);
 		}
 		this.init = function(kargs) {
@@ -54,7 +57,7 @@
 		// 渲染元素的方法
 		this.__beforeRender = function() {
 			// do nothing, not necessary
-			console.log('before render');
+			// console.log('before render');
 		}
 		this.__render = function() {
 			// TODO
@@ -62,7 +65,7 @@
 		}
 		this.__afterRender = function() {
 			// do nothing, not necessary
-			console.log('after render');
+			// console.log('after render');
 		}
 		this.render = function() {
 			this.__beforeRender();
@@ -75,7 +78,7 @@
 		// 向父元素添加对象的方法
 		this.__beforeAppend = function(obj) {
 			// do nothing, not necessary
-			console.log('before Append');
+			// console.log('before Append');
 		}
 		this.__append = function(obj) {
 			// DO
@@ -83,9 +86,40 @@
 		}
 		this.__afterAppend = function(obj) {
 			// do nothing, not necessary
-			console.log('after Append');
+			// console.log('after Append');
 		}
 		this.append = function(obj) {
+			// 生成{组件名: 显示标签名}的map，方便后边使用
+			var name = undefined;
+			var nameList = [];
+			if ($.isArray(obj.components)) {
+				$.each(obj.components, function(idx) {
+					nameList.push(obj.components[idx].opts.name);
+				});
+			} else {
+				name = obj.opts.name;
+			}
+			console.log('this.$form >>>', this.$form, this.opts.label, name, nameList);
+			if (name !== undefined) {
+				var nameLabelMap = this.$form.data('nameLabelMap');
+				if (nameLabelMap === undefined) {
+					nameLabelMap = {};
+				}
+				nameLabelMap[name] = this.opts.label;
+			}
+			else if (nameList.length > 0) {
+				var nameLabelMap = this.$form.data('nameLabelMap');
+				if (nameLabelMap === undefined) {
+					nameLabelMap = {};
+				}
+				$.each(nameList, function(idx) {
+					var name = nameList[idx];
+					nameLabelMap[name] = that.opts.label;
+				});
+			}
+			this.$form.data('nameLabelMap', nameLabelMap);
+			
+
 			this.__beforeAppend(obj);
 			this.__append(obj);
 			this.__afterAppend(obj);

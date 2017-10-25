@@ -1,3 +1,4 @@
+
 var device = Framework7.prototype.device;
 
 
