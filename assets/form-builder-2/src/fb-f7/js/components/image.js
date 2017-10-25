@@ -144,7 +144,12 @@
 
 			// -----------------------------------------------------------
 
-			var urlList = value.match(/images:\[(.*)\]/)[1].split(',');
+			var urlList;
+			if (value.match(/images:\[(.*)\]/) && value.match(/images:\[(.*)\]/).length > 0) {
+				urlList = value.match(/images:\[(.*)\]/)[1].split(',');
+			} else {
+				urlList = [];
+			}
 			$.each(urlList, function(idx) {
 				var $item = $(that.thumbnailTemplate.format({url: urlList[idx]}));
 				// 绑定删除当前图片的方法
