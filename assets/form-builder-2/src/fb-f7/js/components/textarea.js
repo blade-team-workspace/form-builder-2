@@ -106,13 +106,22 @@
 
 			// 联动事件绑定
 			$('#textEdit').on('input', function(e) {
-				// console.log('input');
-				// if ($(e.target).val().trim().length > 0) {
-				// 	$(e.target).closest('.textarea-popup').find('.submitBtn').removeClass('disabled');
-				// } else {
-				// 	$(e.target).closest('.textarea-popup').find('.submitBtn').addClass('disabled');
-				// }
-				$(e.target).closest('.textarea-popup').find('.submitBtn').removeClass('disabled');
+				var minLengthLimit = -1;
+				var maxLengthLimit = 99999;
+				if (that.rule.required == true) {
+					minLengthLimit = 1;
+				}
+				if (that.rule.minlength !== undefined) {
+					minLengthLimit = that.rule.minlength || minLengthLimit;
+				}
+				if (that.rule.maxlength !== undefined) {
+					maxLengthLimit = that.rule.maxlength;
+				}
+				if ($(e.target).val().length >= minLengthLimit && $(e.target).val().length <= maxLengthLimit) {
+					$(e.target).closest('.textarea-popup').find('.submitBtn').removeClass('disabled');
+				} else {
+					$(e.target).closest('.textarea-popup').find('.submitBtn').addClass('disabled');
+				}
 			});
 
 			// 提交事件绑定
@@ -121,6 +130,55 @@
 				that.setValue(value);
 			});
 				
+		}
+
+		// 设置校验步骤
+		this.__setCheckSteps = function() {
+			$.each(this.rule, function(key) {
+				var ruleValue = that.rule[key];
+				var checkStepFunction = undefined;
+				var label = that.opts.label;
+				switch (key) {
+					case 'required':
+						checkStepFunction = function() {
+							if (that.$node.find('input').val() == '') {
+								myApp.alert('请填写"{label}"'.format({label: label}));
+								return false;
+							} else {
+								return true;
+							}
+						}
+						break;
+					case 'maxlength':
+						checkStepFunction = function() {
+							var value = that.$node.find('input').val();
+							if (value && value.length > ruleValue) {
+								myApp.alert('"{label}"的长度不能超过{ruleValue}'.format({label: label, ruleValue: ruleValue}));
+								return false;
+							} else {
+								return true;
+							}
+						}
+						break;
+					case 'minlength':
+						checkStepFunction = function() {
+							var value = that.$node.find('input').val();
+							if (value && value.length < ruleValue) {
+								myApp.alert('"{label}"的长度不能小于{ruleValue}'.format({label: label, ruleValue: ruleValue}));
+								return false;
+							} else {
+								return true;
+							}
+						}
+						break;
+					default:
+						console.warn('[WARN] 发现未知参数 {key}: {ruleValue}'.format({key: key, ruleValue: ruleValue}));
+						break;
+				}
+				if (checkStepFunction) {
+					$.formb.appendCheckStepToForm(that.$form, checkStepFunction);
+				}
+			});
 		}
 	}
 

@@ -62,7 +62,14 @@
 			if (Component === undefined) {
 				console.error('组件或容器[{type}]未找到对应的class定义'.format({type: jsonConf.type}));
 			}
+
+			// 将当前label传入下一层（主要是textarea会用）
 			opt.label = this.opts.label;
+			// 将当前$form传入下一层参数
+			opt.$form = this.$form;
+			// 将当前rule传入下一层
+			opt.rule = this.$form.data('fb-form').opts.rules[opt.name];
+
 			var component = new Component(opt);
 			component.render();
 			this.append(component);
@@ -104,6 +111,35 @@
 			});
 
 			this.$node = [$label, $content];
+		}
+
+		this.__afterAppend = function(childComponent) {
+
+			// 生成{组件名: 显示标签名}的map，并且加必填标志
+			// 加必填用的相关参数
+			var showRequireMark = false;
+			var rules = this.$form.data('fb-form').opts.rules;
+
+			var name = childComponent.opts.name;
+
+			var nameLabelMap = this.$form.data('nameLabelMap');
+			if (nameLabelMap === undefined) {
+				nameLabelMap = {};
+			}
+			nameLabelMap[name] = this.opts.label;
+			
+			this.$form.data('nameLabelMap', nameLabelMap);
+
+			// 加必填标志
+			if (rules[name] && rules[name].required === true) {
+				var $title = $(this.$node[0]).find('.item-title');
+				$title.append(this.$form.data('fb-form').requireMarkTemplate);
+			}
+
+			// 调用childComponent的setValidate方法
+			if (rules[name]) {
+				childComponent.setCheckSteps(rules[name]);
+			}
 		}
 	}
 

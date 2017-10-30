@@ -60,6 +60,7 @@
 				label: this.opts.label,
 				components: []				// 用于存放所有渲染完毕的components
 			};
+			var rules = this.$form.data('fb-form').opts.rules;
 			$.each(this.opts.items, function(idx){
 				opt = that.opts.items[idx];
 
@@ -67,7 +68,14 @@
 				if (Component === undefined) {
 					console.error('组件或容器[{type}]未找到对应的class定义'.format({type: opt.type}));
 				}
-				opt.label = that.opts.label;	// textarea需要用到作为弹出的标题（扶额）
+
+				// 将当前label传入下一层（textarea需要用到作为弹出的标题（扶额））
+				opt.label = that.opts.label;
+				// 将当前$form传入下一层参数
+				opt.$form = that.$form;
+				// 将当前rule传入下一层
+				opt.rule = rules[opt.name];
+
 				var component = new Component(opt);
 				component.render();
 				appendData.components.push(component);
@@ -143,6 +151,56 @@
 				$editBtn.on('click', childComponent.editCallback);
 				$label.find('.addon-items-container').append($editBtn);
 			});
+		}
+
+		this.__afterAppend = function(appendData) {
+
+			// 生成{组件名: 显示标签名}的map，并且加必填标志
+			// 加必填用的相关参数
+			var showRequireMark = false;
+			var rules = this.$form.data('fb-form').opts.rules;
+			var requireAtLeastOne = this.$form.data('fb-form').opts.groupRules.requireAtLeastOne;
+
+			var nameList = [];
+			$.each(appendData.components, function(idx) {
+				var name = appendData.components[idx].opts.name;
+				nameList.push(name);
+
+				// 调用childComponent的setRule方法
+				if (rules[name]) {
+					appendData.components[idx].setRule(rules[name]);
+				}
+			});
+
+			var nameLabelMap = this.$form.data('nameLabelMap');
+			if (nameLabelMap === undefined) {
+				nameLabelMap = {};
+			}
+			$.each(nameList, function(idx) {
+				var name = nameList[idx];
+				nameLabelMap[name] = that.opts.label;
+
+				// 判断是否是普通必填
+				if (rules[name] && rules[name].required === true) {
+					showRequireMark = true;
+				}
+				// 判断是否是分组必填
+				if ($(that.$node[0]).find('.requireMark').length == 0) {
+					$.each(requireAtLeastOne, function(idx) {
+						if (requireAtLeastOne[idx].indexOf(name) != -1) {
+							showRequireMark = true;
+						}
+					});
+				}
+			});
+
+			this.$form.data('nameLabelMap', nameLabelMap);
+
+			// 加必填
+			if (showRequireMark == true) {
+				var $title = $(this.$node[0]).find('.item-title');
+				$title.append(this.$form.data('fb-form').requireMarkTemplate);
+			}
 		}
 	}
 

@@ -186,8 +186,8 @@
 	opacity: 0;
 }
 .addon-items-popover.show {
-    transition-duration: .3s;
-    opacity: 1;
+	transition-duration: .3s;
+	opacity: 1;
 }
 .addon-items-popover .addon-items-container {
 	background: #fff;
@@ -230,6 +230,19 @@
 	border-bottom: solid 0px transparent;
 }
 
+/* 必填项标志 */
+.requireMark {
+	border: solid 1px #ff5400;
+	color: #ff5400;
+	font-size: 12px;
+	border-radius: 22px;
+	padding: 2px 5px;
+	margin-top: 1px;
+	margin-left: 3px;
+	float: right;
+	line-height: 12px;
+	height: 12px;
+}
 
 
 /* 图片上传 */

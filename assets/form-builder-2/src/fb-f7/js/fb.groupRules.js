@@ -53,17 +53,6 @@
 			});
 		}
 
-		appendCheckStepToForm($form, check_requireAtLeastOne);
+		$.formb.appendCheckStepToForm($form, check_requireAtLeastOne);
 	}
-
-	function appendCheckStepToForm($form, checkStepFunc) {
-		var checkSteps = $form.data('checkSteps');
-		if (checkSteps === undefined) {
-			checkSteps = [];
-		}
-		checkSteps.push(checkStepFunc);
-
-		$form.data('checkSteps', checkSteps);
-	}
-
 }));

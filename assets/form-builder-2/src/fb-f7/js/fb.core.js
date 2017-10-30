@@ -10,6 +10,16 @@
 	$.formb.components = $.formb.components || {};
 	$.formb.groupRules = $.formb.groupRules || {};
 
+	// formb全局方法：给指定form增加校验步骤
+	$.formb.appendCheckStepToForm = function($form, checkStepFunc) {
+		var checkSteps = $form.data('checkSteps');
+		if (checkSteps === undefined) {
+			checkSteps = [];
+		}
+		checkSteps.push(checkStepFunc);
+
+		$form.data('checkSteps', checkSteps);
+	}
 
 	$.fn.renderForm = function(jsonConf) {
 		var $form = $(this);
@@ -22,7 +32,7 @@
 		render($form, jsonConf);
 
 		// 加校验
-		setFormRules($form, jsonConf);
+		setFormGroupRules($form, jsonConf);
 		// afterAllAjaxCompleteDo(deferredObjectList, setFormRules, [$form]);
 
 		// 加联动
@@ -41,14 +51,13 @@
 		}
 		var component = new Component(opt);
 		component.render();
-		// component.appendTo($form);
 	}
 
 
 	// 加规则
-	function setFormRules($form, jsonConf) {
+	function setFormGroupRules($form, jsonConf) {
 		// 加普通校验
-		var rules = jsonConf.rules;
+		/*var rules = jsonConf.rules;
 		$.each(rules, function(name){
 			var rule = rules[name];
 			var $targets = $form.find('[name=' + name + ']');
@@ -64,7 +73,7 @@
 					$targets.attr(ruleKey, ruleValue);
 				}
 			});
-		});
+		});*/
 
 		// 加分组校验
 		var groupRules = jsonConf.groupRules;
@@ -80,7 +89,44 @@
 	}
 
 
+	// 整体校验方法
+	function validateForm($form) {
+		var checkSteps = $form.data('checkSteps');
+		if (!checkSteps) {
+			return "没有发现校验步骤";
+		}
+		var formIsValid = true;
+		$.each(checkSteps, function(idx) {
+			var isOK = checkSteps[idx]();
+			if (isOK) {
+				formIsValid = false;
+			}
+		});
 
+		return formIsValid;
+	}
+
+
+	$.fn.submit = function() {
+		var $form = $(this);
+		if (!$form.is('form')) {
+			console.log('Not form, skip it.');
+		} else {
+			console.log('Is form, go on.');
+
+			var isValid = validateForm($form);
+
+			if (isValid == true) {
+				// 通过校验
+				// TODO: 提交
+			} else if (isValid == false) {
+				// 未通过校验
+				// do nothing
+			} else {
+				console.log('提交form，校验结果返回:', isValid);
+			}
+		}
+	}
 
 
 

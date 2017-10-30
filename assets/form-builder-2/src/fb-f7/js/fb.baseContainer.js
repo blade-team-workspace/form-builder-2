@@ -34,7 +34,7 @@
 				{readonly: kargs.global_isRead}, {steamLayout: kargs.global_isSteam});
 			// 取groupId
 			this.groupId = kargs.groupId || undefined;
-			// 如果指定了$node和$form就用指定的（除了form在渲染时会指定，一般不会，$form上层有会传到下一层）
+			// 如果指定了$node和$form就用指定的
 			this.$node = kargs.$node || undefined;
 			this.$form = kargs.$form || undefined;
 		}
@@ -89,39 +89,11 @@
 			// console.log('after Append');
 		}
 		this.append = function(obj) {
-			// 生成{组件名: 显示标签名}的map，方便后边使用
-			var name = undefined;
-			var nameList = [];
-			if ($.isArray(obj.components)) {
-				$.each(obj.components, function(idx) {
-					nameList.push(obj.components[idx].opts.name);
-				});
-			} else {
-				name = obj.opts.name;
-			}
-			console.log('this.$form >>>', this.$form, this.opts.label, name, nameList);
-			if (name !== undefined) {
-				var nameLabelMap = this.$form.data('nameLabelMap');
-				if (nameLabelMap === undefined) {
-					nameLabelMap = {};
-				}
-				nameLabelMap[name] = this.opts.label;
-			}
-			else if (nameList.length > 0) {
-				var nameLabelMap = this.$form.data('nameLabelMap');
-				if (nameLabelMap === undefined) {
-					nameLabelMap = {};
-				}
-				$.each(nameList, function(idx) {
-					var name = nameList[idx];
-					nameLabelMap[name] = that.opts.label;
-				});
-			}
-			this.$form.data('nameLabelMap', nameLabelMap);
-			
 
 			this.__beforeAppend(obj);
+
 			this.__append(obj);
+
 			this.__afterAppend(obj);
 		};
 	}

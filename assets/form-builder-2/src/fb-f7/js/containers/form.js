@@ -19,6 +19,11 @@
 
 		this.template = undefined;
 
+		this.requireMarkTemplate =
+				'<span class="requireMarkHolder">' +
+					'<span class="requireMark">必填</span>' +
+				'</span>';
+
 		this.formGroupTemplate =
 				'<div class="list-block formGroupItem">' +
 					'<ul>' +

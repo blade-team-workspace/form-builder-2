@@ -43,8 +43,10 @@
 			this.value = kargs.value || undefined;
 			// 取groupId
 			this.groupId = kargs.groupId || 'default';
-			// 如果指定了$node就用指定的
+			// 如果指定了$node和$form就用指定的
 			this.$node = kargs.$node || undefined;
+			this.$form = kargs.$form || undefined;
+			this.rule = kargs.rule || undefined;
 		}
 		this.__afterInit = function() {
 			// do nothing, not necessary
@@ -67,6 +69,7 @@
 		this.__beforeRender = function() {
 			// do nothing, not necessary
 			// console.log('before render');
+
 		}
 		this.__render = function() {
 			// TODO
@@ -87,18 +90,22 @@
 
 
 
-		// 配置校验规则
-		this.beforeSetRule = function() {
+		// 配置校验方法
+		this.__beforeSetCheckSteps = function() {
 			// do nothing, not necessary
 		}
-		this.setRule = function() {
+		this.__setCheckSteps = function() {
 			// TODO
 			console.error('Must be rewritten.')
 		}
-		this.afterSetRule = function() {
+		this.__afterSetCheckSteps = function() {
 			// do nothing, not necessary
 		}
-
+		this.setCheckSteps = function(rule) {
+			this.__beforeSetCheckSteps(rule);
+			this.__setCheckSteps(rule);
+			this.__afterSetCheckSteps(rule);
+		}
 
 		// 改变显示状态
 		this.checkViewStatus = function() {

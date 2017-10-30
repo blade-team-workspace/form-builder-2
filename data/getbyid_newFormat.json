@@ -87,7 +87,9 @@
 	],
 	"rules": {
 		"ta1": {
-			"required": true
+			"required": true,
+			"maxlength": 10,
+			"minlength": 5
 		}
 	},
 	"groupRules": {
