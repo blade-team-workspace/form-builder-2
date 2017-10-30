@@ -71,6 +71,27 @@
 						"label": "选项3",
 						"value": 3
 					}]
+				},
+				{
+					"name": "n1",
+					"type": "number",
+					"minValue": 0,
+					"maxValue": 10,
+					"stepValue": 0.5
+				}
+			]
+		},
+		{
+			"label": "[group0] 数字2",
+			"type": "form-group",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "n2",
+					"type": "number",
+					"minValue": 0,
+					"maxValue": 10,
+					"stepValue": 0.5
 				}
 			]
 		},
