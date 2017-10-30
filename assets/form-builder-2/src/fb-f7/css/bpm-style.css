@@ -71,7 +71,7 @@
 .navbar-inner, .subnavbar {
 	padding: 0;
 }
-.ios .smart-select-picker .toolbar a {
+.ios .picker-modal .toolbar a {
 	color: #007aff;
 }
 .navbar a, .toolbar a, .photo-browser .navbar a {
@@ -405,4 +405,9 @@
 	100% {
 		height: 0px;
 	}
+}
+
+/* 使picker滑动触发宽度充满整个容器 */
+.picker-items .picker-items-col.picker-items-col-center {
+	width: 100%;
 }

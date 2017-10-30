@@ -60,7 +60,7 @@
 			}
 			var Component = $.formb.components[opt.type];
 			if (Component === undefined) {
-				console.error('组件或容器[{type}]未找到对应的class定义'.format({type: jsonConf.type}));
+				console.error('组件或容器[{type}]未找到对应的class定义'.format({type: opt.type}));
 			}
 
 			// 将当前label传入下一层（主要是textarea会用）

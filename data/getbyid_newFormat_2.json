@@ -47,6 +47,20 @@
 			]
 		},
 		{
+			"label": "[group0] 数字",
+			"type": "form-group",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "n1",
+					"type": "number",
+					"minValue": 0,
+					"maxValue": 10,
+					"stepValue": 0.5
+				}
+			]
+		},
+		{
 			"label": "[未设置] 多行-2",
 			"type": "form-group",
 			

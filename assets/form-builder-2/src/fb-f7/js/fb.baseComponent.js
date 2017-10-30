@@ -134,10 +134,10 @@
 			// do nothing, not necessary
 		}
 		this.setValue = function(value) {
-			this.__beforeSetValue();
+			this.__beforeSetValue(value);
 			this.__setValue(value);
 			this.value = value;
-			this.__afterSetValue();
+			this.__afterSetValue(value);
 			this.checkViewStatus();
 		}
 

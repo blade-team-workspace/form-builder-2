@@ -6,6 +6,7 @@
 		factory(window.Dom7);
 	}
 }(function ($, undefined) {
+
 	$.formb = $.formb || {};
 
 	$.formb.components = $.formb.components || {};
