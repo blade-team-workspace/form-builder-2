@@ -108,13 +108,13 @@
 			$('#textEdit').on('input', function(e) {
 				var minLengthLimit = -1;
 				var maxLengthLimit = 99999;
-				if (that.rule.required == true) {
+				if (that.rule && that.rule.required == true) {
 					minLengthLimit = 1;
 				}
-				if (that.rule.minlength !== undefined) {
+				if (that.rule && that.rule.minlength !== undefined) {
 					minLengthLimit = that.rule.minlength || minLengthLimit;
 				}
-				if (that.rule.maxlength !== undefined) {
+				if (that.rule && that.rule.maxlength !== undefined) {
 					maxLengthLimit = that.rule.maxlength;
 				}
 				if ($(e.target).val().length >= minLengthLimit && $(e.target).val().length <= maxLengthLimit) {
