@@ -12,11 +12,10 @@
 	var baseComponent = $.formb.baseComponent;
 
 	var component_number = function(kargs) {
-// 定义默认图标
-//		this.componentDefaultOpts = {
-//			//'f7-icon': 'list',
-//			'minValue': '0'
-//		};
+		// 定义默认图标
+		this.componentDefaultOpts = {
+			'f7-icon': 'filter'
+		};
 		baseComponent.apply(this, arguments);	// 执行基类的初始化
 		var that = this;
 
@@ -49,7 +48,17 @@
 				{
 				input: that.$node.find('input'),	//'#picker-device',
 				init: true,
-
+					toolbarTemplate:
+					'<div class="toolbar">' +
+					'<div class="toolbar-inner">' +
+					'<div class="left">' +
+					'<p class="link toolbar-randomize-link"	id="number_hint_test">预计消费小时数</p>' +
+					'</div>' +
+					'<div class="right">' +
+					'<a href="#" class="link close-picker">Done</a>' +
+					'</div>' +
+					'</div>' +
+					'</div>',
 				cols: [
 					{
 						textAlign: 'center',

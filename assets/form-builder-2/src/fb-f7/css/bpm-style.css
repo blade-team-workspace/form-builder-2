@@ -393,7 +393,10 @@
 		background: rgba(255, 255, 0, 0.3);
 	}
 } */
-
+/*number提示语*/
+#number_hint_test{
+	color:#000000;
+}
 .hide-item {
 	animation: hide_item 1s 1 ease-in-out;
 	animation-fill-mode: both;
