@@ -118,85 +118,26 @@
 	// 加联动事件
 	// 添加联动事件
 	function activeEventBinds($form, ebs) {
-		// 触发器名字和事件详情的map
-		var triggerName_eb_map = {};
+		// 触发器名字和事件详情的map	TODO: 改
+		$.formb.eventBinds.triggerName_eb_map = {};
 		$.each(ebs, function(idx) {
-			triggerName_eb_map[ebs[idx].trigger] = ebs[idx];
+			$.formb.eventBinds.triggerName_eb_map[ebs[idx].trigger] = ebs[idx];
 		});
 
-		// 模板定义，TODO: 挪到真正的模板中	<<<---START--->>>
-		var definedFunction = {};
+		var eventBinds = $.formb.eventBinds;
 
-		var definedEvents = {
-			'valueChangeShowHide': 'change',
-			'valueChangeDisable': 'change'
-		};	// 用来绑定和解绑事件
-
-		// 加入到事件模板？？
-		// TODO: 加入魔板
-		// 值改变选中对象的disable状态
-		definedFunction['valueChangeDisable'] = function(event) {
-			// 当前事件的触发对象
-			var $this = $(event.target);
-			// 作用域（form）
-			var $form = $this.closest('form');
-			// 当前事件触发对象的name属性
-			var triggerName = event.target.name;
-			// 当前事件绑定的详情
-			var eb = triggerName_eb_map[triggerName];
-			// 所有响应对象名
-			var allResp = [];
-			$.each(eb.valueResps, function(value){
-				allResp.add(eb.valueResps[value]);
-			});
-
-			var valueRespMap = eb.valueResps;		// {触发器的value: 响应对象的name}的关系
-			var triggerValues = [];					// 触发器现在的值(为了可读性，实际未使用)
-			var respNames = [];						// 取得当前值对应的所有响应对象
-
-			if ($this.attr('type') == 'checkbox') {
-				$.each($('[name=' + triggerName + ']:checked', $form), function(){
-					triggerValues.push($this.val());
-					respNames.add(valueRespMap[$this.val()]);
-				});
-			} else {
-				triggerValues = [$this.val()];
-				respNames.add(valueRespMap[$this.val()]);
-			}
-			console.log('Selected: [' + triggerValues.join(', ') + ']');
-
-			// 初始化，禁用所有响应对象
-			$.each(allResp, function(idx){
-				if (!!allResp[idx] && allResp[idx].length > 0) {
-					$form.find('[name=' + allResp[idx] + ']').closest('.listNode').addClass('disabled');
-					$form.find('[name=' + allResp[idx] + ']').closest('.listNode').prev('.item-divider').addClass('disabled');
-					$form.find('[name=' + allResp[idx] + ']').closest('.listNode').find('input, select, textarea').prop('disabled', true);
-				}
-			});
-
-			// 遍历前值对应的所有响应对象，取消禁用
-			$.each(respNames, function(idx){
-				if (!!respNames[idx] && respNames[idx].length > 0) {
-					$form.find('[name=' + respNames[idx] + ']').closest('.listNode').removeClass('disabled');
-					$form.find('[name=' + respNames[idx] + ']').closest('.listNode').prev('.item-divider').removeClass('disabled');
-					$form.find('[name=' + respNames[idx] + ']').closest('.listNode').find('input, select, textarea').prop('disabled', false);
-				}
-			});
-		}
-		// 模板定义，TODO: 挪到真正的模板中	<<<--- END --->>>
 
 		// 遍历绑定联动事件 初始化绑定
 		$.each(ebs || [], function(idx){
 			var eb = ebs[idx];
-			if ((eb.eventType in definedFunction) && (eb.eventType in definedEvents)) {
+			if (eb.eventType in eventBinds) {
 				var $trigger = $form.find('[name=' + eb.trigger + ']');
-				var $triggerItem = $trigger.closest('.listNode');
 				// 绑定联动事件
-				$trigger.addClass('band').on(definedEvents[eb.eventType], definedFunction[eb.eventType]);
+				$trigger.addClass('band').on(eventBinds[eb.eventType].listener, eventBinds[eb.eventType].callback);
 				// 初始化触发
-				$trigger.trigger(definedEvents[eb.eventType]);
+				$trigger.trigger(eventBinds[eb.eventType].listener);
 			} else {
-				console.log('[WARN] Not support yet.', eb.eventType);
+				console.error('事件绑定/[{ebName}]未找到对应的定义'.format({ebName: eb.eventType}));
 			}
 		});
 	}

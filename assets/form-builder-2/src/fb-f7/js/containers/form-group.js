@@ -19,7 +19,7 @@
 		this.template = undefined;
 
 		this.labelTemplate =
-				'<li>' +
+				'<li class="item-label">' +
 					'<a href="#" class="item-with-addon">' +
 						'<div class="item-content">' +
 							'<div class="item-inner">' +

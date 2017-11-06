@@ -122,12 +122,14 @@
 		"eventType": "valueChangeShowHide",
 		"trigger": "s1",
 		"valueResps": {
-			"1": "t4",
+			"1": "ta4",
 			"2": "",
 			"3": ""
 		}
 	}],
 	"values": {
+		"s1": "1",
+		"ta4": "asdfasdfasdfasdfasdf"
 	},
 	"isSteam": false,
 	"isRead": false,
