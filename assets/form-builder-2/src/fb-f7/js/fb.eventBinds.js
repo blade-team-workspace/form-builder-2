@@ -64,15 +64,17 @@
 				if (!!allResp[idx] && allResp[idx].length > 0) {
 					// 隐藏存值的节点
 					var $valueNode = $form.find('[name=' + allResp[idx] + ']').closest('.swipeout');
-					$valueNode.hide();
-
-					// TODO: 考虑multimedia
-
+					$valueNode.addClass('hide');
 
 					// 隐藏label节点
 					var $labelNode = __findLabel($valueNode);
 					if ($labelNode) {
-						$labelNode.hide();
+						$labelNode.addClass('hide');
+					}
+
+					// 如果当前ul内所有li都是隐藏的，则隐藏整个group	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+					if ($valueNode.closest('ul').find('li').is('.hide')) {
+						
 					}
 				}
 			});

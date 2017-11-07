@@ -414,3 +414,7 @@
 .picker-items .picker-items-col.picker-items-col-center {
 	width: 100%;
 }
+
+.hide {
+	display: none!important;
+}
