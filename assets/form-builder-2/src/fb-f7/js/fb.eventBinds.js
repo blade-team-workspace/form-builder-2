@@ -13,7 +13,7 @@
 	function __findLabel($nowNode) {
 		var $prevNode = undefined;
 		var loopTimes = 0;
-		while (loopTimes < 100 && $nowNode) {
+		while (loopTimes < 100 && $nowNode.length > 0) {
 			$prevNode = $nowNode.prev();
 			if ($prevNode.is('.item-label')) {
 				break;
@@ -21,10 +21,41 @@
 			$nowNode = $prevNode;
 			loopTimes += 1;
 		}
-		return $prevNode;
+		console.log('__findLabel, loopTimes=' + loopTimes);
+		return $prevNode;	// 即label节点
 	}
 
-	// 改变元素后对上层隐藏和显示的方法（TODO)
+
+	// 找下一个兄弟节点，直到找到所有存值节点
+	function __findAllValueNodes($nowNode) {
+		var $valueNodes = [];
+		var $nextNode = undefined;
+		var loopTimes = 0;
+		while (loopTimes < 100 && $nowNode.length > 0) {
+			$nextNode = $nowNode.next();
+			if ($nextNode.length > 0 && $nextNode.is('.swipeout')) {
+				$valueNodes.push($nextNode);
+			}
+			$nowNode = $nextNode;
+			loopTimes += 1;
+		}
+		console.log('__findAllValueNodes, loopTimes=' + loopTimes);
+		return $valueNodes;
+	}
+
+	// 判断是否所有存值点都隐藏了
+	function __isAllValueNodesHide($valueNodes) {
+		var isAllHide = true;
+		console.log('__isAllValueNodesHide $valueNodes.length=', $valueNodes.length);
+		$.each($valueNodes, function(idx) {
+			console.log('__isAllValueNodesHide', $valueNodes[idx], 'class="' + $valueNodes[idx].attr('class') + '" 没有hide类 ->', !$valueNodes[idx].hasClass('hide'));
+			if (!$valueNodes[idx].hasClass('hide')) {
+				isAllHide = false;
+			}
+		});
+		console.log('__isAllValueNodesHide, isAllHide=' + isAllHide);
+		return isAllHide;
+	}
 
 	// 对象值改变，改变其他对象的显示和隐藏状态
 	$.formb.eventBinds.valueChangeShowHide = {
@@ -39,8 +70,9 @@
 			// 当前事件绑定的详情
 			var eb = $.formb.eventBinds.triggerName_eb_map[triggerName];
 			// 所有响应对象名
-			var allResp = [];
+			var allResp = [];	// 一层级
 			$.each(eb.valueResps, function(value){
+				// 使用自定义组相加方法，是组合并，是内容直接加入组
 				allResp.add(eb.valueResps[value]);
 			});
 
@@ -59,31 +91,64 @@
 			}
 			console.log('Selected: [' + triggerValues.join(', ') + ']');
 
-			// 初始化，隐藏所有响应对象
+			// 轮询所有响应的输入项name
 			$.each(allResp, function(idx){
-				if (!!allResp[idx] && allResp[idx].length > 0) {
-					// 隐藏存值的节点
-					var $valueNode = $form.find('[name=' + allResp[idx] + ']').closest('.swipeout');
-					$valueNode.addClass('hide');
+				var itemName = allResp[idx];
 
-					// 隐藏label节点
-					var $labelNode = __findLabel($valueNode);
-					if ($labelNode) {
-						$labelNode.addClass('hide');
+				if (itemName != undefined && itemName.length > 0) {
+					var $valueNode = $form.find('[name=' + itemName + ']').closest('.swipeout');
+
+					// 当前轮询的name在本次应该显示的nameList中
+					if (respNames.indexOf(itemName) != -1) {
+						// 显示存值的节点
+						$valueNode.removeClass('hide');
+
+						// 二话不说显示label和group节点
+						var $labelNode = __findLabel($valueNode);	// 取得当前存值节点的label节点
+						$labelNode.removeClass('hide');
+							console.log('labelNode hide -> ""');
+						$labelNode.closest('.formGroupItem').removeClass('hide');
+
+						// 如果是multimedia的，联动图标的显示
+						if ($labelNode.find('.addon-items-popover').length > 0) {
+							$labelNode.find('a[item-name={itemName}]'.format({itemName: itemName})).removeClass('hide');
+						}
 					}
+					// 不应该显示
+					else {
+						// 隐藏存值的节点
+						$valueNode.addClass('hide');
 
-					// 如果当前ul内所有li都是隐藏的，则隐藏整个group	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-					if ($valueNode.closest('ul').find('li').is('.hide')) {
+						var $labelNode = __findLabel($valueNode);	// 取得当前存值节点的label节点
+						var $valueNodes = __findAllValueNodes($labelNode);	// 根据label节点取得当前label的所有存值节点
 						
+						// 如果是multimedia的，联动图标的隐藏
+						if ($labelNode.find('.addon-items-popover').length > 0) {
+							$labelNode.find('a[item-name={itemName}]'.format({itemName: itemName})).addClass('hide');
+						}
+
+						// 判断是否需要隐藏label
+						if (__isAllValueNodesHide($valueNodes)) {
+							// 隐藏label
+							$labelNode.addClass('hide');
+							console.log('labelNode -> hide');
+
+							// 判断是否需要隐藏整组
+							if ($labelNode.closest('ul').find('li').is('.hide')) {
+								$labelNode.closest('.formGroupItem').addClass('hide');
+							}
+						}
+
 					}
 				}
+				
 			});
 
 			// 遍历前值对应的所有响应对象，显示
 			$.each(respNames, function(idx){
 				if (!!respNames[idx] && respNames[idx].length > 0) {
-					$form.find('[name=' + respNames[idx] + ']').closest('.swipeout').show();
-					$form.find('[name=' + respNames[idx] + ']').closest('.swipeout').prev('.item-divider').show();
+					var $valueNode = $form.find('[name=' + respNames[idx] + ']').closest('.swipeout');
+					$valueNode.removeClass('hide');
 				}
 			});
 		}

@@ -455,8 +455,8 @@ function initPageBindEvent() {
 }
 
 initPageBindEvent();
-/*
-setTimeout(function() {
+
+/*setTimeout(function() {
 	preUploadCallback({formId: 'testForm', name: 'i1', groupId:  0, count: 3});
 }, 4000);
 
@@ -468,5 +468,5 @@ setTimeout(function() {
 }, 5500);
 setTimeout(function() {
 	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 2, url: "http://192.168.10.123:9999/data/you-cant-find-me.gif"});
-}, 6000);
-*/
+}, 6000);*/
+

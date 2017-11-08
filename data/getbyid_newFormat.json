@@ -123,13 +123,17 @@
 		"trigger": "s1",
 		"valueResps": {
 			"1": "ta4",
-			"2": "",
-			"3": ""
+			"2": ["ta3", "i1", "s2"],
+			"3": ["ta3", "i1", "s2", "n1"]
 		}
 	}],
 	"values": {
-		"s1": "1",
-		"ta4": "asdfasdfasdfasdfasdf"
+		"s1": "3",
+		"ta4": "asdfasdfasdfasdfasdf",
+		"ta3": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"i1": "images:[http://192.168.10.123:9999/data/a.jpg,http://192.168.10.123:9999/data/b.png]",
+		"s2": "2",
+		"n1": "5.5"
 	},
 	"isSteam": false,
 	"isRead": false,

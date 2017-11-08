@@ -147,7 +147,7 @@
 				that.$node.push($content);
 
 				// 给addon添加对应按钮
-				var $editBtn = $('<a><i class="f7-icons size-smallest">{f7-icon}</i></a>'.format(opts));
+				var $editBtn = $('<a item-name="{name}"><i class="f7-icons size-smallest">{f7-icon}</i></a>'.format(opts));
 				$editBtn.on('click', childComponent.editCallback);
 				$label.find('.addon-items-container').append($editBtn);
 			});
