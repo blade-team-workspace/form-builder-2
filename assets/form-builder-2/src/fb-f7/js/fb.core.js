@@ -79,9 +79,10 @@
 		var formIsValid = true;
 		$.each(checkSteps, function(idx) {
 			var isOK = checkSteps[idx]();
-			if (isOK) {
+			if (!isOK) {	// 如果不OK
 				formIsValid = false;
 			}
+			console.log('checkSteps[{idx}] =isValid=> {isOK}'.format({idx: idx, isOK: isOK}));
 		});
 
 		return formIsValid;

@@ -208,11 +208,14 @@
 	background: #40BC87;
 	color: #fff;
 }
-.addon-items-popover .addon-items-container a:first-child {
+/* 改成在multimedia容器中点击弹出的时候手动加左和右的留白 */
+/* .addon-items-popover .addon-items-container a:first-child { */
+.addon-items-popover .addon-items-container a.left {
 	width: 34px;
 	padding-left: 4px;
 }
-.addon-items-popover .addon-items-container a:last-child{
+/* .addon-items-popover .addon-items-container a:last-child{ */
+.addon-items-popover .addon-items-container a.right {
 	width: 34px;
 	padding-right: 4px;
 	border-right: none;
@@ -382,19 +385,8 @@
 	background: url(/data/wave.png) no-repeat 0 center;
 }
 
-
-/* .anime_alert {
-	height: calc(100%);
-	animation: anime_alert_border 1s infinite ease-in-out;
-	animation-fill-mode: both;
-}
-@keyframes anime_alert_border{
-	50% {
-		background: rgba(255, 255, 0, 0.3);
-	}
-} */
-/*number提示语*/
-#number_hint_test{
+/* number提示语 */	/* TODO: 不要使用ID选择器 */
+#number_hint_test {
 	color:#000000;
 }
 .hide-item {

@@ -104,6 +104,14 @@
 					$('.modal-overlay').remove();
 				}
 
+				// 手动调整第一个显示项和最后一个显示项，左右的留白
+				$popItems = $modal.find('a:not(.hide)');
+				if ($popItems.length > 0 ) {
+					$popItems.removeClass('left').removeClass('right');
+					$($popItems[0]).addClass('left');
+					$($popItems[($popItems.length - 1)]).addClass('right');
+				}
+
 				$modal.css({top: top - 37 + 'px', display: 'initial'});
 				$modal.addClass('show');
 				$('body').append($modal);

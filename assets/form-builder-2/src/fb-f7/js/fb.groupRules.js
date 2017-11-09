@@ -18,6 +18,7 @@
 		console.log('--> requireAtLeastOne <--');
 		// 思路：给form的checkSteps中推送一个方法（checkSteps是数组），在点击提交的时候依次调用
 		var check_requireAtLeastOne = function() {
+			var result = undefined;
 			// 遍历每组
 			$.each(obj, function(idx) {
 				var nameList = obj[idx];
@@ -47,10 +48,13 @@
 						}
 					});
 					myApp.alert('请在[' + labelList.join(', ') + ']中，至少选填一项！');
+					result = false;	// 校验不通过
 				} else {
 					console.log('分组校验<至少填一个>通过!! 组内容:', nameList);
+					result = true;	// 校验通过
 				}
 			});
+			return result;
 		}
 
 		$.formb.appendCheckStepToForm($form, check_requireAtLeastOne);
