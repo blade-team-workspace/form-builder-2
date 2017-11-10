@@ -293,7 +293,7 @@ $.fn.editText = function(initValue, $nodeToReplace) {
 })*/
 
 
-// 自制播放器-播放/暂停事件绑定
+/*// 自制播放器-播放/暂停事件绑定
 $('.audio-player i.ppBtn').on('click', function(e) {
 	var $audio = $(e.target).closest('.audio-player').find('audio');
 	var $this = $(e.target);
@@ -304,8 +304,8 @@ $('.audio-player i.ppBtn').on('click', function(e) {
 		$audio[0].pause();
 		$this.html('play_round');
 	}
-});
-// 自制播放器-播放进度条-开始拖拽
+});*/
+/*// 自制播放器-播放进度条-开始拖拽
 $('.audio-player .progress-bar, .audio-player .decorate, .audio-player .time').on('touchstart', function(e) {
 	var $processBar = $(e.target).closest('.audio-player').find('.progress-bar');
 	var $playedPart = $processBar.find('.played-part');
@@ -346,7 +346,8 @@ $('.audio-player .progress-bar, .audio-player .decorate, .audio-player .time').o
 	$audio.on('timeupdate', __audioTimeUpdateCallback);
 	$audio[0].play();
 	$ppBtn.html('pause_round');
-});
+});*/
+/*
 // 自制播放器-更新进度条和剩余时间
 $('.audio-player audio').on('timeupdate', __audioTimeUpdateCallback);
 // 更新时间的回调
@@ -365,9 +366,10 @@ function __audioTimeUpdateCallback(e) {
 }
 // 秒数转“分:秒”
 function __formatTime(second) {
-	return [/*parseInt(second / 60 / 60), */parseInt(second / 60 % 60), parseInt(second % 60)].join(":")
+	return [/!*parseInt(second / 60 / 60), *!/parseInt(second / 60 % 60), parseInt(second % 60)].join(":")
 		.replace(/\b(\d)\b/g, "0$1");
 }
+*/
 
 
 // 扩展array类型原生方法，添加obj如果是array，就让其元素合并，否则直接加入
@@ -456,17 +458,27 @@ function initPageBindEvent() {
 
 initPageBindEvent();
 
+
 /*setTimeout(function() {
 	preUploadCallback({formId: 'testForm', name: 'i1', groupId:  0, count: 3});
 }, 4000);
 
+
+ setTimeout(function() {
+ 	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 0, url: "http://192.168.8.125:9999/data/a.jpg"});
+ }, 5000);
+ setTimeout(function() {
+ 	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 1, url: "http://192.168.8.125:9999/data/b.png"});
+ }, 5500);
 setTimeout(function() {
-	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 0, url: "http://192.168.10.123:9999/data/a.jpg"});
-}, 5000);
+	preUploadCallback({formId: 'testForm', name: 'rec2', groupId:  0});
+}, 1000);
 setTimeout(function() {
-	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 1, url: "http://192.168.10.123:9999/data/b.png"});
-}, 5500);
-setTimeout(function() {
+<<<<<<< HEAD
 	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 2, url: "http://192.168.10.123:9999/data/you-cant-find-me.gif"});
 }, 6000);*/
+setTimeout(function() {
+    uploadedCallback({formId: 'testForm', name: 'rec2', groupId:  0,  url: "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"});
+}, 2000);
+
 

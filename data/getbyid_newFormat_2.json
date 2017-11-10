@@ -126,6 +126,21 @@
 					"type": "image",
 					"maxNumber": 3,
 					"minNumber": 0
+				},
+				{
+					"name": "rec2",
+					"label": "录音2",
+					"type": "audio",
+
+					"outerWidth": 12,
+					"labelWidth": 3,
+					"contentWidth": 9,
+					"widthInSteam": "auto",
+
+					"description": "",
+					"maxNumber": 1,
+					"minNumber": 1
+
 				}
 			]
 		}
@@ -134,7 +149,8 @@
 	},
 	"events": [],
 	"values": {
-		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。"
+		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。",
+        "rec2": "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"
 	},
 	"isSteam": false,
 	"isRead": false,
