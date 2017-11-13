@@ -167,7 +167,7 @@
                     // 更新urls表单数据
                     _updateAudioUrls(data);
                 });
-                // audioPlayer_bindEvents($item);
+                audioPlayer_bindEvents($item);
                 var $waiting = $('form#{formId} input[name={name}]'.format(data)).closest('.item-content').find(
                     '.audioItem.waiting.groupId_' + data.groupId );
                 $item.insertBefore($waiting);
