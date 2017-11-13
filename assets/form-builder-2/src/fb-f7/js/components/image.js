@@ -127,6 +127,7 @@
 				$input.val('images:[' + urlList.join(',') + ']');
 			} else {
 				$input.val('');
+                that.$node.closest('li.swipeout').css('height', '0px');
 			}
 
 			// TODO: 检查下这里的逻辑，写的时候有点儿混乱

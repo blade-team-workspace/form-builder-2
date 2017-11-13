@@ -177,22 +177,26 @@
             this.__setValue = function(data) {
                 console.log('audio / this.__setValue(' + data + ')');
                 that.$node.find('input').val(data);
-                var $item = $(that.thumbnailTemplate.format({url:data}));
-                // 绑定删除当前图片的方法
-                $item.find('.delete').on('click', function(e) {
-                    var $delBtn = $(e.target).closest('.delete');
-                    $delBtn.closest('.audioItem').remove();
-                    that.$node.closest('li.swipeout').css('height', '0px');
-                    var audioData = {
-                        formId: that.$node.closest('form').attr('id'),
-                        name: that.opts.name
-                    };
-                    console.log(audioData);
-                    // 更新urls表单数据
-                    _updateAudioUrls(audioData);
-                });
-                audioPlayer_bindEvents($item);
-                that.$node.find('.audioItems-container').append($item);
+                if (data.match(/audios:\[(.*)\]/) !== null) {
+                    var  url = data.match(/audios:\[(.*)\]/)[1].split(',')[0];
+                    var $item = $(that.thumbnailTemplate.format({url:url}));
+                    // 绑定删除当前图片的方法
+                    $item.find('.delete').on('click', function(e) {
+                        var $delBtn = $(e.target).closest('.delete');
+                        $delBtn.closest('.audioItem').remove();
+                        that.$node.closest('li.swipeout').css('height', '0px');
+                        var audioData = {
+                            formId: that.$node.closest('form').attr('id'),
+                            name: that.opts.name
+                        };
+                        console.log(audioData);
+                        // 更新urls表单数据
+                        _updateAudioUrls(audioData);
+                    });
+                    audioPlayer_bindEvents($item);
+                    that.$node.find('.audioItems-container').append($item);
+                }
+
                 // _updateAudioUrls(data);
 
             };
