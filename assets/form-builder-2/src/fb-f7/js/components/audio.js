@@ -235,6 +235,33 @@
             window.location = '/upload?' + urlParam;
         };
 
+        //设置校验步骤
+        this.__setCheckSteps = function() {
+            $.each(this.rule, function(key) {
+                var ruleValue = that.rule[key];
+                console.log(ruleValue);
+                var checkStepFunction = undefined;
+                var label = that.opts.label;
+                switch (key) {
+                    case 'required':
+                        checkStepFunction = function() {
+                            if (that.$node.find('input').val() == '') {
+                                myApp.alert('请填写"{label}"'.format({label: label}));
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        }
+                        break;
+                    default:
+                        console.warn('[WARN] 发现未知参数 {key}: {ruleValue}'.format({key: key, ruleValue: ruleValue}));
+                        break;
+                }
+                if (checkStepFunction) {
+                    $.formb.appendCheckStepToForm(that.$form, checkStepFunction);
+                }
+            });
+        }
     };
 
 

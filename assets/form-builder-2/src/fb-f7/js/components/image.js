@@ -219,7 +219,7 @@
 					case 'required':
 						checkStepFunction = function() {
 							if (that.$node.find('img').length == 0) {
-								myApp.alert('请填加图片'.format({label: label}));
+								myApp.alert('请填写"{label}"'.format({label: label}));
 								return false;
 							} else {
 								return true;

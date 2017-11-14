@@ -57,6 +57,19 @@
 			]
 		},
 		{
+			"label": "[未设置] 录音-1",
+			"type": "form-group",
+			"items": [
+				{
+					"name": "rec1",
+					"type": "audio",
+					"widthInSteam": "auto",
+					"maxNumber": 1,
+					"minNumber": 0
+				}
+			]
+		},
+		{
 			"label": "[未设置] 多媒体",
 			"type": "multimedia",
 			"items": [
@@ -93,17 +106,10 @@
 				},
 				{
 					"name": "rec2",
-					"label": "录音2",
 					"type": "audio",
-
-					"outerWidth": 12,
-					"labelWidth": 3,
-					"contentWidth": 9,
 					"widthInSteam": "auto",
-
-					"description": "",
 					"maxNumber": 1,
-					"minNumber": 1
+					"minNumber": 0
 
 				}
 			]
@@ -152,11 +158,14 @@
 		},
 		"s1": {
 			"required":true
+		},
+		"rec1": {
+			"required":true
 		}
 	},
 	"groupRules": {
 		"requireAtLeastOne": [
-			["ta3", "i1", "s2"]
+			["ta3", "i1", "s2", "n1", "rec2"]
 		]
 	},
 	"events": [{
@@ -170,10 +179,11 @@
 	}],
 	"values": {
 
-		"s1": "2",
+		"s1": "3",
 		"ta4": "asdfasdfasdfasdfasdf",
 		"ta3": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
 		"i1": "images:[http://192.168.10.123:9999/data/a.jpg,http://192.168.10.123:9999/data/b.png]",
+		"rec1": "audios:[http://127.0.0.1:9998/data/556_Butterfly_Kiss.mp3]",
 		"s2": "2",
 		"n1": "5.5"
 	},
