@@ -45,18 +45,6 @@
 			]
 		},
 		{
-			"label": "[未设置] 图片-2",
-			"type": "form-group",
-			"items": [
-				{
-					"name": "i2",
-					"type": "image",
-					"maxNumber": 5,
-					"minNumber": 0
-				}
-			]
-		},
-		{
 			"label": "[未设置] 多媒体",
 			"type": "multimedia",
 			"items": [
@@ -138,20 +126,6 @@
 			"required": true,
 			"maxlength": 10,
 			"minlength": 5
-		},
-		"i2": {
-			"required": true
-		},
-		"ta2": {
-			"required": true,
-			"maxlength": 10,
-			"minlength": 5
-		},
-		"n2": {
-			"required":true
-		},
-		"s1": {
-			"required":true
 		}
 	},
 	"groupRules": {

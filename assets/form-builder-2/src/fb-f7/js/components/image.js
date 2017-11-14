@@ -191,6 +191,7 @@
 
 			// 根据当前已存在的缩略图，调整max和min
 			var nowCount = that.$node.find('.thumbnails-container').find('.thumbnail').length;
+			console.log(nowCount);
 			var max = that.opts.maxNumber - nowCount;
 			var min = (((that.opts.minNumber - nowCount) >= 0) ? (that.opts.minNumber - nowCount) : 0);
 			
@@ -205,6 +206,34 @@
 			that.fileGroupId = that.fileGroupId + 1;
 			var urlParam = $.param(data);
 			window.location = '/upload?' + urlParam;
+		}
+
+		//设置校验步骤
+		this.__setCheckSteps = function() {
+			$.each(this.rule, function(key) {
+				var ruleValue = that.rule[key];
+				console.log(ruleValue);
+				var checkStepFunction = undefined;
+				var label = that.opts.label;
+				switch (key) {
+					case 'required':
+						checkStepFunction = function() {
+							if (that.$node.find('img').length == 0) {
+								myApp.alert('请填加图片'.format({label: label}));
+								return false;
+							} else {
+								return true;
+							}
+						}
+						break;
+					default:
+						console.warn('[WARN] 发现未知参数 {key}: {ruleValue}'.format({key: key, ruleValue: ruleValue}));
+						break;
+				}
+				if (checkStepFunction) {
+					$.formb.appendCheckStepToForm(that.$form, checkStepFunction);
+				}
+			});
 		}
 	}
 

@@ -136,6 +136,7 @@
 		this.__setCheckSteps = function() {
 			$.each(this.rule, function(key) {
 				var ruleValue = that.rule[key];
+				console.log(ruleValue);
 				var checkStepFunction = undefined;
 				var label = that.opts.label;
 				switch (key) {
