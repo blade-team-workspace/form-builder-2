@@ -254,6 +254,6 @@
 		"taNew33" : 0
 	},
 	"isSteam": false,
-	"isRead": false,
+	"global_isRead": true,
 	"groupDefaultSplit": false
 }

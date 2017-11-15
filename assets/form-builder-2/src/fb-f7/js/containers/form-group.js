@@ -57,6 +57,7 @@
 				} else {
 					opt = this.opts.items;
 				}
+
 			}
 			var Component = $.formb.components[opt.type];
 			if (Component === undefined) {
@@ -83,7 +84,10 @@
 			// 渲染label >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $label = $(this.labelTemplate.format(that.opts));
 			$label.find('.addon-edit').on('click', childComponent.editCallback);
-
+			//只读模式去除按钮
+			if(that.opts.readonly){
+                $label.find('.addon-edit').css('display','none');
+            }
 			// 渲染content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $content = $(this.contentTemplate.format(opts));
 			// 给当前content暴露childComponent对象，方便以后操作
@@ -133,7 +137,7 @@
 			this.$form.data('nameLabelMap', nameLabelMap);
 
 			// 加必填标志
-			if (rules[name] && rules[name].required === true) {
+			if (rules[name] && rules[name].required === true&&!that.opts.readonly) {
 				var $title = $(this.$node[0]).find('.item-title');
 				$title.append(this.$form.data('fb-form').requireMarkTemplate);
 			}
