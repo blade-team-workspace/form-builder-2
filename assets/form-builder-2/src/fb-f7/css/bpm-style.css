@@ -396,10 +396,12 @@
 
 /* 提交按钮 */
 .form-submit{
+	text-align: center;
 	background: #6EC097!important;
 	color: #ffffff!important;
 }
 .form-submit.active-state {
+	text-align: center;
 	background: #5B8!important;
 	color: #ffffff!important;
 }
