@@ -145,21 +145,12 @@
 			"maxlength": 10,
 			"minlength": 5
 		},
-		"i2": {
-			"required": true
-		},
 		"ta2": {
 			"required": true,
 			"maxlength": 10,
 			"minlength": 5
 		},
-		"n2": {
-			"required":true
-		},
 		"s1": {
-			"required":true
-		},
-		"rec1": {
 			"required":true
 		}
 	},

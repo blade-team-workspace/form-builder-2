@@ -65,7 +65,7 @@
 
 /* 主题样式 */
 .navbar, .subnavbar, .toolbar, .photo-browser .navbar, .photo-browser .toolbar {
-	background-color: #40BC87;
+	background-color: #6EC097;	/* #40BC87; */
 	color: #fff;
 }
 .navbar-inner, .subnavbar {
@@ -82,7 +82,7 @@
 	background-color: #fff;
 }
 .statusbar-overlay {
-	background: #40BC87;
+	background: #6EC097;	/* #40BC87; */
 	z-index: initial;
 }
 .navbar-btn {
@@ -135,48 +135,6 @@
 	line-height: 1.9em;
 }
 
-/* addon按钮 */
-/* .addon-popover {
-	width: initial;
-	border-radius: 20px;
-	margin-top: 8px;
-}
-.addon-popover .popover-angle.on-bottom:after {
-	width: 20px;
-	height: 20px;
-}
-.addon-popover .popover-angle.on-bottom {
-	margin-left: 6px!important;
-}
-.addon-popover .icons-container {
-	height: 28px;
-	line-height: 28px;
-	border-radius: 20px;
-	overflow: hidden;
-}
-.addon-popover .icons-container a {
-	display: inline-block;
-	width: 30px;
-	line-height: 28px;
-	text-align: center;
-	box-sizing: content-box;
-	border-right: solid 1px #ddd;
-	color: #40BC87;
-}
-.addon-popover .icons-container a.active-state {
-	background: #40BC87;
-	color: #fff;
-}
-.addon-popover .icons-container a:first-child {
-	width: 34px;
-	padding-left: 4px;
-}
-.addon-popover .icons-container a:last-child{
-	width: 34px;
-	padding-right: 4px;
-	border-right: none;
-} */
-
 /* 新addon */
 .addon-items-popover {
 	position: absolute;
@@ -201,11 +159,11 @@
 	text-align: center;
 	box-sizing: content-box;
 	border-right: solid 1px #ddd;
-	color: #40BC87;
+	color: #6EC097;	/* #40BC87; */
 	background: #fff;
 }
 .addon-items-popover .addon-items-container a.active-state {
-	background: #40BC87;
+	background: #6EC097;	/* #40BC87; */
 	color: #fff;
 }
 /* 改成在multimedia容器中点击弹出的时候手动加左和右的留白 */
@@ -271,16 +229,7 @@
 	box-sizing: border-box;
 	border-radius: 0;
 }
-/* .thumbnail.add {
-	border: dashed 2px #bbb;
-}
-.thumbnail.add i.f7-icons {
-	color: #bbb;
-	line-height: 48px;
-	font-size: 26px;
-} */
 .thumbnail.waiting {
-	/*border: solid 2px #bbb;*/
 	background-color: #bbb;
 }
 .thumbnail.waiting .preloader{
@@ -350,7 +299,7 @@
 	display: block;
 	height: 0px;
 	width: 0px;
-	border: solid 16px #40BC87;
+	border: solid 16px #6EC097;	/* #40BC87; */
 	border-radius: 40px;
 	margin-left: -16px;
 	margin-top: -16px;
@@ -359,7 +308,7 @@
 	display: inline-block;
 	height: 0px;
 	width: 0px;
-	border: solid 16px #40BC87;
+	border: solid 16px #6EC097;	/* #40BC87; */
 	/*border-color: rgba(255, 255, 255, 0.5);*/
 	border-radius: 40px;
 	margin-right: -16px;
@@ -367,18 +316,6 @@
 	position: relative;
 	float: right;
 }
-/*.audio-player .ppBtn.f7-icons {
-	width: 0px;
-	height: 0px;
-	float: left;
-	position: relative;
-	left: 5px;
-	top: -27px;
-	font-size: 22px;
-	background: transparent;
-	border: none;
-	color: #fff;
-}*/
 .audio-player .ppBtn.f7-icons {
 	width: 0px;
 	height: 0px;
@@ -455,4 +392,14 @@
 
 .hide {
 	display: none!important;
+}
+
+/* 提交按钮 */
+.form-submit{
+	background: #6EC097!important;
+	color: #ffffff!important;
+}
+.form-submit.active-state {
+	background: #5B8!important;
+	color: #ffffff!important;
 }

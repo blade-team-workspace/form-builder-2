@@ -90,27 +90,15 @@
 
 
 
-	// 给form的dom7对象绑定提交方法
-	$.fn.submit = function() {
+	// 给form的dom7对象绑定校验方法
+	$.fn.validate = function() {
 		var $form = $(this);
 		if (!$form.is('form')) {
 			console.log('Not form, skip it.');
 		} else {
 			console.log('Is form, go on.');
-
 			var isValid = validateForm($form);
-
-			if (isValid == true) {
-				// 通过校验
-				// TODO: 提交
-				console.log('[提交方法] 校验通过~~~~~');
-			} else if (isValid == false) {
-				// 未通过校验
-				// do nothing
-				console.log('[提交方法] 校验不通过！！');
-			} else {
-				console.log('[提交方法] 校验结果返回:', isValid);
-			}
+			return isValid;
 		}
 	}
 

@@ -150,226 +150,83 @@ myApp.onPageBeforeInit('mainPage', function (page) {
 		// blade用
 		$$('form#testForm').renderForm(jsonConf_index);
 	}
+	// 增加提交按钮
+	var submitBtnTemplate = 
+			'<div class="list-block">' +
+				'<ul>' +
+					'<li>' +
+						'<a href="#" class="item-link list-button form-submit">提交</a>' +
+					'</li>' +
+				'</ul>' +
+			'</div>';
+
+	$$('form#testForm').append(submitBtnTemplate);
+
+	// 提交方法、暂存方法
+	$$('.form-submit').on('click', function () {
+		window.location = '/SaveOrSubmit';
+	});
+
 });
 // 手动触发初始化（否则smart-select显示有问题)
 myApp.init();
 
 
-/**
- * 文本编辑的实现方法
- *     使用$obj.editText(initValue, $nodeToReplace)
- *     this:           $obj[0]
- *     initValue:      初始的文本框中的值，修改模式使用
- *     $nodeToReplace: 修改完毕后替换的对象，修改模式使用
- */
-/*$.fn.editText = function(initValue, $nodeToReplace) {
-	myApp.closeModal();
+function saveOrSubmit(isSubmit) {
+	var formData = myApp.formToData('#testForm');
 
-	var $source = this;
-	// TODO: 获取opt
-	var opt = $source.data('opt');
-	opt = {
-		title: '作业批改'
-	};
-	var popupTemplate =
-			'<div class="popup textarea-popup">'+
-				'<div class="navbar">' +
-					'<div class="navbar-inner">' +
-						'<div class="left">' +
-							'<a href="#" class="close-popup">' +
-								'<span>' +
-									'<div class="navbar-btn nbg">取消</div>' +
-								'</span>' +
-							'</a>' +
-						'</div>' +
-						'<div class="center sliding lessonTitle">{title}</div>' +
-						'<div class="right submitBtn disabled">' +
-							'<a href="#" class="link close-popup textarea-popup-submit">' +
-								'<span>' +
-									'<div class="navbar-btn">完成</div>' +
-								'</span>' +
-							'</a>' +
-						'</div>' +
-					'</div>' +
-				'</div>' +
-				
-				'<div class="page-content">' +
-					'<div class="list-block">' +
-						'<ul>' +
-							'<li class="align-top">' +
-								'<div class="item-content">' +
-									'<div class="item-inner">' +
-										'<div class="item-input">' +
-											'<textarea id="textEdit"></textarea>' +
-										'</div>' +
-									'</div>' +
-								'</div>' +
-							'</li>' +
-						'</ul>' +
-					'</div>' +
-				'</div>' +
-			'</div>';
+	console.log('saveOrSubmit formData ->', formData);
 
-	myApp.popup(popupTemplate.format(opt));
-
-	// 联动事件绑定
-	$('#textEdit').on('input', function(e) {
-		console.log('input');
-		if ($(e.target).val().trim().length > 0) {
-			$(e.target).closest('.textarea-popup').find('.submitBtn').removeClass('disabled');
-		} else {
-			$(e.target).closest('.textarea-popup').find('.submitBtn').addClass('disabled');
+	if (isSubmit) {
+		// 校验
+		var isValid = $('#testForm').validate();
+		if (isValid) {
+			// 提交（对应已办）
+			$$.ajax({
+				url: url_saveformData,
+				type: (project == 'blade') ? 'get' : 'post',
+				dataType: 'json',
+				data: 'formValue=' + encodeURI(JSON.stringify(formData)) + '&workflowNumber=' + workflowNumber + '&isSubmit=1',
+				success: function(result){
+					// TODO
+					myApp.alert('提交成功', '提示');
+					$$('.popup-submit .group-ready').hide();
+					$$('.popup-submit .group-done').show();
+				},
+				error: function(result) {
+					// TODO
+					myApp.alert('提交失败', '提示');
+				},
+				complete: function() {
+					setTimeout(function () {
+						myApp.hidePreloader();
+					}, 5000);
+				}
+			});
 		}
-	});
-
-	if (initValue !== undefined) {
-		$('#textEdit').val(initValue);
-	}
-
-	// 提交事件绑定
-	$('.textarea-popup-submit').on('click', function() {
-		var value = $('#textEdit').val();
-		var textViewTemplate = 
-				'<li class="swipeout">' +
-					'<div class="swipeout-content item-content">' +
-						'<div class="item-inner">' +
-							'<div class="item-after textValue">' +
-								'{value}' +
-							'</div>' +
-						'</div>' +
-					'</div>' +
-					'<div class="swipeout-actions-right">' +
-						'<a href="#" class="edit-text bg-lightblue">Edit</a>' +
-						'<a href="#" class="swipeout-delete">Delete</a>' +
-					'</div>' +
-				'</li>';
-		var $viewNode = $(textViewTemplate.format({value: value}));
-
-		$viewNode.find('.edit-text').on('click', function(e) {
-			console.log('edit text');
-			$source.editText($viewNode.find('.textValue').html().trim() || undefined, $(e.target).closest('li.swipeout'));
-		});
-
-
-		if ($nodeToReplace === undefined) {
-			$viewNode.insertAfter($source.find('ul li:last-child'));
-		} else {
-			$viewNode.insertAfter($nodeToReplace);
-			$nodeToReplace.remove();
-		}
-		console.log('Submit');
-	});
-}*/
-
-
-
-// 编辑图片的事件
-/*$('body').on('click', '.addon-images', function(e) {
-	myApp.closeModal();
-
-	var $source = $(e.target).closest('.addon-popover').data('$source');
-	$source.editImages();
-});
-
-$.fn.editText = function(initValue, $nodeToReplace) {
-	myApp.closeModal();
-
-	var $source = this;
-	// TODO: 获取opt
-	var opt = $source.data('opt');
-	opt = {
-		title: '作业批改'
-	};
-	
-}*/
-
-/*$(document).on('page:afteranimation', function(e) {
-	console.log('page:afteranimation');
-	var page = e.detail.page;
-	console.log('page:', page);
-	if (page.name == 'testForm' && page.fromPage.name == 'dynamic-page') {
-		$('[data-page=dynamic-page]').remove();
-	}
-})*/
-
-
-/*// 自制播放器-播放/暂停事件绑定
-$('.audio-player i.ppBtn').on('click', function(e) {
-	var $audio = $(e.target).closest('.audio-player').find('audio');
-	var $this = $(e.target);
-	if ($this.html() == 'play_round') {
-		$audio[0].play();
-		$this.html('pause_round');
 	} else {
-		$audio[0].pause();
-		$this.html('play_round');
+		myApp.showPreloader('上传中...');
+		// 仅保存（对应待办）
+		$$.ajax({
+			url: url_saveformData,
+			type: (project == 'blade') ? 'get' : 'post',
+			dataType: 'json',
+			data: 'formValue=' + encodeURI(JSON.stringify(formData)) + '&workflowNumber=' +workflowNumber + '&isSubmit=0',
+			success: function(result){
+				myApp.alert('暂存成功', '提示');
+			},
+			error: function(result) {
+				myApp.alert('暂存失败', '提示');
+			},
+			complete: function() {
+				setTimeout(function () {
+					myApp.hidePreloader();
+				}, 5000);
+			}
+		});
 	}
-});*/
-/*// 自制播放器-播放进度条-开始拖拽
-$('.audio-player .progress-bar, .audio-player .decorate, .audio-player .time').on('touchstart', function(e) {
-	var $processBar = $(e.target).closest('.audio-player').find('.progress-bar');
-	var $playedPart = $processBar.find('.played-part');
-	var $audio = $(e.target).closest('.audio-player').find('audio');
-	var $time = $(e.target).closest('.audio-player').find('.time');
-	var leftX = $processBar.offset().left + $processBar.parent().offset().left + 16;
-	var barWidth = $processBar.width();
-	var per = 0;
-	// 去掉更新进度条的事件绑定
-	$audio.off('timeupdate');
-	$(document).on('touchmove', function(e) {
-		per = (((e.touches[0].clientX - leftX) / barWidth) * 100).toFixed(2);
-		if (per < 0) {
-			per = 0;
-		} else if (per > 100) {
-			per = 100;
-		}
-		// 更新已播放的进度条长度
-		$playedPart.css('width', per + '%');
-		// 更新剩余时间
-		var leftSeconds = parseInt($audio[0].duration * (1 - per / 100));
-		$time.html(__formatTime(leftSeconds));
-	});
-});
-// 自制播放器-播放进度条-释放
-$('.audio-player .progress-bar, .audio-player .decorate, .audio-player .time').on('touchend', function(e) {
-	console.log('touch-end');
-	$(document).off('touchmove');
-	var $processBar = $(e.target).closest('.audio-player').find('.progress-bar');
-	var $playedPart = $processBar.find('.played-part');
-	var $ppBtn = $(e.target).closest('.audio-player').find('.ppBtn');
-	var endPer = ($playedPart.width() / $processBar.width() * 100).toFixed(2);
-	// console.log('end at', endPer + '%');
-	// 跳转到指定位置播放
-	var $audio = $(e.target).closest('.audio-player').find('audio');
-	$audio[0].currentTime = $audio[0].duration * 0.01 * endPer;
-	// 绑定更新事件
-	$audio.on('timeupdate', __audioTimeUpdateCallback);
-	$audio[0].play();
-	$ppBtn.html('pause_round');
-});*/
-/*
-// 自制播放器-更新进度条和剩余时间
-$('.audio-player audio').on('timeupdate', __audioTimeUpdateCallback);
-// 更新时间的回调
-function __audioTimeUpdateCallback(e) {
-	var $this = $(e.target);
-	var scales = $this[0].currentTime / $this[0].duration;
-	var leftSeconds = parseInt($this[0].duration - $this[0].currentTime);
-	var persentNum = (scales * 100).toFixed(2);
-	var $bar = $this.parent().find('.played-part');
-	var $time = $this.parent().find('.time');
-	
-	// 更新已播放的进度条长度
-	$bar.css('width',  persentNum + '%');
-	// 更新剩余时间
-	$time.html(__formatTime(leftSeconds));
 }
-// 秒数转“分:秒”
-function __formatTime(second) {
-	return [/!*parseInt(second / 60 / 60), *!/parseInt(second / 60 % 60), parseInt(second % 60)].join(":")
-		.replace(/\b(\d)\b/g, "0$1");
-}
-*/
+
 
 
 // 扩展array类型原生方法，添加obj如果是array，就让其元素合并，否则直接加入
