@@ -25,7 +25,7 @@
             '</div>' +
             '</span>';
         this.thumbnailTemplate =
-            '<div class="audio-player audioItem">' +
+            '<div class="audio-player audioItem swipeout-clean-item">' +
             '<audio src="{url}" onerror="onerror=null; $(this)' +
             '.next().css(\'border-color\', \'red\')' +
             '.find(\'.decorate\').css(\'background\', \'transparent\').html(\'ERROR\');">' +
@@ -41,7 +41,7 @@
             '</div>' +
             '</div>';
         this.waitingTemplate =
-            '<div class="audio-player audioItem waiting">' +
+            '<div class="audio-player audioItem swipeout-clean-item waiting">' +
             '<div class="progress-bar">' +
             'uploading ...' +
             '</div>' +

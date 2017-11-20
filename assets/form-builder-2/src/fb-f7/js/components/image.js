@@ -27,7 +27,7 @@
 				'</div>' +
 			'</span>';
 		this.thumbnailTemplate =
-			'<div class="thumbnail">' +
+			'<div class="thumbnail swipeout-clean-item">' +
 				'<div class="delete">' +
 					'<i class="f7-icons">delete_round_fill</i>' +
 				'</div>' +
@@ -39,7 +39,7 @@
 			'</div>';
 			// style=\'background: url(../../img/error.jpg) 0% 0% / 100% 100% no-repeat #000;\'
 		this.waitingTemplate =
-			'<div class="thumbnail waiting">' +
+			'<div class="thumbnail swipeout-clean-item waiting">' +
 				'<div class="delete">' +
 					'<i class="f7-icons">delete_round_fill</i>' +
 				'</div>' +
@@ -77,6 +77,10 @@
 					$waiting.addClass('index_' + i);
 					that.$node.find('.thumbnails-container').append($waiting);
 					// $waiting.insertBefore($addBtn);
+				}
+				// 预上传调用时即显示占位图
+				if (count > 0) {
+					that.$node.closest('li.swipeout').css('height', 'initial');
 				}
 			});
 

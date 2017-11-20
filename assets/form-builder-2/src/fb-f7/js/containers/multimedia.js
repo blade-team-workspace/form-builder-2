@@ -150,6 +150,8 @@
 					});
 					// 清空数据
 					el.data('component').setValue('');
+					// 清空该删掉的对象（图片和音频）
+					el.data('component').$node.find('.swipeout-clean-item').remove();
 				});
 
 				that.$node.push($content);
