@@ -14,6 +14,17 @@
 			]
 		},
 		{
+			"label": "123",
+			"type": "form-group",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "ta123",
+					"type": "textarea"
+				}
+			]
+		},
+		{
 			"label": "[group0] 下拉单选-1",
 			"type": "form-group",
 			"groupId": "group0",
@@ -31,6 +42,28 @@
 						"label": "选项3",
 						"value": 3
 					}]
+				}
+			]
+		},
+		{
+			"label": "今天天气{taNew1},我们去了{taNew2},心情{taNew3}",
+			"type" : "stream",
+			"groupId": "group1",
+			"items": [
+				{
+					"label": "天气",
+					"name":"taNew1",
+					"type":"textarea"
+				},
+				{
+					"label": "目的地",
+					"name":"taNew2",
+					"type":"textarea"
+				},
+				{
+					"label": "任务",
+					"name":"taNew3",
+					"type":"textarea"
 				}
 			]
 		},
@@ -152,6 +185,18 @@
 		},
 		"s1": {
 			"required":true
+		},
+		"rec1": {
+			"required":true
+		},
+		"taNew1":{
+			"required":true
+		},
+		"taNew2":{
+			"required":true
+		},
+		"taNew3":{
+			"required":true
 		}
 	},
 	"groupRules": {
@@ -169,14 +214,18 @@
 		}
 	}],
 	"values": {
-
+		"ta1":"4545456",
 		"s1": "3",
 		"ta4": "asdfasdfasdfasdfasdf",
-		"ta3": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"ta3": "今天天气{0}",
 		"i1": "images:[http://192.168.10.123:9999/data/a.jpg,http://192.168.10.123:9999/data/b.png]",
+		"i2": "images:[http://192.168.10.123:9999/data/b.png]",
 		"rec1": "audios:[http://127.0.0.1:9998/data/556_Butterfly_Kiss.mp3]",
 		"s2": "2",
-		"n1": "5.5"
+		"n1": "5.5",
+		"taNew11" : "多云",
+		"taNew22" : "黄山",
+		"taNew33" : "很开心"
 	},
 	"isSteam": false,
 	"isRead": false,

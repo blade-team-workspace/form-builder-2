@@ -405,3 +405,27 @@
 	background: #5B8!important;
 	color: #ffffff!important;
 }
+
+/* stream 内容为空时 */
+span.no-value {
+    width: 3em;
+    height: 1em;
+    display: inline-block;
+    border-bottom: solid 1px black;
+    margin: 0 3px -3px 3px;
+}
+
+/* deleteBtn 样式 */
+span.delete {
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	line-height: 16px; 
+	top: 0px;
+	border: solid 4px #fff;
+	border-radius: 12px;
+	text-align: center;
+	font-size: 14px;
+	color: #fff;
+	background-color: #f00;
+}

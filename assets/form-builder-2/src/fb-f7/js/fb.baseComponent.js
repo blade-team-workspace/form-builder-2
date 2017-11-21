@@ -138,6 +138,7 @@
 			this.__setValue(value);
 			this.value = value;
 			this.__afterSetValue(value);
+			this.$node.trigger('change');	// 给stream容器用，方便监听
 			this.checkViewStatus();
 		}
 
