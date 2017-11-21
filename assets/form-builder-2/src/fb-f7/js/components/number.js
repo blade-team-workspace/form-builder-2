@@ -158,7 +158,7 @@
 		}
 
 		function specialMethodForValue(value) {
-			if (value === "0" || value === 0) {
+			if (value === "0" || value === 0 || value === "") {
 
 				this.value = "";
 				this.$node.find('input').val("");

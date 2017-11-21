@@ -63,7 +63,7 @@
 
 		this.__setValue = function(value) {
 			this.$node.find('select').val(value);
-			this.$node.find('.showValue').html(this.optionsMap[value]);
+			this.$node.find('.showValue').html(this.optionsMap[value] || "");
 		}
 
 		this.editCallback = function(e) {

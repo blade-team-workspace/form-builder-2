@@ -104,45 +104,47 @@
 				// childComponent.$node插入到属性 item-name=opts.name 的元素前
 				childComponent.$node.insertBefore($label.find('[item-name='+opts.name+']'));
 
+				//渲染 deleteBtn 模板上的内容
+				var $content = $(that.deleteBtn.format(opts));
+	            $content.insertAfter(childComponent.$node);
+	            $content.css('display', 'none');
 
 				// 根据值有无控制边框显示
 	            childComponent.$node.on('change', function() {
-	            	if (childComponent.value !== '' || childComponent.value !== undefined) {
-	            		childComponent.$node.removeClass('no-value');
-	            	} else {
+	            	if (childComponent.value === '' || childComponent.value === undefined) {
 	            		childComponent.$node.addClass('no-value');
-
+	            		$content.css('display', 'none');
+	            	} else {
+	            		childComponent.$node.removeClass('no-value')
+	            		childComponent.$node.css('color','#8e8e93');
+	            		console.log(childComponent.value);
+	            		$content.css('display', 'inline-block');
 	            	}
 	            });
-
-				//渲染 deleteBtn 模板上的内容
-				var $content = $(that.deleteBtn.format(opts));
-				$content.insertBefore($label.find('[item-name='+opts.name+']'));
-				// 移除
-				$label.find('[item-name='+opts.name+']').remove(); 
 				
 				// 获取 .showValue中的值
 	            var $setValue = $label.find('.one > span.textarea-group >.showValue').html();
-	            // console.log($setValue);
+	            console.log($setValue);
 	            // var $setValue = $getValParent.find('.showValue').text('');		// TODO: 以后setValue在render中做完时，删掉，临时代码
 	            // console.log($setValue);
 
 	            // 判断setValue中的内容是否为空
 	            if ($setValue ==  '') {
-	            	$label.find('.one > span.textarea-group').addClass('no-value');
-	            	$label.find('.delete').remove();
+	            	childComponent.$node.addClass('no-value');
+	            	childComponent.$node.next().css('display', 'none');
 	            } else {
-	            	$label.find('.one > span.textarea-group').removeClass('no-value');
-	            	$content.insertBefore($label.find('[item-name='+opts.name+']'));
+	            	childComponent.$node.next().css('display', 'inline-block');
 	            }
 
 	            // 删除目标
-				$label.find('.delete').on('click', function(e) {
-					// 删除 taNew value
-	                $(e.target).closest('.delete').prev().addClass('no-value');
-	                // 删除按钮
-	                $(e.target).closest('.delete').remove();
+				childComponent.$node.next().on('click', function(e) { 
+	                $(this).css('display', 'none');		// 隐藏Btn
+	                childComponent.$node.addClass('no-value');		// 添加 no-value
+	                childComponent.setValue("");
 	            });
+
+	            // 移除
+				$label.find('[item-name='+opts.name+']').remove(); 
 			});
 		}
 
@@ -173,6 +175,9 @@
 			if (rules[name]) {
 				childComponent.setCheckSteps(rules[name]);
 			}
+
+			// $label = appendData.label;
+			// console.log($label.find('.delte'));
 		}
 	}
 
