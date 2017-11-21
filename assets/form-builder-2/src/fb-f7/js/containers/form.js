@@ -46,8 +46,7 @@
 			// 渲染全部items
 			$.each(this.opts.items, function(idx){
 				var opt = that.opts.items[idx];
-				//将只读参数传入container中
-                opt.global_isRead = that.opts.global_isRead;
+
 				// 将当前$form传入下一层参数
 				opt.$form = that.$form;
 

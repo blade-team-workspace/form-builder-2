@@ -246,7 +246,8 @@
 		"ta3": "今天天气{0}",
 		"i1": "images:[http://192.168.10.123:9999/data/a.jpg,http://192.168.10.123:9999/data/b.png]",
 		"i2": "images:[http://192.168.10.123:9999/data/b.png]",
-		"rec1": "audios:[http://127.0.0.1:9998/data/556_Butterfly_Kiss.mp3]",
+		"rec1": "audios:[http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3]",
+
 		"s2": "2",
 		"n1": "5.5",
 		"taNew11" : "我走了",
