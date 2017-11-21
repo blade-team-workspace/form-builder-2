@@ -177,7 +177,7 @@
             this.__setValue = function(data) {
                 console.log('audio / this.__setValue(' + data + ')');
                 that.$node.find('input').val(data);
-                if (data.match(/audios:\[(.*)\]/) !== null) {
+                if (data && data.match(/audios:\[(.*)\]/) !== null) {
                     var  url = data.match(/audios:\[(.*)\]/)[1].split(',')[0];
                     var $item = $(that.thumbnailTemplate.format({url:url}));
                     // 绑定删除当前图片的方法
@@ -189,7 +189,6 @@
                             formId: that.$node.closest('form').attr('id'),
                             name: that.opts.name
                         };
-                        console.log(audioData);
                         // 更新urls表单数据
                         _updateAudioUrls(audioData);
                     });

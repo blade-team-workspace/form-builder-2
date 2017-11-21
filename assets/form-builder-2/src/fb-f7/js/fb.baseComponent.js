@@ -32,15 +32,18 @@
 			// console.log('before init');
 		}
 		this.__init = function(kargs) {
+			//取到全局的只读参数
+            var global_isRead = kargs.$form.data('fb-form').opts.isRead;
 			// 合并默认参数
 			this.defaultOpts = $.extend({}, this.defaultOpts, this.componentDefaultOpts);
 			// 合并配置参数
 			this.opts = $.extend({}, this.defaultOpts, kargs,
-				{readonly: kargs.global_isRead}, {steamLayout: kargs.global_isSteam});
+				{readonly: global_isRead},{readonly: kargs.isRead});
 			// 合并规则
 			this.rule = $.extend({}, kargs.rule);
 			// 赋初值
-			this.value = kargs.value || undefined;
+			// this.value = kargs.value || undefined;
+			this.value = kargs.$form.data('fb-form').opts.values[kargs.name];
 			// 取groupId
 			this.groupId = kargs.groupId || 'default';
 			// 如果指定了$node和$form就用指定的
@@ -77,8 +80,11 @@
 		}
 		this.__afterRender = function() {
 			// do nothing, not necessary
-			// console.log('after render');
-		}
+            // console.log('after render');
+            if(this.value){
+                this.setValue(this.value);
+			}
+        }
 		this.render = function() {
 			this.__beforeRender();
 			this.__render();
@@ -89,7 +95,23 @@
 		}
 
 
+        // 切换只读模式方法
+		this.__beforeTransRead = function () {
 
+            // do nothing, not necessary
+        }
+        this.__transRead = function () {
+            // TODO
+            console.error('Must be rewritten.')
+        }
+        this.__afterTransRead = function(){
+            // do nothing, not necessary
+		}
+        this.transRead = function () {
+            this.__beforeTransRead();
+            this.__transRead();
+            this.__afterTransRead();
+        }
 		// 配置校验方法
 		this.__beforeSetCheckSteps = function() {
 			// do nothing, not necessary
@@ -109,6 +131,7 @@
 
 		// 改变显示状态
 		this.checkViewStatus = function() {
+
 			if (this.value === undefined ||
 				this.value === null ||
 				this.value === '' ||
@@ -116,6 +139,7 @@
 				this.$node.closest('li.swipeout').css('height', '0px');
 				return false;
 			} else {
+                // console.log("::::" + this.$node.closest('li').outerHTML);
 				this.$node.closest('li.swipeout').css('height', 'initial');
 				return true;
 			}

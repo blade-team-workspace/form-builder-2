@@ -84,10 +84,7 @@
 			// 渲染label >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $label = $(this.labelTemplate.format(that.opts));
 			$label.find('.addon-edit').on('click', childComponent.editCallback);
-			//只读模式去除按钮
-			if(that.opts.readonly){
-                $label.find('.addon-edit').css('display','none');
-            }
+
 			// 渲染content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $content = $(this.contentTemplate.format(opts));
 			// 给当前content暴露childComponent对象，方便以后操作
@@ -146,6 +143,8 @@
 			if (rules[name]) {
 				childComponent.setCheckSteps(rules[name]);
 			}
+			//鉴于component的setValue时没有加到container中，所以在container中调用
+			childComponent.checkViewStatus();
 		}
 	}
 

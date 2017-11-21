@@ -180,6 +180,8 @@
 				if (rules[name]) {
 					appendData.components[idx].setRule(rules[name]);
 				}
+				//同form-group一样，在这个地方调用checkViewStatus
+                appendData.components[idx].checkViewStatus();
 			});
 
 			var nameLabelMap = this.$form.data('nameLabelMap');
