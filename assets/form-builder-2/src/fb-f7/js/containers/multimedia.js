@@ -87,7 +87,7 @@
 			// 渲染label >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $label = $(this.labelTemplate.format({label: appendData.label}));
 			this.$node = [$label];
-
+            var global_isRead = that.$form.data('fb-form').opts.isRead;
 			// 点击addon的特殊操作，弹出气泡(未使用popover方法，原因：定位不准确)
 			$label.find('.addon-edit').on('click', function(e) {
 				var top = $(e.target).offset().top;
@@ -122,6 +122,8 @@
 				$('body').append($overlay);
 			});
 
+
+			var component_isRead = true;
 			// 渲染content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			$.each(appendData.components, function(idx) {
 				var childComponent = appendData.components[idx];
@@ -156,11 +158,31 @@
 
 				that.$node.push($content);
 
-				// 给addon添加对应按钮
-				var $editBtn = $('<a item-name="{name}"><i class="f7-icons size-smallest">{f7-icon}</i></a>'.format(opts));
-				$editBtn.on('click', childComponent.editCallback);
-				$label.find('.addon-items-container').append($editBtn);
+				//如果当前组件只读的话，不加图标
+				if (opts.readonly) {
+
+					// do nothing
+
+				} else {
+                    component_isRead = false;
+                    // 给addon添加对应按钮
+                    var $editBtn = $('<a item-name="{name}"><i class="f7-icons size-smallest">{f7-icon}</i></a>'.format(opts));
+                    $editBtn.on('click', childComponent.editCallback);
+                    $label.find('.addon-items-container').append($editBtn);
+				}
+
+
 			});
+            //只读模式，将必填和箭头隐藏
+            if(global_isRead){
+                $label.find('.addon-edit').addClass('hide');
+                $label.find('.requireMarkHolder').addClass('hide');
+            }
+
+            //当所有组件全部只读时，将按钮隐藏
+			if (component_isRead) {
+                $label.find('.addon-edit').addClass('hide');
+			}
 		}
 
 		this.__afterAppend = function(appendData) {
@@ -175,7 +197,10 @@
 			$.each(appendData.components, function(idx) {
 				var name = appendData.components[idx].opts.name;
 				nameList.push(name);
-
+                //只读模式
+                if(appendData.components[idx].opts.readonly){
+                    appendData.components[idx].transRead();
+                }
 				// 调用childComponent的setRule方法
 				if (rules[name]) {
 					appendData.components[idx].setRule(rules[name]);

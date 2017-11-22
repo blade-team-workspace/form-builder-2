@@ -48,7 +48,7 @@
 			};
 			var rules = this.$form.data('fb-form').opts.rules;
 			console.log(this.$form.data('fb-form'));
-
+			var global_isRead = this.$form.data('fb-form').opts.isRead;
 			// 寻找appendData.label中的{taNewx}
 			var reSearch = appendData.label.match((/{[^{}]*}/g));
 			// 循环查找结果，将其替换；

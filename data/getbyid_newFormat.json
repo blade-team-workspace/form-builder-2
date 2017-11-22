@@ -8,6 +8,7 @@
 			"groupId": "group0",
 			"items": [
 				{
+					"isRead":true,
 					"name": "ta1",
 					"type": "textarea"
 				}
@@ -100,6 +101,7 @@
 			"type": "form-group",
 			"items": [
 				{
+
 					"name": "i2",
 					"type": "image",
 					"maxNumber": 5,
@@ -255,6 +257,6 @@
 		"taNew33" : 0
 	},
 	"isSteam": false,
-	"global_isRead": true,
+	"isRead": false,
 	"groupDefaultSplit": false
 }

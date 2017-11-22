@@ -15,7 +15,7 @@
 		var that = this;
 		// params
 		this.$node = undefined;
-		this.$container = undefined;	// 容器对象，是否用到还不清楚……联动时使用？？
+		this.container = undefined;	// 容器对象，是否用到还不清楚……联动时使用？？
 		this.defaultOpts = {
 			'f7-icon': 'star'
 		};
@@ -48,6 +48,7 @@
 			this.groupId = kargs.groupId || 'default';
 			// 如果指定了$node和$form就用指定的
 			this.$node = kargs.$node || undefined;
+			this.container = kargs.container || undefined;
 			this.$form = kargs.$form || undefined;
 			this.rule = kargs.rule || undefined;
 		}
@@ -84,6 +85,7 @@
             if(this.value){
                 this.setValue(this.value);
 			}
+
         }
 		this.render = function() {
 			this.__beforeRender();
@@ -104,17 +106,41 @@
             // TODO
             console.error('Must be rewritten.')
         }
-        this.__afterTransRead = function(){
+        this.__afterTransRead = function() {
             // do nothing, not necessary
+
 		}
+
+		//将component的swipeclass删除
+		this.__cleanSwipeClass = function() {
+            this.$node.closest('li.swipeout').find('.swipeout-actions-right').remove();
+
+
+		}
+
+		//将container事件删除
+		this.__cleanLabelEvent = function() {
+
+			if(this.container.$node) {
+                var $valueNodes = $.formb.findAllValueNodes($(that.$node[0]));
+
+                // 判断是否需要隐藏label
+                if ($.formb.isAllValueNodesHide($valueNodes)) {
+                    $(that.$node[0]).addClass('hide');
+                }
+            }
+		}
+
         this.transRead = function () {
             this.__beforeTransRead();
             this.__transRead();
             this.__afterTransRead();
+            this.__cleanSwipeClass();
         }
+
 		// 配置校验方法
 		this.__beforeSetCheckSteps = function() {
-			// do nothing, not necessary
+			// do g , not necessary
 		}
 		this.__setCheckSteps = function() {
 			// TODO
@@ -164,6 +190,9 @@
 			this.__afterSetValue(value);
 			this.$node.trigger('change');	// 给stream容器用，方便监听
 			this.checkViewStatus();
+			if(this.opts.readonly){
+				this.__cleanLabelEvent();
+			}
 		}
 
 		// 编辑当前对象的回调

@@ -23,8 +23,51 @@
 		$form.data('checkSteps', checkSteps);
 	}
 
+    // 找上一个兄弟节点，直到找到label节点
+	$.formb.findLabel = function($nowNode) {
+        var $prevNode = undefined;
+        var loopTimes = 0;
+        while (loopTimes < 100 && $nowNode.length > 0) {
+            $prevNode = $nowNode.prev();
+            if ($prevNode.is('.item-label')) {
+                break;
+            }
+            $nowNode = $prevNode;
+            loopTimes += 1;
+        }
+        console.log('__findLabel, loopTimes=' + loopTimes);
+        return $prevNode;	// 即label节点
+    }
+    // 找下一个兄弟节点，直到找到所有存值节点
+    $.formb.findAllValueNodes = function($nowNode) {
+        var $valueNodes = [];
+        var $nextNode = undefined;
+        var loopTimes = 0;
+        while (loopTimes < 100 && $nowNode.length > 0) {
+            $nextNode = $nowNode.next();
+            if ($nextNode.length > 0 && $nextNode.is('.swipeout')) {
+                $valueNodes.push($nextNode);
+            }
+            $nowNode = $nextNode;
+            loopTimes += 1;
+        }
+        console.log('__findAllValueNodes, loopTimes=' + loopTimes);
+        return $valueNodes;
+    }
 
-
+    // 判断是否所有存值点都隐藏了
+    $.formb.isAllValueNodesHide = function($valueNodes) {
+        var isAllHide = true;
+        console.log('__isAllValueNodesHide $valueNodes.length=', $valueNodes.length);
+        $.each($valueNodes, function(idx) {
+            console.log('__isAllValueNodesHide', $valueNodes[idx], 'class="' + $valueNodes[idx].attr('class') + '" 没有hide类 ->', !$valueNodes[idx].hasClass('hide'));
+            if (!$valueNodes[idx].hasClass('hide')) {
+                isAllHide = false;
+            }
+        });
+        console.log('__isAllValueNodesHide, isAllHide=' + isAllHide);
+        return isAllHide;
+    }
 	$.fn.renderForm = function(jsonConf) {
 		var $form = $(this);
 

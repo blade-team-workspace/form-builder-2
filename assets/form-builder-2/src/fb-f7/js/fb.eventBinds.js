@@ -104,7 +104,7 @@
 						$valueNode.removeClass('hide');
 
 						// 二话不说显示label和group节点
-						var $labelNode = __findLabel($valueNode);	// 取得当前存值节点的label节点
+						var $labelNode = $.formb.findLabel($valueNode);	// 取得当前存值节点的label节点
 						$labelNode.removeClass('hide');
 							console.log('labelNode hide -> ""');
 						$labelNode.closest('.formGroupItem').removeClass('hide');
@@ -119,8 +119,8 @@
 						// 隐藏存值的节点
 						$valueNode.addClass('hide');
 
-						var $labelNode = __findLabel($valueNode);	// 取得当前存值节点的label节点
-						var $valueNodes = __findAllValueNodes($labelNode);	// 根据label节点取得当前label的所有存值节点
+						var $labelNode = $.formb.findLabel($valueNode);	// 取得当前存值节点的label节点
+						var $valueNodes = $.formb.findAllValueNodes($labelNode);	// 根据label节点取得当前label的所有存值节点
 						
 						// 如果是multimedia的，联动图标的隐藏
 						if ($labelNode.find('.addon-items-popover').length > 0) {
@@ -128,7 +128,7 @@
 						}
 
 						// 判断是否需要隐藏label
-						if (__isAllValueNodesHide($valueNodes)) {
+						if ($.formb.isAllValueNodesHide($valueNodes)) {
 							// 隐藏label
 							$labelNode.addClass('hide');
 							console.log('labelNode -> hide');

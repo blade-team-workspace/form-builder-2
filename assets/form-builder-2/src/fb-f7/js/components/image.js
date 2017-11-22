@@ -139,6 +139,11 @@
 			that.checkViewStatus();
 		}
 
+        this.__transRead = function(){
+           that.$node.find('.thumbnails-container').find('.thumbnail .delete').css('display','none');
+           console.log("+++" +that.$node.closest('form'));
+        }
+
 		this.__setValue = function(value) {
 			console.log('image / this.__setValue(' + value + ')');
 

@@ -169,6 +169,9 @@
 			}
 		}
 
+		this.__transRead = function () {
+            this.$node.off('click', this.editCallback);
+        }
 		this.__setValue = specialMethodForValue;
 
 		this.__afterSetValue = specialMethodForValue;

@@ -45,7 +45,11 @@
 
 			this.$node.on('click', this.editCallback);
 		}
+		this.__transRead = function() {
 
+            this.$node.off('click', this.editCallback);
+
+		}
 		this.__setValue = function(value) {
 			// console.log('textarea / this.__setValue(' + value + ')');
 
@@ -57,7 +61,6 @@
 
 		this.editCallback = function(e) {
 			myApp.closeModal();
-
 			var popupTemplate =
 					'<div class="popup textarea-popup view">'+
 						'<div class="navbar">' +

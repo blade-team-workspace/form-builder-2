@@ -60,7 +60,9 @@
 
 			this.$node.on('click', this.editCallback);
 		}
-
+        this.__transRead = function() {
+            this.$node.off('click', this.editCallback);
+		}
 		this.__setValue = function(value) {
 			this.$node.find('select').val(value);
 			this.$node.find('.showValue').html(this.optionsMap[value] || "");
