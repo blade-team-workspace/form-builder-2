@@ -33,12 +33,11 @@
 		}
 		this.__init = function(kargs) {
 			//取到全局的只读参数
-            var global_isRead = kargs.$form.data('fb-form').opts.isRead;
+            var global_isRead = {isRead: kargs.$form.data('fb-form').opts.isRead || false};
 			// 合并默认参数
 			this.defaultOpts = $.extend({}, this.defaultOpts, this.componentDefaultOpts);
 			// 合并配置参数
-			this.opts = $.extend({}, this.defaultOpts, kargs,
-				{readonly: global_isRead},{readonly: kargs.isRead});
+            this.opts = $.extend({}, this.defaultOpts, global_isRead, kargs);
 			// 合并规则
 			this.rule = $.extend({}, kargs.rule);
 			// 赋初值
@@ -121,14 +120,20 @@
 		//将container事件删除
 		this.__cleanLabelEvent = function() {
 
-			if(this.container.$node) {
-                var $valueNodes = $.formb.findAllValueNodes($(that.$node[0]));
+			//stream 不赋值container
+			if(this.container) {
+                if(this.container.$node) {
+                    var $valueNodes = $.formb.findAllValueNodes($(that.$node[0]));
 
-                // 判断是否需要隐藏label
-                if ($.formb.isAllValueNodesHide($valueNodes)) {
-                    $(that.$node[0]).addClass('hide');
+                    // 判断是否需要隐藏label
+                    if ($.formb.isAllValueNodesHide($valueNodes)) {
+                        $(that.$node[0]).addClass('hide');
+                    }
                 }
-            }
+			}else{
+
+			}
+
 		}
 
         this.transRead = function () {

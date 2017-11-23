@@ -8,7 +8,7 @@
 			"groupId": "group0",
 			"items": [
 				{
-					"isRead":true,
+					"isRead":false,
 					"name": "ta1",
 					"type": "textarea"
 				}
@@ -101,7 +101,7 @@
 			"type": "form-group",
 			"items": [
 				{
-
+					"isRead":true,
 					"name": "i2",
 					"type": "image",
 					"maxNumber": 5,
@@ -114,6 +114,7 @@
 			"type": "form-group",
 			"items": [
 				{
+					"isRead":true,
 					"name": "rec1",
 					"type": "audio",
 					"widthInSteam": "auto",
@@ -127,10 +128,12 @@
 			"type": "multimedia",
 			"items": [
 				{
+					"isRead":true,
 					"name": "ta3",
 					"type": "textarea"
 				}, 
 				{
+					"isRead":true,
 					"name": "i1",
 					"type": "image",
 					"maxNumber": 3,

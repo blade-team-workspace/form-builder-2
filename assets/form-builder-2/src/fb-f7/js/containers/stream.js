@@ -48,7 +48,6 @@
 			};
 			var rules = this.$form.data('fb-form').opts.rules;
 			console.log(this.$form.data('fb-form'));
-			var global_isRead = this.$form.data('fb-form').opts.isRead;
 			// 寻找appendData.label中的{taNewx}
 			var reSearch = appendData.label.match((/{[^{}]*}/g));
 			// 循环查找结果，将其替换；
@@ -90,7 +89,7 @@
 			// 渲染label >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $label = $(this.labelTemplate.format({label: appendData.label}));
 			console.log($label)	//  {0: li.item-label, length: 1}
-			
+            var global_isRead = this.$form.data('fb-form').opts.isRead;
 			this.$node = [$label];
 			//console.log([$label]); // [l] length=1(items行数) Array[0]
 			
@@ -135,6 +134,12 @@
 	            } else {
 	            	childComponent.$node.next().css('display', 'inline-block');
 	            }
+
+                //判断是否是只读
+				if (childComponent.opts.isRead) {
+                     childComponent.$node.next().addClass('hide');
+                     childComponent.transRead();
+				}
 
 	            // 删除目标
 				childComponent.$node.next().on('click', function(e) { 

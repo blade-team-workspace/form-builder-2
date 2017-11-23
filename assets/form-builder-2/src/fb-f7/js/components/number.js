@@ -157,6 +157,9 @@
 			console.log('>>>>>>>>>>>>>>', this.myPicker);
 		}
 
+		this.__transRead  = function() {
+            this.$node.off('click', this.editCallback);
+		}
 		function specialMethodForValue(value) {
 			if (value === "0" || value === 0 || value === "") {
 

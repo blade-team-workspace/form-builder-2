@@ -75,7 +75,8 @@
 				opt.$form = that.$form;
 				// 将当前rule传入下一层
 				opt.rule = rules[opt.name];
-
+				// 将当前容器传入组件
+                opt.container = that;
 				var component = new Component(opt);
 				component.render();
 				appendData.components.push(component);
@@ -159,7 +160,7 @@
 				that.$node.push($content);
 
 				//如果当前组件只读的话，不加图标
-				if (opts.readonly) {
+				if (opts.isRead) {
 
 					// do nothing
 
@@ -198,7 +199,7 @@
 				var name = appendData.components[idx].opts.name;
 				nameList.push(name);
                 //只读模式
-                if(appendData.components[idx].opts.readonly){
+                if(appendData.components[idx].opts.isRead){
                     appendData.components[idx].transRead();
                 }
 				// 调用childComponent的setRule方法

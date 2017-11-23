@@ -157,6 +157,7 @@
                 that.$node.find('.audioItems-container').append($waiting);
                 that.$node.closest('li.swipeout').css('height', 'initial');
             });
+
             this.$node.data("uploaded", function (data) {
                 var $item = $(that.thumbnailTemplate.format(data));
                 // 绑定删除当前图片的方法
@@ -174,6 +175,9 @@
                 $waiting.remove();
                 _updateAudioUrls(data);
             });
+            this.__transRead = function() {
+                that.$node.find('.delete').addClass('hide');
+            }
             this.__setValue = function(data) {
                 console.log('audio / this.__setValue(' + data + ')');
                 that.$node.find('input').val(data);

@@ -136,19 +136,19 @@
 			this.$form.data('nameLabelMap', nameLabelMap);
 
 			// 加必填标志
-			if (rules[name] && rules[name].required === true&&!that.opts.readonly) {
+			if (rules[name] && rules[name].required === true&&!that.opts.isRead) {
 				var $title = $(this.$node[0]).find('.item-title');
 				$title.append(this.$form.data('fb-form').requireMarkTemplate);
 			}
             var global_isRead = that.$form.data('fb-form').opts.isRead;
             //只读模式，将必填和箭头隐藏
-            if ( global_isRead || childComponent.opts.readonly ) {
+            if ( global_isRead || childComponent.opts.isRead ) {
 
                 $(this.$node[0]).find('.addon').addClass('hide');
                 $(this.$node[0]).find('.item-title').find('.requireMarkHolder').addClass('hide');
             }
             //只读模式
-            if(childComponent.opts.readonly){
+            if(childComponent.opts.isRead){
                 childComponent.transRead();
             }
                 // childComponent.__cleanLabelEvent();
