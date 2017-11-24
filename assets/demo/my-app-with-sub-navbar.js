@@ -331,7 +331,7 @@ setTimeout(function() {
 	preUploadCallback({formId: 'testForm', name: 'rec2', groupId:  0});
 }, 1000);
 setTimeout(function() {
-<<<<<<< HEAD
+
 	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 2, url: "http://192.168.10.123:9999/data/you-cant-find-me.gif"});
 }, 6000);*/
 setTimeout(function() {
