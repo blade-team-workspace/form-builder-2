@@ -227,7 +227,7 @@ $$.each(pageTitles, function(idx) {
 // 导航菜单加校验
 $$('.navList a').on('click', function(){
     var href = $$(this).attr('href');
-    if (!validateForm(pageTitles[nowPageIndex].url)) {
+    if (!$('#{formId}'.format({formId:pageTitles[nowPageIndex].url})).validate()) {
         return false;
     } else {
         mainView.router.load({pageName: href.substring(1,href.length - 2)});
