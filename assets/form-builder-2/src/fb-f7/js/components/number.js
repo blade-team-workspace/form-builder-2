@@ -14,7 +14,9 @@
 	var component_number = function(kargs) {
 		// 定义默认图标
 		this.componentDefaultOpts = {
-			'f7-icon': 'filter'
+			'f7-icon': 'filter',
+			'label': '请选择',
+			'valueFormat': '{value}'
 		};
 		baseComponent.apply(this, arguments);	// 执行基类的初始化
 		var that = this;
@@ -52,13 +54,13 @@
 					'<div class="toolbar">' +
 					'<div class="toolbar-inner">' +
 					'<div class="left">' +
-					'<p class="link toolbar-randomize-link"	id="number_hint_test">预计消费小时数</p>' +
+					'<p class="link toolbar-randomize-link number_hint">{label}</p>' +
 					'</div>' +
 					'<div class="right">' +
-					'<a href="#" class="link close-picker">Done</a>' +
+						'<a href="#" class="link close-picker">确定</a>' +
 					'</div>' +
 					'</div>' +
-					'</div>',
+					'</div>'.format({'label': that.opts.label}),
 				cols: [
 					{
 						textAlign: 'center',
@@ -67,82 +69,16 @@
 					}
 
 				]
-					/*
-				 formatValue: function (picker, values) {
-				 console.log('valuesvaluesvaluesvaluesvalues', values);
-				 return  "预计花费{values}小时".format({values: values});
-				 },*/
-
-//,
-//				onChange: function (picr, country) {
-//					picr= that.myPicker;
-//					if (country>0){
-//
-//						if(that.myPicker.cols[0].replaceValues){
-//							that.myPicker.cols[0].replaceValues(values[country]);
-//						}
-//					}
-//
-//				}
-//				onOpen: function(){
-//					if(){
-//
-//					}
-//				}
-
-				//	//var value = e.target.value;
-				//	// console.log('value ->', value);
-				//	that.setValue(value);					//if (value === "0" || value === 0) {
-				//	//	value = "";
-				//	//}
-				//	//that.setValue();
-				//   //
-				//	//console.log(p, value);
-				//}
 			});
 
-			//this.optionsMap = {};
-			//for (var i = 0; i < that.opts.options.length; i++) {
-			//	optionshtml+=option.format({
-			//		value:that.opts.options[i].value,
-			//		label:that.opts.options[i].label
-			//	});
-			//	that.optionsMap[that.opts.options[i].value] = that.opts.options[i].label;
-			//};
-
-			// this.$node.attr('readonly', this.opts.readonly || false);
-
-			// 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
-
-			//console.log('>>>>>>>>>>>>>>>>>>>>>>>>>', this.opts);
-
-
-			//this.$node = $(this.template.format({
-			//	name: that.opts.name,
-			//items: this.opts.minValue
-			//}));
-
 			this.$node.find('input').on('change', function(e) {
-
 
 				var value = e.target.value;
 				// console.log('value ->', value);
 				that.setValue(value);
 
 			});
-			//this.$node.on('click',function(e) {
-			//	if(e.target.value>0){
-			//		that.myPicker.cols[0].setValue(values[0]);
-			//	}
-			//}
 
-
-			//this.$node.on('click', function(values) {
-				//	//var value = e.target.selectedOptions[0]==undefined?'':e.target.selectedOptions[0].label;
-				//	// console.log('value ->', value);
-				//	that.$node.setValue(values[0]);
-				//});
-			//this.$node.find('input').val(value);
 
 			this.$node.find('select').on('change', function(e) {
 				//var value = e.target.selectedOptions[0]==undefined?'':e.target.selectedOptions[0].label;
@@ -168,7 +104,7 @@
 				this.$node.find('.showValue').html("");
 			} else {
 				this.$node.find('input').val(value);
-				this.$node.find('.showValue').html("预计花费{value}个小时".format({value: value}));
+				this.$node.find('.showValue').html(this.opts.valueFormat.format({value: value}));
 			}
 		}
 

@@ -356,7 +356,7 @@
 }
 
 /* number提示语 */	/* TODO: 不要使用ID选择器 */
-#number_hint_test {
+.number_hint {
 	color:#000000;
 }
 .hide-item {

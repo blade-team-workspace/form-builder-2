@@ -13,7 +13,8 @@
     var component_audio = function (kargs) {
         // 定义默认图标
         this.componentDefaultOpts = {
-            'f7-icon': 'compose'
+            'f7-icon': 'mic'
+            
         };
 
         baseComponent.apply(this, arguments);	// 执行基类的初始化
