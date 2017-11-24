@@ -81,9 +81,9 @@
 		this.__afterRender = function() {
 			// do nothing, not necessary
             // console.log('after render');
-            if(this.value){
-                this.setValue(this.value);
-			}
+            // if(this.value){
+            //     this.setValue(this.value);
+            // }
 
         }
 		this.render = function() {

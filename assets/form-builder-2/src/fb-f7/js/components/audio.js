@@ -36,9 +36,9 @@
             '</div>' +
             '<i class="ppBtn f7-icons">play_round</i>' +
             '<div class="time">00:00</div>' +
-            '<div class="delete">' +
-            '<i class="f7-icons size-smaller">close</i>' +
-            '</div>' +
+            // '<div class="delete">' +
+            // '<i class="f7-icons size-smaller">close</i>' +
+            // '</div>' +
             '</div>';
         this.waitingTemplate =
             '<div class="audio-player audioItem swipeout-clean-item waiting">' +
@@ -144,6 +144,11 @@
             }
 
             this.$node.data('preUpload', function (data) {
+                //当audio在已上传或者是上传成功后再次上传,将dom元素删除
+                if(that.$node.find('.audio-player').length>0){
+                    that.$node.find('.audio-player').remove();
+                    that.setValue('');
+                }
                 var groupId = data.groupId;
                 var $waiting = $(that.waitingTemplate);
                 // 绑定删除上传中的方法
@@ -169,14 +174,13 @@
                     _updateAudioUrls(data);
                 });
                 audioPlayer_bindEvents($item);
-                var $waiting = $('form#{formId} input[name={name}]'.format(data)).closest('.item-content').find(
-                    '.audioItem.waiting.groupId_' + data.groupId );
+                var $waiting = that.$node.find('.waiting');
                 $item.insertBefore($waiting);
                 $waiting.remove();
                 _updateAudioUrls(data);
             });
             this.__transRead = function() {
-                that.$node.find('.delete').addClass('hide');
+                // that.$node.find('.delete').addClass('hide');
             }
             this.__setValue = function(data) {
                 console.log('audio / this.__setValue(' + data + ')');
