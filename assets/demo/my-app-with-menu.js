@@ -474,3 +474,5 @@ function bindPagerBtn() {
     });
 }
 bindPagerBtn();
+
+initPageBindEvent();

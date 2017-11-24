@@ -30,6 +30,10 @@
 	font-size: 15px;
 	padding-left: 0;
 }
+/* item-title和item-after在同一行的写法 */
+.list-block.title-after-inline .item-after {
+	width: initial;
+}
 /* 多行文本框样式 */
 .list-block .item-after textarea {
 	width: 100%;
