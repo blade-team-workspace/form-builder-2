@@ -15,7 +15,7 @@
 		// 定义默认图标
 		this.componentDefaultOpts = {
 			'f7-icon': 'filter',
-			'label': '请选择',
+			'description': '请选择',
 			'valueFormat': '{value}'
 		};
 		baseComponent.apply(this, arguments);	// 执行基类的初始化
@@ -51,16 +51,16 @@
 				input: that.$node.find('input'),	//'#picker-device',
 				init: true,
 					toolbarTemplate:
-					'<div class="toolbar">' +
-					'<div class="toolbar-inner">' +
-					'<div class="left">' +
-					'<p class="link toolbar-randomize-link number_hint">{label}</p>' +
-					'</div>' +
-					'<div class="right">' +
-						'<a href="#" class="link close-picker">确定</a>' +
-					'</div>' +
-					'</div>' +
-					'</div>'.format({'label': that.opts.label}),
+						('<div class="toolbar">' +
+						'<div class="toolbar-inner">' +
+						'<div class="left">' +
+						'<p class="link toolbar-randomize-link number_hint">{label}</p>' +
+						'</div>' +
+						'<div class="right">' +
+							'<a href="#" class="link close-picker">确定</a>' +
+						'</div>' +
+						'</div>' +
+						'</div>').format({'label': that.opts.description}),
 				cols: [
 					{
 						textAlign: 'center',

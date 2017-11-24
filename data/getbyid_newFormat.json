@@ -176,7 +176,7 @@
 			"groupId": "group0",
 			"items": [
 				{
-					"label": "请选择",
+					"description": "请选择",
 					"valueFormat": "预计消耗{value}小时",
 					"name": "n2",
 					"type": "number",

@@ -356,8 +356,12 @@
 }
 
 /* number提示语 */	/* TODO: 不要使用ID选择器 */
-.number_hint {
-	color:#000000;
+.ios .number_hint {
+	color: #000;
+}
+.android .number_hint {
+	color: #fff;
+	padding-left: 16px;
 }
 .hide-item {
 	animation: hide_item 1s 1 ease-in-out;

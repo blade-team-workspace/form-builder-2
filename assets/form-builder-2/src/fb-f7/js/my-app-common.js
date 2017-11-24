@@ -99,6 +99,8 @@ function initPageBindEvent() {
 
 		myPhotoBrowser = myApp.photoBrowser({
 			photos: urlList,
+            backLinkText: "关闭",
+            ofText: '/',
 			onOpen: function(photobrowser) {
 				console.log('opened', photobrowser);
 				$$('.photo-browser').find('i.icon').addClass('color-white').addClass('icon-white');
