@@ -63,6 +63,10 @@
 	color: #818181;
 }
 
+.border-none {
+	border: none;
+}
+
 /* 主题样式 */
 .navbar, .subnavbar, .toolbar, .photo-browser .navbar, .photo-browser .toolbar {
 	background-color: #6EC097;	/* #40BC87; */

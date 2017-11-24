@@ -48,33 +48,12 @@ var mainView = myApp.addView('.view-main', {
     animatePages: false
 });
 
-// 给安卓机械后退按键使用的方法
-function androidBackBtn() {
-    mainView.history.pop()
-    var backUrl = mainView.history.pop();
-    if (backUrl) {
-        backUrl = backUrl.substring(1);
-        mainView.router.load({pageName: backUrl});
-    } else {
-        window.location = '/exit-web-view';
-    }
-}
-
 var serviceType = $$('#serviceType').val();
 var formInsideId = $$('#formInsideId').val();
 var groupId = $$('#groupId').val();
 var workflowNumber = $$('#workflowNumber').val();
 var hasValue = ($$('#hasValue').val() == 'true');
-
 var isRead = false;
-
-var getQueryString = function (name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
-}
-
 var isShared = !!getQueryString('isShared');
 
 // 页面数据
@@ -227,7 +206,6 @@ var pageTemplate =
     '</div>';
 
 function strToJson(str){
-
     if (project == 'bpmApp') {
         // bpmApp用
         var json = eval('(' + str + ')');
@@ -380,6 +358,7 @@ function reRenderPage(idx, jsonConf) {
     });
 }
 
+/*
 function getFormData(formId) {
     if($$('form#' + formId).length == 1) {
         var formData = myApp.formToData('#' + formId);
@@ -397,8 +376,7 @@ function getFormData(formId) {
     } else {
         return undefined;
     }
-}
-
+}*/
 
 function saveOrSubmit(isSubmit) {
     var formData = myApp.formToData('#testForm');
@@ -495,81 +473,3 @@ function bindPagerBtn() {
     });
 }
 bindPagerBtn();
-
-// 扩展array类型原生方法，添加obj如果是array，就让其元素合并，否则直接加入
-Array.prototype.add = function(obj) {
-    var arrList = this;
-    if ($.isArray(obj)) {
-        $.each(obj, function(_idx) {
-            arrList.push(obj[_idx]);
-        });
-    } else {
-        arrList.push(obj);
-    }
-}
-
-function GetQueryString(name) {
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if(r!=null)return r[2]; return null;
-}
-
-// 退出webView的方法
-$$('.exit-web-view').on('click', function(){
-    window.location = '/exit-web-view';
-});
-
-// 微信分享方法
-$$('.share-btn').on('click', function(){
-    var data = {
-        link: location.pathname + location.search + '&isShared=1',
-        teacherName: $$('.teacherName').html(),
-        lessonNo: $$('.lessonNo').html(),
-        lessonTitle: $$('.lessonTitle').html()
-    };
-    var urlParam = $$.param(data);
-    var url = "/share-url?" + urlParam;
-
-    window.location = url;
-});
-
-// 预上传回调
-function preUploadCallback(data) {
-    $$('form#{formId} [name={name}]'.format(data)).closest('.media-node').data('preUpload')(data);
-}
-
-// 上传完毕回调
-function uploadedCallback(data) {
-    $$('form#{formId} [name={name}]'.format(data)).closest('.media-node').data('uploaded')(data);
-}
-
-var myPhotoBrowser = undefined;
-
-// 查看已上传图片的方法
-$$('body').on('click', '.openPhotoBrowser', function(e) {
-    var nowUrl = e.target.getAttribute('src');
-    var urlList = $$(e.target).closest('.item-content').find('input').val().match(/images:\[(.*)\]/)[1].split(',');
-    var nowIndex = urlList.indexOf(nowUrl);
-
-    myPhotoBrowser = myApp.photoBrowser({
-        photos: urlList,
-        onOpen: function(photobrowser) {
-            console.log('opened', photobrowser);
-            $$('.photo-browser').find('i.icon').addClass('color-white').addClass('icon-white');
-        }
-    });
-
-    // 加载失败的图片不响应打开相册操作
-    if (nowIndex != -1) {
-        myPhotoBrowser.open(nowIndex); // open photo browser
-    }
-});
-
-// TODEL
-setTimeout(function() {
-    preUploadCallback({formId: 'testForm', name: 'rec1', groupId:  0, count: 1});
-}, 3000);
-
-setTimeout(function() {
-    uploadedCallback({formId: 'testForm', name: 'rec1', groupId:  0, index: 0, url: "http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3"});
-}, 5000);
