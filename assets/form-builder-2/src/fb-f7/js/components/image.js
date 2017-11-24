@@ -141,7 +141,7 @@
 
         this.__transRead = function(){
            that.$node.find('.thumbnails-container').find('.thumbnail .delete').css('display','none');
-           console.log("+++" +that.$node.closest('form'));
+           // console.log("+++" ,that.$node.find('.thumbnails-container'));
         }
 
 		this.__setValue = function(value) {
@@ -183,6 +183,10 @@
 				// 放置
 				// $item.insertBefore($addBtn);
 				that.$node.find('.thumbnails-container').append($item);
+				//如果只读的时候，将delete删除
+                if(that.opts.isRead){
+                	$item.find('.delete').hide();
+                }
 			});
 				
 			// 判断总thumbnail数量是否超过了max

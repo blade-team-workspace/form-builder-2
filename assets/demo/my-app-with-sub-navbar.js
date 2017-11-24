@@ -226,8 +226,8 @@ setTimeout(function() {
 
 	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 2, url: "http://192.168.10.123:9999/data/you-cant-find-me.gif"});
 }, 6000);*/
-setTimeout(function() {
-    uploadedCallback({formId: 'testForm', name: 'rec2', groupId:  0,  url: "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"});
-}, 2000);
+// setTimeout(function() {
+//     uploadedCallback({formId: 'testForm', name: 'rec2', groupId:  0,  url: "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"});
+// }, 2000);
 
 
