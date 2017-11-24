@@ -449,7 +449,8 @@ function bindPagerBtn() {
     });
     $$('.page-next').on('click', function () {
         $$('.page-next').hide();
-        if (!validateForm(pageTitles[nowPageIndex].url)) {
+
+        if (!$('#{formId}'.format({formId:pageTitles[nowPageIndex].url})).validate()) {
             $$('.page-next').show();
             return false;
         }
