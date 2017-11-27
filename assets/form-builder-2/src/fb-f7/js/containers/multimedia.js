@@ -204,7 +204,7 @@
                 }
 				// 调用childComponent的setRule方法
 				if (rules[name]) {
-					appendData.components[idx].setRule(rules[name]);
+					appendData.components[idx].setCheckSteps(rules[name]);
 				}
 				//同form-group一样，在这个地方调用checkViewStatus
                 appendData.components[idx].checkViewStatus();
