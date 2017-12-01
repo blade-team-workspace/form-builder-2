@@ -229,23 +229,25 @@
 			["ta3", "i1", "s2", "n1", "rec2"]
 		]
 	},
-	"events": [{
-		"eventType": "valueChangeShowHide",
-		"trigger": "s1",
-		"valueResps": {
-			"1": "ta4",
-			"2": ["i1", "s2"],
-			"3": ["ta3", "i1", "s2", "n1", "rec2"]
+	"events": [
+		{
+			"eventType": "valueChangeShowHide",
+			"trigger": "s1",
+			"valueResps": {
+				"1": "ta4",
+				"2": ["i1", "s2"],
+				"3": ["ta3", "i1", "s2", "n1", "rec2"]
+			}
+		}, {
+			"eventType": "valueChangeShowHide",
+			"trigger": "taNew211111111",
+			"valueResps": {
+				"1": "",
+				"2": "",
+				"3": ["taNew4111111111"]
+			}
 		}
-	}, {
-		"eventType": "valueChangeShowHide",
-		"trigger": "taNew211111111",
-		"valueResps": {
-			"1": "",
-			"2": "",
-			"3": ["taNew4111111111"]
-		}
-	}],
+	],
 	"values": {
 		"ta1":"4545456",
 		"s1": "3",
@@ -261,7 +263,6 @@
 		"taNew21" : "挥手",
 		"taNew33" : 0
 	},
-	"isSteam": false,
 	"isRead": false,
 	"groupDefaultSplit": false
 }
