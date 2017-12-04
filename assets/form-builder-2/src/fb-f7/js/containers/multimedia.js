@@ -39,7 +39,7 @@
 					'</span>' +
 				'</li>';
 		this.contentTemplate =
-				'<li class="swipeout" style="height: 0px;">' +
+				'<li class="swipeout show-value-container" style="height: 0px;">' +
 					'<div class="swipeout-content item-content">' +
 						'<div class="item-inner">' +
 							'<div class="item-after"></div>' +

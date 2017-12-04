@@ -47,7 +47,7 @@
 			]
 		},
 		{
-			"label": "轻轻的{taNew1}，正如我轻轻的来,我轻轻的{taNew2}{taNew4}，作别西天的{taNew3}",
+			"label": "轻轻的{taNew1}，正如我轻轻的来,我轻轻的{s_s2}{s_ta4}，作别西天的{taNew3}",
 			"type" : "stream",
 			"groupId": "group1",
 			"items": [
@@ -58,7 +58,7 @@
 				},
 				{
 					"label": "目的地",
-					"name":"taNew2",
+					"name":"s_s2",
 					"type":"select",
 					"options": [{
 						"label": "选项1",
@@ -69,6 +69,9 @@
 					}, {
 						"label": "选项3",
 						"value": 3
+					}, {
+						"label": "其他",
+						"value": 4
 					}]
 				},
 				{
@@ -80,8 +83,8 @@
 					"stepValue": 0.5
 				},
 				{
-					"label": "555555555",
-					"name":"taNew4",
+					"label": "请输入目的地",
+					"name":"s_ta4",
 					"type":"textarea"
 				}
 			]
@@ -232,19 +235,12 @@
 	"events": [
 		{
 			"eventType": "valueChangeShowHide",
-			"trigger": "s1",
-			"valueResps": {
-				"1": "ta4",
-				"2": ["i1", "s2"],
-				"3": ["ta3", "i1", "s2", "n1", "rec2"]
-			}
-		}, {
-			"eventType": "valueChangeShowHide",
-			"trigger": "taNew211111111",
+			"trigger": "s_s2",
 			"valueResps": {
 				"1": "",
 				"2": "",
-				"3": ["taNew4111111111"]
+				"3": "",
+				"4": ["s_ta4"]
 			}
 		}
 	],
@@ -259,9 +255,9 @@
 
 		"s2": "2",
 		"n1": "5.5",
-		"taNew11" : "我走了",
-		"taNew21" : "挥手",
-		"taNew33" : 0
+		"taNew1" : "我走了",
+		"taNew2" : "挥手",
+		"taNew3" : 0
 	},
 	"isRead": false,
 	"groupDefaultSplit": false

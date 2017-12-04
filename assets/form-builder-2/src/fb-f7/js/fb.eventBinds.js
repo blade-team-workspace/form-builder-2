@@ -78,7 +78,7 @@
 
 			var valueRespMap = eb.valueResps;		// {触发器的value: 响应对象的name}的关系
 			var triggerValues = [];					// 触发器现在的值(为了可读性，实际未使用)
-			var respNames = [];						// 取得当前值对应的所有响应对象
+			var respNames = [];						// 取得当前值对应的所有响应对象(应该显示的对象名)
 
 			if ($this.attr('type') == 'checkbox') {
 				$.each($('[name=' + triggerName + ']:checked', $form), function(){
@@ -96,7 +96,10 @@
 				var itemName = allResp[idx];
 
 				if (itemName != undefined && itemName.length > 0) {
-					var $valueNode = $form.find('[name=' + itemName + ']').closest('.swipeout');
+					var $valueNode = $form.find('[name=' + itemName + ']').closest('.show-value-container');
+					/*if ($valueNode.length == 0) {
+						$valueNode = $form.find('[name=' + itemName + ']')
+					}*/
 
 					// 当前轮询的name在本次应该显示的nameList中
 					if (respNames.indexOf(itemName) != -1) {

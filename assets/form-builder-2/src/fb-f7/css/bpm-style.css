@@ -418,6 +418,11 @@
 	color: #ffffff!important;
 }
 
+/* 流式布局 */
+.stream-layout {
+	color: #000;
+	text-indent: 2em;
+}
 /* stream 内容为空时 */
 span.no-value {
     width: 3em;
@@ -426,10 +431,10 @@ span.no-value {
     border-bottom: solid 1px black;
     margin: 0 3px -3px 3px;
 }
-
 /* deleteBtn 样式 */
 span.delete {
 	display: inline-block;
+	text-indent: 0;
 	height: 16px;
 	width: 16px;
 	line-height: 16px; 
