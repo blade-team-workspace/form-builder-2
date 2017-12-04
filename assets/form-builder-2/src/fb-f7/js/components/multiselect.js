@@ -32,13 +32,20 @@
             this.__beforeRender = function() {
             }
             this.__render = function() {
-                var option='<option value="{value}">{label}</option>';
+                var hideFlag = '';
+                var option='<option value="{value}" {isHide}>{label}</option>';
                 var optionshtml='';
                 this.optionsMap = {};
                 for (var i = 0; i < that.opts.options.length; i++) {
+                    if(that.opts.options[i].isHide){
+                        hideFlag = 'style="display:none"';
+                    }else{
+                        hideFlag = '';
+                    }
                     optionshtml+=option.format({
                         value:that.opts.options[i].value,
-                        label:that.opts.options[i].label
+                        label:that.opts.options[i].label,
+                        isHide:hideFlag
                     });
                     that.optionsMap[that.opts.options[i].value] = that.opts.options[i].label;
                 };

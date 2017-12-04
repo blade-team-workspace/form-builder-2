@@ -16,7 +16,7 @@
 		// 定义默认图标
 		this.componentDefaultOpts = {
 			'f7-icon': 'list',
-			'placeholder': '--请选择--'
+			'placeholder': '--请选择--',
 		};
 		baseComponent.apply(this, arguments);	// 执行基类的初始化
 
@@ -34,13 +34,20 @@
 		}
 
 		this.__render = function() {
-			var option='<option value="{value}">{label}</option>';
+			var hideFlag = '';
+			var option='<option value="{value}" {isHide}>{label}</option>';
 			var optionshtml='<option value="">' + that.opts.placeholder + '</option>';
 			this.optionsMap = {};
 			for (var i = 0; i < that.opts.options.length; i++) {
+				if(that.opts.options[i].isHide){
+					hideFlag = 'style="display:none"';
+				}else{
+					hideFlag = '';
+				}
 				optionshtml+=option.format({
 					value:that.opts.options[i].value,
-					label:that.opts.options[i].label
+					label:that.opts.options[i].label,
+					isHide:hideFlag
 				});
 				that.optionsMap[that.opts.options[i].value] = that.opts.options[i].label;
 			};
