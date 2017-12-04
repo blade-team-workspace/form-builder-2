@@ -49,7 +49,8 @@
 					label:that.opts.options[i].label,
 					isHide:hideFlag
 				});
-				that.optionsMap[that.opts.options[i].value] = that.opts.options[i].label;
+				//增加value描述description属性，替代label
+				that.optionsMap[that.opts.options[i].value] = that.opts.options[i].description ||that.opts.options[i].label;
 			};
 			this.$node = $(this.template.format({
 				name: that.opts.name,

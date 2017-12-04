@@ -34,9 +34,11 @@
 					"name": "s1",
 					"type": "select",
 					"options": [{
+
 						"label": "选项1",
 						"value": 1
 					}, {
+						"description": "菜鸡",
 						"label": "选项2",
 						"value": 2
 					}, {
@@ -55,6 +57,7 @@
 					"name": "s33",
 					"type": "multiselect",
 					"options": [{
+						"description": "菜鸡",
 						"label": "选项1",
 						"value": 1
 					}, {
