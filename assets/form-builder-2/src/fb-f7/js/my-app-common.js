@@ -73,7 +73,9 @@ function getQueryString(name) {
 */
 function initPageBindEvent() {
 	// 退出webView的方法
-	$$('.exit-web-view').on('click', customizedHistoryBack);
+	$$('.exit-web-view').on('click', function(){
+		window.location = '/exit-web-view';
+	});
 
 	// 微信分享方法
 	$$('.share-btn').on('click', function(){
