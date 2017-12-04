@@ -11,9 +11,12 @@ var url_saveformData;
 
 if (project == 'bpmApp') {
 	// bpmApp用
-	url_getformvaluebyid = "/bpmapp/form/getformvaluebyid";
-	url_getbyid = "/bpmapp/form/getbyid";
-	url_saveformData = "/bpmapp/form/saveformData";
+//	url_getformvaluebyid = "http://192.168.8.77:8088/bpmapp/form/getformvaluebyid";
+//	url_getbyid = "http://192.168.8.77:8088/bpmapp/form/getbyid";
+//	url_saveformData = "http://192.168.8.77:8088/bpmapp/form/saveformData";
+	url_getformvaluebyid = url+"/form/getformvaluebyid";
+	url_getbyid = url+"/form/getbyid";
+	url_saveformData = url+"/form/saveformData";
 } else if (project == 'blade') {
 	// blade用
 	url_getformvaluebyid = "data/getformvaluebyid_4+1.json";
@@ -23,7 +26,7 @@ if (project == 'bpmApp') {
 
 
 // Initialize your app
-var myApp = new Framework7({init: false});
+var myApp = new Framework7({init: false,modalTitle: ''});
 
 // Export selectors engine
 var $$ = Dom7;
@@ -74,7 +77,8 @@ if (hasValue) {
 		dataType: 'json',
 		async: false,
 		success: function(data) {
-			jsonConf_index = data; //strToJson(data);
+//			jsonConf_index = strToJson(data);
+			jsonConf_index = data;
 		},
 		error: function(result) {
 			console.error('[ERROR] 加载班级表单数据失败！');
@@ -98,7 +102,8 @@ else {
 		dataType: 'json',
 		async: false,
 		success: function(data) {
-			jsonConf_index = data; //strToJson(data);
+//			jsonConf_index = strToJson(data);
+			jsonConf_index = data;
 		},
 		error: function(result) {
 			console.error('[ERROR] 加载班级表单配置失败！');
@@ -160,6 +165,7 @@ function saveOrSubmit(isSubmit) {
 		var isValid = $('#testForm').validate();
 		if (isValid) {
 			// 提交（对应已办）
+			myApp.showPreloader('提交中...');
 			$$.ajax({
 				url: url_saveformData,
 				type: (project == 'blade') ? 'get' : 'post',
@@ -205,29 +211,186 @@ function saveOrSubmit(isSubmit) {
 	}
 }
 
+
+// 扩展array类型原生方法，添加obj如果是array，就让其元素合并，否则直接加入
+Array.prototype.add = function(obj) {
+	var arrList = this;
+	if ($.isArray(obj)) {
+		$.each(obj, function(_idx) {
+			arrList.push(obj[_idx]);
+		});
+	} else {
+		arrList.push(obj);
+	}
+}
+
+
+// 扩展String类型的原生方法，提供类似java或python的format方法
+String.prototype.format = function(args) {
+	var result = this;
+	if (arguments.length > 0) {	
+		if (arguments.length == 1 && typeof (args) == "object") {
+			for (var key in args) {
+				if(args[key]!=undefined){
+					var reg = new RegExp("({" + key + "})", "g");
+					result = result.replace(reg, args[key]);
+				}
+			}
+		}
+		else {
+			for (var i = 0; i < arguments.length; i++) {
+				if (arguments[i] != undefined) {
+					var reg = new RegExp("({[" + i + "]})", "g");
+					result = result.replace(reg, arguments[i]);
+				}
+			}
+		}
+	}
+	return result;
+}
+
+function GetQueryString(name) {
+	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	var r = window.location.search.substr(1).match(reg);
+	if(r!=null)return r[2]; return null;
+}
+
+function initPageBindEvent() {
+	// 退出webView的方法
+	$$('.exit-web-view').on('click', customizedHistoryBack);
+
+	// 微信分享方法
+	$$('.share-btn').on('click', function(){
+		var data = {
+			link: location.pathname + location.search + '&isShared=1',
+			teacherName: $$('.teacherName').html(),
+			lessonNo: $$('.lessonNo').html(),
+			lessonTitle: $$('.lessonTitle').html()
+		};
+		var urlParam = $$.param(data);
+		var url = "/share-url?" + urlParam;
+		
+		window.location = url;
+	});
+
+	var myPhotoBrowser = undefined;
+
+	// 查看已上传图片的方法
+	$$('body').on('click', '.openPhotoBrowser', function(e) {
+		var nowUrl = e.target.getAttribute('src');
+		var urlList = $$(e.target).closest('.item-content').find('input').val().match(/images:\[(.*)\]/)[1].split(',');
+		var nowIndex = urlList.indexOf(nowUrl);
+
+		myPhotoBrowser = myApp.photoBrowser({
+			photos: urlList,
+			onOpen: function(photobrowser) {
+				console.log('opened', photobrowser);
+				$$('.photo-browser').find('i.icon').addClass('color-white').addClass('icon-white');
+			}
+		});
+
+		// 加载失败的图片不响应打开相册操作
+		if (nowIndex != -1) {
+			myPhotoBrowser.open(nowIndex); // open photo browser
+		}
+	});
+}
+
+
+function strToJson(str){
+	if (project == 'bpmApp') {
+		// bpmApp用
+		var json = eval('(' + str + ')');
+		return json;
+	} else if (project == 'blade') {
+		// blade用
+		return str;
+	}
+}
+
+
+// 扩展array类型原生方法，添加obj如果是array，就让其元素合并，否则直接加入
+Array.prototype.add = function(obj) {
+	var arrList = this;
+	if ($.isArray(obj)) {
+		$.each(obj, function(_idx) {
+			arrList.push(obj[_idx]);
+		});
+	} else {
+		arrList.push(obj);
+	}
+}
+
+
+// 扩展String类型的原生方法，提供类似java或python的format方法
+String.prototype.format = function(args) {
+	var result = this;
+	if (arguments.length > 0) {	
+		if (arguments.length == 1 && typeof (args) == "object") {
+			for (var key in args) {
+				if(args[key]!=undefined){
+					var reg = new RegExp("({" + key + "})", "g");
+					result = result.replace(reg, args[key]);
+				}
+			}
+		}
+		else {
+			for (var i = 0; i < arguments.length; i++) {
+				if (arguments[i] != undefined) {
+					var reg = new RegExp("({[" + i + "]})", "g");
+					result = result.replace(reg, arguments[i]);
+				}
+			}
+		}
+	}
+	return result;
+}
+
+function GetQueryString(name) {
+	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	var r = window.location.search.substr(1).match(reg);
+	if(r!=null)return r[2]; return null;
+}
+
+function initPageBindEvent() {
+	// 退出webView的方法
+	$$('.exit-web-view').on('click', customizedHistoryBack);
+
+	// 微信分享方法
+	$$('.share-btn').on('click', function(){
+		var data = {
+			link: location.pathname + location.search + '&isShared=1',
+			teacherName: $$('.teacherName').html(),
+			lessonNo: $$('.lessonNo').html(),
+			lessonTitle: $$('.lessonTitle').html()
+		};
+		var urlParam = $$.param(data);
+		var url = "/share-url?" + urlParam;
+		
+		window.location = url;
+	});
+
+	var myPhotoBrowser = undefined;
+
+	// 查看已上传图片的方法
+	$$('body').on('click', '.openPhotoBrowser', function(e) {
+		var nowUrl = e.target.getAttribute('src');
+		var urlList = $$(e.target).closest('.item-content').find('input').val().match(/images:\[(.*)\]/)[1].split(',');
+		var nowIndex = urlList.indexOf(nowUrl);
+
+		myPhotoBrowser = myApp.photoBrowser({
+			photos: urlList,
+			onOpen: function(photobrowser) {
+				console.log('opened', photobrowser);
+				$$('.photo-browser').find('i.icon').addClass('color-white').addClass('icon-white');
+			}
+		});
+
+		// 加载失败的图片不响应打开相册操作
+		if (nowIndex != -1) {
+			myPhotoBrowser.open(nowIndex); // open photo browser
+		}
+	});
+}
+
 initPageBindEvent();
-
-
-/*setTimeout(function() {
-	preUploadCallback({formId: 'testForm', name: 'i1', groupId:  0, count: 3});
-}, 4000);
-
-
- setTimeout(function() {
- 	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 0, url: "http://192.168.8.125:9999/data/a.jpg"});
- }, 5000);
- setTimeout(function() {
- 	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 1, url: "http://192.168.8.125:9999/data/b.png"});
- }, 5500);
-setTimeout(function() {
-	preUploadCallback({formId: 'testForm', name: 'rec2', groupId:  0});
-}, 1000);
-setTimeout(function() {
-
-	uploadedCallback({formId: 'testForm', name: 'i1', groupId:  0, index: 2, url: "http://192.168.10.123:9999/data/you-cant-find-me.gif"});
-}, 6000);*/
-// setTimeout(function() {
-//     uploadedCallback({formId: 'testForm', name: 'rec2', groupId:  0,  url: "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"});
-// }, 2000);
-
-

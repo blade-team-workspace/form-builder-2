@@ -9,10 +9,10 @@ var url_saveformData;
 
 if (project == 'bpmApp') {
     // bpmApp用
-    url_studentList = "/bpmapp/form/studentList";
-    url_getformvaluebyid = "/bpmapp/form/getformvaluebyid";
-    url_getbyid = "/bpmapp/form/getbyid";
-    url_saveformData = "/bpmapp/form/saveformData";
+    url_studentList = url+"/form/studentList";
+    url_getformvaluebyid = url+"/form/getformvaluebyid";
+    url_getbyid = url+"/form/getbyid";
+    url_saveformData = url+"/form/saveformData";
 } else if (project == 'blade') {
     // blade用
     url_studentList = "data/studentList.json";
@@ -23,7 +23,8 @@ if (project == 'bpmApp') {
 
 // Initialize your app
 var myApp = new Framework7({
-    init: false  // 关闭自动初始化
+    init: false,  // 关闭自动初始化
+    modalTitle: ''
 });
 
 // Export selectors engine
@@ -43,7 +44,7 @@ if (device.android) {
 var mainView = myApp.addView('.view-main', {
     // Because we use fixed-through navbar we can enable dynamic navbar
     dynamicNavbar: true,
-    domCache: true,	  //enable inline pages
+    domCache: true,   //enable inline pages
     // swipePanel: 'left',
     animatePages: false
 });
@@ -102,7 +103,8 @@ if (hasValue) {
         dataType: 'json',
         async: false,
         success: function(data) {
-            jsonConf_index = strToJson(data);
+//            jsonConf_index = strToJson(data);
+            jsonConf_index = data;
         },
         error: function(result) {
             console.error('[ERROR] 加载班级表单数据失败！');
@@ -126,7 +128,8 @@ else {
         dataType: 'json',
         async: false,
         success: function(data) {
-            jsonConf_index = strToJson(data);
+            jsonConf_index = data;
+//            jsonConf_index = strToJson(data);
         },
         error: function(result) {
             console.error('[ERROR] 加载班级表单配置失败！');
@@ -264,7 +267,8 @@ function initStudentsFormsAndPages(){
                     },
                     dataType: 'json',
                     success: function (data) {
-                        jsonConfs[pageTitles[_i].url] = strToJson(data);
+                        jsonConfs[pageTitles[_i].url] = data;
+//                        jsonConfs[pageTitles[_i].url] = strToJson(data);
                         reRenderPage(_i, jsonConfs[pageTitles[_i].url]);
                     },
                     error: function (result) {
@@ -296,7 +300,8 @@ function initStudentsFormsAndPages(){
             dataType: 'json',
             async: false,
             success: function(data) {
-                jsonConfs = strToJson(data);
+                jsonConfs = data;
+//                jsonConfs = strToJson(data);
                 // 初始化页面和导航
                 $$.each(pageTitles, function(idx){
                     if (project == 'bpmApp') {
@@ -358,44 +363,44 @@ function reRenderPage(idx, jsonConf) {
     });
 }
 
-/*
-function getFormData(formId) {
-    if($$('form#' + formId).length == 1) {
-        var formData = myApp.formToData('#' + formId);
-        var allDisabled = $$('#' + formId).find(':disabled');
-
-        // 手动删掉禁用的项
-        $$.each(allDisabled, function(idx) {
-            var disabledName = allDisabled[idx].name;
-            if (disabledName in formData) {
-                delete formData[disabledName];
-            }
-        });
-
-        return formData;
-    } else {
-        return undefined;
-    }
-}*/
-
 function saveOrSubmit(isSubmit) {
-    var formData = myApp.formToData('#testForm');
+//    var formData = myApp.formToData('#testForm');
 
-    console.log('saveOrSubmit formData ->', formData);
+    var formDatas = {};
+    $$.each(pageTitles, function(idx){
+        var formId = pageTitles[idx].url;
+
+        var formData = getFormData(formId);
+        if(formData !== undefined) {
+            formDatas[formId] = formData;
+        }
+    });
+    console.log('saveOrSubmit formData ->', formDatas);
 
     if (isSubmit) {
         // 校验
-        var isValid = $('#testForm').validate();
+        var isValid = true;
+        $$.each(pageTitles, function(idx){
+            var formId = pageTitles[idx].url;
+            if($$('form#' + formId).length == 1) {
+                isValid = $$('form#' + formId).validate();
+            }
+            if (!isValid) {return;}
+        });
         if (isValid) {
+            myApp.showPreloader('提交中...');
             // 提交（对应已办）
             $$.ajax({
                 url: url_saveformData,
                 type: (project == 'blade') ? 'get' : 'post',
                 dataType: 'json',
-                data: 'formValue=' + encodeURI(JSON.stringify(formData)) + '&workflowNumber=' + workflowNumber + '&isSubmit=1',
+                data: 'formValue=' + encodeURI(JSON.stringify(formDatas)) + '&workflowNumber=' + workflowNumber + '&isSubmit=1',
                 success: function(result){
                     // TODO
-                    myApp.alert('提交成功', '提示');
+//                    myApp.alert('提交成功', '提示');
+                    myApp.alert('提交成功', '提示',function(){
+                        window.location = "submit-success";
+                    });
                     $$('.popup-submit .group-ready').hide();
                     $$('.popup-submit .group-done').show();
                 },
@@ -417,7 +422,7 @@ function saveOrSubmit(isSubmit) {
             url: url_saveformData,
             type: (project == 'blade') ? 'get' : 'post',
             dataType: 'json',
-            data: 'formValue=' + encodeURI(JSON.stringify(formData)) + '&workflowNumber=' +workflowNumber + '&isSubmit=0',
+            data: 'formValue=' + encodeURI(JSON.stringify(formDatas)) + '&workflowNumber=' +workflowNumber + '&isSubmit=0',
             success: function(result){
                 myApp.alert('暂存成功', '提示');
             },
@@ -460,8 +465,10 @@ function bindPagerBtn() {
             $$('.page-next').show();
             if (isRead) {
                 myApp.alert('到达末页', '提示');
+                confi
             } else {
-                myApp.popup('.popup-submit');
+//                myApp.popup('.popup-submit');
+                window.location = '/SaveOrSubmit';
             }
         } else {
             mainView.router.load({pageName: pageTitles[nextIndex].url});
@@ -476,3 +483,12 @@ function bindPagerBtn() {
 bindPagerBtn();
 
 initPageBindEvent();
+
+function getFormData(formId) {
+    if($$('form#' + formId).length == 1) {
+        var formData = myApp.formToData('#' + formId);
+        return formData;
+    } else {
+        return undefined;
+    }
+}
