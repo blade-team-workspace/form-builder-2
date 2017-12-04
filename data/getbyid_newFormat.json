@@ -47,6 +47,27 @@
 			]
 		},
 		{
+			"label": "[group0] 下拉多选-1",
+			"type": "form-group",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "s33",
+					"type": "multiselect",
+					"options": [{
+						"label": "选项1",
+						"value": 1
+					}, {
+						"label": "选项2",
+						"value": 2
+					}, {
+						"label": "选项3",
+						"value": 3
+					}]
+				}
+			]
+		},
+		{
 			"label": "轻轻的{taNew1}，正如我轻轻的来,我轻轻的{taNew2}{taNew4}，作别西天的{taNew3}",
 			"type" : "stream",
 			"groupId": "group1",
@@ -250,13 +271,12 @@
 	],
 	"values": {
 		"ta1":"4545456",
-		"s1": "3",
 		"ta4": "asdfasdfasdfasdfasdf",
 		"ta3": "今天天气{0}",
 		"i1": "images:[http://192.168.10.123:9999/data/a.jpg,http://192.168.10.123:9999/data/b.png]",
 		"i2": "images:[http://192.168.10.123:9999/data/b.png]",
 		"rec1": "audios:[http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3]",
-
+		"s33":"",
 		"s2": "2",
 		"n1": "5.5",
 		"taNew11" : "我走了",
