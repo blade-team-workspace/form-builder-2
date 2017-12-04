@@ -246,13 +246,12 @@
 	],
 	"values": {
 		"ta1":"4545456",
-		"s1": "3",
 		"ta4": "asdfasdfasdfasdfasdf",
 		"ta3": "今天天气{0}",
 		"i1": "images:[http://192.168.10.123:9999/data/a.jpg,http://192.168.10.123:9999/data/b.png]",
 		"i2": "images:[http://192.168.10.123:9999/data/b.png]",
 		"rec1": "audios:[http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3]",
-
+		"s33":"",
 		"s2": "2",
 		"n1": "5.5",
 		"taNew1" : "我走了",

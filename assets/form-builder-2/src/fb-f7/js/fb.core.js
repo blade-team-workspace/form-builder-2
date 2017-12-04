@@ -145,6 +145,21 @@
 		}
 	}
 
+	//给多选框赋值方法
+    $.fn.smartSelectSetValue = function(values) {
+        var $this = $(this);
+        if (!$.isArray(values)) {
+            console.error('[ERROR] "values" must be an Array. Now is', values);
+        }
+        var $options = $this.find('option');
+        $.each($options, function(_idx) {
+            var optionDom = $options[_idx];
+            var $option = $($options[_idx]);
+            optionDom.selected = (values.indexOf($option.attr('value')) != -1);
+        });
+        $this.change();
+    }
+
 
 
 	// 加联动事件
