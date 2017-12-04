@@ -47,7 +47,7 @@
                         label:that.opts.options[i].label,
                         isHide:hideFlag
                     });
-                    that.optionsMap[that.opts.options[i].value] = that.opts.options[i].description ||that.opts.options[i].label;
+                    that.optionsMap[that.opts.options[i].value] = that.opts.options[i].description || that.opts.options[i].label;
                 };
                 this.$node = $(this.template.format({
                     name: that.opts.name,
