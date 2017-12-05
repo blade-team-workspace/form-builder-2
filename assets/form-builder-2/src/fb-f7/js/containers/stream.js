@@ -119,7 +119,7 @@
 				var childComponentValue = childComponent.value;
 
 				// 初始化，判断setValue中的内容是否为空
-				if (childComponentValue ==  '' || childComponentValue === undefined) {
+				if (childComponentValue ==  '' ||childComponentValue === [] || childComponentValue === undefined) {
 					childComponent.$node.addClass('no-value');
 					childComponent.$node.next().css('display', 'none');
 				} else {

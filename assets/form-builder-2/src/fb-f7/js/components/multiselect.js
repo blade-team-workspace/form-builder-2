@@ -54,13 +54,18 @@
                     options: optionshtml
                 }));
                 this.$node.find('select').prop('multiple', true);
+                if(that.rule.maxlength !== undefined){
+                    that.$node.find('select').attr('maxlength',that.rule.maxlength);
+                }
                 // this.$node.attr('readonly', this.opts.readonly || false);
 
                 var $select = this.$node.find('select');
                 // 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
                 this.$node.find('select').on('change', function(e) {
                     // var value = e.target.selectedOptions[0]==undefined?'':e.target.selectedOptions[0].label;
-                    if ($select.val().length == 0) {
+
+                    //用value判断是否有值比select.val好
+                    if (that.value == undefined || that.value === []) {
                         // 利用timeout0将方法滞后执行
                         that.setValue([]);
                     }else {
@@ -98,6 +103,11 @@
                 setTimeout(function(){
 
                     var smartSelect = that.$node.find('.smart-select');
+                    var $select = that.$node.find('select');
+                    //当没有选择时，让checkbox没有默认点击
+                    if(that.value == undefined || that.value === []) {
+                        that.__setValue([]);
+                    }
                     // smartSelect.smartSelectSetValue([]);
                     myApp.smartSelectOpen(smartSelect);
                 }, 0);
