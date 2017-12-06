@@ -114,6 +114,19 @@
                     }
                     // smartSelect.smartSelectSetValue([]);
                     myApp.smartSelectOpen(smartSelect);
+
+                    // 手动将options 带有hide的选项去掉
+                    var pickerOptions = $('.picker-modal-inner').find('input');
+                    //判断select长度和pickerOptions的长度必须调整成一致
+                    var minLength = $select[0].length > pickerOptions.length ? pickerOptions.length : $select[0].length;
+
+                    for(var i = 0 ; i < minLength ; i++) {
+
+                        if($($select[0][i]).css("display")==='none'){
+                            $(pickerOptions[i]).closest('li').remove();
+                        }
+
+                    }
                 }, 0);
             }
 

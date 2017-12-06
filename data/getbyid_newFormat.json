@@ -59,6 +59,7 @@
 					"name": "s33",
 					"type": "multiselect",
 					"options": [{
+						"isHide": true,
 						"description": "菜鸡",
 						"label": "选项1",
 						"value": 1
