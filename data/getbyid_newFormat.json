@@ -5,6 +5,7 @@
 		{
 			"label": "[group0] 多行-1",
 			"type": "form-group",
+			"fontType": "small",
 			"groupId": "group0",
 			"items": [
 				{

@@ -47,7 +47,11 @@
 	font-size: 15px;
 	padding-left: 0;
 }
-
+/* 改变label-title部分字号 */
+.small {
+	font-size: 14px;
+	color: #8e8e93;
+}
 /* 改变部分符号大小 */
 .f7-icons.size-smaller {
 	font-size: 18px;

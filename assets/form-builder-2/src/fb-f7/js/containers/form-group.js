@@ -23,7 +23,7 @@
 					'<a href="#" class="item-with-addon">' +
 						'<div class="item-content">' +
 							'<div class="item-inner">' +
-								'<div class="item-title">{label}</div>' +
+								'<div class="item-title {fontType}">{label}</div>' +
 								'<div class="addon addon-edit">' +
 									'<i class="f7-icons size-smaller">right</i>' +
 								'</div>' +
