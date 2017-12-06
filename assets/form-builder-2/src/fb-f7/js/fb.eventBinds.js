@@ -20,7 +20,7 @@
 			// 当前事件触发对象的name属性
 			var triggerName = event.target.name;
 			// 当前事件绑定的详情
-			var eb = $.formb.eventBinds.triggerName_eb_map[triggerName];
+			var eb = $form.data('eventBindsMap')[triggerName];
 			// 所有响应对象名
 			var allResp = [];	// 一层级
 			$.each(eb.valueResps, function(value){
@@ -29,19 +29,26 @@
 			});
 
 			var valueRespMap = eb.valueResps;		// {触发器的value: 响应对象的name}的关系
-			var triggerValues = [];					// 触发器现在的值(为了可读性，实际未使用)
+			var triggerValues = [];					// 触发器现在的值(使用数组存储，统一格式方便操作)
 			var respNames = [];						// 取得当前值对应的所有响应对象(应该显示的对象名)
 
-			if ($this.attr('type') == 'checkbox') {
+			// 目前不会出现checkbox，出现，以下方法还需要修改(bs不要直接复制此方法)
+			/*if ($this.attr('type') == 'checkbox') {
 				$.each($('[name=' + triggerName + ']:checked', $form), function(){
 					triggerValues.push($this.val());
 					respNames.add(valueRespMap[$this.val()]);
 				});
-			} else {
-				triggerValues = [$this.val()];
-				respNames.add(valueRespMap[$this.val()]);
-			}
-			console.log('Selected: [' + triggerValues.join(', ') + ']');
+			} else {*/
+
+			// 整理出所有需要显示的name，放到respNames中
+			triggerValues.add($this.val());		// 将触发器值转化成数组放入triggerValues
+			$.each(triggerValues, function(idx) {
+				respNames.add(valueRespMap[triggerValues[idx]]);
+			});
+
+			/*}*/
+
+			console.log('Selected: [' + triggerValues.join(', ') + '], respNames:', respNames);
 
 			// 轮询所有响应的输入项name
 			$.each(allResp, function(idx){
