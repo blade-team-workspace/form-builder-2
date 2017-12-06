@@ -102,24 +102,26 @@
 				$container.append($deleteBtn);
 				$deleteBtn.css('display', 'none');
 
+
 				// 根据值有无控制边框显示
 				childComponent.$node.on('change', function() {
-					if (childComponent.value === '' || childComponent.value === undefined) {
+					if (childComponent.value === '' || ($.isArray(childComponent.value) && childComponent.value.length == 0) || childComponent.value === undefined) {
 						childComponent.$node.addClass('no-value');
 						$deleteBtn.css('display', 'none');
 					} else {
 						childComponent.$node.removeClass('no-value')
 						childComponent.$node.css({'color': '#8e8e93', 'padding-left': '2px'});
-						console.log(childComponent.value);
+						console.log(childComponentValue);
 						$deleteBtn.css('display', 'inline-block');
 					}
 				});
-				
-				// 获取 .showValue中的值
-				var childComponentValue = childComponent.value;
 
-				// 初始化，判断setValue中的内容是否为空
-				if (childComponentValue ==  '' ||childComponentValue === [] || childComponentValue === undefined) {
+                // 获取 .showValue中的值
+                var childComponentValue = childComponent.value;
+                //multiselect 判断空特殊处理
+                var isNullFormultiselect = ($.isArray(childComponentValue) && childComponentValue.length == 0);
+                // 初始化，判断setValue中的内容是否为空
+				if (childComponentValue ==  '' || isNullFormultiselect || childComponentValue === undefined) {
 					childComponent.$node.addClass('no-value');
 					childComponent.$node.next().css('display', 'none');
 				} else {

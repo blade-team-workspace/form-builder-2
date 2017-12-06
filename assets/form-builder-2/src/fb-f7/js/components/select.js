@@ -16,7 +16,7 @@
 		// 定义默认图标
 		this.componentDefaultOpts = {
 			'f7-icon': 'list',
-			'placeholder': '--请选择--',
+			'placeholder': '--请选择--'
 		};
 		baseComponent.apply(this, arguments);	// 执行基类的初始化
 

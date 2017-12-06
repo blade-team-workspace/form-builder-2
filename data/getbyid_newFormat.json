@@ -74,7 +74,7 @@
 		{
 
 
-			"label": "轻轻的{taNew1}，正如我轻轻的来,我轻轻的{s_s2}{s_ta4}，作别西天的{taNew3}",
+			"label": "轻轻的{taNew1}，正如我轻轻的来,我轻轻的{s_s2}{s_ta4}{s_s222}，作别西天的{taNew3}",
 			"type" : "stream",
 			"groupId": "group1",
 			"items": [
@@ -87,6 +87,25 @@
 					"label": "目的地",
 					"name":"s_s2",
 					"type":"select",
+					"options": [{
+						"label": "选项1",
+						"value": 1
+					}, {
+						"label": "选项2",
+						"value": 2
+					}, {
+						"label": "选项3",
+						"value": 3
+					}, {
+						"label": "其他",
+						"value": 4
+					}]
+				},
+
+				{
+					"label": "目的地22",
+					"name":"s_s222",
+					"type":"multiselect",
 					"options": [{
 						"label": "选项1",
 						"value": 1
@@ -283,6 +302,7 @@
 		"rec1": "audios:[http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3]",
 		"s2": "2",
 		"n1": "5.5",
+		"s_s222": ["2","3"],
 		"taNew1" : "我走了",
 		"taNew2" : "挥手",
 		"taNew3" : 0

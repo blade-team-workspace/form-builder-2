@@ -54,7 +54,7 @@
                     options: optionshtml
                 }));
                 this.$node.find('select').prop('multiple', true);
-                if(that.rule.maxlength !== undefined){
+                if(that.rule !== undefined && that.rule.maxlength !== undefined){
                     that.$node.find('select').attr('maxlength',that.rule.maxlength);
                 }
                 // this.$node.attr('readonly', this.opts.readonly || false);
@@ -64,8 +64,11 @@
                 this.$node.find('select').on('change', function(e) {
                     // var value = e.target.selectedOptions[0]==undefined?'':e.target.selectedOptions[0].label;
 
+                    var $select = that.$node.find('select');
+                    console.log("+++",$select.length);
                     //用value判断是否有值比select.val好
-                    if (that.value == undefined || that.value === []) {
+                    if ($select.val().length == 0) {
+
                         // 利用timeout0将方法滞后执行
                         that.setValue([]);
                     }else {
@@ -81,8 +84,9 @@
                 this.$node.off('click', this.editCallback);
             }
             this.__setValue = function(value) {
-                // console.log("++",value);
-                // this.$node.find('select').val();
+                if(value === ''){
+                    value = [] ;
+                }
                 var smartSelect = that.$node.find('.smart-select');
                 smartSelect.smartSelectSetValue(value);
                 var showValue = '';
