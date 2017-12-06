@@ -47,6 +47,8 @@
             $nextNode = $nowNode.next();
             if ($nextNode.length > 0 && $nextNode.is('.swipeout')) {
                 $valueNodes.push($nextNode);
+            } else {
+            	break;
             }
             $nowNode = $nextNode;
             loopTimes += 1;

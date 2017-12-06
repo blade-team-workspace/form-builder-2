@@ -9,54 +9,6 @@
 	$.formb = $.formb || {};
 	$.formb.eventBinds = $.formb.eventBinds || {};
 
-	// 找上一个兄弟节点，直到找到label节点
-	function __findLabel($nowNode) {
-		var $prevNode = undefined;
-		var loopTimes = 0;
-		while (loopTimes < 100 && $nowNode.length > 0) {
-			$prevNode = $nowNode.prev();
-			if ($prevNode.is('.item-label')) {
-				break;
-			}
-			$nowNode = $prevNode;
-			loopTimes += 1;
-		}
-		console.log('__findLabel, loopTimes=' + loopTimes);
-		return $prevNode;	// 即label节点
-	}
-
-
-	// 找下一个兄弟节点，直到找到所有存值节点
-	function __findAllValueNodes($nowNode) {
-		var $valueNodes = [];
-		var $nextNode = undefined;
-		var loopTimes = 0;
-		while (loopTimes < 100 && $nowNode.length > 0) {
-			$nextNode = $nowNode.next();
-			if ($nextNode.length > 0 && $nextNode.is('.swipeout')) {
-				$valueNodes.push($nextNode);
-			}
-			$nowNode = $nextNode;
-			loopTimes += 1;
-		}
-		console.log('__findAllValueNodes, loopTimes=' + loopTimes);
-		return $valueNodes;
-	}
-
-	// 判断是否所有存值点都隐藏了
-	function __isAllValueNodesHide($valueNodes) {
-		var isAllHide = true;
-		console.log('__isAllValueNodesHide $valueNodes.length=', $valueNodes.length);
-		$.each($valueNodes, function(idx) {
-			console.log('__isAllValueNodesHide', $valueNodes[idx], 'class="' + $valueNodes[idx].attr('class') + '" 没有hide类 ->', !$valueNodes[idx].hasClass('hide'));
-			if (!$valueNodes[idx].hasClass('hide')) {
-				isAllHide = false;
-			}
-		});
-		console.log('__isAllValueNodesHide, isAllHide=' + isAllHide);
-		return isAllHide;
-	}
-
 	// 对象值改变，改变其他对象的显示和隐藏状态
 	$.formb.eventBinds.valueChangeShowHide = {
 		listener: 'change',
@@ -121,6 +73,9 @@
 					else {
 						// 隐藏存值的节点
 						$valueNode.addClass('hide');
+
+						// 将要隐藏的组件值赋为空，并触发change事件
+						$form.find('[name=' + itemName + ']').val('').trigger('change');
 
 						var $labelNode = $.formb.findLabel($valueNode);	// 取得当前存值节点的label节点
 						var $valueNodes = $.formb.findAllValueNodes($labelNode);	// 根据label节点取得当前label的所有存值节点

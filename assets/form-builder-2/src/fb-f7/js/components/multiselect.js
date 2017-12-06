@@ -24,7 +24,7 @@
             this.template =
                 '<span class="textarea-group">' +
                 '<span href="#" class="smart-select "  data-back-on-select="true" data-open-in="picker">'+
-                '<select name="{name}">{options} </select>'+
+                '<select name="{name}" multiple>{options} </select>'+
                 '</span>'+
                 '<span class="showValue"></span>' +
                 '</span>';
@@ -53,7 +53,6 @@
                     name: that.opts.name,
                     options: optionshtml
                 }));
-                this.$node.find('select').prop('multiple', true);
                 if(that.rule !== undefined && that.rule.maxlength !== undefined){
                     that.$node.find('select').attr('maxlength',that.rule.maxlength);
                 }

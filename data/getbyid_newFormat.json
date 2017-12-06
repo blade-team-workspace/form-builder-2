@@ -3,30 +3,6 @@
 	"type": "form",
 	"items": [
 		{
-			"label": "[group0] 多行-1",
-			"type": "form-group",
-			"fontType": "small",
-			"groupId": "group0",
-			"items": [
-				{
-					"isRead":false,
-					"name": "ta1",
-					"type": "textarea"
-				}
-			]
-		},
-		{
-			"label": "123",
-			"type": "form-group",
-			"groupId": "group0",
-			"items": [
-				{
-					"name": "ta123",
-					"type": "textarea"
-				}
-			]
-		},
-		{
 			"label": "[group0] 下拉单选-1",
 			"type": "form-group",
 			"groupId": "group0",
@@ -39,7 +15,6 @@
 						"label": "选项1",
 						"value": 1
 					}, {
-						"description": "菜鸡",
 						"label": "选项2",
 						"value": 2
 					}, {
@@ -56,11 +31,9 @@
 			"groupId": "group0",
 			"items": [
 				{
-					"name": "s33",
+					"name": "ms1",
 					"type": "multiselect",
 					"options": [{
-						"isHide": true,
-						"description": "菜鸡",
 						"label": "选项1",
 						"value": 1
 					}, {
@@ -70,6 +43,19 @@
 						"label": "选项3",
 						"value": 3
 					}]
+				}
+			]
+		},
+		{
+			"label": "[group0] 多行-1",
+			"type": "form-group",
+			"fontType": "small",
+			"groupId": "group0",
+			"items": [
+				{
+					"isRead": false,
+					"name": "ta1",
+					"type": "textarea"
 				}
 			]
 		},
@@ -137,6 +123,38 @@
 				}
 			]
 		},
+
+		{
+
+			"label": "[group0] 下拉多选-3",
+			"type": "form-group",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "ms3",
+					"type": "multiselect",
+					"options": [{
+					
+						"description": "菜鸡",
+						"label": "选项1",
+						"value": 1
+					}, {
+						"label": "选项2",
+						"value": 2
+					}, {
+						"label": "选项3",
+						"value": 3
+					}, {
+						"label": "选项4",
+						"value": 4
+					}, {
+						"label": "选项5",
+						"value": 5
+					}]
+				}
+			]
+		},
+
 		{
 			"label": "[未设置] 多行-2",
 			"type": "form-group",
@@ -292,6 +310,26 @@
 				"2": "",
 				"3": "",
 				"4": ["s_ta4"]
+			}
+		},
+		{
+			"eventType": "valueChangeShowHide",
+			"trigger": "s1",
+			"valueResps": {
+				"1": ["ms1"],
+				"2": "",
+				"3": "",
+				"4": ""
+			}
+		},
+		{
+			"eventType": "valueChangeShowHide",
+			"trigger": "ms1",
+			"valueResps": {
+				"1": ["ta1"],
+				"2": "",
+				"3": "",
+				"4": ""
 			}
 		}
 	],
