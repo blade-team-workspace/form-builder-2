@@ -56,16 +56,30 @@
 					"type": "textarea"
 				}
 			]
+		},
+		{
+			"label": "[group0] 多行-2",
+			"type": "form-group",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "ta2",
+					"type": "textarea"
+				}
+			]
 		}
 	],
 	"rules": {
-		"ta1": {
+		"ta12": {
 			"required": true,
 			"maxlength": 10,
 			"minlength": 5
 		}
 	},
 	"groupRules": {
+		"requireAtLeastOne": [
+			["ta1", "ta2"]
+		]
 	},
 	"events": [
 		{

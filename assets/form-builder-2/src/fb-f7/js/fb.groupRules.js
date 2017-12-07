@@ -29,8 +29,9 @@
 					var name = nameList[_idx];
 
 					// 发现有非空的对象
-					var valueInForm = myApp.formToData('#' + $form.attr('id'))[name];
-					if (!(valueInForm === undefined || valueInForm === '')) {
+					var $inputItem = $form.find('[name=' + name + ']');
+					var valueInForm = $inputItem.val();
+					if (!$inputItem.is(':disabled') && !(valueInForm === undefined || valueInForm === '' || valueInForm === [])) {
 						allNullFlag = false;
 						// break;
 					}
@@ -43,7 +44,7 @@
 					var labelList = [];
 					$.each(nameList, function(idx) {
 						var label = $form.data('nameLabelMap')[nameList[idx]];
-						if (labelList.indexOf(label) == -1) {
+						if (labelList.indexOf(label) == -1 && !$form.find('[name=' + nameList[idx] + ']').is(':disabled')) {
 							labelList.push(label);
 						}
 					});
