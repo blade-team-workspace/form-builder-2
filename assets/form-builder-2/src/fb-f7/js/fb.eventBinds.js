@@ -9,7 +9,7 @@
 	$.formb = $.formb || {};
 	$.formb.eventBinds = $.formb.eventBinds || {};
 
-	// 对象值改变，改变其他对象的显示和隐藏状态
+	// 对象值改变，改变其他对象的显示和隐藏状态(并禁用组件)
 	$.formb.eventBinds.valueChangeShowHide = {
 		listener: 'change',
 		callback: function(event) {
@@ -65,6 +65,9 @@
 						// 显示存值的节点
 						$valueNode.removeClass('hide');
 
+						// 启用存值的节点
+						$form.find('[name=' + itemName + ']').prop('disabled', false);
+
 						// 二话不说显示label和group节点
 						var $labelNode = $.formb.findLabel($valueNode);	// 取得当前存值节点的label节点
 						$labelNode.removeClass('hide');
@@ -83,6 +86,9 @@
 
 						// 将要隐藏的组件值赋为空，并触发change事件
 						$form.find('[name=' + itemName + ']').val('').trigger('change');
+
+						// 禁用存值的节点
+						$form.find('[name=' + itemName + ']').prop('disabled', true);
 
 						var $labelNode = $.formb.findLabel($valueNode);	// 取得当前存值节点的label节点
 						var $valueNodes = $.formb.findAllValueNodes($labelNode);	// 根据label节点取得当前label的所有存值节点

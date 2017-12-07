@@ -145,7 +145,7 @@
 				switch (key) {
 					case 'required':
 						checkStepFunction = function() {
-							if (that.$node.find('input').val() == '') {
+							if (!that.$node.find('input').is(':disabled') && that.$node.find('input').val() == '') {
 								myApp.alert('请填写"{label}"'.format({label: label}));
 								return false;
 							} else {
@@ -156,7 +156,7 @@
 					case 'maxlength':
 						checkStepFunction = function() {
 							var value = that.$node.find('input').val();
-							if (value && value.length > ruleValue) {
+							if (!that.$node.find('input').is(':disabled') && value && value.length > ruleValue) {
 								myApp.alert('"{label}"的长度不能超过{ruleValue}'.format({label: label, ruleValue: ruleValue}));
 								return false;
 							} else {
@@ -167,7 +167,7 @@
 					case 'minlength':
 						checkStepFunction = function() {
 							var value = that.$node.find('input').val();
-							if (value && value.length < ruleValue) {
+							if (!that.$node.find('input').is(':disabled') && value && value.length < ruleValue) {
 								myApp.alert('"{label}"的长度不能小于{ruleValue}'.format({label: label, ruleValue: ruleValue}));
 								return false;
 							} else {

@@ -144,7 +144,7 @@
                     switch (key) {
                         case 'required':
                             checkStepFunction = function() {
-                                if (that.$node.find('select').val() == '') {
+                                if (!that.$node.find('select').is(':disabled') && that.$node.find('select').val() == '') {
                                     myApp.alert('请填写"{label}"'.format({label: label}));
                                     return false;
                                 } else {
