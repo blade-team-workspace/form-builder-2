@@ -231,7 +231,7 @@
 				switch (key) {
 					case 'required':
 						checkStepFunction = function() {
-							if (that.$node.find('img').length == 0) {
+							if (!that.$node.find('input').is(':disabled') && that.$node.find('img').length == 0) {
 								myApp.alert('请填写"{label}"'.format({label: label}));
 								return false;
 							} else {

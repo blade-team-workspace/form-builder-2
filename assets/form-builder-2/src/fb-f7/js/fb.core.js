@@ -47,6 +47,8 @@
             $nextNode = $nowNode.next();
             if ($nextNode.length > 0 && $nextNode.is('.swipeout')) {
                 $valueNodes.push($nextNode);
+            } else {
+            	break;
             }
             $nowNode = $nextNode;
             loopTimes += 1;
@@ -165,11 +167,12 @@
 	// 加联动事件
 	// 添加联动事件
 	function activeEventBinds($form, ebs) {
-		// 触发器名字和事件详情的map	TODO: 改
-		$.formb.eventBinds.triggerName_eb_map = {};
+		// 触发器名字和事件详情的map
+		var triggerName_eb_map = {};
 		$.each(ebs, function(idx) {
-			$.formb.eventBinds.triggerName_eb_map[ebs[idx].trigger] = ebs[idx];
+			triggerName_eb_map[ebs[idx].trigger] = ebs[idx];
 		});
+		$form.data('eventBindsMap', triggerName_eb_map);
 
 		var eventBinds = $.formb.eventBinds;
 

@@ -3,30 +3,6 @@
 	"type": "form",
 	"items": [
 		{
-			"label": "[group0] 多行-1",
-			"type": "form-group",
-			"fontType": "small",
-			"groupId": "group0",
-			"items": [
-				{
-					"isRead":false,
-					"name": "ta1",
-					"type": "textarea"
-				}
-			]
-		},
-		{
-			"label": "123",
-			"type": "form-group",
-			"groupId": "group0",
-			"items": [
-				{
-					"name": "ta123",
-					"type": "textarea"
-				}
-			]
-		},
-		{
 			"label": "[group0] 下拉单选-1",
 			"type": "form-group",
 			"groupId": "group0",
@@ -35,11 +11,9 @@
 					"name": "s1",
 					"type": "select",
 					"options": [{
-
 						"label": "选项1",
 						"value": 1
 					}, {
-						"description": "菜鸡",
 						"label": "选项2",
 						"value": 2
 					}, {
@@ -56,7 +30,7 @@
 			"groupId": "group0",
 			"items": [
 				{
-					"name": "s33",
+					"name": "ms1",
 					"type": "multiselect",
 					"options": [{
 						"description": "菜鸡",
@@ -97,189 +71,44 @@
 					}, {
 						"label": "选项3",
 						"value": 3
-					}, {
-						"label": "其他",
-						"value": 4
 					}]
-				},
-
-				{
-					"label": "目的地22",
-					"name":"s_s222",
-					"type":"multiselect",
-					"options": [{
-						"label": "选项1",
-						"value": 1
-					}, {
-						"label": "选项2",
-						"value": 2
-					}, {
-						"label": "选项3",
-						"value": 3
-					}, {
-						"label": "其他",
-						"value": 4
-					}]
-				},
-				{
-					"label": "任务",
-					"name":"taNew3",
-					"type": "number",
-					"minValue": 0,
-					"maxValue": 10,
-					"stepValue": 0.5
-				},
-				{
-					"label": "请输入目的地",
-					"name":"s_ta4",
-					"type":"textarea"
 				}
 			]
 		},
 		{
-			"label": "[未设置] 多行-2",
+			"label": "[group0] 多行-1",
 			"type": "form-group",
+			"fontType": "small",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "ta1",
+					"type": "textarea"
+				}
+			]
+		},
+		{
+			"label": "[group0] 多行-2",
+			"type": "form-group",
+			"groupId": "group0",
 			"items": [
 				{
 					"name": "ta2",
 					"type": "textarea"
 				}
 			]
-		},
-		{
-			"label": "[未设置] 图片-2",
-			"type": "form-group",
-			"items": [
-				{
-					"isRead":true,
-					"name": "i2",
-					"type": "image",
-					"maxNumber": 5,
-					"minNumber": 0
-				}
-			]
-		},
-		{
-			"label": "[未设置] 录音-1",
-			"type": "form-group",
-			"items": [
-				{
-					"isRead":true,
-					"name": "rec1",
-					"type": "audio",
-					"widthInSteam": "auto",
-					"maxNumber": 1,
-					"minNumber": 0
-				}
-			]
-		},
-		{
-			"label": "[未设置] 多媒体",
-			"type": "multimedia",
-			"items": [
-				{
-					"isRead":true,
-					"name": "ta3",
-					"type": "textarea"
-				}, 
-				{
-					"isRead":true,
-					"name": "i1",
-					"type": "image",
-					"maxNumber": 3,
-					"minNumber": 0
-				},
-				{
-					"name": "s2",
-					"type": "select",
-					"options": [{
-						"label": "选项1",
-						"value": 1
-					}, {
-						"label": "选项2",
-						"value": 2
-					}, {
-						"label": "选项3",
-						"value": 3
-					}]
-				},
-				{
-					"name": "n1",
-					"type": "number",
-					"minValue": 0,
-					"maxValue": 10,
-					"stepValue": 0.5
-				},
-				{
-					"name": "rec2",
-					"type": "audio",
-					"widthInSteam": "auto",
-					"maxNumber": 1,
-					"minNumber": 0
-
-				}
-			]
-		},
-		{
-			"label": "[group0] 数字2",
-			"type": "form-group",
-			"groupId": "group0",
-			"items": [
-				{
-					"description": "请选择",
-					"valueFormat": "预计消耗{value}小时",
-					"name": "n2",
-					"type": "number",
-					"minValue": 0,
-					"maxValue": 10,
-					"stepValue": 0.5
-				}
-			]
-		},
-		{
-			"label": "[未设置] 多行-4",
-			"type": "form-group",
-			"items": [
-				{
-					"name": "ta4",
-					"type": "textarea"
-				}
-			]
 		}
 	],
 	"rules": {
-		"s33": {
-			"maxlength": 2
-		},
-		"ta1": {
+		"ta12": {
 			"required": true,
 			"maxlength": 10,
 			"minlength": 5
-		},
-		"ta2": {
-			"required": true,
-			"maxlength": 10,
-			"minlength": 5
-		},
-		"s1": {
-			"required":true
-		},
-		"rec1": {
-			"required":true
-		},
-		"taNew1":{
-			"required":true
-		},
-		"taNew2":{
-			"required":true
-		},
-		"taNew3":{
-			"required":true
 		}
 	},
 	"groupRules": {
 		"requireAtLeastOne": [
-			["ta3", "i1", "s2", "n1", "rec2"]
+			["ta1", "ta2"]
 		]
 	},
 	"events": [
@@ -292,21 +121,29 @@
 				"3": "",
 				"4": ["s_ta4"]
 			}
+		},
+		{
+			"eventType": "valueChangeShowHide",
+			"trigger": "s1",
+			"valueResps": {
+				"1": ["ms1"],
+				"2": "",
+				"3": "",
+				"4": ""
+			}
+		},
+		{
+			"eventType": "valueChangeShowHide",
+			"trigger": "ms1",
+			"valueResps": {
+				"1": ["ta1"],
+				"2": "",
+				"3": "",
+				"4": ""
+			}
 		}
 	],
 	"values": {
-		"ta1":"4545456",
-		"ta4": "asdfasdfasdfasdfasdf",
-		"ta3": "今天天气{0}",
-		"i1": "images:[http://192.168.10.123:9999/data/a.jpg,http://192.168.10.123:9999/data/b.png]",
-		"i2": "images:[http://192.168.10.123:9999/data/b.png]",
-		"rec1": "audios:[http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3]",
-		"s2": "2",
-		"n1": "5.5",
-		"s_s222": ["2","3"],
-		"taNew1" : "我走了",
-		"taNew2" : "挥手",
-		"taNew3" : 0
 	},
 	"isRead": false,
 	"groupDefaultSplit": false
