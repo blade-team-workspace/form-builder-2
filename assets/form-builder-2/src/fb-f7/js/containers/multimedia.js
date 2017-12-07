@@ -233,9 +233,9 @@
 			});
 
 			this.$form.data('nameLabelMap', nameLabelMap);
-
+            var global_isRead = that.$form.data('fb-form').opts.isRead;
 			// 加必填
-			if (showRequireMark == true) {
+			if (showRequireMark == true && !global_isRead ) {
 				var $title = $(this.$node[0]).find('.item-title');
 				$title.append(this.$form.data('fb-form').requireMarkTemplate);
 			}

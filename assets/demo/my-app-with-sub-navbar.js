@@ -150,6 +150,15 @@ myApp.onPageBeforeInit('mainPage', function (page) {
 		window.location = '/SaveOrSubmit';
 	});
 
+    if (jsonConf_index.isRead) {
+        isRead = true;
+        // 隐藏上传按钮
+        $$('.form-submit').hide();
+        // 显示分享按钮
+        $$('.share-btn').closest('.toolbar').show();
+    }else{
+        $$('.share-btn').closest('.toolbar').hide();
+	}
 });
 // 手动触发初始化（否则smart-select显示有问题)
 myApp.init();
