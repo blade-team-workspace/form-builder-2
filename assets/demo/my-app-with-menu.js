@@ -465,7 +465,6 @@ function bindPagerBtn() {
             $$('.page-next').show();
             if (isRead) {
                 myApp.alert('到达末页', '提示');
-                confi
             } else {
 //                myApp.popup('.popup-submit');
                 window.location = '/SaveOrSubmit';

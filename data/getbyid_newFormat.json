@@ -33,6 +33,36 @@
 					"name": "ms1",
 					"type": "multiselect",
 					"options": [{
+						"description": "菜鸡",
+						"label": "选项1",
+						"value": 1
+					}, {
+						"label": "选项2",
+						"value": 2
+					}, {
+						"label": "选项3",
+						"value": 3
+					}]
+				}
+			]
+		},
+		{
+
+
+			"label": "轻轻的{taNew1}，正如我轻轻的来,我轻轻的{s_s2}{s_ta4}{s_s222}，作别西天的{taNew3}",
+			"type" : "stream",
+			"groupId": "group1",
+			"items": [
+				{
+					"label": "天气",
+					"name":"taNew1",
+					"type":"textarea"
+				},
+				{
+					"label": "目的地",
+					"name":"s_s2",
+					"type":"select",
+					"options": [{
 						"label": "选项1",
 						"value": 1
 					}, {
