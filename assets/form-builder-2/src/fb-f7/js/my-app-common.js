@@ -13,7 +13,13 @@ function customizedHistoryBack() {
 		window.location = '/exit-web-view';
 	}
 }
+// timeout提示
+function alertTimeOut (myApp,msg) {
 
+	myApp.alert(msg,function() {
+		window.location = '/exit-web-view';
+	})
+}
 // [图片、音频]预上传回调
 function preUploadCallback(data) {
 	$$('form#{formId} [name={name}]'.format(data)).closest('.media-node').data('preUpload')(data);

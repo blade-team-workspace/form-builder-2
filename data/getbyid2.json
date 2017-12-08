@@ -464,7 +464,7 @@
     "rules": {
       "ta1": {
         "required": true,
-        "maxlength": 10,
+        "maxlength": 30,
         "minlength": 5
       },
       "ta2": {
@@ -511,7 +511,7 @@
       }
     }],
     "values": {
-      "ta1":"4545456",
+      "ta1":"asd",
       "s1": "3",
       "ta4": "asdfasdfasdfasdfasdf",
       "ta3": "今天天气{0}",

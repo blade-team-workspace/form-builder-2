@@ -59,6 +59,7 @@ var workflowNumber = $$('#workflowNumber').val();
 var hasValue = ($$('#hasValue').val() == 'true');
 // TODO：微信分享
 var isRead = false;
+var isShared = !!getQueryString('isShared');
 
 // 加载表单和数据
 myApp.showPreloader('加载中...');
@@ -68,6 +69,7 @@ var jsonConf_index = "";
 if (hasValue) {
 	$$.ajax({
 		url: url_getformvaluebyid,
+        timeout : 15*1000, //超时时间设置，单位毫秒
 		data: {
 			'serviceType': serviceType,
 			'formInsideId': formInsideId,
@@ -83,10 +85,15 @@ if (hasValue) {
 		error: function(result) {
 			console.error('[ERROR] 加载班级表单数据失败！');
 		},
-		complete: function() {
-			myApp.hidePreloader();
+		complete: function(XMLHttpRequest,status) {
+            myApp.hidePreloader();
+
+            if(status=='timeout') {
+                alertTimeOut(myApp,'加载超时');
+            }
 			if (loadStudentFormError) {
-				myApp.alert('加载班级表单数据失败。请稍后重试', '提示');
+				// myApp.alert('加载班级表单数据失败。请稍后重试', '提示');
+                alertTimeOut(myApp,'加载班级表单数据失败。请稍后重试');
 			}
 		}
 	});
@@ -95,6 +102,7 @@ if (hasValue) {
 else {
 	$$.ajax({
 		url: url_getbyid,
+        timeout : 15*1000, //超时时间设置，单位毫秒
 		data: {
 			'serviceType': serviceType,
 			'formInsideId': formInsideId
@@ -108,10 +116,14 @@ else {
 		error: function(result) {
 			console.error('[ERROR] 加载班级表单配置失败！');
 		},
-		complete: function() {
+		complete: function(XMLHttpRequest,status) {
 			myApp.hidePreloader();
+            if(status=='timeout') {
+                alertTimeOut(myApp,'加载超时');
+            }
 			if (loadStudentFormError) {
-				myApp.alert('加载班级表单配置失败。请稍后重试', '提示');
+				// myApp.alert('加载班级表单配置失败。请稍后重试', '提示');
+                alertTimeOut(myApp,'加载班级表单数据失败。请稍后重试');
 			}
 		}
 	});
@@ -158,6 +170,12 @@ myApp.onPageBeforeInit('mainPage', function (page) {
         $$('.share-btn').closest('.toolbar').show();
     }else{
         $$('.share-btn').closest('.toolbar').hide();
+	}
+	if(isShared) {
+        // 隐藏分享按钮
+        $$('.share-btn').closest('.toolbar').hide();
+        // 隐藏退出按钮
+        $$('.exit-web-view').hide();
 	}
 });
 // 手动触发初始化（否则smart-select显示有问题)
