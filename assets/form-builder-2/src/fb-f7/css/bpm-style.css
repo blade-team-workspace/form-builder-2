@@ -52,7 +52,7 @@
 }
 .showValue {
 	word-break: normal;
-	display: block;
+	/* display: block; */
 	white-space: pre-wrap;
 	overflow: hidden;
 }
