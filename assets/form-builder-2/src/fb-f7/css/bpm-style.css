@@ -65,6 +65,11 @@
 .item-with-addon {
 	color: initial;
 }
+.item-with-addon.active-state .item-content {
+	-webkit-transition-duration: 0s;
+    transition-duration: 0s;
+    background-color: #d9d9d9
+}
 .item-with-addon .addon {
 	width: 25px;
 	text-align: center;

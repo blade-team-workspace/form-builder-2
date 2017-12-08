@@ -4,7 +4,7 @@
 	"items": [
 		{
 			"label": "[group0] 下拉单选-1",
-			"type": "form-group",
+			"type": "multimedia",
 			"groupId": "group0",
 			"items": [
 				{

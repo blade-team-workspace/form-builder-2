@@ -85,7 +85,7 @@
 
 			// 渲染label >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $label = $(this.labelTemplate.format(that.opts));
-			$label.find('.addon-edit').on('click', childComponent.editCallback);
+			$label.find('.item-with-addon').on('click', childComponent.editCallback);
 
 			// 渲染content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $content = $(this.contentTemplate.format(opts));
