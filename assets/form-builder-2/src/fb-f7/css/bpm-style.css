@@ -50,6 +50,12 @@
 	font-size: 15px;
 	padding-left: 0;
 }
+.showValue {
+	word-break: normal;
+	display: block;
+	white-space: pre-wrap;
+	overflow: hidden;
+}
 /* 改变label-title部分字号 */
 .small {
 	font-size: 14px;
@@ -478,4 +484,16 @@ span.delete {
 	font-size: 14px;
 	color: #fff;
 	background-color: #f00;
+}
+
+/*限制字数样式*/
+.item-cent{
+	float: right;
+	margin-right: 10px;
+}
+.min-number{
+	color:black;
+}
+.min-number-warn{
+	color:red;
 }

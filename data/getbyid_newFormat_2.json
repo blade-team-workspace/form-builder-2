@@ -5,7 +5,6 @@
 		{
 			"label": "[未设置] 多行-1",
 			"type": "form-group",
-
 			"outerWidth": "col-sm-12",
 			"labelWidth": "col-sm-2",
 			"contentWidth": "col-sm-10",

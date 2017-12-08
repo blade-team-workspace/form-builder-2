@@ -13,7 +13,13 @@ function customizedHistoryBack() {
 		window.location = '/exit-web-view';
 	}
 }
+// timeout提示
+function alertTimeOut (myApp,msg) {
 
+	myApp.alert(msg,function() {
+		window.location = '/exit-web-view';
+	})
+}
 // [图片、音频]预上传回调
 function preUploadCallback(data) {
 	$$('form#{formId} [name={name}]'.format(data)).closest('.media-node').data('preUpload')(data);
@@ -99,9 +105,28 @@ function initPageBindEvent() {
 		var urlList = $$(e.target).closest('.item-content').find('input').val().match(/images:\[(.*)\]/)[1].split(',');
 		var nowIndex = urlList.indexOf(nowUrl);
 
+		var that = this;
+		var params = {
+            type: 'standalone',
+
+		}
 		myPhotoBrowser = myApp.photoBrowser({
 			photos: urlList,
-            backLinkText: "关闭",
+            navbarTemplate: '<div class="navbar">' +
+            '<div class="navbar-inner">' +
+            '<div class="left sliding">' +
+            '<a href="#" class="link icon-only' + (params.type === 'popup' ? 'close-popup' : ' photo-browser-close-link')+ ' ">' +
+            '<i class="f7-icons">close</i>' +
+            '</a>' +
+            '</div>' +
+            '<div class="center sliding">' +
+            '<span class="photo-browser-current"></span> ' +
+            '<span class="photo-browser-of">{{ofText}}</span> ' +
+            '<span class="photo-browser-total"></span>' +
+            '</div>' +
+            '<div class="right"></div>' +
+            '</div>' +
+            '</div>',
             ofText: '/',
 			onOpen: function(photobrowser) {
 				console.log('opened', photobrowser);

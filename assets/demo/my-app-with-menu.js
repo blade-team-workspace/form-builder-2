@@ -69,7 +69,7 @@ var loadStudentListError = false;
 $$.ajax({
     url: url_studentList,
     data: {'workflowNumber': workflowNumber},
-
+    timeout : 15*1000, //超时时间设置，单位毫秒
     async: false,
     dataType: 'json',
     success: function(data) {
@@ -79,10 +79,13 @@ $$.ajax({
         loadStudentListError = true;
         console.error('[ERROR] 加载学生列表失败！');
     },
-    complete: function() {
+    complete: function(XMLHttpRequest,status) {
         myApp.hidePreloader();
+        if(status=='timeout') {
+            alertTimeOut(myApp,'加载超时');
+        }
         if (loadStudentListError) {
-            myApp.alert('加载学生列表失败。请稍后重试', '提示');
+            alertTimeOut(myApp,'加载班级表单数据失败。请稍后重试');
         }
     }
 });
@@ -94,6 +97,7 @@ var jsonConf_index = "";
 if (hasValue) {
     $$.ajax({
         url: url_getformvaluebyid,
+        timeout : 15*1000, //超时时间设置，单位毫秒
         data: {
             'serviceType': serviceType,
             'formInsideId': formInsideId,
@@ -109,10 +113,13 @@ if (hasValue) {
         error: function(result) {
             console.error('[ERROR] 加载班级表单数据失败！');
         },
-        complete: function() {
+        complete: function(XMLHttpRequest,status) {
             myApp.hidePreloader();
+            if(status=='timeout') {
+                alertTimeOut(myApp,'加载超时');
+            }
             if (loadClassInfoError) {
-                myApp.alert('加载班级表单数据失败。请稍后重试', '提示');
+                alertTimeOut(myApp,'加载班级表单数据失败。请稍后重试');
             }
         }
     });
@@ -121,6 +128,7 @@ if (hasValue) {
 else {
     $$.ajax({
         url: url_getbyid,
+        timeout : 15*1000, //超时时间设置，单位毫秒
         data: {
             'serviceType': serviceType,
             'formInsideId': formInsideId
@@ -134,8 +142,11 @@ else {
         error: function(result) {
             console.error('[ERROR] 加载班级表单配置失败！');
         },
-        complete: function() {
+        complete: function(XMLHttpRequest,status) {
             myApp.hidePreloader();
+            if(status=='timeout') {
+                alertTimeOut(myApp,'加载超时');
+            }
             if (loadClassInfoError) {
                 myApp.alert('加载班级表单配置失败。请稍后重试', '提示');
             }
@@ -274,13 +285,18 @@ function initStudentsFormsAndPages(){
                     error: function (result) {
                         loadError.push(pageTitles[_i].label);
                         console.error('[ERROR] 加载学生表单数据失败！表单名：' + pageTitles[_i].label);
+                        alertTimeOut(myApp,'[ERROR] 加载学生表单数据失败！表单名：' + pageTitles[_i].label);
                     },
                     complete: function(xhr, status) {
                         completeCounts += 1;
                         if (completeCounts == pageTitles.length - 1) {
                             myApp.hidePreloader();
+                            if(status=='timeout') {
+                                alertTimeOut(myApp,'加载超时');
+                            }
                             if (loadError.length != 0) {
-                                myApp.alert('加载[' + loadError.join(', ') + ']表数据失败。请稍后重试', '提示');
+                                // myApp.alert('加载[' + loadError.join(', ') + ']表数据失败。请稍后重试', '提示');
+                                alertTimeOut(myApp,'加载[' + loadError.join(', ') + ']表数据失败。请稍后重试');
                             }
                         }
                     }

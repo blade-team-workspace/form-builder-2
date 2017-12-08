@@ -98,15 +98,26 @@
 										'</li>' +
 									'</ul>' +
 								'</div>' +
+								'<div class="item-number">' +
+									'<p class="item-cent"><span class="current-length">{currentLength}</span>{minLength}</p>' +
+								'</div>' +
 							'</div>' +
 						'</div>' +
 					'</div>';
 
+			var currentLength = (that.value === undefined ? 0 :that.value.length);
+			var minLength = (that.rule.minlength === undefined ? 0 :  + that.rule.minlength);
 			myApp.popup(popupTemplate.format({
 				title: that.opts.label,
-				value: that.value || ""
+				value: that.value || "",
+                currentLength: currentLength,
+                minLength: (minLength === 0 ? "" : "/" + minLength)
 			}));
 
+			// $('#textEdit').trigger('input');
+			if(currentLength < minLength) {
+                $('.current-length').addClass('min-number-warn');
+			}
 			// 联动事件绑定
 			$('#textEdit').on('input', function(e) {
 				var minLengthLimit = -1;
@@ -119,6 +130,18 @@
 				}
 				if (that.rule && that.rule.maxlength !== undefined) {
 					maxLengthLimit = that.rule.maxlength;
+				}
+				//获取当前input长度
+				var currentLength = $(e.target).val().length;
+                // 当前字数是否大于maxlength
+                var outOfLength = that.rule.maxlength !==undefined && currentLength > that.rule.maxlength;
+                $('.current-length').text(currentLength);
+                // 当小于最小长度赋红色
+                if(currentLength<that.rule.minlength || outOfLength) {
+                    $('.current-length').addClass('min-number-warn');
+				} else {
+                    $('.current-length').removeClass('min-number-warn');
+                    $('.current-length').addClass('min-number');
 				}
 				if ($(e.target).val().length >= minLengthLimit && $(e.target).val().length <= maxLengthLimit) {
 					$(e.target).closest('.textarea-popup').find('.submitBtn').removeClass('disabled');
