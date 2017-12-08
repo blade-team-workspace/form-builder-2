@@ -30,6 +30,9 @@
 	font-size: 15px;
 	padding-left: 0;
 }
+.list-block.item-after-wrap .item-after {
+	max-width: 65%;
+}
 /* item-title和item-after在同一行的写法 */
 .list-block.title-after-inline .item-after {
 	width: initial;
