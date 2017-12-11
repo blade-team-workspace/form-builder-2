@@ -15,7 +15,7 @@
 		var that = this;
 		// params
 		this.$node = undefined;
-		this.$container = undefined;	// 容器对象，是否用到还不清楚……联动时使用？？
+		this.container = undefined;	// 容器对象，是否用到还不清楚……联动时使用？？
 		this.defaultOpts = {
 			'f7-icon': 'star'
 		};
@@ -32,19 +32,22 @@
 			// console.log('before init');
 		}
 		this.__init = function(kargs) {
+			//取到全局的只读参数
+            var global_isRead = {isRead: kargs.$form.data('fb-form').opts.isRead || false};
 			// 合并默认参数
 			this.defaultOpts = $.extend({}, this.defaultOpts, this.componentDefaultOpts);
 			// 合并配置参数
-			this.opts = $.extend({}, this.defaultOpts, kargs,
-				{readonly: kargs.global_isRead}, {steamLayout: kargs.global_isSteam});
+            this.opts = $.extend({}, this.defaultOpts, global_isRead, kargs);
 			// 合并规则
 			this.rule = $.extend({}, kargs.rule);
 			// 赋初值
-			this.value = kargs.value || undefined;
+			// this.value = kargs.value || undefined;
+			this.value = kargs.$form.data('fb-form').opts.values[kargs.name];
 			// 取groupId
 			this.groupId = kargs.groupId || 'default';
 			// 如果指定了$node和$form就用指定的
 			this.$node = kargs.$node || undefined;
+			this.container = kargs.container || undefined;
 			this.$form = kargs.$form || undefined;
 			this.rule = kargs.rule || undefined;
 		}
@@ -77,8 +80,12 @@
 		}
 		this.__afterRender = function() {
 			// do nothing, not necessary
-			// console.log('after render');
-		}
+            // console.log('after render');
+            // if(this.value){
+            //     this.setValue(this.value);
+            // }
+
+        }
 		this.render = function() {
 			this.__beforeRender();
 			this.__render();
@@ -89,10 +96,56 @@
 		}
 
 
+        // 切换只读模式方法
+		this.__beforeTransRead = function () {
+
+            // do nothing, not necessary
+        }
+        this.__transRead = function () {
+            // TODO
+            console.error('Must be rewritten.')
+        }
+        this.__afterTransRead = function() {
+            // do nothing, not necessary
+
+		}
+
+		//将component的swipeclass删除
+		this.__cleanSwipeClass = function() {
+            this.$node.closest('li.swipeout').find('.swipeout-actions-right').remove();
+
+
+		}
+
+		//将container事件删除
+		this.__cleanLabelEvent = function() {
+
+			//stream 不赋值container
+			if(this.container) {
+                if(this.container.$node) {
+                    var $valueNodes = $.formb.findAllValueNodes($(that.$node[0]));
+
+                    // 判断是否需要隐藏label
+                    if ($.formb.isAllValueNodesHide($valueNodes)) {
+                        $(that.$node[0]).addClass('hide');
+                    }
+                }
+			}else{
+
+			}
+
+		}
+
+        this.transRead = function () {
+            this.__beforeTransRead();
+            this.__transRead();
+            this.__afterTransRead();
+            this.__cleanSwipeClass();
+        }
 
 		// 配置校验方法
 		this.__beforeSetCheckSteps = function() {
-			// do nothing, not necessary
+			// do g , not necessary
 		}
 		this.__setCheckSteps = function() {
 			// TODO
@@ -109,6 +162,7 @@
 
 		// 改变显示状态
 		this.checkViewStatus = function() {
+
 			if (this.value === undefined ||
 				this.value === null ||
 				this.value === '' ||
@@ -116,6 +170,7 @@
 				this.$node.closest('li.swipeout').css('height', '0px');
 				return false;
 			} else {
+                // console.log("::::" + this.$node.closest('li').outerHTML);
 				this.$node.closest('li.swipeout').css('height', 'initial');
 				return true;
 			}
@@ -138,7 +193,11 @@
 			this.__setValue(value);
 			this.value = value;
 			this.__afterSetValue(value);
+			this.$node.trigger('change');	// 给stream容器用，方便监听
 			this.checkViewStatus();
+			if(this.opts.readonly){
+				this.__cleanLabelEvent();
+			}
 		}
 
 		// 编辑当前对象的回调

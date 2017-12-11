@@ -19,11 +19,11 @@
 		this.template = undefined;
 
 		this.labelTemplate =
-				'<li>' +
+				'<li class="item-label">' +
 					'<a href="#" class="item-with-addon">' +
 						'<div class="item-content">' +
 							'<div class="item-inner">' +
-								'<div class="item-title">{label}</div>' +
+								'<div class="item-title {fontType}">{label}</div>' +
 								'<div class="addon addon-edit">' +
 									'<i class="f7-icons size-smaller">right</i>' +
 								'</div>' +
@@ -32,7 +32,7 @@
 					'</a>' +
 				'</li>';
 		this.contentTemplate =
-				'<li class="swipeout" style="height: 0px;">' +
+				'<li class="swipeout show-value-container" style="height: 0px;">' +
 					'<div class="swipeout-content item-content">' +
 						'<div class="item-inner">' +
 							'<div class="item-after"></div>' +
@@ -57,6 +57,7 @@
 				} else {
 					opt = this.opts.items;
 				}
+
 			}
 			var Component = $.formb.components[opt.type];
 			if (Component === undefined) {
@@ -69,6 +70,8 @@
 			opt.$form = this.$form;
 			// 将当前rule传入下一层
 			opt.rule = this.$form.data('fb-form').opts.rules[opt.name];
+			// 将当前容器传入组件
+			opt.container = that;
 
 			var component = new Component(opt);
 			component.render();
@@ -82,7 +85,7 @@
 
 			// 渲染label >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $label = $(this.labelTemplate.format(that.opts));
-			$label.find('.addon-edit').on('click', childComponent.editCallback);
+			$label.find('.item-with-addon').on('click', childComponent.editCallback);
 
 			// 渲染content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $content = $(this.contentTemplate.format(opts));
@@ -108,6 +111,8 @@
 				});
 				// 清空数据
 				el.data('component').setValue('');
+				// 清空该删掉的对象（图片和音频）
+				el.data('component').$node.find('.swipeout-clean-item').remove();
 			});
 
 			this.$node = [$label, $content];
@@ -131,15 +136,28 @@
 			this.$form.data('nameLabelMap', nameLabelMap);
 
 			// 加必填标志
-			if (rules[name] && rules[name].required === true) {
+			if (rules[name] && rules[name].required === true&&!that.opts.isRead) {
 				var $title = $(this.$node[0]).find('.item-title');
 				$title.append(this.$form.data('fb-form').requireMarkTemplate);
 			}
+            var global_isRead = that.$form.data('fb-form').opts.isRead;
+            //只读模式，将必填和箭头隐藏
+            if ( global_isRead || childComponent.opts.isRead ) {
 
+                $(this.$node[0]).find('.addon').addClass('hide');
+                $(this.$node[0]).find('.item-title').find('.requireMarkHolder').addClass('hide');
+            }
+            //只读模式
+            if(childComponent.opts.isRead){
+                childComponent.transRead();
+            }
+                // childComponent.__cleanLabelEvent();
 			// 调用childComponent的setValidate方法
 			if (rules[name]) {
 				childComponent.setCheckSteps(rules[name]);
 			}
+			//鉴于component的setValue时没有加到container中，所以在container中调用
+			childComponent.checkViewStatus();
 		}
 	}
 

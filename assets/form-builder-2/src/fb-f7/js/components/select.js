@@ -34,15 +34,23 @@
 		}
 
 		this.__render = function() {
-			var option='<option value="{value}">{label}</option>';
+			var hideFlag = '';
+			var option='<option value="{value}" {isHide}>{label}</option>';
 			var optionshtml='<option value="">' + that.opts.placeholder + '</option>';
 			this.optionsMap = {};
 			for (var i = 0; i < that.opts.options.length; i++) {
+				if(that.opts.options[i].isHide){
+					hideFlag = 'style="display:none"';
+				}else{
+					hideFlag = '';
+				}
 				optionshtml+=option.format({
 					value:that.opts.options[i].value,
-					label:that.opts.options[i].label
+					label:that.opts.options[i].label,
+					isHide:hideFlag
 				});
-				that.optionsMap[that.opts.options[i].value] = that.opts.options[i].label;
+				//增加value描述description属性，替代label
+				that.optionsMap[that.opts.options[i].value] = that.opts.options[i].description || that.opts.options[i].label;
 			};
 			this.$node = $(this.template.format({
 				name: that.opts.name,
@@ -60,10 +68,12 @@
 
 			this.$node.on('click', this.editCallback);
 		}
-
+        this.__transRead = function() {
+            this.$node.off('click', this.editCallback);
+		}
 		this.__setValue = function(value) {
 			this.$node.find('select').val(value);
-			this.$node.find('.showValue').html(this.optionsMap[value]);
+			this.$node.find('.showValue').html(this.optionsMap[value] || "");
 		}
 
 		this.editCallback = function(e) {
@@ -72,7 +82,37 @@
             	myApp.smartSelectOpen(that.$node.find('.smart-select'));
 			}, 0);
 		}
+
+		//设置校验步骤
+		this.__setCheckSteps = function() {
+			$.each(this.rule, function(key) {
+				var ruleValue = that.rule[key];
+				var checkStepFunction = undefined;
+				var label = that.opts.label;
+				switch (key) {
+					case 'required':
+						checkStepFunction = function() {
+							if (!that.$node.find('select').is(':disabled') && that.$node.find('select').val() == '') {
+								myApp.alert('请填写"{label}"'.format({label: label}));
+								return false;
+							} else {
+								return true;
+							}
+						}
+						break;
+					
+					default:
+						console.warn('[WARN] 发现未知参数 {key}: {ruleValue}'.format({key: key, ruleValue: ruleValue}));
+						break;
+				}
+				if (checkStepFunction) {
+					$.formb.appendCheckStepToForm(that.$form, checkStepFunction);
+				}
+			});
+		}
 	}
+
+
 
 	$.formb.components.select = component_select;
 

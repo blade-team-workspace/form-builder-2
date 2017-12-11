@@ -66,6 +66,7 @@
 				var component = new Component(opt);
 				component.render();
 				that.append(component);
+
 			});
 		}
 

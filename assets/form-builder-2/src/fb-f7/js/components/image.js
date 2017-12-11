@@ -27,7 +27,7 @@
 				'</div>' +
 			'</span>';
 		this.thumbnailTemplate =
-			'<div class="thumbnail">' +
+			'<div class="thumbnail swipeout-clean-item">' +
 				'<div class="delete">' +
 					'<i class="f7-icons">delete_round_fill</i>' +
 				'</div>' +
@@ -39,7 +39,7 @@
 			'</div>';
 			// style=\'background: url(../../img/error.jpg) 0% 0% / 100% 100% no-repeat #000;\'
 		this.waitingTemplate =
-			'<div class="thumbnail waiting">' +
+			'<div class="thumbnail swipeout-clean-item waiting">' +
 				'<div class="delete">' +
 					'<i class="f7-icons">delete_round_fill</i>' +
 				'</div>' +
@@ -77,6 +77,10 @@
 					$waiting.addClass('index_' + i);
 					that.$node.find('.thumbnails-container').append($waiting);
 					// $waiting.insertBefore($addBtn);
+				}
+				// 预上传调用时即显示占位图
+				if (count > 0) {
+					that.$node.closest('li.swipeout').css('height', 'initial');
 				}
 			});
 
@@ -127,12 +131,18 @@
 				$input.val('images:[' + urlList.join(',') + ']');
 			} else {
 				$input.val('');
+                that.$node.closest('li.swipeout').css('height', '0px');
 			}
 
 			// TODO: 检查下这里的逻辑，写的时候有点儿混乱
 			that.value = $input.val();
 			that.checkViewStatus();
 		}
+
+        this.__transRead = function(){
+           that.$node.find('.thumbnails-container').find('.thumbnail .delete').css('display','none');
+           // console.log("+++" ,that.$node.find('.thumbnails-container'));
+        }
 
 		this.__setValue = function(value) {
 			console.log('image / this.__setValue(' + value + ')');
@@ -173,6 +183,10 @@
 				// 放置
 				// $item.insertBefore($addBtn);
 				that.$node.find('.thumbnails-container').append($item);
+				//如果只读的时候，将delete删除
+                if(that.opts.isRead){
+                	$item.find('.delete').hide();
+                }
 			});
 				
 			// 判断总thumbnail数量是否超过了max
@@ -190,6 +204,7 @@
 
 			// 根据当前已存在的缩略图，调整max和min
 			var nowCount = that.$node.find('.thumbnails-container').find('.thumbnail').length;
+			console.log(nowCount);
 			var max = that.opts.maxNumber - nowCount;
 			var min = (((that.opts.minNumber - nowCount) >= 0) ? (that.opts.minNumber - nowCount) : 0);
 			
@@ -204,6 +219,34 @@
 			that.fileGroupId = that.fileGroupId + 1;
 			var urlParam = $.param(data);
 			window.location = '/upload?' + urlParam;
+		}
+
+		//设置校验步骤
+		this.__setCheckSteps = function() {
+			$.each(this.rule, function(key) {
+				var ruleValue = that.rule[key];
+				console.log(ruleValue);
+				var checkStepFunction = undefined;
+				var label = that.opts.label;
+				switch (key) {
+					case 'required':
+						checkStepFunction = function() {
+							if (!that.$node.find('input').is(':disabled') && that.$node.find('img').length == 0) {
+								myApp.alert('请填写"{label}"'.format({label: label}));
+								return false;
+							} else {
+								return true;
+							}
+						}
+						break;
+					default:
+						console.warn('[WARN] 发现未知参数 {key}: {ruleValue}'.format({key: key, ruleValue: ruleValue}));
+						break;
+				}
+				if (checkStepFunction) {
+					$.formb.appendCheckStepToForm(that.$form, checkStepFunction);
+				}
+			});
 		}
 	}
 
