@@ -11,7 +11,7 @@
 					"name": "s1",
 					"type": "select",
 					"options": [{
-						"label": "选项1",
+						"label": "选项1asdasdasdsdadadasdadadadadadadadads",
 						"value": 1
 					}, {
 						"label": "选项2",
@@ -59,9 +59,9 @@
 				{
 					"label": "目的地",
 					"name":"s_s2",
-					"type":"select",
+					"type":"multiselect",
 					"options": [{
-						"label": "选项1",
+						"label": "选项1123123123123131312321321321321321321321321313213sawdhoaudhadh aasdjasdja",
 						"value": 1
 					}, {
 						"label": "选项2",
