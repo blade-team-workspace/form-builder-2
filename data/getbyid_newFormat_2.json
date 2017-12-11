@@ -47,6 +47,37 @@
 			]
 		},
 		{
+			"label": "下拉多选",
+			"type": "form-group",
+			"groupId": "group0",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-3",
+			"contentWidth": "col-sm-9",
+			"items": [
+
+				{
+					"name": "demo_multiselect",
+					"type": "multiselect",
+					"options": [{
+						"label":"选项1",
+						"value": 1
+
+					}
+					,{
+							"label":"选项2",
+							"value": 2
+					},
+					{
+						"label":"选项3",
+						"value": 3
+					}]
+
+
+				}
+			]
+		},
+		{
 			"label": "[未设置] 多行-2",
 			"type": "form-group",
 			
@@ -111,6 +142,9 @@
 		}
 	],
 	"rules": {
+		"demo_multiselect": {
+			"required": false
+		}
 	},
 	"events": [],
 	"values": {

@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+
 	<title>测试fb-bs</title>
 
 	<!-- 基本 -->
 	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
 	<script src="vendor/jquery/jquery-1.9.1.min.js"></script>
+
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- html和json格式化插件 -->
@@ -30,6 +33,8 @@
 	<!-- 下拉复选插件 -->
 	<link href="vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
 	<script src="vendor/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+
+
 
 	<!-- ==================== 以下为自己的东西 ==================== -->
 	<style>
@@ -60,10 +65,18 @@
 	<script src="assets/form-builder-2/src/fb-bs/js/components/text.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/select.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/image.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/components/multiselect.js"></script>
+
 
 	<!-- fb 核心文件 -->
 	<link href="assets/form-builder-2/src/fb-bs/css/form-builder-2.css" rel="stylesheet" type="text/css"/>
 	<script src="assets/form-builder-2/src/fb-bs/js/fb.core.js"></script>
+
+
+
+
+
+
 
 </head>
 <body>
@@ -81,6 +94,8 @@
 	</div> -->
 	<script>
 		$(document).ready(function() {
+
+
 			$.ajax({
 				url: '/data/getbyid_newFormat_2.json',
 				dataType: 'JSON',
