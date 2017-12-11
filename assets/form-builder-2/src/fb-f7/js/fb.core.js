@@ -47,6 +47,8 @@
             $nextNode = $nowNode.next();
             if ($nextNode.length > 0 && $nextNode.is('.swipeout')) {
                 $valueNodes.push($nextNode);
+            } else {
+            	break;
             }
             $nowNode = $nextNode;
             loopTimes += 1;
@@ -145,16 +147,32 @@
 		}
 	}
 
+	//给多选框赋值方法
+    $.fn.smartSelectSetValue = function(values) {
+        var $this = $(this);
+        if (!$.isArray(values)) {
+            console.error('[ERROR] "values" must be an Array. Now is', values);
+        }
+        var $options = $this.find('option');
+        $.each($options, function(_idx) {
+            var optionDom = $options[_idx];
+            var $option = $($options[_idx]);
+            optionDom.selected = (values.indexOf($option.attr('value')) != -1);
+        });
+        $this.change();
+    }
+
 
 
 	// 加联动事件
 	// 添加联动事件
 	function activeEventBinds($form, ebs) {
-		// 触发器名字和事件详情的map	TODO: 改
-		$.formb.eventBinds.triggerName_eb_map = {};
+		// 触发器名字和事件详情的map
+		var triggerName_eb_map = {};
 		$.each(ebs, function(idx) {
-			$.formb.eventBinds.triggerName_eb_map[ebs[idx].trigger] = ebs[idx];
+			triggerName_eb_map[ebs[idx].trigger] = ebs[idx];
 		});
+		$form.data('eventBindsMap', triggerName_eb_map);
 
 		var eventBinds = $.formb.eventBinds;
 

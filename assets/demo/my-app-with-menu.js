@@ -9,10 +9,10 @@ var url_saveformData;
 
 if (project == 'bpmApp') {
     // bpmApp用
-    url_studentList = "/bpmapp/form/studentList";
-    url_getformvaluebyid = "/bpmapp/form/getformvaluebyid";
-    url_getbyid = "/bpmapp/form/getbyid";
-    url_saveformData = "/bpmapp/form/saveformData";
+    url_studentList = url+"/form/studentList";
+    url_getformvaluebyid = url+"/form/getformvaluebyid";
+    url_getbyid = url+"/form/getbyid";
+    url_saveformData = url+"/form/saveformData";
 } else if (project == 'blade') {
     // blade用
     url_studentList = "data/studentList.json";
@@ -23,7 +23,50 @@ if (project == 'bpmApp') {
 
 // Initialize your app
 var myApp = new Framework7({
-    init: false  // 关闭自动初始化
+    init: false,  // 关闭自动初始化
+    modalTitle: '',
+    smartSelectItemTemplate: '{{#if isLabel}}' +
+    '<li class="item-divider">{{groupLabel}}</li>' +
+    '{{else}}' +
+    '<li{{#if className}} class="{{className}}"{{/if}}>' +
+    '<label class="label-{{inputType}} item-content">' +
+    '<input type="{{inputType}}" name="{{inputName}}" value="{{value}}" {{#if selected}}checked{{/if}}>' +
+    '{{#if material}}' +
+    '{{#if hasMedia}}' +
+    '<div class="item-media">' +
+    '{{#if icon}}<i class="icon {{icon}}"></i>{{/if}}' +
+    '{{#if image}}<img src="{{image}}">{{/if}}' +
+    '</div>' +
+    '<div class="item-inner">' +
+    '<div class="item-title-multi{{#if color}} color-{{color}}{{/if}}">{{text}}</div>' +
+    '</div>' +
+    '<div class="item-after">' +
+    '<i class="icon icon-form-{{inputType}}"></i>' +
+    '</div>' +
+    '{{else}}' +
+    '<div class="item-media">' +
+    '<i class="icon icon-form-{{inputType}}"></i>' +
+    '</div>' +
+    '<div class="item-inner">' +
+    '<div class="item-title-multi{{#if color}} color-{{color}}{{/if}}">{{text}}</div>' +
+    '</div>' +
+    '{{/if}}' +
+    '{{else}}' +
+    '{{#if hasMedia}}' +
+    '<div class="item-media">' +
+    '{{#if checkbox}}<i class="icon icon-form-checkbox"></i>{{/if}}' +
+    '{{#if icon}}<i class="icon {{icon}}"></i>{{/if}}' +
+    '{{#if image}}<img src="{{image}}">{{/if}}' +
+    '</div>' +
+    '{{/if}}' +
+    '<div class="item-inner">' +
+    '<div class="item-title-multi{{#if color}} color-{{color}}{{/if}}">{{text}}</div>' +
+    '</div>' +
+    '{{/if}}' +
+    '</label>' +
+    '</li>' +
+    '{{/if}}'
+
 });
 
 // Export selectors engine
@@ -43,7 +86,7 @@ if (device.android) {
 var mainView = myApp.addView('.view-main', {
     // Because we use fixed-through navbar we can enable dynamic navbar
     dynamicNavbar: true,
-    domCache: true,	  //enable inline pages
+    domCache: true,   //enable inline pages
     // swipePanel: 'left',
     animatePages: false
 });
@@ -68,7 +111,7 @@ var loadStudentListError = false;
 $$.ajax({
     url: url_studentList,
     data: {'workflowNumber': workflowNumber},
-
+    timeout : 15*1000, //超时时间设置，单位毫秒
     async: false,
     dataType: 'json',
     success: function(data) {
@@ -78,10 +121,13 @@ $$.ajax({
         loadStudentListError = true;
         console.error('[ERROR] 加载学生列表失败！');
     },
-    complete: function() {
+    complete: function(XMLHttpRequest,status) {
         myApp.hidePreloader();
+        if(status=='timeout') {
+            alertTimeOut(myApp,'加载超时');
+        }
         if (loadStudentListError) {
-            myApp.alert('加载学生列表失败。请稍后重试', '提示');
+            alertTimeOut(myApp,'加载班级表单数据失败。请稍后重试');
         }
     }
 });
@@ -93,6 +139,7 @@ var jsonConf_index = "";
 if (hasValue) {
     $$.ajax({
         url: url_getformvaluebyid,
+        timeout : 15*1000, //超时时间设置，单位毫秒
         data: {
             'serviceType': serviceType,
             'formInsideId': formInsideId,
@@ -102,15 +149,19 @@ if (hasValue) {
         dataType: 'json',
         async: false,
         success: function(data) {
-            jsonConf_index = strToJson(data);
+//            jsonConf_index = strToJson(data);
+            jsonConf_index = data;
         },
         error: function(result) {
             console.error('[ERROR] 加载班级表单数据失败！');
         },
-        complete: function() {
+        complete: function(XMLHttpRequest,status) {
             myApp.hidePreloader();
+            if(status=='timeout') {
+                alertTimeOut(myApp,'加载超时');
+            }
             if (loadClassInfoError) {
-                myApp.alert('加载班级表单数据失败。请稍后重试', '提示');
+                alertTimeOut(myApp,'加载班级表单数据失败。请稍后重试');
             }
         }
     });
@@ -119,6 +170,7 @@ if (hasValue) {
 else {
     $$.ajax({
         url: url_getbyid,
+        timeout : 15*1000, //超时时间设置，单位毫秒
         data: {
             'serviceType': serviceType,
             'formInsideId': formInsideId
@@ -126,13 +178,17 @@ else {
         dataType: 'json',
         async: false,
         success: function(data) {
-            jsonConf_index = strToJson(data);
+            jsonConf_index = data;
+//            jsonConf_index = strToJson(data);
         },
         error: function(result) {
             console.error('[ERROR] 加载班级表单配置失败！');
         },
-        complete: function() {
+        complete: function(XMLHttpRequest,status) {
             myApp.hidePreloader();
+            if(status=='timeout') {
+                alertTimeOut(myApp,'加载超时');
+            }
             if (loadClassInfoError) {
                 myApp.alert('加载班级表单配置失败。请稍后重试', '提示');
             }
@@ -184,6 +240,9 @@ myApp.onPageBeforeInit('testForm', function (page) {
     if (isShared) {
         // 隐藏分享按钮
         $$('.share-btn').hide();
+        //
+        $$('.top-toolbar').hide();
+        $$('.page-content').css('padding-top','initial');
         // 隐藏退出按钮
         $$('.exit-web-view').hide();
     }
@@ -264,19 +323,25 @@ function initStudentsFormsAndPages(){
                     },
                     dataType: 'json',
                     success: function (data) {
-                        jsonConfs[pageTitles[_i].url] = strToJson(data);
+                        jsonConfs[pageTitles[_i].url] = data;
+//                        jsonConfs[pageTitles[_i].url] = strToJson(data);
                         reRenderPage(_i, jsonConfs[pageTitles[_i].url]);
                     },
                     error: function (result) {
                         loadError.push(pageTitles[_i].label);
                         console.error('[ERROR] 加载学生表单数据失败！表单名：' + pageTitles[_i].label);
+                        alertTimeOut(myApp,'[ERROR] 加载学生表单数据失败！表单名：' + pageTitles[_i].label);
                     },
                     complete: function(xhr, status) {
                         completeCounts += 1;
                         if (completeCounts == pageTitles.length - 1) {
                             myApp.hidePreloader();
+                            if(status=='timeout') {
+                                alertTimeOut(myApp,'加载超时');
+                            }
                             if (loadError.length != 0) {
-                                myApp.alert('加载[' + loadError.join(', ') + ']表数据失败。请稍后重试', '提示');
+                                // myApp.alert('加载[' + loadError.join(', ') + ']表数据失败。请稍后重试', '提示');
+                                alertTimeOut(myApp,'加载[' + loadError.join(', ') + ']表数据失败。请稍后重试');
                             }
                         }
                     }
@@ -296,7 +361,8 @@ function initStudentsFormsAndPages(){
             dataType: 'json',
             async: false,
             success: function(data) {
-                jsonConfs = strToJson(data);
+                jsonConfs = data;
+//                jsonConfs = strToJson(data);
                 // 初始化页面和导航
                 $$.each(pageTitles, function(idx){
                     if (project == 'bpmApp') {
@@ -358,44 +424,44 @@ function reRenderPage(idx, jsonConf) {
     });
 }
 
-/*
-function getFormData(formId) {
-    if($$('form#' + formId).length == 1) {
-        var formData = myApp.formToData('#' + formId);
-        var allDisabled = $$('#' + formId).find(':disabled');
-
-        // 手动删掉禁用的项
-        $$.each(allDisabled, function(idx) {
-            var disabledName = allDisabled[idx].name;
-            if (disabledName in formData) {
-                delete formData[disabledName];
-            }
-        });
-
-        return formData;
-    } else {
-        return undefined;
-    }
-}*/
-
 function saveOrSubmit(isSubmit) {
-    var formData = myApp.formToData('#testForm');
+//    var formData = myApp.formToData('#testForm');
 
-    console.log('saveOrSubmit formData ->', formData);
+    var formDatas = {};
+    $$.each(pageTitles, function(idx){
+        var formId = pageTitles[idx].url;
+
+        var formData = getFormData(formId);
+        if(formData !== undefined) {
+            formDatas[formId] = formData;
+        }
+    });
+    console.log('saveOrSubmit formData ->', formDatas);
 
     if (isSubmit) {
         // 校验
-        var isValid = $('#testForm').validate();
+        var isValid = true;
+        $$.each(pageTitles, function(idx){
+            var formId = pageTitles[idx].url;
+            if($$('form#' + formId).length == 1) {
+                isValid = $$('form#' + formId).validate();
+            }
+            if (!isValid) {return;}
+        });
         if (isValid) {
+            myApp.showPreloader('提交中...');
             // 提交（对应已办）
             $$.ajax({
                 url: url_saveformData,
                 type: (project == 'blade') ? 'get' : 'post',
                 dataType: 'json',
-                data: 'formValue=' + encodeURI(JSON.stringify(formData)) + '&workflowNumber=' + workflowNumber + '&isSubmit=1',
+                data: 'formValue=' + encodeURI(JSON.stringify(formDatas)) + '&workflowNumber=' + workflowNumber + '&isSubmit=1',
                 success: function(result){
                     // TODO
-                    myApp.alert('提交成功', '提示');
+//                    myApp.alert('提交成功', '提示');
+                    myApp.alert('提交成功', '提示',function(){
+                        window.location = "submit-success";
+                    });
                     $$('.popup-submit .group-ready').hide();
                     $$('.popup-submit .group-done').show();
                 },
@@ -417,7 +483,7 @@ function saveOrSubmit(isSubmit) {
             url: url_saveformData,
             type: (project == 'blade') ? 'get' : 'post',
             dataType: 'json',
-            data: 'formValue=' + encodeURI(JSON.stringify(formData)) + '&workflowNumber=' +workflowNumber + '&isSubmit=0',
+            data: 'formValue=' + encodeURI(JSON.stringify(formDatas)) + '&workflowNumber=' +workflowNumber + '&isSubmit=0',
             success: function(result){
                 myApp.alert('暂存成功', '提示');
             },
@@ -461,7 +527,8 @@ function bindPagerBtn() {
             if (isRead) {
                 myApp.alert('到达末页', '提示');
             } else {
-                myApp.popup('.popup-submit');
+//                myApp.popup('.popup-submit');
+                window.location = '/SaveOrSubmit';
             }
         } else {
             mainView.router.load({pageName: pageTitles[nextIndex].url});
@@ -476,3 +543,12 @@ function bindPagerBtn() {
 bindPagerBtn();
 
 initPageBindEvent();
+
+function getFormData(formId) {
+    if($$('form#' + formId).length == 1) {
+        var formData = myApp.formToData('#' + formId);
+        return formData;
+    } else {
+        return undefined;
+    }
+}

@@ -3,10 +3,8 @@
 	"type": "form",
 	"items": [
 		{
-			"label": "[group0] 多行-1",
+			"label": "[未设置] 多行-1",
 			"type": "form-group",
-			"groupId": "group0",
-
 			"outerWidth": "col-sm-12",
 			"labelWidth": "col-sm-2",
 			"contentWidth": "col-sm-10",
@@ -17,6 +15,22 @@
 					"type": "textarea",
 					"rows": 3,
 					"resize": "none"
+				}
+			]
+		},
+		{
+			"label": "[group0] 单行-1",
+			"type": "form-group",
+			"groupId": "group0",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
+			"items": [
+				{
+					"name": "t1",
+					"type": "text"
 				}
 			]
 		},
@@ -47,54 +61,6 @@
 			]
 		},
 		{
-			"label": "[group0] 数字",
-			"type": "form-group",
-			"groupId": "group0",
-			"items": [
-				{
-					"name": "n1",
-					"type": "number",
-					"minValue": 0,
-					"maxValue": 10,
-					"stepValue": 0.5
-				}
-			]
-		},
-		{
-			"label": "[未设置] 多行-2",
-			"type": "form-group",
-			
-			"outerWidth": "col-sm-6",
-			"labelWidth": "col-sm-4",
-			"contentWidth": "col-sm-8",
-
-			"items": [
-				{
-					"name": "ta2",
-					"type": "textarea",
-					"rows": 3,
-					"resize": "none"
-				}
-			]
-		},
-		{
-			"label": "[未设置] 多行-3",
-			"type": "form-group",
-			
-			"outerWidth": "col-sm-6",
-			"labelWidth": "col-sm-4",
-			"contentWidth": "col-sm-8",
-
-			"items": [
-				{
-					"name": "ta3",
-					"type": "textarea",
-					"rows": 3,
-					"resize": "none"
-				}
-			]
-		},
-		{
 			"label": "[未设置] 多媒体",
 			"type": "multimedia",
 			
@@ -111,7 +77,7 @@
 					"name": "s2",
 					"type": "select",
 					"options": [{
-						"label": "选项1",
+						"label": "adadhasdsahdoashda ashadpiasjdoasasdhnasa 啊aadasdasdasdasdasd",
 						"value": 1
 					}, {
 						"label": "选项2",
@@ -120,27 +86,6 @@
 						"label": "选项3",
 						"value": 3
 					}]
-				},
-				{
-					"name": "i1",
-					"type": "image",
-					"maxNumber": 3,
-					"minNumber": 0
-				},
-				{
-					"name": "rec2",
-					"label": "录音2",
-					"type": "audio",
-
-					"outerWidth": 12,
-					"labelWidth": 3,
-					"contentWidth": 9,
-					"widthInSteam": "auto",
-
-					"description": "",
-					"maxNumber": 1,
-					"minNumber": 1
-
 				}
 			]
 		}
@@ -149,10 +94,9 @@
 	},
 	"events": [],
 	"values": {
-		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。",
-        "rec2": "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"
+		"t1": "初值",
+		"ta1": "lasdjflaksdjflasjdlfkjasldfjljasdkfjasklfjlkasjdflkajsdklfjaklsdfjlaskdflkasjdlfkjasldfjlaskdfjlkasd"
 	},
-	"isSteam": false,
 	"isRead": false,
 	"groupDefaultSplit": true
 }

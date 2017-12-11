@@ -27,7 +27,7 @@
         ]
       },
       {
-        "label": "[group0] 下拉单选-1",
+        "label": "[group0] 下拉单选-12313",
         "type": "form-group",
         "groupId": "group0",
         "items": [
@@ -35,10 +35,10 @@
             "name": "s1",
             "type": "select",
             "options": [{
-              "label": "选项1",
+              "label": "选项1asdasdasdasdbgasdkjhasdkhasdkhadkhasdhasdasdkasldjl",
               "value": 1
             }, {
-              "label": "选项2",
+              "label": "选项22323",
               "value": 2
             }, {
               "label": "选项3",
@@ -62,10 +62,10 @@
             "name":"taNew2",
             "type":"select",
             "options": [{
-              "label": "选项1",
+              "label": "选项1asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdas",
               "value": 1
             }, {
-              "label": "选项2",
+              "label": "选项23",
               "value": 2
             }, {
               "label": "选项3",
@@ -464,7 +464,7 @@
     "rules": {
       "ta1": {
         "required": true,
-        "maxlength": 10,
+        "maxlength": 30,
         "minlength": 5
       },
       "ta2": {
@@ -511,7 +511,7 @@
       }
     }],
     "values": {
-      "ta1":"4545456",
+      "ta1":"asd",
       "s1": "3",
       "ta4": "asdfasdfasdfasdfasdf",
       "ta3": "今天天气{0}",

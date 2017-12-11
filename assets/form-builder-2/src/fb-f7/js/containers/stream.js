@@ -23,18 +23,21 @@
 					'<div class="item-content">' +
 						'<div class="item-inner">' +
 							'<div class="item-after">'+
-							    '<div class="textarea-group one" style="color:#000;display:inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{label}'+
-							    '</div>'+
+								'<div class="stream-layout">' +
+									'{label}'+
+								'</div>'+
 							  '</div>'+
 						'</div>' +
 					'</div>' +
 				'</li>';
 
-			
+		this.contentTemplate = 
+				'<span class="show-value-container" item-name="{name}"></span>';
+
 		this.deleteBtn =
-				'<span class="delete" style="">' +
-	            	'<i class="f7-icons" style="font-size:15px;width:17px;">close</i>' +
-	            '</span>' ;
+				'<span class="delete">' +
+					'<i class="f7-icons" style="font-size: 15px; width: 16px; line-height: 16px;">close</i>' +
+				'</span>' ;
 		
 		this.__beforeRender = function() {
 		}
@@ -50,106 +53,93 @@
 			console.log(this.$form.data('fb-form'));
 			// 寻找appendData.label中的{taNewx}
 			var reSearch = appendData.label.match((/{[^{}]*}/g));
-			// 循环查找结果，将其替换；
+
+			// 循环查找结果，将其替换
 			$.each(reSearch, function(idx) {
-				appendData.label = appendData.label.replace(reSearch[idx], '<span item-name="{name}">{name}</span>'.format({name: reSearch[idx].match("{([^{}]*)}")[1]}));
-				console.log(appendData.label);
+				var name = reSearch[idx].match("{([^{}]*)}")[1];	// 去掉左右大括号的
+				appendData.label = appendData.label.replace(reSearch[idx], that.contentTemplate.format({name: name}));
 			})
 
 			var opts = this.labelTemplate.format({label: appendData.label});
 			$.each(this.opts.items, function(idx){
 				opt = that.opts.items[idx];
-				//console.log(opt);
 
 				var Component = $.formb.components[opt.type];
-				//console.log(Component)
 
 				if (Component === undefined) {
 					console.error('组件或容器[{type}]未找到对应的class定义'.format({type: opt.type}));
 				}
-				// 将当前label传入下一层（textarea需要用到作为弹出的标题（扶额））
-				// opt.label = that.opts.label;
 				// 将当前$form传入下一层参数
 				opt.$form = that.$form;
 				// 将当前rule传入下一层
 				opt.rule = rules[opt.name];
-				// console.log(opt.rule);		// undefined
 
 				var component = new Component(opt);
 				component.render();
 				appendData.components.push(component);
 			});
+
 			this.append(appendData);
-			// console.log(appendData)  // Object {label: "今天天气<span item-name={name}>{name}</span>,我们去了<span…me}</span>,心情<span item-name={name}>{name}</span>", components: Array[3]}
 		}
 
 		this.__append = function(appendData) {
-			// 渲染streamItem >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-			// 渲染label >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $label = $(this.labelTemplate.format({label: appendData.label}));
-			console.log($label)	//  {0: li.item-label, length: 1}
-            var global_isRead = this.$form.data('fb-form').opts.isRead;
-			this.$node = [$label];
-			//console.log([$label]); // [l] length=1(items行数) Array[0]
 			
-			// 渲染content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+			var global_isRead = this.$form.data('fb-form').opts.isRead;
+			this.$node = [$label];
+
+			// 遍历所有已经渲染的组件，替换到label中
 			$.each(appendData.components, function(idx) {
 				var childComponent = appendData.components[idx];
 				var opts = childComponent.opts;
-
-				// console.log(opts.name);	// taNew1,taNew2,taNew3
 				
-				// childComponent.$node插入到属性 item-name=opts.name 的元素前
-				childComponent.$node.insertBefore($label.find('[item-name='+opts.name+']'));
+				var $container = $label.find('[item-name=' + opts.name + ']');
+				// 找到指定“壳”，将渲染完的对象放入容器中
+				$container.append(childComponent.$node);
 
-				//渲染 deleteBtn 模板上的内容
-				var $content = $(that.deleteBtn.format(opts));
-	            $content.insertAfter(childComponent.$node);
-	            $content.css('display', 'none');
+				// 渲染 deleteBtn 模板上的内容
+				var $deleteBtn = $(that.deleteBtn);
+				$container.append($deleteBtn);
+				$deleteBtn.css('display', 'none');
+
 
 				// 根据值有无控制边框显示
-	            childComponent.$node.on('change', function() {
-	            	if (childComponent.value === '' || childComponent.value === undefined) {
-	            		childComponent.$node.addClass('no-value');
-	            		$content.css('display', 'none');
-	            	} else {
-	            		childComponent.$node.removeClass('no-value')
-	            		childComponent.$node.css('color','#8e8e93');
-	            		console.log(childComponent.value);
-	            		$content.css('display', 'inline-block');
-	            	}
-	            });
-				
-				// 获取 .showValue中的值
-	            var $setValue = $label.find('.one > span.textarea-group >.showValue').html();
-	            console.log($setValue);
-	            // var $setValue = $getValParent.find('.showValue').text('');		// TODO: 以后setValue在render中做完时，删掉，临时代码
-	            // console.log($setValue);
+				childComponent.$node.on('change', function() {
+					if (childComponent.value === '' || ($.isArray(childComponent.value) && childComponent.value.length == 0) || childComponent.value === undefined) {
+						childComponent.$node.addClass('no-value');
+						$deleteBtn.css('display', 'none');
+					} else {
+						childComponent.$node.removeClass('no-value')
+						childComponent.$node.css({'color': '#8e8e93', 'padding-left': '2px'});
+						console.log(childComponentValue);
+						$deleteBtn.css('display', 'inline-block');
+					}
+				});
 
-	            // 判断setValue中的内容是否为空
-	            if ($setValue ==  '') {
-	            	childComponent.$node.addClass('no-value');
-	            	childComponent.$node.next().css('display', 'none');
-	            } else {
-	            	childComponent.$node.next().css('display', 'inline-block');
-	            }
-
-                //判断是否是只读
-				if (childComponent.opts.isRead) {
-                     childComponent.$node.next().addClass('hide');
-                     childComponent.transRead();
+                // 获取 .showValue中的值
+                var childComponentValue = childComponent.value;
+                //multiselect 判断空特殊处理
+                var isNullFormultiselect = ($.isArray(childComponentValue) && childComponentValue.length == 0);
+                // 初始化，判断setValue中的内容是否为空
+				if (childComponentValue ==  '' || isNullFormultiselect || childComponentValue === undefined) {
+					childComponent.$node.addClass('no-value');
+					childComponent.$node.next().css('display', 'none');
+				} else {
+					childComponent.$node.next().css('display', 'inline-block');
 				}
 
-	            // 删除目标
-				childComponent.$node.next().on('click', function(e) { 
-	                $(this).css('display', 'none');		// 隐藏Btn
-	                childComponent.$node.addClass('no-value');		// 添加 no-value
-	                childComponent.setValue("");
-	            });
+				// 只读删掉删除按钮、转换只读模式
+				if (childComponent.opts.isRead) {
+					$deleteBtn.addClass('hide');
+					childComponent.transRead();
+				}
 
-	            // 移除
-				$label.find('[item-name='+opts.name+']').remove(); 
+				// 删除目标
+				$deleteBtn.on('click', function(e) { 
+					$(this).css('display', 'none');		// 隐藏Btn
+					childComponent.$node.addClass('no-value');		// 添加 no-value
+					childComponent.setValue("");
+				});
 			});
 		}
 
@@ -180,9 +170,6 @@
 			if (rules[name]) {
 				childComponent.setCheckSteps(rules[name]);
 			}
-
-			// $label = appendData.label;
-			// console.log($label.find('.delte'));
 		}
 	}
 

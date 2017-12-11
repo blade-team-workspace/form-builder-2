@@ -18,7 +18,7 @@
 		console.log('--> requireAtLeastOne <--');
 		// 思路：给form的checkSteps中推送一个方法（checkSteps是数组），在点击提交的时候依次调用
 		var check_requireAtLeastOne = function() {
-			var result = undefined;
+			var result = true;
 			// 遍历每组
 			$.each(obj, function(idx) {
 				var nameList = obj[idx];
@@ -29,8 +29,9 @@
 					var name = nameList[_idx];
 
 					// 发现有非空的对象
-					var valueInForm = myApp.formToData('#' + $form.attr('id'))[name];
-					if (!(valueInForm === undefined || valueInForm === '')) {
+					var $inputItem = $form.find('[name=' + name + ']');
+					var valueInForm = $inputItem.val();
+					if (!$inputItem.is(':disabled') && !(valueInForm === undefined || valueInForm === '' || valueInForm === [])) {
 						allNullFlag = false;
 						// break;
 					}
@@ -43,15 +44,15 @@
 					var labelList = [];
 					$.each(nameList, function(idx) {
 						var label = $form.data('nameLabelMap')[nameList[idx]];
-						if (labelList.indexOf(label) == -1) {
+						if (labelList.indexOf(label) == -1 && !$form.find('[name=' + nameList[idx] + ']').is(':disabled')) {
 							labelList.push(label);
 						}
 					});
 					myApp.alert('请在[' + labelList.join(', ') + ']中，至少选填一项！');
-					result = false;	// 校验不通过
+					result = false && result;	// 校验不通过
 				} else {
 					console.log('分组校验<至少填一个>通过!! 组内容:', nameList);
-					result = true;	// 校验通过
+					result = true && result;	// 校验通过
 				}
 			});
 			return result;

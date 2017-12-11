@@ -16,7 +16,8 @@
 		this.componentDefaultOpts = {
 			'f7-icon': 'filter',
 			'description': '请选择',
-			'valueFormat': '{value}'
+			'valueFormat': '{value}',
+			'sort': 'desc'
 		};
 		baseComponent.apply(this, arguments);	// 执行基类的初始化
 		var that = this;
@@ -40,11 +41,21 @@
 			}));
 
 			var valueList = [];
-			var i = this.opts.minValue;
-			while(i <= that.opts.maxValue) {
-				valueList.push(i);
-				i += that.opts.stepValue;
+			if(this.opts.sort==='asc') {
+
+                var i = this.opts.minValue;
+                while(i <= that.opts.maxValue) {
+                    valueList.push(i);
+                    i += that.opts.stepValue;
+                }
+			}else {
+				var i = this.opts.maxValue;
+				while(i>=this.opts.minValue) {
+					valueList.push(i);
+					i -= this.opts.stepValue;
+				}
 			}
+
 
 			that.myPicker = myApp.picker(
 				{
@@ -136,7 +147,7 @@
 				switch (key) {
 					case 'required':
 						checkStepFunction = function() {
-							if (that.$node.find('input').val() == '') {
+							if (!that.$node.find('input').is(':disabled') && that.$node.find('input').val() == '') {
 								myApp.alert('请填写"{label}"'.format({label: label}));
 								return false;
 							} else {

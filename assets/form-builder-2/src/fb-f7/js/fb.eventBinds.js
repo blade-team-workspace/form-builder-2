@@ -9,55 +9,7 @@
 	$.formb = $.formb || {};
 	$.formb.eventBinds = $.formb.eventBinds || {};
 
-	// 找上一个兄弟节点，直到找到label节点
-	function __findLabel($nowNode) {
-		var $prevNode = undefined;
-		var loopTimes = 0;
-		while (loopTimes < 100 && $nowNode.length > 0) {
-			$prevNode = $nowNode.prev();
-			if ($prevNode.is('.item-label')) {
-				break;
-			}
-			$nowNode = $prevNode;
-			loopTimes += 1;
-		}
-		console.log('__findLabel, loopTimes=' + loopTimes);
-		return $prevNode;	// 即label节点
-	}
-
-
-	// 找下一个兄弟节点，直到找到所有存值节点
-	function __findAllValueNodes($nowNode) {
-		var $valueNodes = [];
-		var $nextNode = undefined;
-		var loopTimes = 0;
-		while (loopTimes < 100 && $nowNode.length > 0) {
-			$nextNode = $nowNode.next();
-			if ($nextNode.length > 0 && $nextNode.is('.swipeout')) {
-				$valueNodes.push($nextNode);
-			}
-			$nowNode = $nextNode;
-			loopTimes += 1;
-		}
-		console.log('__findAllValueNodes, loopTimes=' + loopTimes);
-		return $valueNodes;
-	}
-
-	// 判断是否所有存值点都隐藏了
-	function __isAllValueNodesHide($valueNodes) {
-		var isAllHide = true;
-		console.log('__isAllValueNodesHide $valueNodes.length=', $valueNodes.length);
-		$.each($valueNodes, function(idx) {
-			console.log('__isAllValueNodesHide', $valueNodes[idx], 'class="' + $valueNodes[idx].attr('class') + '" 没有hide类 ->', !$valueNodes[idx].hasClass('hide'));
-			if (!$valueNodes[idx].hasClass('hide')) {
-				isAllHide = false;
-			}
-		});
-		console.log('__isAllValueNodesHide, isAllHide=' + isAllHide);
-		return isAllHide;
-	}
-
-	// 对象值改变，改变其他对象的显示和隐藏状态
+	// 对象值改变，改变其他对象的显示和隐藏状态(并禁用组件)
 	$.formb.eventBinds.valueChangeShowHide = {
 		listener: 'change',
 		callback: function(event) {
@@ -68,7 +20,7 @@
 			// 当前事件触发对象的name属性
 			var triggerName = event.target.name;
 			// 当前事件绑定的详情
-			var eb = $.formb.eventBinds.triggerName_eb_map[triggerName];
+			var eb = $form.data('eventBindsMap')[triggerName];
 			// 所有响应对象名
 			var allResp = [];	// 一层级
 			$.each(eb.valueResps, function(value){
@@ -77,31 +29,44 @@
 			});
 
 			var valueRespMap = eb.valueResps;		// {触发器的value: 响应对象的name}的关系
-			var triggerValues = [];					// 触发器现在的值(为了可读性，实际未使用)
-			var respNames = [];						// 取得当前值对应的所有响应对象
+			var triggerValues = [];					// 触发器现在的值(使用数组存储，统一格式方便操作)
+			var respNames = [];						// 取得当前值对应的所有响应对象(应该显示的对象名)
 
-			if ($this.attr('type') == 'checkbox') {
+			// 目前不会出现checkbox，出现，以下方法还需要修改(bs不要直接复制此方法)
+			/*if ($this.attr('type') == 'checkbox') {
 				$.each($('[name=' + triggerName + ']:checked', $form), function(){
 					triggerValues.push($this.val());
 					respNames.add(valueRespMap[$this.val()]);
 				});
-			} else {
-				triggerValues = [$this.val()];
-				respNames.add(valueRespMap[$this.val()]);
-			}
-			console.log('Selected: [' + triggerValues.join(', ') + ']');
+			} else {*/
+
+			// 整理出所有需要显示的name，放到respNames中
+			triggerValues.add($this.val());		// 将触发器值转化成数组放入triggerValues
+			$.each(triggerValues, function(idx) {
+				respNames.add(valueRespMap[triggerValues[idx]]);
+			});
+
+			/*}*/
+
+			console.log('Selected: [' + triggerValues.join(', ') + '], respNames:', respNames);
 
 			// 轮询所有响应的输入项name
 			$.each(allResp, function(idx){
 				var itemName = allResp[idx];
 
 				if (itemName != undefined && itemName.length > 0) {
-					var $valueNode = $form.find('[name=' + itemName + ']').closest('.swipeout');
+					var $valueNode = $form.find('[name=' + itemName + ']').closest('.show-value-container');
+					/*if ($valueNode.length == 0) {
+						$valueNode = $form.find('[name=' + itemName + ']')
+					}*/
 
 					// 当前轮询的name在本次应该显示的nameList中
 					if (respNames.indexOf(itemName) != -1) {
 						// 显示存值的节点
 						$valueNode.removeClass('hide');
+
+						// 启用存值的节点
+						$form.find('[name=' + itemName + ']').prop('disabled', false);
 
 						// 二话不说显示label和group节点
 						var $labelNode = $.formb.findLabel($valueNode);	// 取得当前存值节点的label节点
@@ -118,6 +83,12 @@
 					else {
 						// 隐藏存值的节点
 						$valueNode.addClass('hide');
+
+						// 将要隐藏的组件值赋为空，并触发change事件
+						$form.find('[name=' + itemName + ']').val('').trigger('change');
+
+						// 禁用存值的节点
+						$form.find('[name=' + itemName + ']').prop('disabled', true);
 
 						var $labelNode = $.formb.findLabel($valueNode);	// 取得当前存值节点的label节点
 						var $valueNodes = $.formb.findAllValueNodes($labelNode);	// 根据label节点取得当前label的所有存值节点

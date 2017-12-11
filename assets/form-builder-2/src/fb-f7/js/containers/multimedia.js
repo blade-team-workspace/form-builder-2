@@ -39,7 +39,7 @@
 					'</span>' +
 				'</li>';
 		this.contentTemplate =
-				'<li class="swipeout" style="height: 0px;">' +
+				'<li class="swipeout show-value-container" style="height: 0px;">' +
 					'<div class="swipeout-content item-content">' +
 						'<div class="item-inner">' +
 							'<div class="item-after"></div>' +
@@ -90,8 +90,9 @@
 			this.$node = [$label];
             var global_isRead = that.$form.data('fb-form').opts.isRead;
 			// 点击addon的特殊操作，弹出气泡(未使用popover方法，原因：定位不准确)
-			$label.find('.addon-edit').on('click', function(e) {
-				var top = $(e.target).offset().top;
+			$label.find('.item-with-addon').on('click', function(e) {
+				// 取编辑图标的top
+				var top = $(e.target).closest('.item-label').find('.addon-edit').offset().top;
 
 				var $parent = $(e.target).closest('li');
 				var $modal = $parent.find('.addon-items-popover');
@@ -233,9 +234,9 @@
 			});
 
 			this.$form.data('nameLabelMap', nameLabelMap);
-
+            var global_isRead = that.$form.data('fb-form').opts.isRead;
 			// 加必填
-			if (showRequireMark == true) {
+			if (showRequireMark == true && !global_isRead ) {
 				var $title = $(this.$node[0]).find('.item-title');
 				$title.append(this.$form.data('fb-form').requireMarkTemplate);
 			}

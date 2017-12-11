@@ -34,15 +34,23 @@
 		}
 
 		this.__render = function() {
-			var option='<option value="{value}">{label}</option>';
+			var hideFlag = '';
+			var option='<option value="{value}" {isHide}>{label}</option>';
 			var optionshtml='<option value="">' + that.opts.placeholder + '</option>';
 			this.optionsMap = {};
 			for (var i = 0; i < that.opts.options.length; i++) {
+				if(that.opts.options[i].isHide){
+					hideFlag = 'style="display:none"';
+				}else{
+					hideFlag = '';
+				}
 				optionshtml+=option.format({
 					value:that.opts.options[i].value,
-					label:that.opts.options[i].label
+					label:that.opts.options[i].label,
+					isHide:hideFlag
 				});
-				that.optionsMap[that.opts.options[i].value] = that.opts.options[i].label;
+				//增加value描述description属性，替代label
+				that.optionsMap[that.opts.options[i].value] = that.opts.options[i].description || that.opts.options[i].label;
 			};
 			this.$node = $(this.template.format({
 				name: that.opts.name,
@@ -84,7 +92,7 @@
 				switch (key) {
 					case 'required':
 						checkStepFunction = function() {
-							if (that.$node.find('select').val() == '') {
+							if (!that.$node.find('select').is(':disabled') && that.$node.find('select').val() == '') {
 								myApp.alert('请填写"{label}"'.format({label: label}));
 								return false;
 							} else {

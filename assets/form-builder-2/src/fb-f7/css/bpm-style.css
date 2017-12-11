@@ -30,6 +30,9 @@
 	font-size: 15px;
 	padding-left: 0;
 }
+.list-block.item-after-wrap .item-after {
+	max-width: 65%;
+}
 /* item-title和item-after在同一行的写法 */
 .list-block.title-after-inline .item-after {
 	width: initial;
@@ -47,7 +50,17 @@
 	font-size: 15px;
 	padding-left: 0;
 }
-
+.showValue {
+	word-break: normal;
+	/* display: block; */
+	white-space: pre-wrap;
+	overflow: hidden;
+}
+/* 改变label-title部分字号 */
+.small {
+	font-size: 14px;
+	color: #8e8e93;
+}
 /* 改变部分符号大小 */
 .f7-icons.size-smaller {
 	font-size: 18px;
@@ -60,6 +73,11 @@
 /* 输入项-附加项 */
 .item-with-addon {
 	color: initial;
+}
+.item-with-addon.active-state .item-content {
+	-webkit-transition-duration: 0s;
+    transition-duration: 0s;
+    background-color: #d9d9d9
 }
 .item-with-addon .addon {
 	width: 25px;
@@ -114,6 +132,27 @@
 }
 .right .navbar-btn {
 	right: 10px;
+}
+
+/* 去掉左侧菜单栏顶部带颜色的条 */
+html.ios.with-statusbar-overlay .framework7-root .panel {
+	padding-top: 0px;
+}
+/* 优化左侧菜单滑动效果 - 隐藏静止状态(左侧出界260，滑动时由此开始) */
+.ios .framework7-root .panel.panel-left.panel-reveal {
+	margin-left: -260px;
+}
+/* 优化左侧菜单滑动效果 - 由左滑出(位移状态 0 -> 260) & 保持滑出状态(保持位移状态260，保持因为.active一直在) */
+.ios .framework7-root.with-panel-left-reveal .panel.panel-left.panel-reveal.active {
+	transform: translate3d(260px, 0, 0);
+	transition-duration: 0.4s;
+	transition-property: transform;
+}
+/* 优化左侧菜单滑动效果 - 回收过程(位移状态 260 -> 0) */
+.ios .framework7-root.panel-closing .panel.panel-left.panel-reveal {
+	transform: translate3d(0px, 0, 0);
+	transition-duration: 0.4s;
+	transition-property: transform;
 }
 
 /* 副标题自定义高度 */
@@ -418,6 +457,11 @@
 	color: #ffffff!important;
 }
 
+/* 流式布局 */
+.stream-layout {
+	color: #000;
+	text-indent: 2em;
+}
 /* stream 内容为空时 */
 span.no-value {
     width: 3em;
@@ -426,10 +470,10 @@ span.no-value {
     border-bottom: solid 1px black;
     margin: 0 3px -3px 3px;
 }
-
 /* deleteBtn 样式 */
 span.delete {
 	display: inline-block;
+	text-indent: 0;
 	height: 16px;
 	width: 16px;
 	line-height: 16px; 
@@ -440,4 +484,29 @@ span.delete {
 	font-size: 14px;
 	color: #fff;
 	background-color: #f00;
+}
+/** 多行item **/
+.list-block .item-title-multi {
+	-webkit-flex-shrink: 1;
+	-ms-flex: 0 1 auto;
+	flex-shrink: 1;
+	min-width: 0;
+	/* white-space: nowrap; */
+	position: relative;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100%;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+/*限制字数样式*/
+.item-cent{
+	float: right;
+	margin-right: 10px;
+}
+.min-number{
+	color:black;
+}
+.min-number-warn{
+	color:red;
 }

@@ -23,7 +23,7 @@
 					'<a href="#" class="item-with-addon">' +
 						'<div class="item-content">' +
 							'<div class="item-inner">' +
-								'<div class="item-title">{label}</div>' +
+								'<div class="item-title {fontType}">{label}</div>' +
 								'<div class="addon addon-edit">' +
 									'<i class="f7-icons size-smaller">right</i>' +
 								'</div>' +
@@ -32,7 +32,7 @@
 					'</a>' +
 				'</li>';
 		this.contentTemplate =
-				'<li class="swipeout" style="height: 0px;">' +
+				'<li class="swipeout show-value-container" style="height: 0px;">' +
 					'<div class="swipeout-content item-content">' +
 						'<div class="item-inner">' +
 							'<div class="item-after"></div>' +
@@ -85,7 +85,7 @@
 
 			// 渲染label >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $label = $(this.labelTemplate.format(that.opts));
-			$label.find('.addon-edit').on('click', childComponent.editCallback);
+			$label.find('.item-with-addon').on('click', childComponent.editCallback);
 
 			// 渲染content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $content = $(this.contentTemplate.format(opts));
