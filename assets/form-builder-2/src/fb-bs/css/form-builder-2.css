@@ -1,5 +1,5 @@
 /* 设置全局字体 */
-:not(i) {
+body {
 	font-family: '微软雅黑'!important;
 }
 
@@ -142,4 +142,11 @@
 	line-height: 80px;
 	vertical-align: middle;
 	display: inline-block;
+}
+.feedback-fix {
+	right: 15px;
+}
+/*日历*/
+.glyphicon {
+	font-family: 'Glyphicons Halflings';
 }

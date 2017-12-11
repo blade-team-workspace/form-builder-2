@@ -48,10 +48,10 @@
 
 
 
-	// 扩展String类型的原生方法，提供类似java或python的format方法
+// 扩展String类型的原生方法，提供类似java或python的format方法
 	String.prototype.format = function(args) {
 		var result = this;
-		if (arguments.length > 0) {	
+		if (arguments.length > 0) {
 			if (arguments.length == 1 && typeof (args) == "object") {
 				for (var key in args) {
 					if(args[key]!=undefined){

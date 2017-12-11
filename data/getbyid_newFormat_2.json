@@ -6,7 +6,7 @@
 			"label": "[group0] 多行-1",
 			"type": "form-group",
 			"groupId": "group0",
-
+			"test": 4,
 			"outerWidth": "col-sm-12",
 			"labelWidth": "col-sm-2",
 			"contentWidth": "col-sm-10",
@@ -24,7 +24,7 @@
 			"label": "[group0] 下拉单选-1",
 			"type": "form-group",
 			"groupId": "group0",
-
+			"test": 2,
 			"outerWidth": "col-sm-12",
 			"labelWidth": "col-sm-2",
 			"contentWidth": "col-sm-10",
@@ -46,6 +46,125 @@
 				}
 			]
 		},
+		{
+			"label": "单选-1",
+			"type": "form-group",
+			"groupId": "group0",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
+			"items": [
+				{
+					"name": "s2",
+					"type": "radio",
+					"test": 1,
+					"options": [{
+						"label": "选项1",
+						"value": 1
+
+					}, {
+						"label": "选项2",
+						"value": 2
+
+					}, {
+						"label": "选项3",
+						"value": 3
+
+
+					}]
+				}
+			]
+		},
+		{
+			"label": "多选-1",
+			"type": "form-group",
+			"groupId": "group0",
+			"test": 3,
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
+			"items": [
+				{
+					"name": "s3",
+					"type": "checkbox",
+					"options": [{
+						"label": "选项1",
+						"value": 1
+
+					}, {
+						"label": "选项2",
+						"value": 2
+
+					}, {
+						"label": "选项3",
+						"value": 3
+
+
+					}]
+				}
+			]
+		},
+		{
+			"label": "日期",
+			"type": "form-group",
+			"groupId": "group0",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
+			"items": [{
+				"name": "demo_date",
+				"widthInSteam": "auto",
+				"type": "date",
+				"placeholder": "请点击以选择日期",
+				"description": "请点击以选择日期"
+			}
+
+			]
+		},
+
+		{
+
+
+			"label": "下拉多选-1",
+			"name": "demo_multiselect",
+			"placeholder": "--请选择--",
+			"description": "请点击选择",
+			"dataUrl": "",
+			"type": "form-group",
+			"groupId": "group0",
+
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
+			"items": [
+				{
+					"name": "s4",
+					"type": "dropdow",
+					"options": [{
+						"label": "选项1",
+						"value": 1
+
+					}, {
+						"label": "选项2",
+						"value": 2
+
+					}, {
+						"label": "选项3",
+						"value": 3
+
+
+					}]
+				}
+			]
+		},
+
 		{
 			"label": "[group0] 数字",
 			"type": "form-group",
@@ -108,7 +227,7 @@
 					"type": "textarea"
 				},
 				{
-					"name": "s2",
+					"name": "ss2",
 					"type": "select",
 					"options": [{
 						"label": "选项1",
