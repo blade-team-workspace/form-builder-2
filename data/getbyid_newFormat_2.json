@@ -68,6 +68,37 @@
 				}
 			]
 		},
+		{
+			"label": "下拉多选",
+			"type": "form-group",
+			"groupId": "group0",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-3",
+			"contentWidth": "col-sm-9",
+			"items": [
+
+				{
+					"name": "demo_multiselect",
+					"type": "multiselect",
+					"options": [{
+						"label":"选项1",
+						"value": 1
+
+					}
+					,{
+							"label":"选项2",
+							"value": 2
+						},
+						{
+							"label":"选项3",
+							"value": 3
+						}]
+
+
+				}
+			]
+		},
 
 		{
 			"label": "[group0] 选择文件",
@@ -99,37 +130,6 @@
 					"minValue": 0,
 					"maxValue": 10,
 					"stepValue": 0.5
-				}
-			]
-		},
-		{
-			"label": "下拉多选",
-			"type": "form-group",
-			"groupId": "group0",
-
-			"outerWidth": "col-sm-12",
-			"labelWidth": "col-sm-3",
-			"contentWidth": "col-sm-9",
-			"items": [
-
-				{
-					"name": "demo_multiselect",
-					"type": "multiselect",
-					"options": [{
-						"label":"选项1",
-						"value": 1
-
-					}
-					,{
-							"label":"选项2",
-							"value": 2
-					},
-					{
-						"label":"选项3",
-						"value": 3
-					}]
-
-
 				}
 			]
 		},
@@ -226,9 +226,9 @@
 	},
 	"events": [],
 	"values": {
-
 		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。",
         "rec2": "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"
+
 
 	},
 	"isSteam": false,

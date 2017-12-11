@@ -79,7 +79,7 @@
 
 
             this.$node.replaceWith(
-                that
+                this.$node
             );
             that.$node.multiselect({
                 dropRight: true,
