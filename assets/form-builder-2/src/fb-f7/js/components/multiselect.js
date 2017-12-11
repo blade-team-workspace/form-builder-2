@@ -94,7 +94,7 @@
                         showValue += that.optionsMap[value[i]];
                     }else{
                         showValue += that.optionsMap[value[i]];
-                        showValue += ','
+                        showValue += '/'
                     }
                 }
                 that.$node.find('.showValue').html(showValue);
