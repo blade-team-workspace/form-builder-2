@@ -46,6 +46,48 @@
 				}
 			]
 		},
+
+		{
+			"label": "[group0] 录音瞎写",
+			"name": "rec2",
+			"type": "form-group",
+			"groupId": "group0",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
+			"items": [
+				{
+					"type": "audio",
+					"url": "data/556_Butterfly_Kiss.mp3",
+					"widthInSteam": "auto",
+					"description": "",
+					"maxNumber": 1,
+					"minNumber": 1
+				}
+			]
+		},
+
+		{
+			"label": "[group0] 选择文件",
+			"type": "form-group",
+			"groupId": "group0",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
+			"items": [
+				{
+					"type": "button_audio",
+					"widthInSteam": "auto",
+					"description": "",
+					"maxNumber": 9,
+					"minNumber": 1
+				}
+			]
+		},
 		{
 			"label": "[group0] 数字",
 			"type": "form-group",
@@ -127,6 +169,7 @@
 					"maxNumber": 3,
 					"minNumber": 0
 				}
+
 			]
 		}
 	],
@@ -134,7 +177,12 @@
 	},
 	"events": [],
 	"values": {
+
 		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。"
+
+		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。",
+        "rec2": "http://192.168.8.176:9998/data/556_Butterfly_Kiss.mp3"
+
 	},
 	"isSteam": false,
 	"isRead": false,
