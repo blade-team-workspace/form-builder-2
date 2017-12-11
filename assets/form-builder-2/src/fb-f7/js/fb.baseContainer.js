@@ -30,8 +30,7 @@
 		}
 		this.__init = function(kargs) {
 			// 合并配置参数
-			this.opts = $.extend({}, this.defaultOpts, kargs,
-				{readonly: kargs.global_isRead}, {steamLayout: kargs.global_isSteam});
+			this.opts = $.extend({}, this.defaultOpts, kargs);
 			// 取groupId
 			this.groupId = kargs.groupId || undefined;
 			// 如果指定了$node和$form就用指定的

@@ -30,6 +30,13 @@
 	font-size: 15px;
 	padding-left: 0;
 }
+.list-block.item-after-wrap .item-after {
+	max-width: 65%;
+}
+/* item-title和item-after在同一行的写法 */
+.list-block.title-after-inline .item-after {
+	width: initial;
+}
 /* 多行文本框样式 */
 .list-block .item-after textarea {
 	width: 100%;
@@ -43,7 +50,17 @@
 	font-size: 15px;
 	padding-left: 0;
 }
-
+.showValue {
+	word-break: normal;
+	/* display: block; */
+	white-space: pre-wrap;
+	overflow: hidden;
+}
+/* 改变label-title部分字号 */
+.small {
+	font-size: 14px;
+	color: #8e8e93;
+}
 /* 改变部分符号大小 */
 .f7-icons.size-smaller {
 	font-size: 18px;
@@ -57,15 +74,24 @@
 .item-with-addon {
 	color: initial;
 }
+.item-with-addon.active-state .item-content {
+	-webkit-transition-duration: 0s;
+    transition-duration: 0s;
+    background-color: #d9d9d9
+}
 .item-with-addon .addon {
 	width: 25px;
 	text-align: center;
 	color: #818181;
 }
 
+.border-none {
+	border: none;
+}
+
 /* 主题样式 */
 .navbar, .subnavbar, .toolbar, .photo-browser .navbar, .photo-browser .toolbar {
-	background-color: #40BC87;
+	background-color: #6EC097;	/* #40BC87; */
 	color: #fff;
 }
 .navbar-inner, .subnavbar {
@@ -82,7 +108,7 @@
 	background-color: #fff;
 }
 .statusbar-overlay {
-	background: #40BC87;
+	background: #6EC097;	/* #40BC87; */
 	z-index: initial;
 }
 .navbar-btn {
@@ -106,6 +132,27 @@
 }
 .right .navbar-btn {
 	right: 10px;
+}
+
+/* 去掉左侧菜单栏顶部带颜色的条 */
+html.ios.with-statusbar-overlay .framework7-root .panel {
+	padding-top: 0px;
+}
+/* 优化左侧菜单滑动效果 - 隐藏静止状态(左侧出界260，滑动时由此开始) */
+.ios .framework7-root .panel.panel-left.panel-reveal {
+	margin-left: -260px;
+}
+/* 优化左侧菜单滑动效果 - 由左滑出(位移状态 0 -> 260) & 保持滑出状态(保持位移状态260，保持因为.active一直在) */
+.ios .framework7-root.with-panel-left-reveal .panel.panel-left.panel-reveal.active {
+	transform: translate3d(260px, 0, 0);
+	transition-duration: 0.4s;
+	transition-property: transform;
+}
+/* 优化左侧菜单滑动效果 - 回收过程(位移状态 260 -> 0) */
+.ios .framework7-root.panel-closing .panel.panel-left.panel-reveal {
+	transform: translate3d(0px, 0, 0);
+	transition-duration: 0.4s;
+	transition-property: transform;
 }
 
 /* 副标题自定义高度 */
@@ -135,48 +182,6 @@
 	line-height: 1.9em;
 }
 
-/* addon按钮 */
-/* .addon-popover {
-	width: initial;
-	border-radius: 20px;
-	margin-top: 8px;
-}
-.addon-popover .popover-angle.on-bottom:after {
-	width: 20px;
-	height: 20px;
-}
-.addon-popover .popover-angle.on-bottom {
-	margin-left: 6px!important;
-}
-.addon-popover .icons-container {
-	height: 28px;
-	line-height: 28px;
-	border-radius: 20px;
-	overflow: hidden;
-}
-.addon-popover .icons-container a {
-	display: inline-block;
-	width: 30px;
-	line-height: 28px;
-	text-align: center;
-	box-sizing: content-box;
-	border-right: solid 1px #ddd;
-	color: #40BC87;
-}
-.addon-popover .icons-container a.active-state {
-	background: #40BC87;
-	color: #fff;
-}
-.addon-popover .icons-container a:first-child {
-	width: 34px;
-	padding-left: 4px;
-}
-.addon-popover .icons-container a:last-child{
-	width: 34px;
-	padding-right: 4px;
-	border-right: none;
-} */
-
 /* 新addon */
 .addon-items-popover {
 	position: absolute;
@@ -201,18 +206,21 @@
 	text-align: center;
 	box-sizing: content-box;
 	border-right: solid 1px #ddd;
-	color: #40BC87;
+	color: #6EC097;	/* #40BC87; */
 	background: #fff;
 }
 .addon-items-popover .addon-items-container a.active-state {
-	background: #40BC87;
+	background: #6EC097;	/* #40BC87; */
 	color: #fff;
 }
-.addon-items-popover .addon-items-container a:first-child {
+/* 改成在multimedia容器中点击弹出的时候手动加左和右的留白 */
+/* .addon-items-popover .addon-items-container a:first-child { */
+.addon-items-popover .addon-items-container a.left {
 	width: 34px;
 	padding-left: 4px;
 }
-.addon-items-popover .addon-items-container a:last-child{
+/* .addon-items-popover .addon-items-container a:last-child{ */
+.addon-items-popover .addon-items-container a.right {
 	width: 34px;
 	padding-right: 4px;
 	border-right: none;
@@ -268,16 +276,7 @@
 	box-sizing: border-box;
 	border-radius: 0;
 }
-/* .thumbnail.add {
-	border: dashed 2px #bbb;
-}
-.thumbnail.add i.f7-icons {
-	color: #bbb;
-	line-height: 48px;
-	font-size: 26px;
-} */
 .thumbnail.waiting {
-	/*border: solid 2px #bbb;*/
 	background-color: #bbb;
 }
 .thumbnail.waiting .preloader{
@@ -321,11 +320,24 @@
 }
 
 /* 音乐播放器 */
+.audio-player.waiting .delete {
+	position: initial;
+	top: initial;
+}
+.audio-player .delete i {
+	font-size: 15px;
+	width: 17px;
+}
 .audio-player {
 	height: 32px;
+
+}
+.audio-player.waiting .progress-bar {
+	line-height: 0px;
 }
 .audio-player .progress-bar {
-	display: block;
+	display: inline-block;
+	width: calc(100% - 60px);
 	height: 0px;
 	border: solid 16px #ccc;
 	border-radius: 40px;
@@ -334,7 +346,7 @@
 	display: block;
 	height: 0px;
 	width: 0px;
-	border: solid 16px #40BC87;
+	border: solid 16px #6EC097;	/* #40BC87; */
 	border-radius: 40px;
 	margin-left: -16px;
 	margin-top: -16px;
@@ -343,7 +355,7 @@
 	display: inline-block;
 	height: 0px;
 	width: 0px;
-	border: solid 16px #40BC87;
+	border: solid 16px #6EC097;	/* #40BC87; */
 	/*border-color: rgba(255, 255, 255, 0.5);*/
 	border-radius: 40px;
 	margin-right: -16px;
@@ -355,19 +367,19 @@
 	width: 0px;
 	height: 0px;
 	float: left;
-	position: relative;
+	position: absolute;
 	left: 5px;
-	top: -27px;
+	top: 5px;
 	font-size: 22px;
 	background: transparent;
 	border: none;
-	color: #fff;
+	color: #f9f9f9;
 }
 .audio-player .time {
 	float: right;
 	position: relative;
-	right: 10px;
-	top: -27px;
+	right: 40px;
+	top: -31px;
 	height: 0px;
 	color: #fff;
 }
@@ -382,21 +394,38 @@
 	background: url(/data/wave.png) no-repeat 0 center;
 }
 
-
-/* .anime_alert {
-	height: calc(100%);
-	animation: anime_alert_border 1s infinite ease-in-out;
-	animation-fill-mode: both;
+/* number提示语 */	/* TODO: 不要使用ID选择器 */
+.ios .number_hint {
+	color: #000;
 }
-@keyframes anime_alert_border{
-	50% {
-		background: rgba(255, 255, 0, 0.3);
-	}
-} */
-
+.android .number_hint {
+	color: #fff;
+	padding-left: 16px;
+}
 .hide-item {
 	animation: hide_item 1s 1 ease-in-out;
 	animation-fill-mode: both;
+}
+
+
+/*录音*/
+.audio-player .delete {
+	display: inline-block;
+	position: relative;
+	/*float: right;*/
+	z-index: 2;
+	height: 16px;
+	width: 16px;
+	line-height: 16px;
+	/*right: -9px;*/
+	top: -11px;
+	border: solid 4px #fff;
+	border-radius: 12px;
+	text-align: center;
+	font-size: 14px;
+	color: #fff;
+	background-color: #f00;
+
 }
 @keyframes hide_li {
 	0% {
@@ -410,4 +439,74 @@
 /* 使picker滑动触发宽度充满整个容器 */
 .picker-items .picker-items-col.picker-items-col-center {
 	width: 100%;
+}
+
+.hide {
+	display: none!important;
+}
+
+/* 提交按钮 */
+.form-submit{
+	text-align: center;
+	background: #6EC097!important;
+	color: #ffffff!important;
+}
+.form-submit.active-state {
+	text-align: center;
+	background: #5B8!important;
+	color: #ffffff!important;
+}
+
+/* 流式布局 */
+.stream-layout {
+	color: #000;
+	text-indent: 2em;
+}
+/* stream 内容为空时 */
+span.no-value {
+    width: 3em;
+    height: 1em;
+    display: inline-block;
+    border-bottom: solid 1px black;
+    margin: 0 3px -3px 3px;
+}
+/* deleteBtn 样式 */
+span.delete {
+	display: inline-block;
+	text-indent: 0;
+	height: 16px;
+	width: 16px;
+	line-height: 16px; 
+	top: 0px;
+	border: solid 4px #fff;
+	border-radius: 12px;
+	text-align: center;
+	font-size: 14px;
+	color: #fff;
+	background-color: #f00;
+}
+/** 多行item **/
+.list-block .item-title-multi {
+	-webkit-flex-shrink: 1;
+	-ms-flex: 0 1 auto;
+	flex-shrink: 1;
+	min-width: 0;
+	/* white-space: nowrap; */
+	position: relative;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 100%;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+/*限制字数样式*/
+.item-cent{
+	float: right;
+	margin-right: 10px;
+}
+.min-number{
+	color:black;
+}
+.min-number-warn{
+	color:red;
 }

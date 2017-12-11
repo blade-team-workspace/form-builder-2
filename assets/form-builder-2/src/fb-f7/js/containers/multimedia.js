@@ -19,7 +19,7 @@
 		this.template = undefined;
 
 		this.labelTemplate =
-				'<li>' +
+				'<li class="item-label">' +
 					'<a href="#" class="item-with-addon">' +
 						'<div class="item-content">' +
 							'<div class="item-inner">' +
@@ -39,7 +39,7 @@
 					'</span>' +
 				'</li>';
 		this.contentTemplate =
-				'<li class="swipeout" style="height: 0px;">' +
+				'<li class="swipeout show-value-container" style="height: 0px;">' +
 					'<div class="swipeout-content item-content">' +
 						'<div class="item-inner">' +
 							'<div class="item-after"></div>' +
@@ -75,7 +75,8 @@
 				opt.$form = that.$form;
 				// 将当前rule传入下一层
 				opt.rule = rules[opt.name];
-
+				// 将当前容器传入组件
+                opt.container = that;
 				var component = new Component(opt);
 				component.render();
 				appendData.components.push(component);
@@ -87,10 +88,11 @@
 			// 渲染label >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			var $label = $(this.labelTemplate.format({label: appendData.label}));
 			this.$node = [$label];
-
+            var global_isRead = that.$form.data('fb-form').opts.isRead;
 			// 点击addon的特殊操作，弹出气泡(未使用popover方法，原因：定位不准确)
-			$label.find('.addon-edit').on('click', function(e) {
-				var top = $(e.target).offset().top;
+			$label.find('.item-with-addon').on('click', function(e) {
+				// 取编辑图标的top
+				var top = $(e.target).closest('.item-label').find('.addon-edit').offset().top;
 
 				var $parent = $(e.target).closest('li');
 				var $modal = $parent.find('.addon-items-popover');
@@ -104,6 +106,14 @@
 					$('.modal-overlay').remove();
 				}
 
+				// 手动调整第一个显示项和最后一个显示项，左右的留白
+				$popItems = $modal.find('a:not(.hide)');
+				if ($popItems.length > 0 ) {
+					$popItems.removeClass('left').removeClass('right');
+					$($popItems[0]).addClass('left');
+					$($popItems[($popItems.length - 1)]).addClass('right');
+				}
+
 				$modal.css({top: top - 37 + 'px', display: 'initial'});
 				$modal.addClass('show');
 				$('body').append($modal);
@@ -114,6 +124,8 @@
 				$('body').append($overlay);
 			});
 
+
+			var component_isRead = true;
 			// 渲染content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			$.each(appendData.components, function(idx) {
 				var childComponent = appendData.components[idx];
@@ -142,15 +154,37 @@
 					});
 					// 清空数据
 					el.data('component').setValue('');
+					// 清空该删掉的对象（图片和音频）
+					el.data('component').$node.find('.swipeout-clean-item').remove();
 				});
 
 				that.$node.push($content);
 
-				// 给addon添加对应按钮
-				var $editBtn = $('<a><i class="f7-icons size-smallest">{f7-icon}</i></a>'.format(opts));
-				$editBtn.on('click', childComponent.editCallback);
-				$label.find('.addon-items-container').append($editBtn);
+				//如果当前组件只读的话，不加图标
+				if (opts.isRead) {
+
+					// do nothing
+
+				} else {
+                    component_isRead = false;
+                    // 给addon添加对应按钮
+                    var $editBtn = $('<a item-name="{name}"><i class="f7-icons size-smallest">{f7-icon}</i></a>'.format(opts));
+                    $editBtn.on('click', childComponent.editCallback);
+                    $label.find('.addon-items-container').append($editBtn);
+				}
+
+
 			});
+            //只读模式，将必填和箭头隐藏
+            if(global_isRead){
+                $label.find('.addon-edit').addClass('hide');
+                $label.find('.requireMarkHolder').addClass('hide');
+            }
+
+            //当所有组件全部只读时，将按钮隐藏
+			if (component_isRead) {
+                $label.find('.addon-edit').addClass('hide');
+			}
 		}
 
 		this.__afterAppend = function(appendData) {
@@ -165,11 +199,16 @@
 			$.each(appendData.components, function(idx) {
 				var name = appendData.components[idx].opts.name;
 				nameList.push(name);
-
+                //只读模式
+                if(appendData.components[idx].opts.isRead){
+                    appendData.components[idx].transRead();
+                }
 				// 调用childComponent的setRule方法
 				if (rules[name]) {
-					appendData.components[idx].setRule(rules[name]);
+					appendData.components[idx].setCheckSteps(rules[name]);
 				}
+				//同form-group一样，在这个地方调用checkViewStatus
+                appendData.components[idx].checkViewStatus();
 			});
 
 			var nameLabelMap = this.$form.data('nameLabelMap');
@@ -195,9 +234,9 @@
 			});
 
 			this.$form.data('nameLabelMap', nameLabelMap);
-
+            var global_isRead = that.$form.data('fb-form').opts.isRead;
 			// 加必填
-			if (showRequireMark == true) {
+			if (showRequireMark == true && !global_isRead ) {
 				var $title = $(this.$node[0]).find('.item-title');
 				$title.append(this.$form.data('fb-form').requireMarkTemplate);
 			}

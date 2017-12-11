@@ -1,0 +1,157 @@
+{
+	"label": "测试表单",
+	"type": "form",
+	"items": [
+		{
+			"label": "[group0] 多行-1",
+			"type": "form-group",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "ta1",
+					"type": "textarea"
+				}
+			]
+		},
+		{
+			"label": "[group0] 下拉单选-1",
+			"type": "form-group",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "s1",
+					"type": "select",
+					"options": [{
+						"label": "选项1",
+						"value": 1
+					}, {
+						"label": "选项2",
+						"value": 2
+					}, {
+						"label": "选项3",
+						"value": 3
+					}]
+				}
+			]
+		},
+		{
+			"label": "[未设置] 多行-2",
+			"type": "form-group",
+			"items": [
+				{
+					"name": "ta2",
+					"type": "textarea"
+				}
+			]
+		},
+		{
+			"label": "[未设置] 多媒体",
+			"type": "multimedia",
+			"items": [
+				{
+					"name": "ta3",
+					"type": "textarea"
+				}, 
+				{
+					"name": "i1",
+					"type": "image",
+					"maxNumber": 3,
+					"minNumber": 0
+				},
+				{
+					"name": "s2",
+					"type": "select",
+					"options": [{
+						"label": "选项1",
+						"value": 1
+					}, {
+						"label": "选项2",
+						"value": 2
+					}, {
+						"label": "选项3",
+						"value": 3
+					}]
+				},
+				{
+					"name": "n1",
+					"type": "number",
+					"minValue": 0,
+					"maxValue": 10,
+					"stepValue": 0.5
+				},
+				{
+					"name": "rec2",
+					"label": "录音2",
+					"type": "audio",
+
+					"outerWidth": 12,
+					"labelWidth": 3,
+					"contentWidth": 9,
+					"widthInSteam": "auto",
+
+					"description": "",
+					"maxNumber": 1,
+					"minNumber": 1
+
+				}
+			]
+		},
+		{
+			"label": "[group0] 数字2",
+			"type": "form-group",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "n2",
+					"type": "number",
+					"minValue": 0,
+					"maxValue": 10,
+					"stepValue": 0.5
+				}
+			]
+		},
+		{
+			"label": "[未设置] 多行-4",
+			"type": "form-group",
+			"items": [
+				{
+					"name": "ta4",
+					"type": "textarea"
+				}
+			]
+		}
+	],
+	"rules": {
+		"ta1": {
+			"required": true,
+			"maxlength": 10,
+			"minlength": 5
+		}
+	},
+	"groupRules": {
+		"requireAtLeastOne": [
+			["ta3", "i1", "s2"]
+		]
+	},
+	"events": [{
+		"eventType": "valueChangeShowHide",
+		"trigger": "s1",
+		"valueResps": {
+			"1": "ta4",
+			"2": ["i1", "s2"],
+			"3": ["ta3", "i1", "s2", "n1", "rec2"]
+		}
+	}],
+	"values": {
+
+		"s1": "2",
+		"ta4": "asdfasdfasdfasdfasdf",
+		"ta3": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+		"i1": "images:[http://192.168.10.123:9999/data/a.jpg,http://192.168.10.123:9999/data/b.png]",
+		"s2": "2",
+		"n1": "5.5"
+	},
+	"isSteam": false,
+	"isRead": false,
+	"groupDefaultSplit": false
+}

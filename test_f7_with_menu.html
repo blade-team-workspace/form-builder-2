@@ -9,7 +9,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="theme-color" content="#40BC87">
 	
-	<title>测试fb-f7 带子导航条</title>
+	<title>英联邦小班课堂反馈</title>
 
 	<!-- Style Files -->
 	<link class="ios-css" rel="stylesheet" href="vendor/framework7/css/framework7.ios.min.css">
@@ -25,6 +25,24 @@
 	<!-- Panels overlay-->
 	<div class="panel-overlay"></div>
 
+	<!-- Left panel with reveal effect-->
+	<div class="panel panel-left panel-reveal">
+		<div class="content-block">
+			<div class="log"></div>
+			<!-- 导航菜单 -->
+			<div class="content-block-title">导航</div>
+			<div class="list-block">
+				<ul class="navList"></ul>
+			</div>
+		</div>
+	</div>
+	<!-- Right panel with cover effect-->
+	<div class="panel panel-right panel-cover">
+		<div class="content-block">
+			<p>Right panel content goes here</p>
+		</div>
+	</div>
+
 	<!-- Views-->
 	<div class="views">
 		<!-- Your main view, should have "view-main" class-->
@@ -32,39 +50,71 @@
 
 			<!-- Top Navbar-->
 			<div class="navbar top-toolbar">
-				<!-- 主页面的导航栏 -->
-				<div class="navbar-inner" data-page="mainPage">
+
+				<div class="navbar-inner">
 					<div class="left">
 						<a href="#" class="link icon-only exit-web-view">
-							<i class="f7-icons">left</i>
+							<i class="f7-icons">close</i>
 						</a>
 					</div>
-
+					<div class="center sliding lessonTitle">英联邦小班课堂反馈</div>
 					<div class="right">
 						<a href="#" class="link icon-only open-panel">
-							<i class="f7-icons"></i>
+							<i class="f7-icons">menu</i>
 						</a>
 					</div>
-					<!-- Sub navbar -->
-					<div class="subnavbar custom-height">
-						<div class="class-info">
-							<p>
-							<span>授课教师</span>：<span>刘少锋</span><br>
-							<span>上课时间</span>：<span>2月26日 09:30-11:30</span><br>
-							<span>当前/总课次</span>：<span>50/90次课</span>
-							</p>
-						</div>
-					</div>
 				</div>
-				
+
 			</div>
 
 			<!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
 			<div class="pages navbar-through toolbar-through pagesContainer">
 				<!-- Page, data-page contains page name-->
-				<div data-page="mainPage" class="page with-subnavbar custom-height" page-index="0">
+				<div data-page="testForm" class="page" page-index="0">
 					<!-- Scrollable page content-->
 					<div class="page-content">
+
+						<div class="content-block-title">班级信息</div>
+						<div class="list-block title-after-inline">
+							<ul>
+								<li class="item-content">
+									<div class="item-inner">
+										<div class="item-title">课程名称</div>
+										<div class="item-after">${courseName}</div>
+									</div>
+								</li>
+								<li class="item-content">
+									<div class="item-inner">
+										<div class="item-title">教师</div>
+										<div class="item-after teacherName">${teacherName}</div>
+									</div>
+								</li>
+								<li class="item-content">
+									<div class="item-inner">
+										<div class="item-title">课次</div>
+										<div class="item-after lessonNo">${lessonNo}</div>
+									</div>
+								</li>
+								<li class="item-content">
+									<div class="item-inner">
+										<div class="item-title">班级编码</div>
+										<div class="item-after">${classCode}</div>
+									</div>
+								</li>
+								<li class="item-content">
+									<div class="item-inner">
+										<div class="item-title">学员姓名</div>
+										<div class="item-after">${studentName}</div>
+									</div>
+								</li>
+								<li class="item-content">
+									<div class="item-inner">
+										<div class="item-title">班级描述</div>
+										<div class="item-after">${className}</div>
+									</div>
+								</li>
+							</ul>
+						</div>
 
 						<!-- 首页form -->
 						<form id="testForm">
@@ -78,8 +128,11 @@
 
 			<!-- Bottom Toolbar-->
 			<div class="toolbar">
-				<div class="">
-					<a style="display: block;height: 44px;line-height: 44px;" href="javascript:void(0);" class="button border-none share-btn" >分享</a>
+				<div class="toolbar-inner">
+					<a href="javascript:void(0);" class="button border-none page-prev" style="display: none;"><i class="f7-icons">chevron_left</i><span>上一页</span> </a>
+					<a href="javascript:void(0);" class="button border-none save-bar">提交</a>
+					<a href="javascript:void(0);" class="button border-none share-btn" style="display: none;">分享</a>
+					<a href="javascript:void(0);" class="button border-none page-next" style="display: none;"><span>下一页</span> <i class="f7-icons">chevron_right</i></a>
 				</div>
 			</div>
 
@@ -104,15 +157,14 @@
 		<div class="content-block group-done" style="display: none;">
 			<p style="text-align: center;">您已成功提交</p>
 		</div>
-
 	</div>
-	<!-- <input type="hidden" id="serviceType" value="${serviceType}" />
+	<input type="hidden" id="serviceType" value="${serviceType}" />
 	<input type="hidden" id="formInsideId" value="${formInsideId}" />
 	<input type="hidden" id="workflowNumber" value="${workflowNumber}" />
 	<input type="hidden" id="groupId" value="${groupId}" />
-	<input type="hidden" id="hasValue" value="${hasValue}" /> -->
+	<input type="hidden" id="hasValue" value="${hasValue}" />
 	
-	<!-- <div class="modal-overlay modal-overlay-visible"></div>
+	<div class="modal-overlay modal-overlay-visible"></div>
 	<div class="modal modal-no-buttons modal-preloader modal-in" style="display: block; margin-top: -50px;">
 		<div class="modal-inner">
 			<div class="modal-title">Loading... </div>
@@ -120,13 +172,14 @@
 				<div class="preloader"></div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 
 	<!-- html和json格式化插件 -->
-	<!-- <script src="assets/html_formater/htmlformat.js"></script>
-	<script src="assets/html_formater/jsformat.js"></script> -->
-	
+	<!--<script src="assets/html_formater/htmlformat.js"></script>-->
+	<!--<script src="assets/html_formater/jsformat.js"></script>-->
+	<!---->
 	<script src="vendor/framework7/js/framework7.min.js"></script>
+
 
 	<!-- 核心部分 -->
 	<script src="assets/form-builder-2/src/fb-f7/js/fb.baseContainer.js"></script>
@@ -141,14 +194,13 @@
 	<script src="assets/form-builder-2/src/fb-f7/js/components/select.js"></script>
 	<script src="assets/form-builder-2/src/fb-f7/js/components/number.js"></script>
 	<script src="assets/form-builder-2/src/fb-f7/js/components/audio.js"></script>
-	<script src="assets/form-builder-2/src/fb-f7/js/components/multiselect.js"></script>
 
 	<script src="assets/form-builder-2/src/fb-f7/js/fb.groupRules.js"></script>
 	<script src="assets/form-builder-2/src/fb-f7/js/fb.eventBinds.js"></script>
 	<script src="assets/form-builder-2/src/fb-f7/js/fb.core.js"></script>
 	<script src="assets/form-builder-2/src/fb-f7/js/my-app-common.js"></script>
-	
-	<script src="assets/demo/my-app-with-sub-navbar.js"></script>
+
+	<script src="assets/demo/my-app-with-menu.js"></script>
 
 </body>
 </html>
