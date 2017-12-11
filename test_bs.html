@@ -90,7 +90,7 @@
 				success: function(jsonConf) {
 					$('#testForm').renderForm(jsonConf);
 				},
-				error: function(r) {
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					$('#testForm').html('Ops... Something must be wrong, check it');
 				}
 			});
