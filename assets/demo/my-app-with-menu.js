@@ -198,6 +198,9 @@ myApp.onPageBeforeInit('testForm', function (page) {
     if (isShared) {
         // 隐藏分享按钮
         $$('.share-btn').hide();
+        //
+        $$('.top-toolbar').hide();
+        $$('.page-content').css('padding-top','initial');
         // 隐藏退出按钮
         $$('.exit-web-view').hide();
     }

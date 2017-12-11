@@ -171,9 +171,12 @@ myApp.onPageBeforeInit('mainPage', function (page) {
     }else{
         $$('.share-btn').closest('.toolbar').hide();
 	}
-	if(isShared) {
+	if(!isShared) {
         // 隐藏分享按钮
         $$('.share-btn').closest('.toolbar').hide();
+        //
+        $$('.top-toolbar').css('height','0px');
+        $$('.page-content').css('padding-top','88px');
         // 隐藏退出按钮
         $$('.exit-web-view').hide();
 	}
