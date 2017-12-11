@@ -49,6 +49,10 @@
 			}
 			var component = new Component(opt);
 			component.render();
+		/*	//测试setvalue方法是否有效，这段代码没有任何意义
+			if(opt.test){ //如果需要测试
+				component.setValue(opt.test);
+			}*/
 			this.append(component);
 		}
 

@@ -26,6 +26,7 @@
 			this.$node.attr('onblur', 'this.placeholder="' + this.opts.placeholder + '"');
 			this.$node.attr('readonly', this.opts.isRead || false);
 		}
+		
 	}
 
 	$.formb.components.text = component_input;
