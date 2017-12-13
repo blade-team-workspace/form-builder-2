@@ -175,8 +175,9 @@
 
 
 			});
-            //只读模式，将必填和箭头隐藏
+            //只读模式，将必填和箭头隐藏 将点击事件取消
             if(global_isRead){
+                $label.find('.item-with-addon').off('click');
                 $label.find('.addon-edit').addClass('hide');
                 $label.find('.requireMarkHolder').addClass('hide');
             }
