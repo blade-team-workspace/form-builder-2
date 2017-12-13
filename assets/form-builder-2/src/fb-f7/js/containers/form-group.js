@@ -20,7 +20,7 @@
 
 		this.labelTemplate =
 				'<li class="item-label">' +
-					'<a href="#" class="item-with-addon">' +
+					'<div href="#" class="item-with-addon">' +
 						'<div class="item-content">' +
 							'<div class="item-inner">' +
 								'<div class="item-title {fontType}">{label}</div>' +
@@ -29,7 +29,7 @@
 								'</div>' +
 							'</div>' +
 						'</div>' +
-					'</a>' +
+					'</div>' +
 				'</li>';
 		this.contentTemplate =
 				'<li class="swipeout show-value-container" style="height: 0px;">' +
