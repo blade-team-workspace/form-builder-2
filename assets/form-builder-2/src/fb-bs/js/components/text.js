@@ -19,7 +19,7 @@
 		this.template =
 			'<span class="text-group">'+
 				'<input type="text" name="{name}" width="{width}" height="{height}" ' +
-				'class="form-control coreInput" value="{value}"/>'+
+				'class="form-control coreInput" placeholder="{placeholder}"/>'+
 			'</span>';
 
 		var that = this ;
@@ -39,7 +39,8 @@
 
 		this.__setValue = function (value) {
 
-				that.$node.find("input[value='" + value + "']").attr("checked",true);
+				that.$node.find("input[value='" + value + "']");
+				console.log("++++",that.$node.find("input[value='" + value + "']"));
 
 
 		}

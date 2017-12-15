@@ -83,8 +83,30 @@
 			// this.$node.data('component', that);
 		}
 
+		//判断value值
+		this.hasValue = function () {
 
+		}
 
+		// 切换只读模式方法
+        this.__beforeTransRead = function () {
+
+            // do nothing, not necessary
+        }
+        this.__transRead = function () {
+            // TODO
+            console.error('Must be rewritten.')
+        }
+        this.__afterTransRead = function() {
+            // do nothing, not necessary
+
+        }
+
+        this.transRead = function () {
+            this.__beforeTransRead();
+            this.__transRead();
+            this.__afterTransRead();
+        }
 		// 配置校验规则
 		this.beforeSetRule = function() {
 			// do nothing, not necessary
@@ -156,7 +178,9 @@
 
 		var Dog = function(data, name) {
 			Animal.apply(this, arguments);
-			this.subType = "dog";
+			th
+
+			is.subType = "dog";
 			this.name = name;
 			this.bark = function() {
 				// console.log('汪汪汪 我是' + this.name);

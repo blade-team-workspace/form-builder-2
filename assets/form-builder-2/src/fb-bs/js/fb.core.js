@@ -25,7 +25,6 @@
 		// afterAllAjaxCompleteDo(deferredObjectList, setFormRules, [$form]);
 
 		// 加联动
-		// activeEventBinds($form, jsonConf.events);
 
 		// 赋初值
 		setFormValue($form, jsonConf.values);
@@ -42,6 +41,30 @@
 		var component = new Component(opt);
 		component.render();
 		// component.appendTo($form);
+	}
+
+	function activeEventBinds($form, ebs) {
+		// 触发器名字和事件详情的map
+        var triggerName_eb_map = {};
+        $.each(ebs, function(idx) {
+            triggerName_eb_map[ebs[idx].trigger] = ebs[idx];
+        });
+        $form.data('eventBindsMap', triggerName_eb_map);
+
+        var eventBinds = $.formb.eventBinds;
+        // 遍历绑定联动事件 初始化绑定
+        $.each(ebs || [], function(idx){
+            var eb = ebs[idx];
+            if (eb.eventType in eventBinds) {
+                var $trigger = $form.find('[name=' + eb.trigger + ']');
+                // 绑定联动事件
+                $trigger.addClass('band').on(eventBinds[eb.eventType].listener, eventBinds[eb.eventType].callback);
+                // 初始化触发
+                $trigger.trigger(eventBinds[eb.eventType].listener);
+            } else {
+                console.error('事件绑定/[{ebName}]未找到对应的定义'.format({ebName: eb.eventType}));
+            }
+        });
 	}
 
 

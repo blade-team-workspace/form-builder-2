@@ -19,7 +19,7 @@
 		var that = this;
 
 		this.template = 
-				'<div class="outerClass {outerWidth} drag_item">' +
+				'<div class="outerClass {outerWidth} ">' +
 					'<div class="item row formDescription form-group">' +
 						'<label class="labelClass {labelWidth} form-control-static">' +
 							'<span class="textRequired formLabel pull-right">{label}</span>' +
@@ -49,10 +49,17 @@
 			}
 			var component = new Component(opt);
 			component.render();
-		/*	//测试setvalue方法是否有效，这段代码没有任何意义*/
-			//if(opt.value){ //如果需要测试
-			//	component.setValue(opt.value);
-			//}
+
+			//测试setvalue方法是否有效，这段代码没有任何意义
+			if(opt.test){ //如果需要测试
+				component.setValue(opt.test);
+			}
+			/*if(opt.isRead){
+				component.transRead();
+			}*/
+
+
+
 			this.append(component);
 		}
 
