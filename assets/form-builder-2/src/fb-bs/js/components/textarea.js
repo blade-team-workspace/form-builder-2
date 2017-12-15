@@ -17,9 +17,15 @@
 		baseComponent.apply(this, arguments);
 
 		this.template =
+
             '<span class="textarea-group">' +
 				'<textarea name="{name}" class="form-control" rows="{rows}" placeholder="{placeholder}"></textarea>'
             + '</span>';
+
+            '<div class = "component"><span class="textarea-group">' +
+				'<textarea name="{name}" class="form-control" rows="{rows}" value = "{value}"></textarea>'
+            + '</span></div>';
+
 
 		var that = this ;
 		this.__render = function() {
