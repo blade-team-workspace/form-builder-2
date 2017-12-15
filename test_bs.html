@@ -63,6 +63,10 @@
 	<script src="assets/form-builder-2/src/fb-bs/js/components/checkbox.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/datetimepicker.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/image.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/components/multiselect.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/components/audio.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/components/button_audio.js"></script>
+
 
 	<!-- fb 核心文件 -->
 	<link href="assets/form-builder-2/src/fb-bs/css/form-builder-2.css" rel="stylesheet" type="text/css"/>
@@ -90,7 +94,7 @@
 				success: function(jsonConf) {
 					$('#testForm').renderForm(jsonConf);
 				},
-				error: function(r) {
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					$('#testForm').html('Ops... Something must be wrong, check it');
 				}
 			});

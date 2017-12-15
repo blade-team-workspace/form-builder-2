@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6cb01cb7-ce0f-41b3-a3c7-aa8116ac2303" name="Default" comment="mulitiselect">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/image2.js" />
-      <change beforePath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/image.js" afterPath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/image.js" />
+    <list default="true" id="6cb01cb7-ce0f-41b3-a3c7-aa8116ac2303" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/bs.eventBinds.js" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/button_audio.js" afterPath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/button_audio.js" />
+      <change beforePath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/multiselect.js" afterPath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/multiselect.js" />
+      <change beforePath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/text.js" afterPath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/text.js" />
+      <change beforePath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/textarea.js" afterPath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/textarea.js" />
+      <change beforePath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/containers/form-group.js" afterPath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/containers/form-group.js" />
       <change beforePath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/fb.baseComponent.js" afterPath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/fb.baseComponent.js" />
+      <change beforePath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/fb.core.js" afterPath="$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/fb.core.js" />
+      <change beforePath="$PROJECT_DIR$/assets/form-builder-2/src/fb-f7/js/fb.groupRules.js" afterPath="$PROJECT_DIR$/assets/form-builder-2/src/fb-f7/js/fb.groupRules.js" />
       <change beforePath="$PROJECT_DIR$/data/getbyid_newFormat_2.json" afterPath="$PROJECT_DIR$/data/getbyid_newFormat_2.json" />
-      <change beforePath="$PROJECT_DIR$/data/getbyid_newformat_image.json" afterPath="$PROJECT_DIR$/data/getbyid_newformat_image.json" />
       <change beforePath="$PROJECT_DIR$/test_bs.html" afterPath="$PROJECT_DIR$/test_bs.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -29,17 +34,27 @@
         <entry file="file://$PROJECT_DIR$/data/getbyid_newformat_image.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="371">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="getbyid_newFormat_2.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="text.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/text.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-448">
+              <caret line="18" column="23" lean-forward="false" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="getbyid_newFormat_2.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/data/getbyid_newFormat_2.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1136">
-              <caret line="53" column="32" lean-forward="true" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+            <state relative-caret-position="238">
+              <caret line="18" column="37" lean-forward="true" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -49,7 +64,7 @@
         <entry file="file://$PROJECT_DIR$/data/getbyid_newFormat.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-719">
-              <caret line="57" column="18" lean-forward="true" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
+              <caret line="57" column="18" lean-forward="false" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -59,7 +74,7 @@
         <entry file="file://$PROJECT_DIR$/data/getbyid2.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2693">
-              <caret line="516" column="22" lean-forward="true" selection-start-line="516" selection-start-column="22" selection-end-line="516" selection-end-column="22" />
+              <caret line="516" column="22" lean-forward="false" selection-start-line="516" selection-start-column="22" selection-end-line="516" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -69,7 +84,7 @@
         <entry file="file://$PROJECT_DIR$/data/getbyid.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2392">
-              <caret line="104" column="23" lean-forward="true" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
+              <caret line="104" column="23" lean-forward="false" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -79,13 +94,13 @@
         <entry file="file://$PROJECT_DIR$/data/jsonConf.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="621">
-              <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+              <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="studentList.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="studentList.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/studentList.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="138">
@@ -95,11 +110,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fb.baseComponent.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/fb.baseComponent.js">
+      <file leaf-file-name="form.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/containers/form.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2508">
-              <caret line="160" column="12" lean-forward="false" selection-start-line="160" selection-start-column="12" selection-end-line="160" selection-end-column="12" />
+            <state relative-caret-position="144">
+              <caret line="80" column="31" lean-forward="false" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -109,17 +124,7 @@
         <entry file="file://$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/image.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="205">
-              <caret line="173" column="0" lean-forward="true" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="image.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/form-builder-2/src/fb-f7/js/components/image.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="147" column="12" lean-forward="false" selection-start-line="147" selection-start-column="12" selection-end-line="189" selection-end-column="15" />
+              <caret line="173" column="0" lean-forward="false" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -145,6 +150,7 @@
       <find>thumbnails-container</find>
       <find>value</find>
       <find>image</find>
+      <find>&gt;&gt;&gt;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -377,12 +383,20 @@
       <workItem from="1512970190902" duration="710000" />
       <workItem from="1513043897561" duration="3180000" />
       <workItem from="1513213474692" duration="15686000" />
-      <workItem from="1513301898306" duration="8143000" />
+      <workItem from="1513301898306" duration="8633000" />
     </task>
+    <task id="LOCAL-00001" summary="修改image控件">
+      <created>1513317117354</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1513317117354</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="138896000" />
+    <option name="totallyTimeSpent" value="139386000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -400,9 +414,10 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2233073" sideWeight="0.86690015" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31853786" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3524804" sideWeight="0.5026042" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21925753" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3524804" sideWeight="0.49739584" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15613826" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28247914" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -412,7 +427,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -443,7 +457,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="mulitiselect" />
-    <option name="LAST_COMMIT_MESSAGE" value="mulitiselect" />
+    <MESSAGE value="修改image控件" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改image控件" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -607,18 +622,10 @@
         <state relative-caret-position="460">
           <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
           <folding>
-            <marker date="1512963884000" expanded="true" signature="2403:2415" ph="..." />
-            <marker date="1512963884000" expanded="true" signature="2692:2815" ph="..." />
-            <marker date="1512963884000" expanded="true" signature="3006:3018" ph="..." />
+            <marker date="1513317136000" expanded="true" signature="2409:2421" ph="..." />
+            <marker date="1513317136000" expanded="true" signature="2698:2821" ph="..." />
+            <marker date="1513317136000" expanded="true" signature="3012:3024" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/text.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="18" column="23" lean-forward="false" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -655,6 +662,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
           <caret line="4" column="4169" lean-forward="false" selection-start-line="4" selection-start-column="4169" selection-end-line="4" selection-end-column="4169" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -662,6 +670,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
           <caret line="2" column="11082" lean-forward="false" selection-start-line="2" selection-start-column="11082" selection-end-line="2" selection-end-column="11082" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -685,9 +694,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -731,14 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/containers/form.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/getbyid_newFormat_yuan.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -758,7 +757,7 @@
     <entry file="file://$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/fb.baseComponent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2508">
-          <caret line="160" column="12" lean-forward="false" selection-start-line="160" selection-start-column="12" selection-end-line="160" selection-end-column="12" />
+          <caret line="182" column="12" lean-forward="false" selection-start-line="182" selection-start-column="12" selection-end-line="182" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -774,7 +773,7 @@
     <entry file="file://$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/image.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
-          <caret line="173" column="0" lean-forward="true" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
+          <caret line="173" column="0" lean-forward="false" selection-start-line="173" selection-start-column="0" selection-end-line="173" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -782,15 +781,7 @@
     <entry file="file://$PROJECT_DIR$/data/getbyid_newformat_image.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/getbyid_newFormat_2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1136">
-          <caret line="53" column="32" lean-forward="true" selection-start-line="53" selection-start-column="32" selection-end-line="53" selection-end-column="32" />
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -798,7 +789,7 @@
     <entry file="file://$PROJECT_DIR$/data/getbyid_newFormat.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-719">
-          <caret line="57" column="18" lean-forward="true" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
+          <caret line="57" column="18" lean-forward="false" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -806,7 +797,7 @@
     <entry file="file://$PROJECT_DIR$/data/getbyid2.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2693">
-          <caret line="516" column="22" lean-forward="true" selection-start-line="516" selection-start-column="22" selection-end-line="516" selection-end-column="22" />
+          <caret line="516" column="22" lean-forward="false" selection-start-line="516" selection-start-column="22" selection-end-line="516" selection-end-column="22" />
           <folding />
         </state>
       </provider>
@@ -814,7 +805,7 @@
     <entry file="file://$PROJECT_DIR$/data/getbyid.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2392">
-          <caret line="104" column="23" lean-forward="true" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
+          <caret line="104" column="23" lean-forward="false" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -822,7 +813,7 @@
     <entry file="file://$PROJECT_DIR$/data/jsonConf.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="621">
-          <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -831,6 +822,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="6" column="1" lean-forward="true" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/containers/form.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="80" column="31" lean-forward="false" selection-start-line="80" selection-start-column="31" selection-end-line="80" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/form-builder-2/src/fb-bs/js/components/text.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-448">
+          <caret line="18" column="23" lean-forward="false" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/getbyid_newFormat_2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="18" column="37" lean-forward="true" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
           <folding />
         </state>
       </provider>

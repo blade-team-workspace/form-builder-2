@@ -24,6 +24,7 @@
 				var nameList = obj[idx];
 
 				var allNullFlag = true;
+				var allDisable = true;
 				// 组内遍历每个name
 				$.each(nameList, function(_idx) {
 					var name = nameList[_idx];
@@ -31,6 +32,10 @@
 					// 发现有非空的对象
 					var $inputItem = $form.find('[name=' + name + ']');
 					var valueInForm = $inputItem.val();
+					//只要有一个不是disabled 我们就不管，如果全都是disable，那么校验通过
+					if(!$inputItem.is(':disabled')) {
+						allDisable = false;
+					}
 					if (!$inputItem.is(':disabled') && !(valueInForm === undefined || valueInForm === '' || valueInForm === [])) {
 						allNullFlag = false;
 						// break;
@@ -38,7 +43,7 @@
 				});
 
 				// 当前组全为空
-				if (allNullFlag == true) {
+				if (allNullFlag == true && allDisable == false) {
 					// myApp.alert('发现全空组：[' + nameList.join(', ') + ']');
 					// 使用组件渲染时生成的{组件名: 显示标签名}的map提示错误
 					var labelList = [];
