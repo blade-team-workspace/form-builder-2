@@ -12,11 +12,12 @@
 			"contentWidth": "col-sm-10",
 
 			"items": [
-				{
+				{	"text":"text_area",
 					"name": "ta1",
 					"type": "textarea",
 					"rows": 3,
-					"resize": "none"
+					"resize": "none",
+					"value":"图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计mmp"
 				}
 			]
 		},
@@ -68,6 +69,25 @@
 				}
 			]
 		},
+      {
+        "label": "[未设置] 单行文本",
+        "type": "form-group",
+        "groupId": "group0",
+
+        "outerWidth": "col-sm-12",
+        "labelWidth": "col-sm-2",
+        "contentWidth": "col-sm-10",
+
+        "items": [
+          {
+            "name":"ta222",
+            "type": "text",
+            "width": "200px",
+            "height": "600px",
+            "value":"图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计mmp"
+          }
+        ]
+      },
 		{
 			"label": "下拉多选",
 			"type": "form-group",
@@ -117,7 +137,7 @@
 		{
 			"label": "[未设置] 多行-2",
 			"type": "form-group",
-			
+            "ceshi":"textarea",
 			"outerWidth": "col-sm-6",
 			"labelWidth": "col-sm-4",
 			"contentWidth": "col-sm-8",
@@ -131,23 +151,7 @@
 				}
 			]
 		},
-		{
-			"label": "[未设置] 多行-3",
-			"type": "form-group",
-			
-			"outerWidth": "col-sm-6",
-			"labelWidth": "col-sm-4",
-			"contentWidth": "col-sm-8",
 
-			"items": [
-				{
-					"name": "ta3",
-					"type": "textarea",
-					"rows": 3,
-					"resize": "none"
-				}
-			]
-		},
 		{
 			"label": "[未设置] 多媒体",
 			"type": "multimedia",
