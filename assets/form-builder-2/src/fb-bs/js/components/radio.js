@@ -14,6 +14,7 @@
         baseComponent.apply(this, arguments);
         this.template = '<div class="formContent" ></div>';
         this.options = '<div class="radio clip-radio radio-primary radio-inline" ><input name = "{name}" type="radio" value="{value}" class="coreInput"><label class = "itemLabel">{label}</label></div>';
+        this.readTemplate = '<div class="contentClass  form-control-static" title="{value}">{value}</div>';
         var that = this ;
         function randomId(prefix){
             return ( prefix || '' ) + ( new Date().valueOf().toString(36)+Math.random().toString(36) ).split('0.').join('_').toUpperCase();
@@ -37,7 +38,14 @@
                 that.setValue(value);
             });
 
+
         }
+
+        this.__transRead = function (){
+            that.$node.find('.radio').remove();
+            that.$node.append(that.readTemplate.format({value:that.value !== undefined?that.value:''}))
+        }
+
         this.__setValue = function(value) {
             that.$node.find("input[value='" + value + "']").attr("checked",true);
             console.log("++++",that.$node.find("input[value='" + value + "']").attr("checked",true))

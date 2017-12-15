@@ -17,14 +17,10 @@
 		baseComponent.apply(this, arguments);
 
 		this.template =
-
-            '<span class="textarea-group">' +
-				'<textarea name="{name}" class="form-control" rows="{rows}" placeholder="{placeholder}"></textarea>'
-            + '</span>';
-
             '<div class = "component"><span class="textarea-group">' +
 				'<textarea name="{name}" class="form-control" rows="{rows}" value = "{value}"></textarea>'
             + '</span></div>';
+		this.readTemplate = '<div class="contentClass form-control-static" title="{value}">{value}</div>';
 
 
 		var that = this ;
@@ -38,6 +34,12 @@
 				// console.log('value ->', value);
 				that.setValue(value);
 			});
+		}
+
+		this.__transRead = function () {
+
+			that.$node.find('span').remove();
+			that.$node.append(that.readTemplate.format({value:that.value !== undefined?that.value:''}))
 		}
 
 

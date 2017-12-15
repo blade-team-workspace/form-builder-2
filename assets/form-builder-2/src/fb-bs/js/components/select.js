@@ -21,32 +21,21 @@
 		baseComponent.apply(this, arguments);
 
 		this.template =
-				'<select name="{name}" class="form-control"></select>';
-
+				'<div class = "component"><select name="{name}" class="form-control"></select></div>';
+		this.readTemplate = '<div class="contentClass form-control-static" title="{value}">{value}</div>';
+		var that = this;
+		var optionsMap = {};
 		this.__render = function() {
-			var that = this;
-			that.$node = $(that.template.format(that.opts));
 
+			that.$node = $(that.template.format(that.opts));
+				
 			if (that.opts.placeholder) {
-				that.$node.append('<option value="">' + that.opts.placeholder + '</option>')
+				that.$node.find('select').append('<option value="">' + that.opts.placeholder + '</option>')
 			}
-			if (that.opts.dataUrl) {
-				$.ajax({
-					url: that.opts.dataUrl,
-					success: function(data) {
-						// TODO: log
-						log('获取选项数据成功:', data);
-						$.each(data.options, function() {
-							that.$node.append('<option value="' + this.value + '">' + this.label + '</option>');
-						});
-					},
-					error: function(data) {
-						error('[ERROR] 获取待选项失败', opt);
-					}
-				});
-			} else if (that.opts.options !== undefined && that.opts.options.length > 0){
+			if (that.opts.options !== undefined && that.opts.options.length > 0){
 				$.each(that.opts.options, function() {
-					that.$node.append('<option value="' + this.value + '">' + this.label + '</option>');
+					that.$node.find('select').append('<option value="' + this.value + '">' + this.label + '</option>');
+					optionsMap[this.value] = this.label;
 				});
 			} else {
 				that.$node.append('<option value="">--No-Item--</option>');
@@ -58,6 +47,12 @@
 				var value = e.target.value;
 				that.setValue(value);
 			});
+		}
+
+		this.__transRead = function () {
+
+			that.$node.find('select').remove();
+			that.$node.append(that.readTemplate.format({value:that.value !== undefined?optionsMap[that.value]:''}))
 		}
 
 		this.__setValue = function(value) {
