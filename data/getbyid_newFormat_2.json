@@ -17,7 +17,7 @@
 					"type": "textarea",
 					"rows": 3,
 					"resize": "none",
-                  "placeholder": "请输入内容",
+					"placeholder": "请输入内容",
 					"value":"图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计mmp"
 				}
 			]
@@ -50,10 +50,8 @@
 		},
 
 		{
-			"label": "[group0] 录音瞎写",
-			"name": "rec2",
+			"label": "录音",
 			"type": "form-group",
-			"groupId": "group0",
 
 			"outerWidth": "col-sm-12",
 			"labelWidth": "col-sm-2",
@@ -61,10 +59,10 @@
 
 			"items": [
 				{
+					"value": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]",
+
+					"name": "rec",
 					"type": "audio",
-					"url": "data/556_Butterfly_Kiss.mp3",
-					"widthInSteam": "auto",
-					"description": "",
 					"maxNumber": 1,
 					"minNumber": 1
 				}
@@ -94,26 +92,26 @@
 		},
 
 
-      {
-        "label": "[未设置] 单行文本",
-        "type": "form-group",
-        "groupId": "group0",
+		{
+		"label": "[未设置] 单行文本",
+		"type": "form-group",
+		"groupId": "group0",
 
-        "outerWidth": "col-sm-12",
-        "labelWidth": "col-sm-2",
-        "contentWidth": "col-sm-10",
+		"outerWidth": "col-sm-12",
+		"labelWidth": "col-sm-2",
+		"contentWidth": "col-sm-10",
 
-        "items": [
-          {
-            "text":"text_content",
-            "name":"ta222",
-            "type": "text",
-            "width": "200px",
-            "height": "600px",
-            "placeholder": "请输入内容"
-          }
-        ]
-      },
+		"items": [
+			{
+			"text":"text_content",
+			"name":"ta222",
+			"type": "text",
+			"width": "200px",
+			"height": "600px",
+			"placeholder": "请输入内容"
+			}
+		]
+		},
 		{
 			"label": "下拉多选",
 			"type": "form-group",
@@ -147,28 +145,8 @@
 
 		},
 
-        {
-          "label": "日期",
-          "type": "form-group",
-          "groupId": "group0",
-
-          "outerWidth": "col-sm-12",
-          "labelWidth": "col-sm-2",
-          "contentWidth": "col-sm-10",
-
-          "items": [{
-            "name": "demo_date",
-            "widthInSteam": "auto",
-            "type": "date",
-            "placeholder": "请点击以选择日期",
-            "description": "请点击以选择日期"
-          }
-
-        ]
-      },
-
-      {
-			"label": "[group0] 选择文件",
+		{
+			"label": "日期",
 			"type": "form-group",
 			"groupId": "group0",
 
@@ -176,37 +154,20 @@
 			"labelWidth": "col-sm-2",
 			"contentWidth": "col-sm-10",
 
-			"items": [
-				{
-					"type": "button_audio",
-					"widthInSteam": "auto",
-					"description": "",
-					"maxNumber": 9,
-					"minNumber": 1
-				}
-			]
+			"items": [{
+				"name": "demo_date",
+				"widthInSteam": "auto",
+				"type": "date",
+				"placeholder": "请点击以选择日期",
+				"description": "请点击以选择日期"
+			}]
 		},
 
-		
 
-		{
-			"label": "[group0] 数字",
-			"type": "form-group",
-			"groupId": "group0",
-			"items": [
-				{
-					"name": "n1",
-					"type": "number",
-					"minValue": 0,
-					"maxValue": 10,
-					"stepValue": 0.5
-				}
-			]
-		},
 		{
 			"label": "[未设置] 多行-2",
 			"type": "form-group",
-            "ceshi":"textarea",
+			"ceshi":"textarea",
 			"outerWidth": "col-sm-6",
 			"labelWidth": "col-sm-4",
 			"contentWidth": "col-sm-8",
@@ -253,21 +214,6 @@
 					"type": "image",
 					"maxNumber": 3,
 					"minNumber": 0
-				},
-				{
-					"name": "rec2",
-					"label": "录音2",
-					"type": "audio",
-
-					"outerWidth": 12,
-					"labelWidth": 3,
-					"contentWidth": 9,
-					"widthInSteam": "auto",
-
-					"description": "",
-					"maxNumber": 1,
-					"minNumber": 1
-
 				}
 
 			]
@@ -281,7 +227,7 @@
 	"events": [],
 	"values": {
 		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。",
-        "rec2": "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"
+		"rec": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]"
 
 
 	},

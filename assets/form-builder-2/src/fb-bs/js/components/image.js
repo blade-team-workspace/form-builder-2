@@ -42,8 +42,8 @@
         this.thumbnailTemplate =
             '<div class="thumbnail">' +
             '<div class="image-container">' +
-            '<img src="{url}" onerror="onerror=null;" />' +
-            '</div>' +
+            '<img src="{url}" onerror="onerror=null;" onclick=""/>' +
+            </div>' +
             '</div>';
 
         this.waitingTemplate =
