@@ -17,6 +17,7 @@
 					"type": "textarea",
 					"rows": 3,
 					"resize": "none",
+                  "placeholder": "请输入内容",
 					"value":"图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计mmp"
 				}
 			]
@@ -104,11 +105,12 @@
 
         "items": [
           {
+            "text":"text_content",
             "name":"ta222",
             "type": "text",
             "width": "200px",
             "height": "600px",
-            "value":"图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计mmp"
+            "placeholder": "请输入内容"
           }
         ]
       },
@@ -142,8 +144,51 @@
 
 				}
 			]
-		}
-		,
+
+		},
+
+        {
+          "label": "日期",
+          "type": "form-group",
+          "groupId": "group0",
+
+          "outerWidth": "col-sm-12",
+          "labelWidth": "col-sm-2",
+          "contentWidth": "col-sm-10",
+
+          "items": [{
+            "name": "demo_date",
+            "widthInSteam": "auto",
+            "type": "date",
+            "placeholder": "请点击以选择日期",
+            "description": "请点击以选择日期"
+          }
+
+        ]
+      },
+
+      {
+			"label": "[group0] 选择文件",
+			"type": "form-group",
+			"groupId": "group0",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
+			"items": [
+				{
+					"type": "button_audio",
+					"widthInSteam": "auto",
+					"description": "",
+					"maxNumber": 9,
+					"minNumber": 1
+				}
+			]
+		},
+
+		
+
 		{
 			"label": "[group0] 数字",
 			"type": "form-group",
