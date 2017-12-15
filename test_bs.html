@@ -23,13 +23,14 @@
 	<link href="vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 	<script src="vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 	<script src="vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-
+	<!-- 下拉复选插件 -->
+	<script src="vendor/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+	<link href="vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
 	<!-- 特殊radio和checkbox样式 -->
 	<link rel="stylesheet" href="vendor/styles-radio-checkbox.css">
 
-	<!-- 下拉复选插件 -->
-	<link href="vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
-	<script src="vendor/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+
+
 
 	<!-- ==================== 以下为自己的东西 ==================== -->
 	<style>
@@ -63,7 +64,13 @@
 	<script src="assets/form-builder-2/src/fb-bs/js/components/checkbox.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/datetimepicker.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/image.js"></script>
+
+
+
+	<script src="vendor/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/multiselect.js"></script>
+	<link href="vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
+
 	<script src="assets/form-builder-2/src/fb-bs/js/components/audio.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/button_audio.js"></script>
 
@@ -71,6 +78,8 @@
 	<!-- fb 核心文件 -->
 	<link href="assets/form-builder-2/src/fb-bs/css/form-builder-2.css" rel="stylesheet" type="text/css"/>
 	<script src="assets/form-builder-2/src/fb-bs/js/fb.core.js"></script>
+
+
 
 </head>
 <body>
@@ -81,6 +90,8 @@
 		<hr>
 		<form id="testForm"></form>
 	</div>
+
+
 	<!-- <div class="card">
 		<h3 style="border-left: solid 5px darkgreen; text-indent: 1em;">测试表单2 - #testForm2</h3>
 		<hr>
@@ -88,11 +99,13 @@
 	</div> -->
 	<script>
 		$(document).ready(function() {
-			$.ajax({
+
+
+            $.ajax({
 				url: '/data/getbyid_newFormat_2.json',
 				dataType: 'JSON',
 				success: function(jsonConf) {
-					$('#testForm').renderForm(jsonConf);
+                    $('#testForm').renderForm(jsonConf);
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					$('#testForm').html('Ops... Something must be wrong, check it');
@@ -111,5 +124,7 @@
 			});*/
 		});
 	</script>
+
+
 </body>
 </html>

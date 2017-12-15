@@ -23,14 +23,14 @@
 			]
 		},
 		{
-			"label": "[group0] 下拉单选-1",
+			"label": "下拉单选-1",
 			"type": "form-group",
 			"groupId": "group0",
 
 			"outerWidth": "col-sm-12",
 			"labelWidth": "col-sm-2",
 			"contentWidth": "col-sm-10",
-			
+
 			"items": [
 				{
 					"name": "s1",
@@ -91,13 +91,13 @@
         ]
       },
 		{
-			"label": "下拉多选",
+			"label": "下拉多选-1",
 			"type": "form-group",
 			"groupId": "group0",
 
 			"outerWidth": "col-sm-12",
-			"labelWidth": "col-sm-3",
-			"contentWidth": "col-sm-9",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
 			"items": [
 
 				{
@@ -115,6 +115,12 @@
 						{
 							"label":"选项3",
 							"value": 3
+						}, {
+							"label": "选项4",
+							"value": 4
+						}, {
+							"label": "选项5",
+							"value": 5
 						}]
 
 
@@ -260,8 +266,9 @@
         "rec2": "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"
 
 
+
 	},
 	"isSteam": false,
-	"isRead": false,
+	"isRead": true,
 	"groupDefaultSplit": true
 }

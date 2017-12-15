@@ -61,9 +61,9 @@
 		}
 
 		this.__setValue = function(value) {
-			that.$node.find("option[value='"+value+"']").attr("selected",true);
-			console.log("--",that.$node.find("option[value='"+value+"']").attr("selected",true));
-		}
+            that.$node.find("option[value='"+value+"']").attr("selected",true);
+            console.log("--",that.$node.find("option[value='"+value+"']").attr("selected",true));
+        }
 
 		//设置校验步骤
 		this.__setCheckSteps = function() {
