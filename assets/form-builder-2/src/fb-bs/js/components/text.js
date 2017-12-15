@@ -22,6 +22,8 @@
 				'class="form-control coreInput" placeholder="{placeholder}"/>'+
 			'</span>';
 
+		this.readTemplate = '<div class="contentClass  form-control-static" title="{value}">{value}</div>';
+
 		var that = this ;
 		this.__render = function() {
 			that.$node = $(that.template.format(that.opts));//配参数
@@ -36,6 +38,13 @@
 				that.setValue(value);
 			});
 		}
+		this.__transRead = function () {
+
+			that.$node.find('span').remove();
+			that.$node.append(that.readTemplate.format({value:that.value !== undefined?that.value:''}))
+		}
+
+
 
 		this.__setValue = function (value) {
 

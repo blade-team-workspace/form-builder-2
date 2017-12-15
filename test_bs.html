@@ -31,6 +31,8 @@
 	<link href="vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
 	<script src="vendor/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
 
+	<!-- 文本校验 -->
+	<script src="assets/form-builder-2/src/fb-bs/js/fb.form-validate.js"></script>
 	<!-- ==================== 以下为自己的东西 ==================== -->
 	<style>
 		* {
@@ -47,6 +49,17 @@
 			margin: 0 10% 30px 10%;
 			padding: 20px;
 		}
+		span.no-value {
+			width: 3em;
+			height: 1em;
+			display: inline-block;
+			border-bottom: solid 1px black;
+			margin: 0 3px -3px 3px;
+		}
+		.stream span{
+			display: inline-block;
+			margin-right: 5px;
+		}
 	</style>
 
 	<!-- fb 组件 -->
@@ -58,7 +71,10 @@
 	<script src="assets/form-builder-2/src/fb-bs/js/fb.baseComponent.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/textarea.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/text.js"></script>
+
+	<script src="assets/form-builder-2/src/fb-bs/js/containers/stream.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/select.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/components/audio.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/radio.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/checkbox.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/datetimepicker.js"></script>
@@ -98,6 +114,13 @@
 					$('#testForm').html('Ops... Something must be wrong, check it');
 				}
 			});
+
+
+			$('#testForm').append(
+					'<div class="col-sm-12">'+
+					'<button class="btn btn btn-primary btn-block" type="submit">提交</button>' +
+					'</div>'
+			);
 
 			/*$.ajax({
 				url: '/data/getbyid_newFormat_bak.json',
