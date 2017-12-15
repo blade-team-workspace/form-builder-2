@@ -28,7 +28,7 @@
 		// activeEventBinds($form, jsonConf.events);
 
 		// 赋初值
-		// setFormValue($form, jsonConf.values);
+		setFormValue($form, jsonConf.values);
 	}
 
 
@@ -45,6 +45,29 @@
 	}
 
 
+
+	// 沿用fb1的代码
+	function setFormValue($form, values) {
+		$.each(values || [], function(name) {
+			var value = values[name];
+
+			var targets = $('[name=' + name + ']', $form);
+
+			$.each(targets, function() {
+				var $this = $(this);
+				if (['radio', 'checkbox'].indexOf($this.attr('type')) != -1) {
+					if ((!$.isArray(value) && $this.attr('value') == value) || 
+						($.isArray(value) && value.indexOf($this.attr('value')) != -1)) {
+						$this.prop('checked', true);
+						$this.trigger('change');
+					}
+				} else {
+					$this.val(value);
+					$this.trigger('change');
+				}
+			});
+		});
+	}
 
 
 
