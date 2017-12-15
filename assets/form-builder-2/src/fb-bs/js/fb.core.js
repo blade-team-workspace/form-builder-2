@@ -27,7 +27,7 @@
 		// 加联动
 
 		// 赋初值
-		 setFormValue($form, jsonConf.values);
+		// setFormValue($form, jsonConf.values);
 	}
 
 

@@ -14,17 +14,16 @@
 			"items": [
 				{	"text":"text_area",
 					"name": "ta1",
-					"isRead":true,
 					"type": "textarea",
 					"rows": 3,
 					"resize": "none",
-                 	"placeholder": "请输入内容",
+					"placeholder": "请输入内容",
 					"value":"图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计mmp"
 				}
 			]
 		},
 		{
-			"label": "下拉单选-1",
+			"label": "[group0] 下拉单选-1",
 			"type": "form-group",
 			"groupId": "group0",
 
@@ -36,27 +35,23 @@
 				{
 					"name": "s1",
 					"type": "select",
-					"test": 1,
-					"isRead":true,
 					"options": [{
-						"label": "在家里",
-						"value": "1"
+						"label": "选项1",
+						"value": 1
 					}, {
-						"label": "在门外",
-						"value": "2"
+						"label": "选项2",
+						"value": 2
 					}, {
-						"label": "在桥上",
-						"value": "3"
+						"label": "选项3",
+						"value": 3
 					}]
 				}
 			]
 		},
 
 		{
-			"label": "录音瞎写",
-			"name": "rec2",
+			"label": "录音",
 			"type": "form-group",
-			"groupId": "group0",
 
 			"outerWidth": "col-sm-12",
 			"labelWidth": "col-sm-2",
@@ -64,6 +59,9 @@
 
 			"items": [
 				{
+					"value": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]",
+
+					"name": "rec",
 					"type": "audio",
 					"url": "data/556_Butterfly_Kiss.mp3",
 					"widthInSteam": "auto",
@@ -75,7 +73,8 @@
 		},
 
 		{
-			"label": "单选-1",
+			"label": "[group0] 图片",
+			"name": "image",
 			"type": "form-group",
 			"groupId": "group0",
 
@@ -85,120 +84,25 @@
 
 			"items": [
 				{
-					"name": "s2",
-					"type": "radio",
-					"test": 1,
-					"isRead":true,
-					"options": [{
-						"label": "选项1",
-						"value": 1
-
-					}, {
-						"label": "选项2",
-						"value": 2
-
-					}, {
-						"label": "选项3",
-						"value": 3
-
-
-					}]
-				}
-			]
-		},
-		{
-			"label": "多选-1",
-			"type": "form-group",
-			"groupId": "group0",
-			"test": 3,
-			"outerWidth": "col-sm-12",
-			"labelWidth": "col-sm-2",
-			"contentWidth": "col-sm-10",
-
-			"items": [
-				{
-					"name": "s3",
-					"type": "checkbox",
-					"options": [{
-						"label": "选项1",
-						"value": 1
-
-					}, {
-						"label": "选项2",
-						"value": 2
-
-					}, {
-						"label": "选项3",
-						"value": 3
-
-
-					}]
-				}
-			]
-		},
-		{
-			"label": "日期",
-			"type": "form-group",
-			"groupId": "group0",
-
-			"outerWidth": "col-sm-12",
-			"labelWidth": "col-sm-2",
-			"contentWidth": "col-sm-10",
-
-			"items": [{
-				"name": "demo_date",
-				"widthInSteam": "auto",
-				"type": "date",
-				"placeholder": "请点击以选择日期",
-				"description": "请点击以选择日期"
-			}
-			]
-		},
-		{
-			"label": "下拉多选-1",
-			"name": "demo_multiselect",
-			"placeholder": "--请选择--",
-			"description": "请点击选择",
-			"dataUrl": "",
-			"type": "form-group",
-			"groupId": "group0",
-
-
-			"outerWidth": "col-sm-12",
-			"labelWidth": "col-sm-2",
-			"contentWidth": "col-sm-10",
-
-			"items": [
-				{
-					"name": "s4",
-					"type": "dropdow",
-					"options": [{
-						"label": "选项1",
-						"value": 1
-
-					}, {
-						"label": "选项2",
-						"value": 2
-
-					}, {
-						"label": "选项3",
-						"value": 3
-
-
-					}]
+					"name": "i1",
+					"type": "image",
+					"maxNumber": 3,
+					"minNumber": 0,
+					"value" : 6,
+					"test":"images:[http://127.0.0.1:8080/2222.jpg,http://127.0.0.1:8080/3333.jpg,http://127.0.0.1:8080/4444.jpg]"
 				}
 			]
 		},
 
 
-      {
-        "label": "单行文本",
-        "type": "form-group",
-        "groupId": "group0",
+		{
+		"label": "[未设置] 单行文本",
+		"type": "form-group",
+		"groupId": "group0",
 
-        "outerWidth": "col-sm-12",
-        "labelWidth": "col-sm-2",
-        "contentWidth": "col-sm-10",
+		"outerWidth": "col-sm-12",
+		"labelWidth": "col-sm-2",
+		"contentWidth": "col-sm-10",
 
         "items": [
           {
@@ -208,11 +112,9 @@
             "width": "200px",
             "height": "600px",
             "placeholder": "请输入内容"
-
           }
         ]
       },
-
 		{
 			"label": "下拉多选",
 			"type": "form-group",
@@ -439,7 +341,9 @@
 	},
 	"events": [],
 	"values": {
-		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。"
+		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。",
+        "rec2": "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"
+
 
 	},
 	"isSteam": false,

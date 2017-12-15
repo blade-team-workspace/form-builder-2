@@ -1,7 +1,7 @@
 /* 设置全局字体 */
-body {
+/* body {
 	font-family: '微软雅黑'!important;
-}
+} */
 
 /* 容器分组用 */
 * .formGroupItem {
@@ -149,4 +149,14 @@ body {
 /*日历*/
 .glyphicon {
 	font-family: 'Glyphicons Halflings';
+}
+
+/* 录音部分 */
+.play-part .btn, .record-part .btn {
+	margin-left: 8px;
+}
+.fb-audio {
+	vertical-align: middle;
+	height: 34px;
+	border: solid 1px #ccc;
 }

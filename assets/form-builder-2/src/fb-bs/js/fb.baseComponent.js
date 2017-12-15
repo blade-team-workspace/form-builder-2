@@ -178,7 +178,9 @@
 
 		var Dog = function(data, name) {
 			Animal.apply(this, arguments);
-			this.subType = "dog";
+			th
+
+			is.subType = "dog";
 			this.name = name;
 			this.bark = function() {
 				// console.log('汪汪汪 我是' + this.name);
