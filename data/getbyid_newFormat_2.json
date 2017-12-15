@@ -98,27 +98,8 @@
 
 				}
 			]
-		},
-
-		{
-			"label": "[group0] 选择文件",
-			"type": "form-group",
-			"groupId": "group0",
-
-			"outerWidth": "col-sm-12",
-			"labelWidth": "col-sm-2",
-			"contentWidth": "col-sm-10",
-
-			"items": [
-				{
-					"type": "button_audio",
-					"widthInSteam": "auto",
-					"description": "",
-					"maxNumber": 9,
-					"minNumber": 1
-				}
-			]
-		},
+		}
+		,
 		{
 			"label": "[group0] 数字",
 			"type": "form-group",
