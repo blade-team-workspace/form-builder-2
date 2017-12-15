@@ -44,14 +44,13 @@
             '<div class="delete">' +
             '<i class="fa fa-minus"></i>' +
             '</div>' +
-            '<div class="row">' +
-            '<div class="col-xs-6 col-md-3">' +
-            '<a href="#" class="thumbnail">' +
-            '<img src="..." alt="...">' +
-            '</a>' +
+            '<a class="openPhotoBrowser" href="javascript:void(0);">' +
+            '<div class="image-container">' +
+            '<img src="{url}" onerror="onerror=null;" />' +
             '</div>' +
-
+            '</a>' +
             '</div>';
+        // style=\'background: url(../../img/error.jpg) 0% 0% / 100% 100% no-repeat #000;\'
 
         '<a class="openPhotoBrowser" href="javascript:void(0);">' +
         '<div class="image-container">' +
