@@ -18,16 +18,16 @@
 
 		this.template =
             '<span class="textarea-group">' +
-				'<textarea name="{name}" class="form-control" rows="{rows}" value = "{value}"></textarea>'
+				'<textarea name="{name}" class="form-control" rows="{rows}" placeholder="{placeholder}"></textarea>'
             + '</span>';
 
 		var that = this ;
 		this.__render = function() {
 			that.$node = $(that.template.format(that.opts));
-			this.$node.css({
-				resize: this.opts.resize || "none"//没有对浏览器窗口进行调整
-			})
-			this.$node.find('textarea').on('change', function(e) {
+			//this.$node.css({
+			//	resize: this.opts.resize || "none"//没有对浏览器窗口进行调整
+			//})
+			this.$node.find('textarea').on('change', function(e) {//设置监听事件
 				var value = e.target.value;
 				// console.log('value ->', value);
 				that.setValue(value);
@@ -38,7 +38,7 @@
 		this.__setValue = function (value){
 
 			that.$node.find("textarea[value='" + value + "']");
-			console.log("++++",that.$node.find("input[value='" + value + "']"));
+			console.log("++++",that.$node.find("textarea[value='" + value + "']"));
 
 		}
 	};
