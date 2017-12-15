@@ -17,15 +17,31 @@
 		baseComponent.apply(this, arguments);
 
 		this.template =
-				'<textarea name="{name}" class="form-control" rows="{rows}"></textarea>';
+            '<span class="textarea-group">' +
+				'<textarea name="{name}" class="form-control" rows="{rows}" value = "{value}"></textarea>'
+            + '</span>';
 
+		var that = this ;
 		this.__render = function() {
-			this.$node = $(this.template.format(this.opts));
+			that.$node = $(that.template.format(that.opts));
 			this.$node.css({
-				resize: this.opts.resize || "none"
+				resize: this.opts.resize || "none"//没有对浏览器窗口进行调整
 			})
+			this.$node.find('textarea').on('change', function(e) {
+				var value = e.target.value;
+				// console.log('value ->', value);
+				that.setValue(value);
+			});
 		}
-	}
+
+
+		this.__setValue = function (value){
+
+			that.$node.find("textarea[value='" + value + "']");
+			console.log("++++",that.$node.find("input[value='" + value + "']"));
+
+		}
+	};
 
 	$.formb.components.textarea = component_textarea;
 
