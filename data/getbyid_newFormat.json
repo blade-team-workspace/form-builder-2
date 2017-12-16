@@ -51,6 +51,43 @@
 			]
 		},
 		{
+			"label": "轻轻的{taNew1}，正如我轻轻的来,我轻轻的{taNew2}{taNew4}",
+			"type" : "stream",
+			"groupId": "group0",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
+			"items": [
+				{
+					"label": "天气",
+					"name":"taNew1",
+					"type":"text"
+				},
+				{
+					"label": "目的地",
+					"name":"taNew2",
+					"type":"select",
+					"options": [{
+						"label": "选项1",
+						"value": 1
+					}, {
+						"label": "选项2",
+						"value": 2
+					}, {
+						"label": "选项3",
+						"value": 3
+					}]
+				},
+				{
+					"label": "555555555",
+					"name":"taNew4",
+					"type":"text"
+				}
+			]
+		},
+		{
 			"label": "[group0] 多行-1",
 			"type": "form-group",
 			"fontType": "small",
@@ -109,6 +146,15 @@
 		]
 	},
 	"events": [
+		{
+			"eventType": "valueChangeShowHide",
+			"trigger": "taNew2",
+			"valueResps": {
+				"1": ["taNew1","taNew4"],
+				"2": "",
+				"3": ""
+			}
+		},
 		{
 			"eventType": "valueChangeShowHide",
 			"trigger": "s55",

@@ -14,6 +14,92 @@
     $.formb.eventBinds.valueChangeShowHide = {
         listener: 'change',
         callback: function(event) {
+            //formGroup事件绑定
+            function __fromGroupEventBind ($form ,itemContainer,itemName,respNames) {
+                // 当前轮询的name在本次应该显示的nameList中
+                if (respNames.indexOf(itemName) != -1) {
+                    itemContainer.removeAttr('hidden');
+                    // 启用存值的节点
+                    $form.find('[name=' + itemName + ']').prop('disabled', false);
+                } else {
+                    // 隐藏存值的节点
+                    itemContainer.attr('hidden',true);
+
+                    // 将要隐藏的组件值赋为空，并触发change事件
+                    $form.find('[name=' + itemName + ']').val('').trigger('change');
+
+                    // 禁用存值的节点
+                    $form.find('[name=' + itemName + ']').prop('disabled', true);
+                }
+            }
+            //multimedia事件绑定
+            function __multiMediaEventBind ($form ,itemContainer,itemName,respNames) {
+                //找到每个组件的dom
+                var $component = itemContainer.find('[name=' + itemName + ']').closest('.component');
+                // 当前轮询的name在本次应该显示的nameList中
+                if (respNames.indexOf(itemName) != -1) {
+                    $component.removeAttr('hidden');
+                    // 启用存值的节点
+                    $form.find('[name=' + itemName + ']').prop('disabled', false);
+                    console.log("123123",$component);
+                } else {
+                    // 隐藏存值的节点
+                    $component.attr('hidden',true);
+
+                    // 将要隐藏的组件值赋为空，并触发change事件
+                    $form.find('[name=' + itemName + ']').val('').trigger('change');
+
+                    // 禁用存值的节点
+                    $form.find('[name=' + itemName + ']').prop('disabled', true);
+                }
+                //如果全部都隐藏的话，把整个outerclass也隐藏
+                var allDisable = true;
+                var $allComponent = itemContainer.find('.component');
+                $.each( $allComponent, function (idx) {
+                    if (!$allComponent[idx].hasAttribute('hidden')) {
+                        allDisable = false;
+                    }
+                });
+                //将整个multimedia隐藏
+                if(allDisable) {
+                    itemContainer.attr('hidden',true);
+                } else {
+                    itemContainer.removeAttr('hidden');
+                }
+            }
+            function __streamEventBind($form ,itemContainer,itemName,respNames) {
+                //找到每个组件的dom
+                var $component = itemContainer.find('[name=' + itemName + ']').closest('.component');
+                // 当前轮询的name在本次应该显示的nameList中
+                if (respNames.indexOf(itemName) != -1) {
+                    $component.removeAttr('hidden');
+                    // 启用存值的节点
+                    $form.find('[name=' + itemName + ']').prop('disabled', false);
+                } else {
+                    // 隐藏存值的节点
+                    $component.attr('hidden',true);
+
+                    // 将要隐藏的组件值赋为空，并触发change事件
+                    $form.find('[name=' + itemName + ']').val('').trigger('change');
+
+                    // 禁用存值的节点
+                    $form.find('[name=' + itemName + ']').prop('disabled', true);
+                }
+                //如果全部都隐藏的话，把整个outerclass也隐藏
+                var allDisable = true;
+                var $allComponent = itemContainer.find('.component');
+                $.each( $allComponent, function (idx) {
+                    if (!$allComponent[idx].hasAttribute('hidden')) {
+                        allDisable = false;
+                    }
+                });
+                //将整个multimedia隐藏
+                if(allDisable) {
+                    itemContainer.attr('hidden',true);
+                } else {
+                    itemContainer.removeAttr('hidden');
+                }
+            }
             // 当前事件的触发对象
             var $this = $(event.target);
             // 作用域（form）
@@ -56,67 +142,17 @@
                     var itemContainer = $form.find('[name=' + itemName + ']').closest('.outerClass');
                     // 在这个地方我们需要判断每个container做不同的处理
                     if (itemContainer.hasClass('fromGroup')) {
-                        fromGroupEventBind($form ,itemContainer,itemName,respNames);
+                        __fromGroupEventBind($form ,itemContainer,itemName,respNames);
                     } else if (itemContainer.hasClass('multimedia')) {
-                        multiMediaEventBind($form ,itemContainer,itemName,respNames);
+                        __multiMediaEventBind($form ,itemContainer,itemName,respNames);
+                    } else if (itemContainer.hasClass('stream')) {
+                        __streamEventBind($form ,itemContainer,itemName,respNames);
                     }
 
                 }
             });
         }
     }
-    //formGroup事件绑定
-    function fromGroupEventBind ($form ,itemContainer,itemName,respNames) {
-        // 当前轮询的name在本次应该显示的nameList中
-        if (respNames.indexOf(itemName) != -1) {
-            itemContainer.removeAttr('hidden');
-            // 启用存值的节点
-            $form.find('[name=' + itemName + ']').prop('disabled', false);
-        } else {
-            // 隐藏存值的节点
-            itemContainer.attr('hidden',true);
 
-            // 将要隐藏的组件值赋为空，并触发change事件
-            $form.find('[name=' + itemName + ']').val('').trigger('change');
 
-            // 禁用存值的节点
-            $form.find('[name=' + itemName + ']').prop('disabled', true);
-        }
-    }
-    //multimedia事件绑定
-    function multiMediaEventBind ($form ,itemContainer,itemName,respNames) {
-        //找到每个组件的dom
-        var $component = itemContainer.find('[name=' + itemName + ']').closest('.component');
-        // 当前轮询的name在本次应该显示的nameList中
-        if (respNames.indexOf(itemName) != -1) {
-            $component.removeAttr('hidden');
-            // 启用存值的节点
-            $form.find('[name=' + itemName + ']').prop('disabled', false);
-            console.log("123123",$component);
-        } else {
-            // 隐藏存值的节点
-            $component.attr('hidden',true);
-
-            // 将要隐藏的组件值赋为空，并触发change事件
-            $form.find('[name=' + itemName + ']').val('').trigger('change');
-
-            // 禁用存值的节点
-            $form.find('[name=' + itemName + ']').prop('disabled', true);
-        }
-        //如果全部都隐藏的话，把整个outerclass也隐藏
-        var allDisable = true;
-        var $allComponent = itemContainer.find('.component');
-        $.each( $allComponent, function (idx) {
-            if (!$allComponent[idx].hasAttribute('hidden')) {
-                allDisable = false;
-            }
-        });
-        //将整个multimedia隐藏
-        if(allDisable) {
-            itemContainer.attr('hidden',true);
-        } else {
-            itemContainer.removeAttr('hidden');
-        }
-
-    }
 }));

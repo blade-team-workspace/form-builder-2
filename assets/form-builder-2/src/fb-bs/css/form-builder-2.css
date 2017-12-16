@@ -150,7 +150,9 @@
 .glyphicon {
 	font-family: 'Glyphicons Halflings';
 }
-
+.item {
+	padding :10px;
+}
 /* 录音部分 */
 .play-part .btn, .record-part .btn {
 	margin-left: 8px;

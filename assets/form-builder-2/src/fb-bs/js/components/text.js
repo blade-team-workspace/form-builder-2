@@ -17,11 +17,12 @@
 		baseComponent.apply(this, arguments);
 
 		this.template =
-			'<span class="text-group">'+
-				'<input type="text" name="{name}" width="{width}" height="{height}" ' +
-				'class="form-control coreInput" placeholder="{placeholder}"/>'+
-			'</span>';
-
+			'<div class = "component">'+
+				'<span class="text-group">'+
+					'<input type="text" name="{name}" width="{width}" height="{height}" ' +
+					'class="form-control coreInput" placeholder="{placeholder}"/>'+
+				'</span>';
+			'</div>'
 		this.readTemplate = '<div class="contentClass  form-control-static" title="{value}">{value}</div>';
 
 		var that = this ;
