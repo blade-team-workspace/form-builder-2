@@ -13,8 +13,8 @@
     $.formb.components = $.formb.components || {};
     var baseComponent = $.formb.baseComponent;
 
-    const qiniu_domain = "olt0d7mfp.bkt.clouddn.com";
-    const qiniu_token = "pBwzxNPBDAAD9cJaND2xh3TkgtTilQERWHSByAQ_:9CNVM9IegER_FjIbGKw3qcjTvIQ=:eyJzY29wZSI6ImJwbXRlc3QiLCJkZWFkbGluZSI6MTU0OTIxNTMxNX0=";
+    var qiniu_domain = "olt0d7mfp.bkt.clouddn.com";
+    var qiniu_token = "pBwzxNPBDAAD9cJaND2xh3TkgtTilQERWHSByAQ_:9CNVM9IegER_FjIbGKw3qcjTvIQ=:eyJzY29wZSI6ImJwbXRlc3QiLCJkZWFkbGluZSI6MTU0OTIxNTMxNX0=";
 
     var component_image = function(args) {
         // 定义默认图标
