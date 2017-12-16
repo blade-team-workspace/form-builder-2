@@ -20,48 +20,25 @@
 						"label": "选项3",
 						"value": 3
 					}]
-				}
-			]
-		},
-		{
-
-			"label": "[group0] 下拉多选-1",
-			"type": "form-group",
-			"groupId": "group0",
-			"items": [
-				{
-					"name": "ms1",
-					"type": "multiselect",
-					"options": [{
-						"description": "菜鸡",
-						"label": "选项1",
-						"value": 1
-					}, {
-						"label": "选项2",
-						"value": 2
-					}, {
-						"label": "选项3",
-						"value": 3
-					}]
-				}
-			]
-		},
-		{
-			"label": "轻轻的{taNew1}，正如我轻轻的来,我轻轻的{s_s2}{s_ta4}{s_s222}，作别西天的{taNew3}",
-			"type" : "stream",
-			"groupId": "group1",
-			"items": [
-				{
-					"label": "天气",
-					"name":"s_ta4",
-					"type":"textarea"
 				},
 				{
-					"label": "目的地",
-					"name":"s_s2",
-					"type":"multiselect",
+					"name": "s2",
+					"type": "select",
 					"options": [{
-						"label": "选项1123123123123131312321321321321321321321321313213sawdhoaudhadh aasdjasdja",
+						"label": "选项1asdasdasdsdadadasdadadadadadadadads",
+						"value": 1
+					}, {
+						"label": "选项2",
+						"value": 2
+					}, {
+						"label": "选项3",
+						"value": 3
+					}]
+				},{
+					"name": "s3",
+					"type": "select",
+					"options": [{
+						"label": "选项1asdasdasdsdadadasdadadadadadadadads",
 						"value": 1
 					}, {
 						"label": "选项2",
@@ -73,6 +50,7 @@
 				}
 			]
 		},
+
 		{
 			"label": "[group0] 多行-1",
 			"type": "form-group",
@@ -123,8 +101,8 @@
 			"eventType": "valueChangeShowHide",
 			"trigger": "s1",
 			"valueResps": {
-				"1": ["ms1"],
-				"2": "",
+				"1": ["s2","s3"],
+				"2": ["s3"],
 				"3": "",
 				"4": ""
 			}

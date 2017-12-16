@@ -19,7 +19,7 @@
 		var that = this;
 
 		this.template = 
-				'<div class="outerClass {outerWidth} drag_item">' +
+				'<div class="outerClass {outerWidth} multimedia">' +
 					'<div class="item row formDescription form-group">' +
 						'<label class="labelClass {labelWidth} form-control-static">' +
 							'<span class="textRequired formLabel pull-right">{label}</span>' +

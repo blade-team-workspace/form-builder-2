@@ -43,7 +43,7 @@
             '<div class="thumbnail">' +
             '<div class="image-container">' +
             '<img src="{url}" onerror="onerror=null;" onclick=""/>' +
-            </div>' +
+            '</div>'+
             '</div>';
 
         this.waitingTemplate =

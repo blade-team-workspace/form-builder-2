@@ -209,25 +209,6 @@
 				}
 			]
 		},
-		{
-			"label": "[group0] 选择文件",
-			"type": "form-group",
-			"groupId": "group0",
-
-			"outerWidth": "col-sm-12",
-			"labelWidth": "col-sm-2",
-			"contentWidth": "col-sm-10",
-
-			"items": [
-				{
-					"type": "button_audio",
-					"widthInSteam": "auto",
-					"description": "",
-					"maxNumber": 9,
-					"minNumber": 1
-				}
-			]
-		},
 
 		{
 			"label": "下拉多选",
@@ -345,8 +326,18 @@
 			"dateISO": true
 		}
 	},
-	"events": [],
+	"events": [
+		{
+			"eventType": "valueChangeShowHide",
+			"trigger": "s1",
+			"valueResps": {
+				"1": "ta1"
+
+			}
+		}
+	],
 	"values": {
+		"s1":1,
 		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。",
         "rec2": "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"
 

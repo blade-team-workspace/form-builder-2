@@ -20,7 +20,7 @@
         baseComponent.apply(this, arguments);
 
         this.template =
-            '<select class="form-control coreinput" size="2"  multiple></select>';
+            '<div class = "component"><select name="{name}" class="form-control coreinput" size="2"  multiple></select></div>';
 
 
 
@@ -31,10 +31,11 @@
             that.$node = undefined;
 
             that.$node = $(that.template.format(that.opts));
-            that.$node.multiselect('destroy');
-            $('.multiselect-native-select:eq(0)',that.$node).replaceWith(that.$node);
+            var $select = that.$node.find('select');
+            $select.multiselect('destroy');
+            $('.multiselect-native-select:eq(0)',$select).replaceWith($select);
 
-            that.$node.html('');
+            $select.html('');
 
             // if (that.opts.placeholder) {
             //     that.$node.append('<option value="">' + that.opts.placeholder + '</option>')
@@ -42,14 +43,14 @@
 
             if (that.opts.options !== undefined && that.opts.options.length > 0){
                 $.each(that.opts.options, function() {
-                    that.$node.append('<option value="' + this.value + '">' + this.label + '</option>');
+                    $select.append('<option value="' + this.value + '">' + this.label + '</option>');
                 });
             } else {
-                that.$node.append('<option value="">--No-Item--</option>');
+                $select.append('<option value="">--No-Item--</option>');
             }
 
 
-            that.$node.multiselect =  {
+            $select.multiselect =  {
                 dropRight: true,
                 buttonContainer: '<div class="btn-group" style="width:100%;"/>',
                 nonSelectedText: that.opts.placeholder||'--请选择--',
@@ -64,7 +65,7 @@
                 }
             };
 
-            that.$node.on('change', function(){
+            $select.on('change', function(){
                 $(this).multiselect('refresh');
 
             });
