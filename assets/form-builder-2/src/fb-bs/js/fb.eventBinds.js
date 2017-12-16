@@ -103,5 +103,20 @@
             // 禁用存值的节点
             $form.find('[name=' + itemName + ']').prop('disabled', true);
         }
+        //如果全部都隐藏的话，把整个outerclass也隐藏
+        var allDisable = true;
+        var $allComponent = itemContainer.find('.component');
+        $.each( $allComponent, function (idx) {
+            if (!$allComponent[idx].hasAttribute('hidden')) {
+                allDisable = false;
+            }
+        });
+        //将整个multimedia隐藏
+        if(allDisable) {
+            itemContainer.attr('hidden',true);
+        } else {
+            itemContainer.removeAttr('hidden');
+        }
+
     }
 }));

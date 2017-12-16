@@ -50,7 +50,28 @@
 				}
 			]
 		},
-
+		{
+			"label": "[group0] 多行-1",
+			"type": "form-group",
+			"fontType": "small",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "s55",
+					"type": "select",
+					"options": [{
+						"label": "显示multi",
+						"value": 1
+					}, {
+						"label": "选项2",
+						"value": 2
+					}, {
+						"label": "选项3",
+						"value": 3
+					}]
+				}
+			]
+		},
 		{
 			"label": "[group0] 多行-1",
 			"type": "form-group",
@@ -90,11 +111,11 @@
 	"events": [
 		{
 			"eventType": "valueChangeShowHide",
-			"trigger": "s_s2",
+			"trigger": "s55",
 			"valueResps": {
-				"1": "",
+				"1": ["s1","s2","s3"],
 				"2": "",
-				"3": ["s_ta4"]
+				"3": ""
 			}
 		},
 		{
