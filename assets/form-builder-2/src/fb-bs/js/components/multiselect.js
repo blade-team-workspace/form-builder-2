@@ -12,6 +12,7 @@
     $.formb.components = $.formb.components || {};
     var baseComponent = $.formb.baseComponent;
 
+    var that = this;
     var component_multiselect = function(kargs) {
         // 定义默认图标
         this.componentDefaultOpts = {
@@ -20,22 +21,14 @@
         baseComponent.apply(this, arguments);
 
         this.template =
-            '<div class = "component"><select name="{name}" class="form-control coreinput" size="2"  multiple></select></div>';
-
-
+            '<div class = "component"><select name="{name}" class="form-control coreinput multiselect" size="2"  multiple></select></div>';
 
         this.__render = function() {
 
             var that = this;
-
-            that.$node = undefined;
-
             that.$node = $(that.template.format(that.opts));
             var $select = that.$node.find('select');
-            $select.multiselect('destroy');
-            $('.multiselect-native-select:eq(0)',$select).replaceWith($select);
 
-            $select.html('');
 
             // if (that.opts.placeholder) {
             //     that.$node.append('<option value="">' + that.opts.placeholder + '</option>')
@@ -50,7 +43,7 @@
             }
 
 
-            $select.multiselect =  {
+            $select.multiselect({
                 dropRight: true,
                 buttonContainer: '<div class="btn-group" style="width:100%;"/>',
                 nonSelectedText: that.opts.placeholder||'--请选择--',
@@ -63,9 +56,10 @@
                     '</button>',
                     ul: '<ul class="multiselect-container dropdown-menu" style="width: 100%;"></ul>'
                 }
-            };
+            });
 
-            $select.on('change', function(){
+            $select.on('change', function() {
+
                 $(this).multiselect('refresh');
 
             });
@@ -80,8 +74,10 @@
         }
 
         this.__setValue = function(value) {
-            this.$node.find("option[value='"+value+"']").attr("selected",true);
-            console.log("--",that.$node.find("option[value='"+value+"']").attr("selected",true));
+            if(value === ''){
+                value = [] ;
+            }
+            that.$node.find('select').val(value).trigger('change');
         }
 
 

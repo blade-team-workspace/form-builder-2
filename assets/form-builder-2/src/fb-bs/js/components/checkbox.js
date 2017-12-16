@@ -33,17 +33,27 @@
                 that.$node.append($option);
             })
 
-            // 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
+            /*// 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
             this.$node.find('input').on('change', function(e) {
                 var value = e.target.value;
                 that.setValue(value);
-            });
+            });*/
 
         }
 
         this.__setValue = function(value) {
-            that.$node.find("input[value='" + value + "']").attr("checked",true);
-            console.log("++++",that.$node.find("input[value='" + value + "']").attr("checked",true))
+            if(value === ''){
+                value = [] ;
+            }
+            var targets = that.$node.find('input');
+            $.each(targets , function(_idx) {
+                var $this = $(this);
+                if(value.indexOf($this.attr('value'))){
+                    $this.prop('checked', true);
+                }
+            })
+/*            that.$node.find("input[value='" + value + "']").attr("checked",true);
+            console.log("++++",that.$node.find("input[value='" + value + "']").attr("checked",true))*/
         }
 
     };
