@@ -23,7 +23,6 @@
 					'class="form-control coreInput" placeholder="{placeholder}"/>'+
 				'</span>';
 			'</div>'
-		this.readTemplate = '<div class="contentClass  form-control-static" title="{value}">{value}</div>';
 
 		var that = this ;
 		this.__render = function() {
@@ -49,10 +48,7 @@
 
 		this.__setValue = function (value) {
 
-				that.$node.find("input[value='" + value + "']");
-				console.log("++++",that.$node.find("input[value='" + value + "']"));
-
-
+				that.$node.find("input").val(value);
 		}
 
 		

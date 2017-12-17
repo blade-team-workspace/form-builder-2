@@ -11,8 +11,6 @@
 				{
 					"name": "s2",
 					"type": "checkbox",
-					"isRead":true,
-					"test": ["2","3"],
 					"options": [{
 						"label": "选项1asdasdasdsdadadasdadadadadadadadads",
 						"value": 1
@@ -106,9 +104,7 @@
 			"items": [
 				{
 					"name": "s1",
-					"type": "radio",
-					"test": "2",
-					"isRead":true,
+					"type": "select",
 					"options": [{
 						"label": "选项1asdasdasdsdadadasdadadadadadadadads",
 						"value": 1
@@ -129,6 +125,8 @@
 			"items": [
 				{
 					"name": "ta2",
+					"isRead": true,
+					"test": "asdadadada",
 					"type": "textarea"
 				}
 			]
@@ -179,7 +177,6 @@
 		}
 	],
 	"values": {
-		"ta2": "12312312321313",
 		"s2":"3"
 	},
 	"isRead": false,

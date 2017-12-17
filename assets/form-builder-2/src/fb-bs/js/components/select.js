@@ -21,8 +21,8 @@
 		baseComponent.apply(this, arguments);
 
 		this.template =
-				'<div class = "component"><select name="{name}" class="form-control"></select></div>';
-		this.readTemplate = '<div class="contentClass form-control-static" title="{value}">{value}</div>';
+				'<div class ="component"><div class="select-content"><select name="{name}" class="form-control"></select></div></div>';
+		this.readTemplate = '<div class="form-control-static" title="{value}">{value}</div>';
 		var that = this;
 		var optionsMap = {};
 		this.__render = function() {
@@ -38,7 +38,7 @@
 					optionsMap[this.value] = this.label;
 				});
 			} else {
-				that.$node.append('<option value="">--No-Item--</option>');
+				that.$node.find('.select-content').append('<option value="">--No-Item--</option>');
 			}
 
 
@@ -51,43 +51,14 @@
 
 		this.__transRead = function () {
 
-			that.$node.find('select').remove();
-			that.$node.append(that.readTemplate.format({value:that.value !== undefined?optionsMap[that.value]:''}))
-		}
+			var value = that.$node.find('select').val();
+            that.$node.find('.select-content').remove();
+            that.$node.append(that.readTemplate.format({value:value !== undefined?optionsMap[value]:''}))
+        }
 
 		this.__setValue = function(value) {
             that.$node.find("option[value='"+value+"']").attr("selected",true);
-            console.log("--",that.$node.find("option[value='"+value+"']").attr("selected",true));
         }
-
-		//设置校验步骤
-		this.__setCheckSteps = function() {
-			$.each(this.rule, function(key) {
-				var ruleValue = that.rule[key];
-				var checkStepFunction = undefined;
-				var label = that.opts.label;
-				switch (key) {
-					case 'required':
-						checkStepFunction = function() {
-							if (that.$node.find('select').val() == '') {
-								myApp.alert('请填写"{label}"'.format({label: label}));
-								return false;
-							} else {
-								return true;
-							}
-						}
-						break;
-
-					default:
-						console.warn('[WARN] 发现未知参数 {key}: {ruleValue}'.format({key: key, ruleValue: ruleValue}));
-						break;
-				}
-				if (checkStepFunction) {
-					$.formb.appendCheckStepToForm(that.$form, checkStepFunction);
-				}
-			});
-		}
-
 
 
 	};

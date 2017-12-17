@@ -37,14 +37,15 @@
 
 		this.__transRead = function () {
 
+			var value = that.$node.find("textarea").val();
 			that.$node.find('span').remove();
-			that.$node.append(that.readTemplate.format({value:that.value !== undefined?that.value:''}))
+			that.$node.append(that.readTemplate.format({value:value !== undefined?value:''}))
 		}
 
 
 		this.__setValue = function (value){
 
-			that.$node.find("textarea[value='" + value + "']");
+			that.$node.find("textarea").val(value);
 
 		}
 	};
