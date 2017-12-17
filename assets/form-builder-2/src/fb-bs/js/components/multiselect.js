@@ -69,9 +69,16 @@
 
         this.__transRead = function() {
 
+            //取得select的value值
             var value = that.$node.find('select').val();
+            var label = [];
+            $.each(that.opts.options , function (idx) {
+                if (value.indexOf(that.opts.options[idx].value.toString()) != -1) {
+                    label.add(that.opts.options[idx].label);
+                }
+            });
             that.$node.find('.select').remove();
-            that.$node.append(that.readTemplate.format({value:value !== undefined? value.join(',') : ''}));
+            that.$node.append(that.readTemplate.format({value: label.join(',')}));
 
         }
 

@@ -12,9 +12,9 @@
 
     var component_radio = function (kargs) {
         baseComponent.apply(this, arguments);
-        this.template = '<div class="formContent" ></div>';
+        this.template = '<div class="component" ><div class="radio-content"></div></div>';
         this.options = '<div class="radio clip-radio radio-primary radio-inline" ><input name = "{name}" type="radio" value="{value}" class="coreInput"><label class = "itemLabel">{label}</label></div>';
-        this.readTemplate = '<div class="contentClass  form-control-static" title="{value}">{value}</div>';
+        this.readTemplate = '<div class="form-control-static" title="{value}">{value}</div>';
         var that = this ;
         function randomId(prefix){
             return ( prefix || '' ) + ( new Date().valueOf().toString(36)+Math.random().toString(36) ).split('0.').join('_').toUpperCase();
@@ -28,7 +28,7 @@
                 var $option = $(that.options.format($.extend({},that.opts.options[idx],{'name': that.opts.name})));
                 $option.find('input').prop('id',random_id);
                 $option.find('label').attr('for',random_id);
-                that.$node.append($option);
+                that.$node.find('.radio-content').append($option);
             });
 
 
@@ -42,13 +42,28 @@
         }
 
         this.__transRead = function (){
-            that.$node.find('.radio').remove();
-            that.$node.append(that.readTemplate.format({value:that.value !== undefined?that.value:''}))
+
+            var $input = that.$node.find('input');
+            var label = '';
+            $.each($input , function (idx) {
+                var $this = $(this);
+                if($this.prop('checked')) {
+                    $.each(that.opts.options, function (idx){
+                       if(that.opts.options[idx].value == $this.val()) {
+                           label = that.opts.options[idx].label;
+                       }
+                    });
+
+                }
+
+            });
+            that.$node.find('.radio-content').remove();
+            that.$node.append(that.readTemplate.format({value:label}));
         }
 
         this.__setValue = function(value) {
             that.$node.find("input[value='" + value + "']").attr("checked",true);
-            console.log("++++",that.$node.find("input[value='" + value + "']").attr("checked",true))
+
         }
 
     };

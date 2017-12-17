@@ -106,8 +106,8 @@
 			"items": [
 				{
 					"name": "s1",
-					"type": "multiselect",
-					"test": ["1","2","3"],
+					"type": "radio",
+					"test": "2",
 					"isRead":true,
 					"options": [{
 						"label": "选项1asdasdasdsdadadasdadadadadadadadads",
