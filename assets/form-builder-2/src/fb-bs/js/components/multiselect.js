@@ -19,13 +19,13 @@
             'placeholder': '--请选择--'
         };
         baseComponent.apply(this, arguments);
-
+        var that = this;
         this.template =
-            '<div class = "component"><select name="{name}" class="form-control coreinput multiselect" size="2"  multiple></select></div>';
+            '<div class = "component"><div class="select"><select name="{name}" class="form-control coreinput multiselect" size="2"  multiple></select></div></div>';
 
         this.__render = function() {
 
-            var that = this;
+
             that.$node = $(that.template.format(that.opts));
             var $select = that.$node.find('select');
 
@@ -64,12 +64,14 @@
 
             });
 
-
-
         }
 
 
         this.__transRead = function() {
+
+            var value = that.$node.find('select').val();
+            that.$node.find('.select').remove();
+            that.$node.append(that.readTemplate.format({value:value !== undefined? value.join(',') : ''}));
 
         }
 

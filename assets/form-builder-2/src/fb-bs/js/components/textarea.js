@@ -45,7 +45,6 @@
 		this.__setValue = function (value){
 
 			that.$node.find("textarea[value='" + value + "']");
-			console.log("++++",that.$node.find("textarea[value='" + value + "']"));
 
 		}
 	};

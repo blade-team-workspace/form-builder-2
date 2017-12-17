@@ -76,6 +76,10 @@
 
         }
 
+        this.__transRead = function () {
+            //暂时不管image的transRead方法
+        }
+
     }
 
     $.formb.components.image = component_image;
