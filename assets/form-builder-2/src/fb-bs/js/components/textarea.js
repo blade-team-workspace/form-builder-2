@@ -20,7 +20,6 @@
             '<div class = "component"><span class="textarea-group">' +
 				'<textarea name="{name}" class="form-control" rows="{rows}" value = "{value}"></textarea>'
             + '</span></div>';
-		this.readTemplate = '<div class="contentClass form-control-static" title="{value}">{value}</div>';
 
 
 		var that = this ;

@@ -12,7 +12,7 @@
 
     var component_checkbox = function (kargs) {
         baseComponent.apply(this, arguments);
-        this.template = '<div class="formContent"></div>';
+        this.template = '<div class="component"><div class="options"></div></div>';
         this.options = '<div class="checkbox clip-check check-primary checkbox-inline" ><input type="checkbox" value="{value}" name="{name}" class="coreInput"><label class = "itemLabel">{label}</label></div>';
         var that = this ;
         function randomId(prefix){
@@ -30,7 +30,7 @@
                 $option.find('input').prop('id',random_id);
 
                 $option.find('label').attr('for',random_id);
-                that.$node.append($option);
+                that.$node.find('.options').append($option);
             })
 
             /*// 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
@@ -48,14 +48,31 @@
             var targets = that.$node.find('input');
             $.each(targets , function(_idx) {
                 var $this = $(this);
-                if(value.indexOf($this.attr('value'))){
+                if(value.indexOf($this.attr('value'))!= -1){
                     $this.prop('checked', true);
                 }
             })
-/*            that.$node.find("input[value='" + value + "']").attr("checked",true);
-            console.log("++++",that.$node.find("input[value='" + value + "']").attr("checked",true))*/
+
         }
 
+        this.__transRead = function () {
+            var $input = that.$node.find('input');
+            var values = [];
+            $.each($input ,function(idx) {
+               var $this = $(this);
+               if($this.prop("checked")) {
+                   $.each(that.opts.options, function(idx) {
+                       var option = that.opts.options[idx];
+                       if(option.value == $this.val()){
+                           values.add(option.label);
+                           return;
+                       }
+                   })
+               }
+            });
+            that.$node.find('.options').remove();
+            that.$node.append(that.readTemplate.format({value:values.join(',')}));
+        }
     };
     $.formb.components.checkbox = component_checkbox;
 

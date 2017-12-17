@@ -10,7 +10,9 @@
 
 				{
 					"name": "s2",
-					"type": "select",
+					"type": "checkbox",
+					"isRead":true,
+					"test": ["2","3"],
 					"options": [{
 						"label": "选项1asdasdasdsdadadasdadadadadadadadads",
 						"value": 1
@@ -104,7 +106,9 @@
 			"items": [
 				{
 					"name": "s1",
-					"type": "multiselect",
+					"type": "checkbox",
+					"test": ["2","3"],
+					"isRead":true,
 					"options": [{
 						"label": "选项1asdasdasdsdadadasdadadadadadadadads",
 						"value": 1

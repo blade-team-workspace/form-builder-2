@@ -20,6 +20,7 @@
 			'f7-icon': 'star'
 		};
 		this.template = '<div>THIS IS BASE-COMPONENT TEMPLATE</div>';
+        this.readTemplate = '<div class=" form-control-static" title="{value}">{value}</div>';
 		this.opts = undefined;
 		this.rule = undefined;
 		this.value = undefined;
