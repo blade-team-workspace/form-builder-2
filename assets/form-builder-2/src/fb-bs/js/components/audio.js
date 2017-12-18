@@ -40,7 +40,8 @@
 				that.setValue(value);
 			});
 
-			// TODO: 渲染录音部分
+			// TODO: 渲染录音部分(未完成)
+			this.$node.find('.recorder-placeholder').renderRecorder();
 
 			// 删除按钮事件绑定
 			this.$node.find('.play-part .delete').on('click', function(e) {

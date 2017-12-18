@@ -3,6 +3,23 @@
 	"type": "form",
 	"items": [
 		{
+			"label": "录音",
+			"type": "form-group",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
+			"items": [
+				{
+					"name": "rec",
+					"type": "audio",
+					"maxNumber": 1,
+					"minNumber": 1
+				}
+			]
+		},
+		{
 			"label": "[group0] 下拉duo选-1",
 			"type": "multimedia",
 			"groupId": "group0",
@@ -177,7 +194,8 @@
 		}
 	],
 	"values": {
-		"s2":"3"
+		"s2":"3",
+		"rec": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]"
 	},
 	"isRead": false,
 	"groupDefaultSplit": false
