@@ -153,6 +153,7 @@
 .item {
 	padding :10px;
 }
+
 /* 录音部分 */
 .play-part .btn, .record-part .btn {
 	margin-left: 8px;
@@ -161,4 +162,19 @@
 	vertical-align: middle;
 	height: 34px;
 	border: solid 1px #ccc;
+}
+/* 录音闪烁动画 */
+.record-btn .active {
+	animation: recording 1.5s infinite;
+}
+@keyframes recording {
+	0% {
+		color: #333;
+	}
+	50% {
+		color: #f00;
+	}
+	100% {
+		color: #333;
+	}
 }
