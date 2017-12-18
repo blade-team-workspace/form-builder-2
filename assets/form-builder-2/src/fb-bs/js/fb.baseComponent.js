@@ -20,7 +20,7 @@
 			'f7-icon': 'star'
 		};
 		this.template = '<div>THIS IS BASE-COMPONENT TEMPLATE</div>';
-        this.readTemplate = '<div class=" form-control-static" title="{value}">{value}</div>';
+        this.readTemplate = '<div class="component form-control-static" title=""><input type="hidden" name="{name}" ><span class="showValue"></span></div>';
 		this.opts = undefined;
 		this.rule = undefined;
 		this.value = undefined;
@@ -33,11 +33,12 @@
 			console.log('before init');
 		}
 		this.__init = function(kargs) {
-			// 合并默认参数
-			this.defaultOpts = $.extend({}, this.defaultOpts, this.componentDefaultOpts);
-			// 合并配置参数
-			this.opts = $.extend({}, this.defaultOpts, kargs,
-				{readonly: kargs.global_isRead}, {steamLayout: kargs.global_isSteam});
+            //取到全局的只读参数
+            var global_isRead = {isRead: kargs.$form.data('fb-form').opts.isRead || false};
+            // 合并默认参数
+            this.defaultOpts = $.extend({}, this.defaultOpts, this.componentDefaultOpts);
+            // 合并配置参数
+            this.opts = $.extend({}, this.defaultOpts, global_isRead, kargs);
 			// 合并规则
 			this.rule = $.extend({}, kargs.rule);
 			// 赋初值

@@ -33,7 +33,7 @@
 
 	function render($form, jsonConf) {
 		// 将当前渲染的form对象传入配置，作为form容器的$node对象
-		var opt = $.extend({}, jsonConf, {'$node': $form});
+        var opt = $.extend({}, jsonConf, {'$node': $form, '$form': $form});
 		var Component = $.formb.components[opt.type];
 		if (Component === undefined) {
 			console.error('组件或容器[{type}]未找到对应的class定义'.format({type: opt.type}));
@@ -70,6 +70,8 @@
 	// 表单赋值与取值
 	// /////////////////////////////////////////////////////////////////////////////
 	function setFormValue($form, values) {
+		// console.log('>>>length', $(':input').length);
+		// $(':input').trigger('change');
 		$.each(values || [], function(name) {
 			var value = values[name];
 

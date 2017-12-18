@@ -125,12 +125,19 @@
             var respNames = [];						// 取得当前值对应的所有响应对象(应该显示的对象名)
 
 
+            if ($this.attr('type') == 'checkbox') {
+                $.each($('[name=' + triggerName + ']:checked', $form), function(){
+                    triggerValues.push($(this).val());
+                    respNames.add(valueRespMap[$(this).val()]);
+                });
+            } else {
+
             // 整理出所有需要显示的name，放到respNames中
             triggerValues.add($this.val());		// 将触发器值转化成数组放入triggerValues
             $.each(triggerValues, function(idx) {
                 respNames.add(valueRespMap[triggerValues[idx]]);
             });
-
+            }
             console.log('Selected: [' + triggerValues.join(', ') + '], respNames:', respNames);
 
             // 轮询所有响应的输入项name

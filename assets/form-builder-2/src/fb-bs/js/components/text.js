@@ -26,17 +26,25 @@
 
 		var that = this ;
 		this.__render = function() {
-			that.$node = $(that.template.format(that.opts));//配参数
-			//this.$node.attr('placeholder', this.opts.placeholder);
-			//this.$node.attr('onfocus', 'this.placeholder=""');
-			//this.$node.attr('onblur', 'this.placeholder="' + this.opts.placeholder + '"');
-			//this.$node.attr('readonly', this.opts.isRead || false);
+			if(!that.opts.isRead) {
+                that.$node = $(that.template.format(that.opts));//配参数
+                //this.$node.attr('placeholder', this.opts.placeholder);
+                //this.$node.attr('onfocus', 'this.placeholder=""');
+                //this.$node.attr('onblur', 'this.placeholder="' + this.opts.placeholder + '"');
+                //this.$node.attr('readonly', this.opts.isRead || false);
 
-			this.$node.find('input').on('change', function(e) {
-				var value = e.target.value;
-				// console.log('value ->', value);
-				that.setValue(value);
-			});
+                this.$node.find('input').on('change', function(e) {
+                    var value = e.target.value;
+                    // console.log('value ->', value);
+                    that.setValue(value);
+                });
+			} else {
+				that.$node = $(that.readTemplate.format(that.opts));
+                that.$node.find('input').on('change',function () {
+                    that.setValue($(this).val());
+                });
+			}
+
 		}
 		this.__transRead = function () {
 
@@ -48,7 +56,18 @@
 
 		this.__setValue = function (value) {
 
-				that.$node.find("input").val(value);
+			if(!that.opts.isRead) {
+                that.$node.find("input").val(value);
+            } else {
+                if(value === '') {
+                    that.$node.attr('hidden',true);
+                } else {
+                    that.$node.removeAttr('hidden');
+                    that.$node.attr("title",value);
+                    that.$node.find('input').val(value);
+                    that.$node.find('.showValue').html(value);
+                }
+			}
 		}
 
 		

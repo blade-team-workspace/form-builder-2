@@ -14,30 +14,36 @@
         baseComponent.apply(this, arguments);
         this.template = '<div class="component" ><div class="radio-content"></div></div>';
         this.options = '<div class="radio clip-radio radio-primary radio-inline" ><input name = "{name}" type="radio" value="{value}" class="coreInput"><label class = "itemLabel">{label}</label></div>';
-        this.readTemplate = '<div class="form-control-static" title="{value}">{value}</div>';
         var that = this ;
         function randomId(prefix){
             return ( prefix || '' ) + ( new Date().valueOf().toString(36)+Math.random().toString(36) ).split('0.').join('_').toUpperCase();
         }
         this.__render = function() {
+            if(!that.opts.isRead) {
 
 
-            that.$node = $(that.template);
-            $.each(that.opts.options,function(idx, obj){
-              var random_id = randomId();
-                var $option = $(that.options.format($.extend({},that.opts.options[idx],{'name': that.opts.name})));
-                $option.find('input').prop('id',random_id);
-                $option.find('label').attr('for',random_id);
-                that.$node.find('.radio-content').append($option);
-            });
+                that.$node = $(that.template);
+                $.each(that.opts.options, function (idx, obj) {
+                    var random_id = randomId();
+                    var $option = $(that.options.format($.extend({}, that.opts.options[idx], {'name': that.opts.name})));
+                    $option.find('input').prop('id', random_id);
+                    $option.find('label').attr('for', random_id);
+                    that.$node.find('.radio-content').append($option);
+                });
 
 
-            // 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
-            this.$node.find('input').on('change', function(e) {
-                var value = e.target.value;
-                that.setValue(value);
-            });
+                // 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
+                this.$node.find('input').on('change', function (e) {
+                    var value = e.target.value;
+                    that.setValue(value);
+                });
+            } else {
+                that.$node = $(that.readTemplate.format(that.opts));
+                that.$node.find('input').on('change',function () {
+                    that.setValue($(this).val());
+                });
 
+            }
 
         }
 
@@ -62,7 +68,26 @@
         }
 
         this.__setValue = function(value) {
-            that.$node.find("input[value='" + value + "']").attr("checked",true);
+            if(!that.opts.isRead) {
+                that.$node.find("input[value='" + value + "']").attr("checked",true);
+            } else {
+                var  label = '';
+                $.each(that.opts.options , function (_idx) {
+                    var option = that.opts.options[_idx];
+                    if (value === option.value.toString()) {
+                        label = option.label;
+                    }
+                });
+                if(label === ''){
+                    that.$node.attr('hidden',true);
+                }else {
+                    that.$node.removeAttr('hidden');
+                    that.$node.attr("title", label);
+                    that.$node.find('input').val(value);
+                    that.$node.find('.showValue').html(label);
+                }
+
+            }
 
         }
 

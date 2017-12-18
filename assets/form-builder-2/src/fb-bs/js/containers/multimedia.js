@@ -40,6 +40,8 @@
 				if (Component === undefined) {
 					console.error('组件或容器[{type}]未找到对应的class定义'.format({type: opt.type}));
 				}
+                // 将当前$form传入下一层参数
+                opt.$form = that.$form;
 				var component = new Component(opt);
 				component.render();
 				childComponents.push(component);

@@ -21,38 +21,56 @@
 
         this.__render = function() {
 
-            that.$node = $(that.template);
-            $.each(that.opts.options,function(idx, obj){
-              var random_id = randomId();
+            if (that.opts.isRead ) {
+                that.$node = $(that.readTemplate.format(that.opts));
+                that.$node.find('input').on('change',function () {
+                   that.setValue($(this).val());
+                });
+            } else {
+                that.$node = $(that.template);
+                $.each(that.opts.options,function (idx, obj) {
+                    var random_id = randomId();
+                    var $option = $(that.options.format($.extend({},that.opts.options[idx],{'name' : that.opts.name})));
+                    $option.find('input').prop('id',random_id);
+                    $option.find('label').attr('for',random_id);
+                    that.$node.find('.options').append($option);
+                });
+            }
 
-                var $option = $(that.options.format($.extend({},that.opts.options[idx],{'name' : that.opts.name})));
 
-                $option.find('input').prop('id',random_id);
 
-                $option.find('label').attr('for',random_id);
-                that.$node.find('.options').append($option);
-            })
-
-            /*// 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
-            this.$node.find('input').on('change', function(e) {
-                var value = e.target.value;
-                that.setValue(value);
-            });*/
 
         }
 
         this.__setValue = function(value) {
-            if(value === ''){
-                value = [] ;
-            }
-            var targets = that.$node.find('input');
-            $.each(targets , function(_idx) {
-                var $this = $(this);
-                if(value.indexOf($this.attr('value'))!= -1){
-                    $this.prop('checked', true);
+            if (!that.opts.isRead ) {
+                if (value === '') {
+                    value = [];
                 }
-            })
+                var targets = that.$node.find('input');
+                $.each(targets, function (_idx) {
+                    var $this = $(this);
+                    if (value.indexOf($this.attr('value')) != -1) {
+                        $this.prop('checked', true);
+                    }
+                })
+            } else {
+                var label = [];
 
+                if(value !== undefined) {
+
+                    $.each(that.opts.options, function (_idx) {
+                        if(value.indexOf(that.opts.options[_idx].value) != -1) {
+                            label.add(that.opts.options[_idx].label);
+                        }
+
+                    });
+                    var finalLabel = label.join(',');
+                    that.$node.attr("title",finalLabel);
+                    that.$node.find('input').val(value);
+                    that.$node.find('.showValue').html(finalLabel);
+                }
+            }
         }
 
         this.__transRead = function () {

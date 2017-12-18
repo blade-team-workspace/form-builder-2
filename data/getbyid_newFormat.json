@@ -10,7 +10,7 @@
 
 				{
 					"name": "s2",
-					"type": "checkbox",
+					"type": "radio",
 					"options": [{
 						"label": "选项1asdasdasdsdadadasdadadadadadadadads",
 						"value": 1
@@ -177,8 +177,8 @@
 		}
 	],
 	"values": {
-		"s2":"3"
+		"s3":["1"]
 	},
-	"isRead": false,
+	"isRead": true ,
 	"groupDefaultSplit": false
 }

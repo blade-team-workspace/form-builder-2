@@ -22,31 +22,39 @@
 
 		this.template =
 				'<div class ="component"><div class="select-content"><select name="{name}" class="form-control"></select></div></div>';
-		this.readTemplate = '<div class="form-control-static" title="{value}">{value}</div>';
 		var that = this;
 		var optionsMap = {};
 		this.__render = function() {
 
-			that.$node = $(that.template.format(that.opts));
-				
-			if (that.opts.placeholder) {
-				that.$node.find('select').append('<option value="">' + that.opts.placeholder + '</option>')
-			}
-			if (that.opts.options !== undefined && that.opts.options.length > 0){
-				$.each(that.opts.options, function() {
-					that.$node.find('select').append('<option value="' + this.value + '">' + this.label + '</option>');
-					optionsMap[this.value] = this.label;
-				});
-			} else {
-				that.$node.find('.select-content').append('<option value="">--No-Item--</option>');
-			}
+			if(!that.opts.isRead) {
 
 
-			// 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
-			this.$node.find('select').on('change', function(e) {
-				var value = e.target.value;
-				that.setValue(value);
-			});
+                that.$node = $(that.template.format(that.opts));
+
+                if (that.opts.placeholder) {
+                    that.$node.find('select').append('<option value="">' + that.opts.placeholder + '</option>')
+                }
+                if (that.opts.options !== undefined && that.opts.options.length > 0) {
+                    $.each(that.opts.options, function () {
+                        that.$node.find('select').append('<option value="' + this.value + '">' + this.label + '</option>');
+                        optionsMap[this.value] = this.label;
+                    });
+                } else {
+                    that.$node.find('.select-content').append('<option value="">--No-Item--</option>');
+                }
+
+
+                // 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
+                this.$node.find('select').on('change', function (e) {
+                    var value = e.target.value;
+                    that.setValue(value);
+                });
+            } else {
+                that.$node = $(that.readTemplate.format(that.opts));
+                that.$node.find('input').on('change',function () {
+                    that.setValue($(this).val());
+                });
+			}
 		}
 
 		this.__transRead = function () {
@@ -57,7 +65,27 @@
         }
 
 		this.__setValue = function(value) {
-            that.$node.find("option[value='"+value+"']").attr("selected",true);
+			if(!that.opts.isRead) {
+                that.$node.find("option[value='"+value+"']").attr("selected",true);
+            } else {
+                var  label = '';
+                $.each(that.opts.options , function (_idx) {
+                    var option = that.opts.options[_idx];
+                    if (value === option.value.toString()) {
+                        label = option.label;
+
+                    }
+                });
+
+                if(label === '') {
+                	that.$node.attr('hidden',true);
+				} else {
+                    that.$node.removeAttr('hidden');
+                    that.$node.attr("title",label);
+                    that.$node.find('input').val(value);
+                    that.$node.find('.showValue').html(label);
+				}
+			}
         }
 
 

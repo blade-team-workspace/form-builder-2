@@ -46,6 +46,11 @@
 			this.$node.find('.play-part .delete').on('click', function(e) {
 				that.setValue('');
 			});
+			if(that.opts.isRead) {
+
+                this.$node.find('.play-part .delete').remove();
+
+			}
 		}
 
 

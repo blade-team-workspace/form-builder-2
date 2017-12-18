@@ -24,15 +24,23 @@
 
 		var that = this ;
 		this.__render = function() {
-			that.$node = $(that.template.format(that.opts));
-			//this.$node.css({
-			//	resize: this.opts.resize || "none"//没有对浏览器窗口进行调整
-			//})
-			this.$node.find('textarea').on('change', function(e) {//设置监听事件
-				var value = e.target.value;
-				// console.log('value ->', value);
-				that.setValue(value);
-			});
+			if(!that.opts.isRead) {
+                that.$node = $(that.template.format(that.opts));
+                //this.$node.css({
+                //	resize: this.opts.resize || "none"//没有对浏览器窗口进行调整
+                //})
+                this.$node.find('textarea').on('change', function(e) {//设置监听事件
+                    var value = e.target.value;
+                    // console.log('value ->', value);
+                    that.setValue(value);
+                });
+			} else {
+                that.$node = $(that.readTemplate.format(that.opts));
+                that.$node.find('input').on('change',function () {
+                    that.setValue($(this).val());
+                });
+			}
+
 		}
 
 		this.__transRead = function () {
@@ -45,7 +53,18 @@
 
 		this.__setValue = function (value){
 
-			that.$node.find("textarea").val(value);
+			if(!that.opts.isRead) {
+                that.$node.find("textarea").val(value);
+            } else {
+                if(value === '') {
+                    that.$node.attr('hidden',true);
+                } else {
+                    that.$node.removeAttr('hidden');
+                    that.$node.attr("title",value);
+                    that.$node.find('input').val(value);
+                    that.$node.find('.showValue').html(value);
+                }
+			}
 
 		}
 	};
