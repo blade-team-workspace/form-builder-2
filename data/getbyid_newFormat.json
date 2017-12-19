@@ -40,7 +40,7 @@
 					}]
 				},{
 					"name": "s3",
-					"type": "multiselect",
+					"type": "checkbox",
 					"options": [{
 						"label": "选项1asdasdasdsdadadasdadadadadadadadads",
 						"value": 1,

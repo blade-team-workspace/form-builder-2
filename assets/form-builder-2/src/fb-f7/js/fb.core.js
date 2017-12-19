@@ -89,6 +89,21 @@
 
 
 	function render($form, jsonConf) {
+        $.each(jsonConf.items , function (_idx) {
+        	var items = jsonConf.items[_idx];
+        	$.each(items.items, function (__i) {
+        		var item = items.items[__i];
+                if (item.type == 'checkbox') {
+                    item.type = 'multiselect';
+                }
+                if (item.type == 'radio') {
+                    item.type = 'select';
+                }
+                if (item.type == 'text') {
+                    item.type = 'textarea';
+                }
+			})
+		});
 		var opt = $.extend({}, jsonConf, {'$node': $form, '$form': $form});
 		var Component = $.formb.components[opt.type];
 		if (Component === undefined) {
