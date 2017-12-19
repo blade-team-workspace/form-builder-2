@@ -69,15 +69,18 @@
 
 		this.__setValue = function(data) {
 			console.log('audio / this.__setValue("' + data + '")');
-			this.$node.find('input').val(data);
-			var url = "";
-			
-			if (data && data.match(/audios:\[(.*)\]/) !== null) {
-				url = data.match(/audios:\[(.*)\]/)[1].split(',')[0];
-			}
+			if(that.opts.isRead) {
 
-			// 给播放部分的audio赋值
-			this.$node.find('.play-part audio').attr('src', url);
+                this.$node.find('input').val(data);
+                var url = "";
+
+                if (data && data.match(/audios:\[(.*)\]/) !== null) {
+                    url = data.match(/audios:\[(.*)\]/)[1].split(',')[0];
+                }
+
+                // 给播放部分的audio赋值
+                this.$node.find('.play-part audio').attr('src', url);
+            }
 		};
 
 

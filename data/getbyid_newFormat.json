@@ -40,22 +40,34 @@
 					}]
 				},{
 					"name": "s3",
-					"type": "select",
+					"type": "multiselect",
 					"options": [{
 						"label": "选项1asdasdasdsdadadasdadadadadadadadads",
-						"value": 1
+						"value": 1,
+						"description":"菜鸡12312312312312313"
 					}, {
 						"label": "选项2",
-						"value": 2
+						"value": 2,
+						"description":"哈哈哈哈哈哈哈"
 					}, {
 						"label": "选项3",
 						"value": 3
 					}]
+				},
+
+				{
+					"label": "任务",
+					"name":"b22",
+					"type": "number",
+					"minValue": 0,
+					"maxValue": 10,
+					"stepValue": 0.5
 				}
+
 			]
 		},
 		{
-			"label": "轻轻的{taNew1}，正如我轻轻的来,我轻轻的{taNew2}{taNew4}",
+			"label": "轻轻的{taNew3}，正如我轻轻的来,我轻轻的{taNew2}{taNew4}",
 			"type" : "stream",
 			"groupId": "group0",
 
@@ -65,9 +77,12 @@
 
 			"items": [
 				{
-					"label": "天气",
-					"name":"taNew1",
-					"type":"text"
+					"label": "任务",
+   					"name":"taNew3",
+    				"type": "number",
+    				"minValue": 0,
+   					"maxValue": 10,
+    				"stepValue": 0.5
 				},
 				{
 					"label": "目的地",
@@ -142,8 +157,6 @@
 			"items": [
 				{
 					"name": "ta2",
-					"isRead": true,
-					"test": "asdadadada",
 					"type": "textarea"
 				}
 			]
@@ -194,12 +207,14 @@
 		}
 	],
 	"values": {
-		
-		"s3":["1"],
-		"s2":"3",
-		"rec": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]"
 
+		"s3":["1"],
+		"s2":"1",
+		"rec": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]",
+		"b22":3,
+		"s55":"1",
+		"taNew1":"123"
 	},
-	"isRead": true ,
+	"isRead": false ,
 	"groupDefaultSplit": false
 }

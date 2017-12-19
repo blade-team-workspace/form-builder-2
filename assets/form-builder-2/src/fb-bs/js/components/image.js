@@ -26,7 +26,7 @@
         var that = this;
 
         this.template =
-            '<div class="media-node">' +
+            '<div class="component">' +
             '<input type="hidden" name="{name}" />' +
             '<div class="thumbnails-container">' +
             '</div>' +
@@ -73,6 +73,9 @@
                 var $item = $(that.thumbnailTemplate.format({url: urlList[idx]}));
                 that.$node.find('.thumbnails-container').append($item);
             });
+            if(urlList.length == 0) {
+                that.$node.attr('hidden',true);
+            }
 
         }
 

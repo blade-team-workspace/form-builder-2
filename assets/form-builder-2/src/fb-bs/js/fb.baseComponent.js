@@ -124,7 +124,22 @@
 
 		// 改变显示状态
 		this.checkViewStatus = function() {
-			if (this.value === undefined ||
+            var $inputs = this.opts.$form.find('[name=' + that.opts.name + ']');
+                var $container = this.$node.closest('.outerClass');
+                var components = $container.find('.component');
+                var allHidden = true;
+                $.each(components, function (_idx) {
+                    if (!$(components[_idx]).is('[hidden]')) {
+                        allHidden = false;
+                    }
+                });
+                if (allHidden) {
+                    $container.attr('hidden', true);
+                } else {
+                    $container.removeAttr('hidden');
+                }
+
+			/*if (this.value === undefined ||
 				this.value === null ||
 				this.value === '' ||
 				this.value.length == 0) {
@@ -133,7 +148,8 @@
 			} else {
 				this.$node.closest('li.swipeout').css('height', 'initial');
 				return true;
-			}
+			}*/
+
 		}
 		
 
@@ -153,6 +169,7 @@
 			this.__setValue(value);
 			this.value = value;
 			this.__afterSetValue();
+			if(that.opts.isRead)
 			this.checkViewStatus();
 		}
 

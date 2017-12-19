@@ -28,6 +28,9 @@
         activeEventBinds($form,jsonConf.events);
 		// 赋初值
 		setFormValue($form, jsonConf.values);
+		//zz写法，后人引以为鉴，要开发时间必须预估时间* 2
+		// if(jsonConf.isRead)
+		// setTimeout(changeContainerStatus($form) , 300);
 	}
 
 
@@ -71,7 +74,7 @@
 	// /////////////////////////////////////////////////////////////////////////////
 	function setFormValue($form, values) {
 		// console.log('>>>length', $(':input').length);
-		// $(':input').trigger('change');
+		$(':input').trigger('change');
 		$.each(values || [], function(name) {
 			var value = values[name];
 
@@ -91,6 +94,27 @@
 				}
 			});
 		});
+
+	}
+
+	function changeContainerStatus($form) {
+        // var $inputs = $form.find('[name=' + that.opts.name + ']');
+        var $containers = $form.find('.outerClass');
+        $.each($containers , function (_idx) {
+            var $container = $($containers[_idx]);
+            var components = $container.find('.component');
+            var allHidden = true;
+            $.each(components, function (_idx) {
+                if (!$(components[_idx]).is('[hidden]')) {
+                    allHidden = false;
+                }
+            });
+            if (allHidden) {
+                $container.attr('hidden', true);
+            } else {
+                $container.removeAttr('hidden');
+            }
+		})
 
 	}
 

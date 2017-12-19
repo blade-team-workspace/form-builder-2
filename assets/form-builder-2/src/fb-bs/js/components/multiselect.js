@@ -38,7 +38,13 @@
 
                 if (that.opts.options !== undefined && that.opts.options.length > 0) {
                     $.each(that.opts.options, function () {
-                        $select.append('<option value="' + this.value + '">' + this.label + '</option>');
+                        var label ='';
+                        if(this.description) {
+                            label = this.description;
+                        } else {
+                            label = this.label;
+                        }
+                        $select.append('<option value="' + this.value + '">' + label + '</option>');
                     });
                 } else {
                     $select.append('<option value="">--No-Item--</option>');
@@ -104,7 +110,12 @@
 
                     $.each(that.opts.options, function (_idx) {
                         if(value.indexOf(that.opts.options[_idx].value) != -1) {
-                            label.add(that.opts.options[_idx].label);
+
+                            if(that.opts.options[_idx].description) {
+                                label.add(that.opts.options[_idx].description);
+                            }else{
+                                label.add(that.opts.options[_idx].label);
+                            }
                         }
 
                     });

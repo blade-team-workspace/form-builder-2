@@ -30,7 +30,12 @@
                 that.$node = $(that.template);
                 $.each(that.opts.options,function (idx, obj) {
                     var random_id = randomId();
-                    var $option = $(that.options.format($.extend({},that.opts.options[idx],{'name' : that.opts.name})));
+                    var label  = that.opts.options[idx].description !== undefined ? that.opts.options[idx].description : that.opts.options[idx].label;
+                    var values = {
+                        value:that.opts.options[idx].value,
+                        label:label
+                    }
+                    var $option = $(that.options.format($.extend({},values,{'name' : that.opts.name})));
                     $option.find('input').prop('id',random_id);
                     $option.find('label').attr('for',random_id);
                     that.$node.find('.options').append($option);
@@ -61,7 +66,11 @@
 
                     $.each(that.opts.options, function (_idx) {
                         if(value.indexOf(that.opts.options[_idx].value) != -1) {
-                            label.add(that.opts.options[_idx].label);
+                            if(that.opts.options[_idx].description) {
+                                label.add(that.opts.options[_idx].description);
+                            }else{
+                                label.add(that.opts.options[_idx].label);
+                            }
                         }
 
                     });
