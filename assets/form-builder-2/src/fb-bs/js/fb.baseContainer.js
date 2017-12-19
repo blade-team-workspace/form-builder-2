@@ -26,6 +26,7 @@
 		this.template = '<div>THIS IS BASE-CONTAINER TEMPLATE</div>';
 		this.opts = undefined;
 		this.groupId = undefined;
+        this.$form = undefined;		// 自动表单的表单对象，绑定许多参数和事件用，方便调度
 
 
 		// 初始化(实例化默认调用)
@@ -39,7 +40,9 @@
 				{readonly: kargs.global_isRead}, {steamLayout: kargs.global_isSteam});
 			// 取groupId
 			this.groupId = kargs.groupId || undefined;
+            // 如果指定了$node和$form就用指定的
 			this.$node = kargs.$node || undefined;
+            this.$form = kargs.$form || undefined;
 		}
 		this.__afterInit = function() {
 			// do nothing, not necessary

@@ -13,21 +13,66 @@
 	$.formb.components = $.formb.components || {};
 	var baseComponent = $.formb.baseComponent;
 
-	var component_input = function(kargs) {
+	var component_text = function(kargs) {
 		baseComponent.apply(this, arguments);
 
 		this.template =
-				'<input type="text" name="{name}" class="form-control coreInput"/>';
+			'<div class = "component">'+
+				'<span class="text-group">'+
+					'<input type="text" name="{name}" width="{width}" height="{height}" ' +
+					'class="form-control coreInput" placeholder="{placeholder}"/>'+
+				'</span>';
+			'</div>'
 
+		var that = this ;
 		this.__render = function() {
-			this.$node = $(this.template.format(this.opts));
-			this.$node.attr('placeholder', this.opts.placeholder);
-			this.$node.attr('onfocus', 'this.placeholder=""');
-			this.$node.attr('onblur', 'this.placeholder="' + this.opts.placeholder + '"');
-			this.$node.attr('readonly', this.opts.isRead || false);
+			if(!that.opts.isRead) {
+                that.$node = $(that.template.format(that.opts));//配参数
+                //this.$node.attr('placeholder', this.opts.placeholder);
+                //this.$node.attr('onfocus', 'this.placeholder=""');
+                //this.$node.attr('onblur', 'this.placeholder="' + this.opts.placeholder + '"');
+                //this.$node.attr('readonly', this.opts.isRead || false);
+
+                this.$node.find('input').on('change', function(e) {
+                    var value = e.target.value;
+                    // console.log('value ->', value);
+                    that.setValue(value);
+                });
+			} else {
+				that.$node = $(that.readTemplate.format(that.opts));
+                that.$node.find('input').on('change',function () {
+                    that.setValue($(this).val());
+                });
+			}
+
 		}
+		this.__transRead = function () {
+
+			that.$node.find('span').remove();
+			that.$node.append(that.readTemplate.format({value:that.value !== undefined?that.value:''}))
+		}
+
+
+
+		this.__setValue = function (value) {
+
+			if(!that.opts.isRead) {
+                that.$node.find("input").val(value);
+            } else {
+                if(value === '') {
+                    that.$node.attr('hidden',true);
+                } else {
+                    that.$node.removeAttr('hidden');
+                    that.$node.attr("title",value);
+                    that.$node.find('input').val(value);
+                    that.$node.find('.showValue').html(value);
+                }
+			}
+		}
+
+		
 	}
 
-	$.formb.components.text = component_input;
+	$.formb.components.text = component_text;
 
 }));

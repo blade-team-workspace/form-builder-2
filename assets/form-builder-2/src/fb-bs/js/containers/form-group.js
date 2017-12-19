@@ -19,7 +19,7 @@
 		var that = this;
 
 		this.template = 
-				'<div class="outerClass {outerWidth} drag_item">' +
+					'<div class="outerClass {outerWidth} fromGroup">' +
 					'<div class="item row formDescription form-group">' +
 						'<label class="labelClass {labelWidth} form-control-static">' +
 							'<span class="textRequired formLabel pull-right">{label}</span>' +
@@ -43,12 +43,25 @@
 					opt = this.opts.items;
 				}
 			}
+            // 将当前$form传入下一层参数
+            opt.$form = this.$form;
 			var Component = $.formb.components[opt.type];
 			if (Component === undefined) {
 				console.error('组件或容器[{type}]未找到对应的class定义'.format({type: opt.type}));
 			}
 			var component = new Component(opt);
 			component.render();
+
+			/*//测试setvalue方法是否有效，这段代码没有任何意义
+			if(opt.test){ //如果需要测试
+				component.setValue(opt.test);
+			}
+			if(opt.isRead){
+				component.transRead();
+			}*/
+
+
+
 			this.append(component);
 		}
 

@@ -33,10 +33,13 @@
 				// TODO: 改成ERROR函数
 				console.error('没有指定$node对象');
 			}
+            this.$node.data('fb-form', that);
+
 			// 渲染全部items
 			$.each(this.opts.items, function(idx){
 				var opt = that.opts.items[idx];
-
+				// 将当前$form传入下一层参数
+                opt.$form = that.$form;
 				// 确定groupId
 				if (opt.groupId === undefined) {
 					if (that.opts.groupDefaultSplit == true) {

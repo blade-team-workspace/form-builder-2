@@ -13,10 +13,11 @@
 	$.formb.components = $.formb.components || {};
 	var baseComponent = $.formb.baseComponent;
 
-	var component_select = function(kargs) {
+	var component_number = function(kargs) {
 		// 定义默认图标
 		this.componentDefaultOpts = {
-			'placeholder': '--请选择--'
+			'placeholder': '--请选择--',
+            'sort': 'desc'
 		};
 		baseComponent.apply(this, arguments);
 
@@ -24,24 +25,40 @@
 				'<div class ="component"><div class="select-content"><select name="{name}" class="form-control"></select></div></div>';
 		var that = this;
 		var optionsMap = {};
+        var valueList = [];
 		this.__render = function() {
 
-			if(!that.opts.isRead) {
+            if(this.opts.sort==='asc') {
 
+                var i = this.opts.minValue;
+                while(i <= that.opts.maxValue) {
+                    valueList.push(i);
+                    i += that.opts.stepValue;
+                }
+            }else {
+                var i = this.opts.maxValue;
+                while(i>=this.opts.minValue) {
+                    valueList.push(i);
+                    i -= this.opts.stepValue;
+                }
+            }
+
+			if(!that.opts.isRead) {
 
                 that.$node = $(that.template.format(that.opts));
 
                 if (that.opts.placeholder) {
                     that.$node.find('select').append('<option value="">' + that.opts.placeholder + '</option>')
                 }
-                if (that.opts.options !== undefined && that.opts.options.length > 0) {
-                    $.each(that.opts.options, function () {
-                        that.$node.find('select').append('<option value="' + this.value + '">' + this.label + '</option>');
-                        optionsMap[this.value] = this.label;
-                    });
-                } else {
+
+
+                if (valueList.length == 0) {
                     that.$node.find('.select-content').append('<option value="">--No-Item--</option>');
                 }
+                $.each(valueList,function (_idx) {
+                    that.$node.find('select').append('<option value="' + valueList[_idx] + '">' + valueList[_idx] + '</option>');
+                    optionsMap[valueList[_idx]] = valueList[_idx];
+                });
 
 
                 // 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
@@ -68,21 +85,15 @@
 			if(!that.opts.isRead) {
                 that.$node.find("option[value='"+value+"']").attr("selected",true);
             } else {
-                var  label = '';
-                $.each(that.opts.options , function (_idx) {
-                    var option = that.opts.options[_idx];
-                    if (value === option.value.toString()) {
-                        label = option.label;
-                    }
-                });
 
-                if(label === '') {
+
+                if(value === '') {
                 	that.$node.attr('hidden',true);
 				} else {
                     that.$node.removeAttr('hidden');
-                    that.$node.attr("title",label);
+                    that.$node.attr("title",value);
                     that.$node.find('input').val(value);
-                    that.$node.find('.showValue').html(label);
+                    that.$node.find('.showValue').html(value);
 				}
 			}
         }
@@ -90,6 +101,6 @@
 
 	};
 
-	$.formb.components.select = component_select;
+	$.formb.components.number = component_number;
 
 }));

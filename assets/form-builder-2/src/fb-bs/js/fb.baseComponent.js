@@ -20,6 +20,7 @@
 			'f7-icon': 'star'
 		};
 		this.template = '<div>THIS IS BASE-COMPONENT TEMPLATE</div>';
+        this.readTemplate = '<div class="component form-control-static" title=""><input type="hidden" name="{name}" ><span class="showValue"></span></div>';
 		this.opts = undefined;
 		this.rule = undefined;
 		this.value = undefined;
@@ -32,11 +33,12 @@
 			console.log('before init');
 		}
 		this.__init = function(kargs) {
-			// 合并默认参数
-			this.defaultOpts = $.extend({}, this.defaultOpts, this.componentDefaultOpts);
-			// 合并配置参数
-			this.opts = $.extend({}, this.defaultOpts, kargs,
-				{readonly: kargs.global_isRead}, {steamLayout: kargs.global_isSteam});
+            //取到全局的只读参数
+            var global_isRead = {isRead: kargs.$form.data('fb-form').opts.isRead || false};
+            // 合并默认参数
+            this.defaultOpts = $.extend({}, this.defaultOpts, this.componentDefaultOpts);
+            // 合并配置参数
+            this.opts = $.extend({}, this.defaultOpts, global_isRead, kargs);
 			// 合并规则
 			this.rule = $.extend({}, kargs.rule);
 			// 赋初值
@@ -83,8 +85,30 @@
 			// this.$node.data('component', that);
 		}
 
+		//判断value值
+		this.hasValue = function () {
 
+		}
 
+		// 切换只读模式方法
+        this.__beforeTransRead = function () {
+
+            // do nothing, not necessary
+        }
+        this.__transRead = function () {
+            // TODO
+            console.error('Must be rewritten.')
+        }
+        this.__afterTransRead = function() {
+            // do nothing, not necessary
+
+        }
+
+        this.transRead = function () {
+            this.__beforeTransRead();
+            this.__transRead();
+            this.__afterTransRead();
+        }
 		// 配置校验规则
 		this.beforeSetRule = function() {
 			// do nothing, not necessary
@@ -100,7 +124,22 @@
 
 		// 改变显示状态
 		this.checkViewStatus = function() {
-			if (this.value === undefined ||
+            var $inputs = this.opts.$form.find('[name=' + that.opts.name + ']');
+                var $container = this.$node.closest('.outerClass');
+                var components = $container.find('.component');
+                var allHidden = true;
+                $.each(components, function (_idx) {
+                    if (!$(components[_idx]).is('[hidden]')) {
+                        allHidden = false;
+                    }
+                });
+                if (allHidden) {
+                    $container.attr('hidden', true);
+                } else {
+                    $container.removeAttr('hidden');
+                }
+
+			/*if (this.value === undefined ||
 				this.value === null ||
 				this.value === '' ||
 				this.value.length == 0) {
@@ -109,7 +148,8 @@
 			} else {
 				this.$node.closest('li.swipeout').css('height', 'initial');
 				return true;
-			}
+			}*/
+
 		}
 		
 
@@ -129,6 +169,7 @@
 			this.__setValue(value);
 			this.value = value;
 			this.__afterSetValue();
+			if(that.opts.isRead)
 			this.checkViewStatus();
 		}
 
@@ -156,7 +197,9 @@
 
 		var Dog = function(data, name) {
 			Animal.apply(this, arguments);
-			this.subType = "dog";
+			th
+
+			is.subType = "dog";
 			this.name = name;
 			this.bark = function() {
 				// console.log('汪汪汪 我是' + this.name);

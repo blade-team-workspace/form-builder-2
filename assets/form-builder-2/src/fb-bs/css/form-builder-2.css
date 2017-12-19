@@ -1,7 +1,7 @@
 /* 设置全局字体 */
-:not(i) {
+/* body {
 	font-family: '微软雅黑'!important;
-}
+} */
 
 /* 容器分组用 */
 * .formGroupItem {
@@ -142,4 +142,39 @@
 	line-height: 80px;
 	vertical-align: middle;
 	display: inline-block;
+}
+.feedback-fix {
+	right: 15px;
+}
+/*日历*/
+.glyphicon {
+	font-family: 'Glyphicons Halflings';
+}
+.item {
+	padding :10px;
+}
+
+/* 录音部分 */
+.play-part .btn, .record-part .btn {
+	margin-left: 8px;
+}
+.fb-audio {
+	vertical-align: middle;
+	height: 34px;
+	border: solid 1px #ccc;
+}
+/* 录音闪烁动画 */
+.record-btn .active {
+	animation: recording 1.5s infinite;
+}
+@keyframes recording {
+	0% {
+		color: #333;
+	}
+	50% {
+		color: #f00;
+	}
+	100% {
+		color: #333;
+	}
 }
