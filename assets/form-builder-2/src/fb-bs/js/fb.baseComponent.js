@@ -133,7 +133,7 @@
                         allHidden = false;
                     }
                 });
-                if (allHidden) {
+                if (allHidden && !$container.hasClass('stream')) {
                     $container.attr('hidden', true);
                 } else {
                     $container.removeAttr('hidden');

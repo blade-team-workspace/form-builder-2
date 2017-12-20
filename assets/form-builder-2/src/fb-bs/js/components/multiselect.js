@@ -108,6 +108,12 @@
 
                 if(value !== undefined) {
 
+                    if($.isArray(value)){
+
+                    } else {
+                        value = [value];
+                    }
+
                     $.each(that.opts.options, function (_idx) {
                         if(value.indexOf(that.opts.options[_idx].value) != -1) {
 

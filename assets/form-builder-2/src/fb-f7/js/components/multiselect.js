@@ -86,6 +86,11 @@
                 if(value === ''){
                     value = [] ;
                 }
+                if($.isArray(value)){
+
+                } else {
+                    value = [value];
+                }
                 var smartSelect = that.$node.find('.smart-select');
                 smartSelect.smartSelectSetValue(value);
                 var showValue = '';

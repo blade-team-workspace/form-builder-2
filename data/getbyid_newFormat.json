@@ -3,7 +3,7 @@
 	"type": "form",
 	"items": [
 		{
-			"label": "录音",
+			"label": "nilaialai",
 			"type": "form-group",
 
 			"outerWidth": "col-sm-12",
@@ -12,8 +12,25 @@
 
 			"items": [
 				{
-					"name": "rec",
+					"name": "rec1111",
 					"type": "audio",
+					"maxNumber": 1,
+					"minNumber": 1
+				}
+			]
+		},
+		{
+			"label": "text",
+			"type": "form-group",
+
+			"outerWidth": "col-sm-12",
+			"labelWidth": "col-sm-2",
+			"contentWidth": "col-sm-10",
+
+			"items": [
+				{
+					"name": "b2333",
+					"type": "text",
 					"maxNumber": 1,
 					"minNumber": 1
 				}
@@ -177,32 +194,10 @@
 	"events": [
 		{
 			"eventType": "valueChangeShowHide",
-			"trigger": "taNew2",
-			"valueResps": {
-				"1": ["taNew1","taNew4"],
-				"2": "",
-				"3": ""
-			}
-		},
-
-		{
-			"eventType": "valueChangeShowHide",
-			"trigger": "ms1",
-			"valueResps": {
-				"1": ["ta1"],
-				"2": "",
-				"3": "",
-				"4": ""
-			}
-		},
-		{
-			"eventType": "valueChangeShowHide",
 			"trigger": "s2",
 			"valueResps": {
-				"1": ["s55"],
-				"2": "",
-				"3": "",
-				"4": ""
+				"1": ["b2333"]
+
 			}
 		}
 	],
@@ -211,10 +206,10 @@
 		"s3":["1"],
 		"s2":"1",
 		"rec": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]",
-		"b22":3,
 		"s55":"1",
-		"taNew1":"123"
+		"taNew1":"123",
+		"taNew2":2
 	},
-	"isRead": false ,
+	"isRead": true ,
 	"groupDefaultSplit": false
 }
