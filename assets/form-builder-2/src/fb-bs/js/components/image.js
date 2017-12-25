@@ -56,6 +56,11 @@
 
         this.__render = function() {
             this.$node = $(this.template.format(this.opts));
+
+            this.$node.find('input').on('change', function(e) {
+                var value = e.target.value;
+                that.setValue(value);
+            });
         }
 
         this.__setValue = function(value) {

@@ -40,6 +40,9 @@
                     $option.find('label').attr('for',random_id);
                     that.$node.find('.options').append($option);
                 });
+                // that.$node.find("input").on('change',function () {
+                //     this.setValue($(this.val))
+                // })
             }
 
 
@@ -51,6 +54,8 @@
             if (!that.opts.isRead ) {
                 if (value === '') {
                     value = [];
+                } else {
+                    value = value.split(",");
                 }
                 var targets = that.$node.find('input');
                 $.each(targets, function (_idx) {
@@ -67,10 +72,11 @@
                         if($.isArray(value)){
 
                         } else {
-                            value = [value];
+                            value = value.split(",");
                         }
                     $.each(that.opts.options, function (_idx) {
-                        if(value.indexOf(that.opts.options[_idx].value) != -1) {
+
+                        if(value.indexOf(that.opts.options[_idx].value.toString()) != -1) {
                             if(that.opts.options[_idx].description) {
                                 label.add(that.opts.options[_idx].description);
                             }else{

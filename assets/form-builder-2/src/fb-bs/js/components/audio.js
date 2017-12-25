@@ -33,6 +33,7 @@
 		var that = this ;
 
 		this.__render = function() {
+
 			this.$node = $(this.template.format(this.opts));
 
 			this.$node.find('input').on('change', function(e) {
@@ -71,15 +72,21 @@
 			console.log('audio / this.__setValue("' + data + '")');
 			if(that.opts.isRead) {
 
-                this.$node.find('input').val(data);
-                var url = "";
+				// 当没有值的时候
+				if(data === '') {
+					this.$node.attr('hidden',true);
+				} else {
+                    this.$node.removeAttr('hidden');
+                    this.$node.find('input').val(data);
+                    var url = "";
 
-                if (data && data.match(/audios:\[(.*)\]/) !== null) {
-                    url = data.match(/audios:\[(.*)\]/)[1].split(',')[0];
+                    if (data && data.match(/audios:\[(.*)\]/) !== null) {
+                        url = data.match(/audios:\[(.*)\]/)[1].split(',')[0];
+                    }
+
+                    // 给播放部分的audio赋值
+                    this.$node.find('.play-part audio').attr('src', url);
                 }
-
-                // 给播放部分的audio赋值
-                this.$node.find('.play-part audio').attr('src', url);
             }
 		};
 
