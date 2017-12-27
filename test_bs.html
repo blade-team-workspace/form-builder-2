@@ -23,18 +23,24 @@
 	<link href="vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 	<script src="vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 	<script src="vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
 	<!-- 下拉复选插件 -->
 	<script src="vendor/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
 	<link href="vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
+
 	<!-- 特殊radio和checkbox样式 -->
 	<link rel="stylesheet" href="vendor/styles-radio-checkbox.css">
 
+	<!-- 七牛云上传sdk -->
+	<script src="vendor/qiniu/js/qiniu.min.js"></script>
+
 	<!-- html5录音插件 -->
 	<script src="vendor/HZRecorder/HZRecorder.js"></script>
-	<script src="vendor/HZRecorder/HZRecorder_render.js"></script>
 
 	<!-- 文本校验 -->
 	<script src="assets/form-builder-2/src/fb-bs/js/fb.form-validate.js"></script>
+
+
 	<!-- ==================== 以下为自己的东西 ==================== -->
 	<style>
 		/* * {
@@ -69,12 +75,11 @@
 	<script src="assets/form-builder-2/src/fb-bs/js/containers/form.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/containers/form-group.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/containers/multimedia.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/containers/stream.js"></script>
 
 	<script src="assets/form-builder-2/src/fb-bs/js/fb.baseComponent.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/textarea.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/text.js"></script>
-
-	<script src="assets/form-builder-2/src/fb-bs/js/containers/stream.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/select.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/audio.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/radio.js"></script>
@@ -82,15 +87,10 @@
 	<script src="assets/form-builder-2/src/fb-bs/js/components/datetimepicker.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/image.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/number.js"></script>
-
-
-
-	<script src="vendor/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/multiselect.js"></script>
-	<link href="vendor/bootstrap-multiselect/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css"/>
 
-	<script src="assets/form-builder-2/src/fb-bs/js/components/audio.js"></script>
-
+	<!-- fb 额外 -->
+	<script src="assets/form-builder-2/src/fb-bs/js/extra/qiniuCustomized.js"></script>
 
 	<!-- fb 核心文件 -->
 	<link href="assets/form-builder-2/src/fb-bs/css/form-builder-2.css" rel="stylesheet" type="text/css"/>
@@ -101,7 +101,13 @@
 
 </head>
 <body>
+	<input type="hidden" id="qiniuDomain" value="http://olt0d7mfp.bkt.clouddn.com/">
+
 	<h1 style="text-indent: 20px;">测试自动表单2.0 - Bootstrap</h1>
+
+	<label for="teacherUsername">教师username，上线时从后台传过来：</label>
+	<input type="text" id="teacherUsername" value="fb-bs-test">
+
 	<hr style="border-color: #ddd;">
 	<div class="card">
 		<h3 style="border-left: solid 5px darkgreen; text-indent: 1em;">测试表单 - #testForm</h3>
@@ -132,9 +138,9 @@
 
 
 			$('#testForm').append(
-					'<div class="col-sm-12">'+
+				'<div class="col-sm-12">'+
 					'<button class="btn btn btn-primary btn-block" type="submit">提交</button>' +
-					'</div>'
+				'</div>'
 			);
 
 			/*$.ajax({

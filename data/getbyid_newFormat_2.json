@@ -59,8 +59,7 @@
 
 			"items": [
 				{
-					"value": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]",
-
+					
 					"name": "rec",
 					"type": "audio",
 					"url": "data/556_Butterfly_Kiss.mp3",
@@ -73,7 +72,7 @@
 		},
 
 		{
-			"label": "[group0] 图片",
+			"label": "图片",
 			"name": "image",
 			"type": "form-group",
 			"groupId": "group0",
@@ -96,7 +95,7 @@
 
 
 		{
-		"label": "[未设置] 单行文本",
+		"label": "单行文本",
 		"type": "form-group",
 		"groupId": "group0",
 
@@ -241,7 +240,7 @@
 			]
 		},
 		{
-			"label": "[未设置] 多行-2",
+			"label": "多行-2",
 			"type": "form-group",
             "ceshi":"textarea",
 			"outerWidth": "col-sm-6",
@@ -259,7 +258,7 @@
 		},
 
 		{
-			"label": "[未设置] 多媒体",
+			"label": "多媒体",
 			"type": "multimedia",
 			
 			"outerWidth": "col-sm-12",
@@ -337,7 +336,6 @@
 		}
 	],
 	"values": {
-		"s1":1,
 		"ta1": "图像在设计中拥有强大的力量。无论是什么主题，我们很自然地会被图片所吸引。从美丽清晰的照片，到精心设计的图形，总能第一时间捕获我们的眼球。",
         "rec2": "http://192.168.8.125:9998/data/556_Butterfly_Kiss.mp3"
 
@@ -345,6 +343,6 @@
 
 	},
 	"isSteam": false,
-	"isRead": true,
+	"isRead": false,
 	"groupDefaultSplit": true
 }

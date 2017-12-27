@@ -4,7 +4,7 @@
     "type": "form",
     "items": [
       {
-        "label": "[group0] 多行-1",
+        "label": "多行-1",
         "type": "form-group",
         "groupId": "group0",
         "items": [
@@ -27,7 +27,7 @@
         ]
       },
       {
-        "label": "[group0] 下拉单选-12313",
+        "label": "下拉单选-12313",
         "type": "form-group",
         "groupId": "group0",
         "items": [
@@ -88,7 +88,7 @@
         ]
       },
       {
-        "label": "[未设置] 多行-2",
+        "label": "多行-2",
         "type": "form-group",
         "items": [
           {
@@ -98,7 +98,7 @@
         ]
       },
       {
-        "label": "[未设置] 图片-2",
+        "label": "图片-2",
         "type": "form-group",
         "items": [
           {
@@ -111,7 +111,7 @@
         ]
       },
       {
-        "label": "[未设置] 录音-1",
+        "label": "录音-1",
         "type": "form-group",
         "items": [
           {
@@ -125,7 +125,7 @@
         ]
       },
       {
-        "label": "[未设置] 多媒体",
+        "label": "多媒体",
         "type": "multimedia",
         "items": [
           {
@@ -172,7 +172,7 @@
         ]
       },
       {
-        "label": "[group0] 数字2",
+        "label": "数字2",
         "type": "form-group",
         "groupId": "group0",
         "items": [
@@ -186,7 +186,7 @@
         ]
       },
       {
-        "label": "[未设置] 多行-4",
+        "label": "多行-4",
         "type": "form-group",
         "items": [
           {
@@ -269,7 +269,7 @@
     "type": "form",
     "items": [
       {
-        "label": "[group0] 多行-1",
+        "label": "多行-1",
         "type": "form-group",
         "groupId": "group0",
         "items": [
@@ -292,7 +292,7 @@
         ]
       },
       {
-        "label": "[group0] 下拉单选-1",
+        "label": "下拉单选-1",
         "type": "form-group",
         "groupId": "group0",
         "items": [
@@ -353,7 +353,7 @@
         ]
       },
       {
-        "label": "[未设置] 多行-2",
+        "label": "多行-2",
         "type": "form-group",
         "items": [
           {
@@ -363,7 +363,7 @@
         ]
       },
       {
-        "label": "[未设置] 图片-2",
+        "label": "图片-2",
         "type": "form-group",
         "items": [
           {
@@ -376,7 +376,7 @@
         ]
       },
       {
-        "label": "[未设置] 录音-1",
+        "label": "录音-1",
         "type": "form-group",
         "items": [
           {
@@ -390,7 +390,7 @@
         ]
       },
       {
-        "label": "[未设置] 多媒体",
+        "label": "多媒体",
         "type": "multimedia",
         "items": [
           {
@@ -437,7 +437,7 @@
         ]
       },
       {
-        "label": "[group0] 数字2",
+        "label": "数字2",
         "type": "form-group",
         "groupId": "group0",
         "items": [
@@ -451,7 +451,7 @@
         ]
       },
       {
-        "label": "[未设置] 多行-4",
+        "label": "多行-4",
         "type": "form-group",
         "items": [
           {
