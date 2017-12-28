@@ -107,7 +107,7 @@
 				var opt = {
 					data: {
 						file: recorder.getBlob(),
-						key: 'testUploadAudio.wav'
+						key: 'testUploadAudio1.wav'
 					},
 					success: function(res) {
 						console.log('upload success');

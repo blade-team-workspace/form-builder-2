@@ -2,23 +2,7 @@
 	"label": "测试表单",
 	"type": "form",
 	"items": [
-		{
-			"label": "录音",
-			"type": "form-group",
 
-			"outerWidth": "col-sm-12",
-			"labelWidth": "col-sm-2",
-			"contentWidth": "col-sm-10",
-
-			"items": [
-				{
-					"name": "rec",
-					"type": "audio",
-					"maxNumber": 1,
-					"minNumber": 1
-				}
-			]
-		},
 		{
 			"label": "[group0] 下拉duo选-1",
 			"type": "multimedia",
