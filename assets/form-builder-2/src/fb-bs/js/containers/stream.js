@@ -54,7 +54,7 @@
                 }
                 // 将当前$form传入下一层参数
                 opt.$form = that.$form;
-
+                opt.rule = that.$form.data('fb-form').opts.rules[opt.name];
                 var component = new Component(opt);
                 component.render();
                 appendData.components.push(component);

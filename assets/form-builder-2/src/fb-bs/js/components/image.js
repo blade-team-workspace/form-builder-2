@@ -124,9 +124,9 @@
                 setTimeout(function() {
                     _bindUpload(that.$node)
                 },500);
-                that.$node.removeAttr('hidden');
+                $add.css('display','inline-block');
             } else {
-                that.$node.attr('hidden',true);
+                $add.css('display','none')
             }
 
         }

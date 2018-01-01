@@ -70,6 +70,7 @@
 
                     $(this).multiselect('refresh');
 
+                    that.addSimpleLabel();
                 });
             } else {
                 that.$node = $(that.readTemplate.format(that.opts));

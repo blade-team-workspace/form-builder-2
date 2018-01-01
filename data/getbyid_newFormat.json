@@ -23,7 +23,7 @@
       "contentWidth": "col-sm-10",
       "items": [
         {
-          "name": "b2333",
+          "name": "ta12",
           "type": "text",
           "maxNumber": 1,
           "minNumber": 1
@@ -102,7 +102,7 @@
         {
           "label": "目的地",
           "name": "taNew2",
-          "type": "select",
+          "type": "multiselect",
           "options": [
             {
               "label": "选项1",
@@ -145,7 +145,7 @@
       "items": [
         {
           "name": "s55",
-          "type": "select",
+          "type": "multiselect",
           "options": [
             {
               "label": "显示multi",
@@ -206,6 +206,9 @@
       "required": true,
       "maxlength": 10,
       "minlength": 5
+    },
+    "s55": {
+      "required": true
     }
   },
   "groupRules": {
@@ -236,8 +239,8 @@
     "rec": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]",
     "s55": "1",
     "taNew1": "123",
-    "taNew2": 2
+    "taNew2": "2"
   },
-  "isRead": true,
+  "isRead": false,
   "groupDefaultSplit": false
 }

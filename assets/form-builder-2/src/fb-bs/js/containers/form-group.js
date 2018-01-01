@@ -46,6 +46,7 @@
             // 将当前$form传入下一层参数
             opt.$form = this.$form;
 			var Component = $.formb.components[opt.type];
+            opt.rule = this.$form.data('fb-form').opts.rules[opt.name];
 			if (Component === undefined) {
 				console.error('组件或容器[{type}]未找到对应的class定义'.format({type: opt.type}));
 			}

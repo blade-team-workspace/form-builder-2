@@ -23,7 +23,11 @@
 .childComponent * + * {
 	margin-top: 8px;
 }
-
+.symbol.required:before {
+	content: "*";
+	display: inline;
+	color: #E6674A;
+}
 /* 图片上传 */
 .thumbnails-description {
 	color: #999;
