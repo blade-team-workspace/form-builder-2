@@ -65,63 +65,6 @@
         var add_id = this.opts.name + "_add";
         //绑定上传序号，自增变量，与max无关
         var index = 0;
-        /**
-         * 给add按钮绑定事件
-         */
-        function _addBind($addBtn) {
-            // 给添加图片按钮绑定上传方法
-            var $files = $addBtn.find('input[type=file]');
-            $files.on('change', function() {
-                if ($(this).val() == '') {
-                    return;
-                }
-                var formId = $(this).closest('form').attr('id');
-                var name = $(this).closest('.component').find('input[type=hidden]').attr('name');
-                // 更新已存值
-                var imageData = {
-                    formId: formId,
-                    name: name
-                };
-
-                // 定义表单变量
-                var files = $(this)[0].files;
-                // 新建一个FormData对象
-                var formData = new FormData();
-                // 追加文件数据
-                for (var i = 0; i < files.length; i++) {
-                    formData.append("file[" + i + "]", files[i]);
-                }
-                // 计算现在可上传文件的个数
-                var nowCount = $addBtn.closest('.thumbnails-container').find('.thumbnail:not(.add)').length;
-                var maxNow =that.opts.maxNumber - nowCount;
-                // 判断符合条件，立刻上传
-                if (files.length <= maxNow && files.length >= that.opts.minNumber) {
-                    // 放置占位图
-                    $.each(files, function(idx) {
-                        var $waiting = $(that.waitingTemplate);
-
-                        // 绑定删除上传中的方法
-                        _bindDelete($waiting);
-
-                        $addBtn.before($waiting);
-                        $addBtn.trigger('changeShowHide');
-                    });
-                }
-                // //当文件超出上限的时候，禁止上传
-                // var currentCount  = $addBtn.closest('.thumbnails-container').find('.thumbnail:not(.add)').length;
-                // if(currentCount >= that.opts.maxNumber) {
-                //     $addBtn.hide();
-                // }
-
-                // 当file.length等于
-
-            });
-
-            /*var opt = {
-                id:that.opts.name  +
-            }
-            qiniu_upload2()*/
-        }
 
         function _bindDelete($obj) {
             $obj.find('.delete').on('click', function(e) {
@@ -174,34 +117,46 @@
                 }
             });
 
-            // sb七牛云必须加载到页面后的dom才能初始化
-            setTimeout(function() {
-                _bindUpload(that.$node)
-            },500);
+            if(!that.opts.isRead){
+                // sb七牛云必须加载到页面后的dom才能初始化
+                setTimeout(function() {
+                    _bindUpload(that.$node)
+                },500);
+                that.$node.removeAttr('hidden');
+            } else {
+                that.$node.attr('hidden',true);
+            }
+
         }
 
 
-        this.__afterAppend = function () {
-            // _bindUpload(that.$node);
-        }
         this.__setValue = function(value) {
-            // console.log('image / this.__setValue(' + value + ')');
-            // this.$node.find('input').val(value);
-            //
-            // var urlList;
-            // if (value.match(/images:\[(.*)\]/) && value.match(/images:\[(.*)\]/).length > 0) {
-            //     urlList = value.match(/images:\[(.*)\]/)[1].split(',');
-            // } else {
-            //     urlList = [];
-            // }
-            //
-            // $.each(urlList, function(idx) {
-            //     var $item = $(that.thumbnailTemplate.format({url: urlList[idx]}));
-            //     that.$node.find('.thumbnails-container').append($item);
-            // });
-            // if(urlList.length == 0) {
-            //     that.$node.attr('hidden',true);
-            // }
+            console.log('image / this.__setValue(' + value + ')');
+            this.$node.find('input[name={name}]'.format({name:that.opts.name})).val(value);
+
+            var urlList;
+            if (value.match(/images:\[(.*)\]/) && value.match(/images:\[(.*)\]/).length > 0) {
+                urlList = value.match(/images:\[(.*)\]/)[1].split(',');
+            } else {
+                urlList = [];
+            }
+
+            $.each(urlList, function(idx) {
+                var $item = $(that.thumbnailTemplate.format({url: urlList[idx]}));
+                if(that.opts.isRead) {
+                    $item.find('.delete').hide();
+                }
+                _bindDelete($item);
+                var $container = that.$node.find('.thumbnails-container');
+                var $addBtn = $container.find('.thumbnail.add');
+                $addBtn.before($item);
+            });
+            if(urlList.length == 0) {
+                that.$node.attr('hidden',true);
+            } else {
+                that.$node.removeAttr('hidden');
+
+            }
 
         }
 
