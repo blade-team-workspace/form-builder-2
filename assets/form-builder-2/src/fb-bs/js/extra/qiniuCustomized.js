@@ -15,7 +15,7 @@
 
 		formData.append('file', opts.data.file);
 		// 这里需要设置正确的token
-		formData.append('token', 'pBwzxNPBDAAD9cJaND2xh3TkgtTilQERWHSByAQ_:9CNVM9IegER_FjIbGKw3qcjTvIQ=:eyJzY29wZSI6ImJwbXRlc3QiLCJkZWFkbGluZSI6MTU0OTIxNTMxNX0=');
+		formData.append('token', 'token');
 		formData.append('key', opts.data.key);
 
 		$.ajax({

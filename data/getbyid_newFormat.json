@@ -218,6 +218,7 @@
 
 		"s3":["1"],
 		"s2":"1",
+		"i2": "images:[http://192.168.10.123:9999/data/b.png]",
 		"rec": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]",
 		"b22":3,
 		"s55":"1",

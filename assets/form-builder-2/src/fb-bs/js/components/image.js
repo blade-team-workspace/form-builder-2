@@ -174,7 +174,7 @@
                 // 切如果提供了多个，其优先级为uptoken > uptoken_url > uptoken_func
                 // 其中uptoken是直接提供上传凭证，uptoken_url是提供了获取上传凭证的地址，如果需要定制获取uptoken的过程则可以设置uptoken_func
                 // uptoken_url: '/token',			//Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
-                uptoken : 'pBwzxNPBDAAD9cJaND2xh3TkgtTilQERWHSByAQ_:9CNVM9IegER_FjIbGKw3qcjTvIQ=:eyJzY29wZSI6ImJwbXRlc3QiLCJkZWFkbGluZSI6MTU0OTIxNTMxNX0=',			//若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
+                uptoken : 'token',			//若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
 
                 // unique_names: true,				// 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
                 // save_key: true,   				// 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
