@@ -85,10 +85,15 @@
                         }
 
                     });
-                    var finalLabel = label.join(',');
-                    that.$node.attr("title",finalLabel);
-                    that.$node.find('input').val(value);
-                    that.$node.find('.showValue').html(finalLabel);
+                    if(label.length == 0 ) {
+                        this.$node.attr('hidden',true);
+                    } else {
+                        this.$node.removeAttr('hidden', true);
+                        var finalLabel = label.join(',');
+                        that.$node.attr("title", finalLabel);
+                        that.$node.find('input').val(value);
+                        that.$node.find('.showValue').html(finalLabel);
+                    }
                 }
             }
         }
