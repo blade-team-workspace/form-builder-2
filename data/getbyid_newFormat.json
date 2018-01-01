@@ -2,7 +2,17 @@
 	"label": "测试表单",
 	"type": "form",
 	"items": [
-
+		{
+			"label": "[group0] luyin",
+			"type": "form-group",
+			"groupId": "group0",
+			"items": [
+				{
+					"name": "ta2",
+					"type": "audio"
+				}
+			]
+		},
 		{
 			"label": "[group0] 下拉duo选-1",
 			"type": "multimedia",
@@ -22,7 +32,8 @@
 						"label": "选项3",
 						"value": 3
 					}]
-				},{
+				}
+				,{
 					"name": "s3",
 					"type": "checkbox",
 					"options": [{
@@ -87,6 +98,19 @@
 					"label": "555555555",
 					"name":"taNew4",
 					"type":"text"
+				}
+			]
+		}
+	,
+		{
+			"label": "图片-2",
+			"type": "form-group",
+			"items": [
+				{
+					"name": "i2",
+					"type": "image",
+					"maxNumber": 5,
+					"minNumber": 0
 				}
 			]
 		},
