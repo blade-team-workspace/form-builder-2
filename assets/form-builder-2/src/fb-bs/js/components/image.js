@@ -102,12 +102,14 @@
         this.__render = function() {
             this.$node = $(this.template.format(this.opts));
 
+
             var $add = $(this.addTemplate.format({id:add_id}));
             this.$node.find('.thumbnails-container').append($add);
-            this.$node.find('input').on('change', function(e) {
+            this.$node.find('input[name={name}]'.format({name:that.opts.name})).on('change', function(e) {
                 var value = e.target.value;
                 that.setValue(value);
             });
+
             $add.on('changeShowHide',function() {
                 var current = $(this).closest('.thumbnails-container').find('.thumbnail:not(.add)').length;
                 if (current >= that.opts.maxNumber) {

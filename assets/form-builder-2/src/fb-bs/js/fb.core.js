@@ -49,7 +49,7 @@
 	function activeEventBinds($form, ebs) {
 		// 触发器名字和事件详情的map
 		var triggerName_eb_map = {};
-		$.each(ebs, function (idx) {
+		$.each(ebs || [], function (idx) {
 			triggerName_eb_map[ebs[idx].trigger] = ebs[idx];
 		});
 		$form.data('eventBindsMap', triggerName_eb_map);
@@ -94,6 +94,7 @@
 				}
 			});
 		});
+        changeContainerStatus($form);
 
 	}
 

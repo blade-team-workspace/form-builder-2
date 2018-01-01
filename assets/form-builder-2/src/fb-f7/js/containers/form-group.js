@@ -20,7 +20,7 @@
 
 		this.labelTemplate =
 				'<li class="item-label">' +
-					'<a href="#" class="item-with-addon">' +
+					'<div href="#" class="item-with-addon">' +
 						'<div class="item-content">' +
 							'<div class="item-inner">' +
 								'<div class="item-title {fontType}">{label}</div>' +
@@ -29,7 +29,7 @@
 								'</div>' +
 							'</div>' +
 						'</div>' +
-					'</a>' +
+					'</div>' +
 				'</li>';
 		this.contentTemplate =
 				'<li class="swipeout show-value-container" style="height: 0px;">' +
@@ -144,6 +144,7 @@
             //只读模式，将必填和箭头隐藏
             if ( global_isRead || childComponent.opts.isRead ) {
 
+                $(this.$node[0]).find('.item-with-addon').off('click', childComponent.editCallback);
                 $(this.$node[0]).find('.addon').addClass('hide');
                 $(this.$node[0]).find('.item-title').find('.requireMarkHolder').addClass('hide');
             }

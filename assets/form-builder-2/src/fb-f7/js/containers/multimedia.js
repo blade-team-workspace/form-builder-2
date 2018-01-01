@@ -20,7 +20,7 @@
 
 		this.labelTemplate =
 				'<li class="item-label">' +
-					'<a href="#" class="item-with-addon">' +
+					'<div href="#" class="item-with-addon">' +
 						'<div class="item-content">' +
 							'<div class="item-inner">' +
 								'<div class="item-title">{label}</div>' +
@@ -29,7 +29,7 @@
 								'</div>' +
 							'</div>' +
 						'</div>' +
-					'</a>' +
+					'</div>' +
 					'<span class="addon-items-popover" style="display: none;">' +
 						'<div class="addon-items-container">' +
 							/*'<a><i class="f7-icons size-smallest">compose</i></a>' +
@@ -175,8 +175,9 @@
 
 
 			});
-            //只读模式，将必填和箭头隐藏
+            //只读模式，将必填和箭头隐藏 将点击事件取消
             if(global_isRead){
+                $label.find('.item-with-addon').off('click');
                 $label.find('.addon-edit').addClass('hide');
                 $label.find('.requireMarkHolder').addClass('hide');
             }

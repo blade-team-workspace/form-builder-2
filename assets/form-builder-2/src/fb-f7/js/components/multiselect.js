@@ -86,6 +86,11 @@
                 if(value === ''){
                     value = [] ;
                 }
+                if($.isArray(value)){
+
+                } else {
+                    value = [value];
+                }
                 var smartSelect = that.$node.find('.smart-select');
                 smartSelect.smartSelectSetValue(value);
                 var showValue = '';
@@ -94,7 +99,7 @@
                         showValue += that.optionsMap[value[i]];
                     }else{
                         showValue += that.optionsMap[value[i]];
-                        showValue += ','
+                        showValue += '/'
                     }
                 }
                 that.$node.find('.showValue').html(showValue);
