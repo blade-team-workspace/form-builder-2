@@ -14,8 +14,6 @@
 		// TODO: 改成从后台获取token
 
 		formData.append('file', opts.data.file);
-		// 这里需要设置正确的token
-		formData.append('token', 'token');
 		formData.append('key', opts.data.key);
 
 		$.ajax({
