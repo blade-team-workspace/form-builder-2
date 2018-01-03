@@ -161,7 +161,7 @@
                     }*/
                     that.$node.addClass('symbol required')
                 } else {
-                    label.removeClass('symbol required');
+                    that.$node.removeClass('symbol required');
                 }
             }
         }

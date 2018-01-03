@@ -40,7 +40,7 @@
     function initValidator($form) {
         $.validator.setDefaults({
             debug: true,
-            ignore: '.ignore',
+            ignore: '.ignore, :input:not([name])',	// 不去校验所有带ignore的class的输入项和没有name属性的
             errorClass: 'text-danger',
             errorPlacement: function (label, element) {
                 $(label).html($(label).html().replace(/:|：/g, ''));
@@ -55,7 +55,7 @@
             }
         });
 
-        dropFormValidator = $form.validate({ignore: '.ignore'});
+        dropFormValidator = $form.validate();
 
         $form.on('submit', function(){
             var inputs = $(':input', $form);
