@@ -133,18 +133,17 @@
 				dataType: 'JSON',
 				success: function(jsonConf) {
                     $('#testForm').renderForm(jsonConf);
+
+					$('#testForm').append(
+						'<div class="col-sm-12">'+
+							'<button class="btn btn btn-primary btn-block" type="submit">提交</button>' +
+						'</div>'
+					);
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					$('#testForm').html('Ops... Something must be wrong, check it');
 				}
 			});
-
-
-			$('#testForm').append(
-				'<div class="col-sm-12">'+
-					'<button class="btn btn btn-primary btn-block" type="submit">提交</button>' +
-				'</div>'
-			);
 
 			/*$.ajax({
 				url: '/data/getbyid_newFormat_bak.json',
