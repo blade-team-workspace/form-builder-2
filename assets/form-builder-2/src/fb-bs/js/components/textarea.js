@@ -17,9 +17,12 @@
 		baseComponent.apply(this, arguments);
 
 		this.template =
-            '<div class = "component"><span class="textarea-group">' +
-				'<textarea name="{name}" class="form-control" rows="{rows}" value = "{value}"></textarea>'
-            + '</span></div>';
+            '<div class = "component">' +
+				'<span class="textarea-group">' +
+					'<textarea name="{name}" class="form-control" rows="{rows}" value = "{value}"></textarea>'+
+             	'</span>' +
+           		'<div class="help-block-error"></div>' +
+			'</div>';
 
 
 		var that = this ;

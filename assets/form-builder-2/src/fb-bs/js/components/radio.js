@@ -12,7 +12,9 @@
 
     var component_radio = function (kargs) {
         baseComponent.apply(this, arguments);
-        this.template = '<div class="component" ><div class="radio-content"></div></div>';
+        this.template = '<div class="component" ><div class="radio-content"></div>' +
+            '<div class="help-block-error"></div>'+
+            '</div>';
         this.options = '<div class="radio clip-radio radio-primary radio-inline" ><input name = "{name}" type="radio" value="{value}" class="coreInput"><label class = "itemLabel">{label}</label></div>';
         var that = this ;
         function randomId(prefix){

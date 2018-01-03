@@ -17,7 +17,7 @@
 		baseComponent.apply(this, arguments);// 执行基类的初始化
 
 		this.template =  
-				'<span class="component">' +
+				'<div class="component">' +
 					'<input type="hidden" name="{name}"/>' +
 					'<span class="record-part">' +
 						// 录音按钮、试听按钮、上传按钮、清空按钮
@@ -28,7 +28,8 @@
 						'<audio class="fb-audio" controls="controls">您的浏览器不支持该功能</audio>' +
 						'<button type="button" class="btn btn-danger delete"><i class="fa fa-close"></i></button>' +
 					'</span>' +
-				'</span>';
+					'<div class="help-block-error"></div>' +
+				'</div>';
 		this.recorderTemplate =
 				'<div class="recorder">' +
 					'<span class="record-btn-part">' +

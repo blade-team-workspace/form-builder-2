@@ -12,7 +12,12 @@
 
     var component_checkbox = function (kargs) {
         baseComponent.apply(this, arguments);
-        this.template = '<div class="component"><div class="options"></div></div>';
+        this.template = '<div class="component">' +
+                            '<div class="options">' +
+                            '</div>' +
+                            '<div class="help-block-error">' +
+                            '</div>' +
+                        '</div>';
         this.options = '<div class="checkbox clip-check check-primary checkbox-inline" ><input type="checkbox" value="{value}" name="{name}" class="coreInput"><label class = "itemLabel">{label}</label></div>';
         var that = this ;
         function randomId(prefix){

@@ -26,7 +26,6 @@
 						'</label>' +
 						'<div class="contentClass {contentWidth}">' +
 							'<div class="childComponent"></div>' +
-							'<div class="help-block-error"></div>' +
 						'</div>' +
 					'</div>' +
 				'</div>';
@@ -50,6 +49,13 @@
 			if (Component === undefined) {
 				console.error('组件或容器[{type}]未找到对应的class定义'.format({type: opt.type}));
 			}
+            var nameLabelMap = this.$form.data('nameLabelMap');
+            if (nameLabelMap === undefined) {
+                nameLabelMap = {};
+            }
+            nameLabelMap[opt.name] = this.opts.label;
+
+            this.$form.data('nameLabelMap', nameLabelMap);
 			var component = new Component(opt);
 			component.render();
 

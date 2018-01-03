@@ -54,6 +54,12 @@
                 }
                 // 将当前$form传入下一层参数
                 opt.$form = that.$form;
+                var nameLabelMap = this.$form.data('nameLabelMap');
+                if (nameLabelMap === undefined) {
+                    nameLabelMap = {};
+                }
+                nameLabelMap[opt.name] = that.opts.label;
+                this.$form.data('nameLabelMap', nameLabelMap);
                 opt.rule = that.$form.data('fb-form').opts.rules[opt.name];
                 var component = new Component(opt);
                 component.render();

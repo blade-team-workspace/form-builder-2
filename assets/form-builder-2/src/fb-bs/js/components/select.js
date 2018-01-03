@@ -21,7 +21,10 @@
 		baseComponent.apply(this, arguments);
 
 		this.template =
-				'<div class ="component"><div class="select-content"><select name="{name}" class="form-control"></select></div></div>';
+				'<div class ="component">' +
+            '<div class="select-content"><select name="{name}" class="form-control"></select></div>' +
+            '<div class="help-block-error"></div>'+
+            '</div>';
 		var that = this;
 		var optionsMap = {};
 		this.__render = function() {

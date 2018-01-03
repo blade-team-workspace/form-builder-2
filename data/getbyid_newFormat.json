@@ -16,14 +16,14 @@
       ]
     },
     {
-      "label": "text",
+      "label": "ta1的label",
       "type": "form-group",
       "outerWidth": "col-sm-12",
       "labelWidth": "col-sm-2",
       "contentWidth": "col-sm-10",
       "items": [
         {
-          "name": "ta12",
+          "name": "ta1",
           "type": "text",
           "maxNumber": 1,
           "minNumber": 1
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "label": "[group0] 下拉duo选-1",
+      "label": "[group0] media_label",
       "type": "multimedia",
       "groupId": "group0",
       "items": [
@@ -207,7 +207,7 @@
       "maxlength": 10,
       "minlength": 5
     },
-    "s55": {
+    "i2": {
       "required": true
     }
   },
@@ -215,7 +215,7 @@
     "requireAtLeastOne": [
       [
         "ta1",
-        "ta2"
+        "s3"
       ]
     ]
   },
@@ -231,9 +231,7 @@
     }
   ],
   "values": {
-    "s3": [
-      "1"
-    ],
+
     "s2": "1",
     "i2": "images:[http://192.168.10.123:9999/data/b.png]",
     "rec": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]",

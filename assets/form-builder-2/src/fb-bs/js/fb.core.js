@@ -12,28 +12,70 @@
 
 	var cpts = $.formb.components;
 
+    // form校验器
+    var dropFormValidator = undefined;
 
 	$.fn.renderForm = function(jsonConf) {
 		var $form = $(this);
 		// 初始化校验器
-		// initValidator($form);
+		initValidator($form);
 
 		// 渲染生成form
 		render($form, jsonConf);
 
 		// 加校验
-		// afterAllAjaxCompleteDo(deferredObjectList, setFormRules, [$form]);
+		setFormRules($form , jsonConf.rules);
+        setGroupRules($form, jsonConf.groupRules);
 
 		// 加联动
         activeEventBinds($form,jsonConf.events);
+
 		// 赋初值
 		setFormValue($form, jsonConf.values);
-		//zz写法，后人引以为鉴，要开发时间必须预估时间* 2
-		// if(jsonConf.isRead)
-		// setTimeout(changeContainerStatus($form) , 300);
+
 	}
 
 
+    // 初始化form校验器
+    function initValidator($form) {
+        $.validator.setDefaults({
+            debug: true,
+            ignore: '.ignore',
+            errorClass: 'text-danger',
+            errorPlacement: function (label, element) {
+                $(label).html($(label).html().replace(/:|：/g, ''));
+                $(element).closest('.component').find('.help-block-error').append(label);
+            },
+            highlight : function(element) {
+                $(element).closest('.component').addClass('has-error');
+            },
+            success: function (label, element) {
+                label.remove();
+                $(element).closest('.has-error').removeClass('has-error');
+            }
+        });
+
+        dropFormValidator = $form.validate({ignore: '.ignore'});
+
+        $form.on('submit', function(){
+            var inputs = $(':input', $form);
+            // $.each(inputs, function(idx){
+            //     try {
+            //         if ($(inputs[idx]).valid() == false) {
+            //             var offsetTop = $(inputs[idx]).closest('.component').offset().top + ($(inputs[idx]).closest('.component').height() / 2);
+            //             var halfAvailHeight = (window.screen.availHeight / 2);
+            //             $("html, body").animate({
+            //                 scrollTop: (offsetTop - halfAvailHeight)
+            //             }, 0);
+            //             return false;
+            //         }
+            //     } catch (e) {
+            //         // do nothing
+            //     }
+            // });
+
+        });
+    }
 	function render($form, jsonConf) {
 		// 将当前渲染的form对象传入配置，作为form容器的$node对象
         var opt = $.extend({}, jsonConf, {'$node': $form, '$form': $form});
@@ -46,6 +88,60 @@
 		// component.appendTo($form);
 	}
 
+	function setGroupRules ($form,groupRules) {
+		//将所有参与groupRules的input绑定规则
+		// case atLeastOne
+		var index = 0;
+        var rule_name ;
+		var requireAtLeastOne = groupRules.requireAtLeastOne ;
+		$.each(requireAtLeastOne || [] ,function (_idx) {
+            rule_name = 'requireAtLeastOne'+index;
+			index ++;//每个index都不一样
+            $.validator.addMethod(rule_name,function (value, element, param) {
+                var isAllNull = true;
+                $.each(param , function (_idx) {
+                    var $form = $(element).closest('form');
+                    var values = $form.serializeJson();
+                    if(values[param[_idx]] !== undefined && values[param[_idx]] !== ''){
+                        isAllNull = false;
+                    }
+                });
+                return !isAllNull;
+            },function (params) {
+                var label = [];
+                var labelMap = $form.data('nameLabelMap');
+                $.each(params , function (_idx) {
+                    if(labelMap[params[_idx]] !== undefined) {
+                        label.push(labelMap[params[_idx]])
+                    }
+                });
+                return label.join(',') + '必须填一项'
+
+            });
+			var each_group = requireAtLeastOne[_idx];
+			$.each(each_group , function (_i) {
+				var each = each_group[_i];
+				var $input = $form.find(':input[name={name}]'.format({name:each}));
+
+				var obj = new Object();
+				obj[rule_name] = each_group;
+				$input.rules('add',obj);
+
+			})
+		})
+
+	}
+    function aa (value, element, param) {
+		var isAllNull = true;
+		$.each(param , function (_idx) {
+			var $form = $(element).closest('form');
+			var values = $form.serializeJson();
+			if(values.param[_idx] !== undefined && values.param[_idx] !== ''){
+                isAllNull = false;
+			}
+		});
+		return isAllNull;
+	}
 	function activeEventBinds($form, ebs) {
 		// 触发器名字和事件详情的map
 		var triggerName_eb_map = {};
@@ -82,6 +178,7 @@
 
 			$.each(targets, function() {
 				var $this = $(this);
+				console.log($this[0].outerHTML + '~~~~~~');
 				if (['radio', 'checkbox'].indexOf($this.attr('type')) != -1) {
 					if ((!$.isArray(value) && $this.attr('value') == value) ||
 						($.isArray(value) && value.indexOf($this.attr('value')) != -1)) {
@@ -95,7 +192,6 @@
 			});
 		});
         changeContainerStatus($form);
-
 	}
 
 	function changeContainerStatus($form) {
@@ -119,11 +215,29 @@
 
 	}
 
+	// 增加表单校验
+	function setFormRules($form,rules) {
+
+		//获取到所有含有name的input
+		var $inputs = $form.find(':input[name]');
+
+		$.each($inputs , function (_idx , input) {
+			var $input = $($inputs[_idx]);
+			var name = $input.attr('name');
+			var rule = rules[name] ;
+			if( rule !== undefined ) {
+                $input.rules('add', rule);
+			}
+		});
+
+
+	}
 
 
 
 
-// 扩展String类型的原生方法，提供类似java或python的format方法
+
+	// 扩展String类型的原生方法，提供类似java或python的format方法
 	String.prototype.format = function(args) {
 		var result = this;
 		if (arguments.length > 0) {
@@ -166,6 +280,29 @@
             }
         }
         return false;
+    }
+
+    // 序列化表格元素为JSON
+    $.fn.serializeJson = function() {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (o[this.name] == null || !o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                if (this.value === "false") {
+                    o[this.name] = false;
+                } else if (this.value === "true") {
+                    o[this.name] = true;
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            }
+        });
+        return o;
     }
 
 }));

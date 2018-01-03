@@ -26,13 +26,13 @@
 						'</label>' +
 						'<div class="contentClass {contentWidth}">' +
 							'<span class="childComponent"></span>' +
-							'<div class="help-block-error"></div>' +
 						'</div>' +
 					'</div>' +
 				'</div>';
 
 		this.__render = function() {
 			var childComponents = [];		// 用于存放所有渲染完毕的components
+
 			$.each(this.opts.items, function(idx){
 				var opt = that.opts.items[idx];
 
@@ -43,7 +43,13 @@
                 // 将当前$form传入下一层参数
                 opt.$form = that.$form;
                 opt.rule = that.$form.data('fb-form').opts.rules[opt.name];
-				var component = new Component(opt);
+                var nameLabelMap = this.$form.data('nameLabelMap');
+                if (nameLabelMap === undefined) {
+                    nameLabelMap = {};
+                }
+                nameLabelMap[opt.name] = that.opts.label;
+                this.$form.data('nameLabelMap', nameLabelMap);
+                var component = new Component(opt);
 				component.render();
 				childComponents.push(component);
 			});

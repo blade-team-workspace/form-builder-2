@@ -21,7 +21,10 @@
         baseComponent.apply(this, arguments);
         var that = this;
         this.template =
-            '<div class = "component"><div class="select"><select name="{name}" class="form-control coreinput multiselect" size="2"  multiple></select></div></div>';
+            '<div class = "component">' +
+            '<div class="select"><select name="{name}" class="form-control coreinput multiselect" size="2"  multiple></select></div>' +
+            '<div class="help-block-error"></div>'+
+            '</div>';
 
         this.__render = function() {
 

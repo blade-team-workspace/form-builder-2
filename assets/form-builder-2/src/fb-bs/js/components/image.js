@@ -27,6 +27,7 @@
             '<input type="hidden" name="{name}" />' +
             '<div class="thumbnails-container">' +
             '</div>' +
+            '<div class="help-block-error"></div>'+
             '</div>';
 
         this.addTemplate =
@@ -122,11 +123,13 @@
             if(!that.opts.isRead){
                 // sb七牛云必须加载到页面后的dom才能初始化
                 setTimeout(function() {
-                    _bindUpload(that.$node)
+                    _bindUpload(that.$node);
                 },500);
                 $add.css('display','inline-block');
+                // $add.show();
             } else {
                 $add.css('display','none')
+                // $add.hide();
             }
 
         }
@@ -178,6 +181,9 @@
                 // uptoken_url: '/token',			//Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
                 uptoken : 'token',			//若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
 
+                filters : {
+                    mime_types:[{title : "Image files", extensions : "jpg,jpeg,png,bmp"}]
+                },
                 // unique_names: true,				// 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
                 // save_key: true,   				// 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK会忽略对key的处理
                 domain: 'http://olt0d7mfp.bkt.clouddn.com/',   //bucket 域名，下载资源时用到，**必需**
