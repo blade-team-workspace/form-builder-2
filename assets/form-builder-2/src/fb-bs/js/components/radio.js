@@ -15,7 +15,7 @@
         this.template = '<div class="component" ><div class="radio-content"></div>' +
             '<div class="help-block-error"></div>'+
             '</div>';
-        this.options = '<div class="radio clip-radio radio-primary radio-inline" ><input name = "{name}" type="radio" value="{value}" class="coreInput"><label class = "itemLabel">{label}</label></div>';
+        this.options = '<div class="radio clip-radio radio-primary radio-inline" {isHide}><input name = "{name}" type="radio" value="{value}" class="coreInput"><label class = "itemLabel">{label}</label></div>';
         var that = this ;
         function randomId(prefix){
             return ( prefix || '' ) + ( new Date().valueOf().toString(36)+Math.random().toString(36) ).split('0.').join('_').toUpperCase();
@@ -23,11 +23,17 @@
         this.__render = function() {
             if(!that.opts.isRead) {
 
-
                 that.$node = $(that.template);
                 $.each(that.opts.options, function (idx, obj) {
                     var random_id = randomId();
-                    var $option = $(that.options.format($.extend({}, that.opts.options[idx], {'name': that.opts.name})));
+                    var hideFlag;
+                    var label  = that.opts.options[idx].description !== undefined ? that.opts.options[idx].description : that.opts.options[idx].label;
+                    if(that.opts.options[idx].isHide){
+                        hideFlag = 'style="display:none"';
+                    }else{
+                        hideFlag = '';
+                    }
+                    var $option = $(that.options.format($.extend({}, {value:that.opts.options[idx].value,label:label,isHide:hideFlag}, {'name': that.opts.name})));
                     $option.find('input').prop('id', random_id);
                     $option.find('label').attr('for', random_id);
                     that.$node.find('.radio-content').append($option);

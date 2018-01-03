@@ -28,6 +28,12 @@
 	display: inline;
 	color: #E6674A;
 }
+.symbol.required-stream:before {
+	content: "*";
+	display: inline;
+	color: #E6674A;
+	margin-right: 5px;
+}
 /* 图片上传 */
 .thumbnails-description {
 	color: #999;

@@ -18,7 +18,7 @@
                             '<div class="help-block-error">' +
                             '</div>' +
                         '</div>';
-        this.options = '<div class="checkbox clip-check check-primary checkbox-inline" ><input type="checkbox" value="{value}" name="{name}" class="coreInput"><label class = "itemLabel">{label}</label></div>';
+        this.options = '<div class="checkbox clip-check check-primary checkbox-inline" {isHide}><input type="checkbox" value="{value}" name="{name}" class="coreInput"><label class = "itemLabel">{label}</label></div>';
         var that = this ;
         function randomId(prefix){
             return ( prefix || '' ) + ( new Date().valueOf().toString(36)+Math.random().toString(36) ).split('0.').join('_').toUpperCase();
@@ -35,10 +35,17 @@
                 that.$node = $(that.template);
                 $.each(that.opts.options,function (idx, obj) {
                     var random_id = randomId();
+                    var hideFlag;
                     var label  = that.opts.options[idx].description !== undefined ? that.opts.options[idx].description : that.opts.options[idx].label;
+                    if(that.opts.options[idx].isHide){
+                        hideFlag = 'style="display:none"';
+                    }else{
+                        hideFlag = '';
+                    }
                     var values = {
                         value:that.opts.options[idx].value,
-                        label:label
+                        label:label,
+                        isHide:hideFlag
                     }
                     var $option = $(that.options.format($.extend({},values,{'name' : that.opts.name})));
                     $option.find('input').prop('id',random_id);

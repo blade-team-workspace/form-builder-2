@@ -52,6 +52,7 @@
             success: function (label, element) {
                 label.remove();
                 $(element).closest('.has-error').removeClass('has-error');
+
             }
         });
 
@@ -126,6 +127,10 @@
 				var obj = new Object();
 				obj[rule_name] = each_group;
 				$input.rules('add',obj);
+
+				$input.on('keyup', function() {
+                    $(event.target).closest('form').valid();
+				});
 
 			})
 		})
@@ -303,6 +308,54 @@
             }
         });
         return o;
+    }
+    function addHideValue($form,json) {
+        var $hide_div = $form.find('.hidden-value');
+        $.each($hide_div , function (_idx) {
+            var name = $($hide_div[_idx]).attr('value-name');
+            var hide_value =  $($hide_div[_idx]).html();
+            var array = hide_value!==''?hide_value.split(','):[];
+            var show_value = json[name];
+            if(show_value === undefined){
+                json[name] = array;
+            }else {
+                if($.isArray(show_value)) {
+                    var final_value =  show_value.concat(array);
+                    json[name] = final_value;
+                } else {
+                    var c = show_value.split('');
+                    var final_value = c.concat(array);
+                    json[name] = final_value;
+                }
+            }
+
+        });
+        return json;
+
+	}
+	window.addHideValue = function ($form,json) {
+        var $hide_div = $form.find('.hidden-value');
+        $.each($hide_div , function (_idx) {
+            var name = $($hide_div[_idx]).attr('value-name');
+            var hide_value =  $($hide_div[_idx]).html();
+            var array = hide_value!==''?hide_value.split(','):[];
+            var show_value = json[name];
+            if(show_value === undefined){
+                json[name] = array;
+			}else {
+                if($.isArray(show_value)) {
+                   var final_value =  show_value.concat(array);
+                    json[name] = final_value;
+                } else {
+                    var c = show_value.split('');
+                    var final_value = c.concat(array);
+                    json[name] = final_value;
+                }
+			}
+
+        })
+        return json;
+
     }
 
 }));

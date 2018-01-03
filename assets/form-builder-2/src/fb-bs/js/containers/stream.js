@@ -84,8 +84,18 @@
                  var childComponent = appendData.components[idx];
                  var opts = childComponent.opts;
                  var $container = $label.find('[item-name=' + opts.name + ']');
+                 if(true) {
+                     // $container.addClass('symbol required')
+                     // $container.css('display','inline-block');
+                     // $container.css(':before','margin-right:5px')
+                 }
                  // 找到指定“壳”，将渲染完的对象放入容器中
                  $container.append(childComponent.$node);
+                 if(opts.rule!==undefined && opts.rule.required){
+
+                     childComponent.$node.css('display','inline-block');
+                     $container.addClass('symbol required-stream');
+                 }
 
           //       //判断是否是只读
           //       if (childComponent.opts.isRead) {

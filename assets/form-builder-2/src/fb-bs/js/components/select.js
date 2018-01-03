@@ -38,8 +38,21 @@
                     that.$node.find('select').append('<option value="">' + that.opts.placeholder + '</option>')
                 }
                 if (that.opts.options !== undefined && that.opts.options.length > 0) {
-                    $.each(that.opts.options, function () {
-                        that.$node.find('select').append('<option value="' + this.value + '">' + this.label + '</option>');
+                    $.each(that.opts.options, function (idx) {
+                        var hideFlag;
+                        var label  = that.opts.options[idx].description !== undefined ? that.opts.options[idx].description : that.opts.options[idx].label;
+                        if(that.opts.options[idx].isHide){
+                            hideFlag = 'style="display:none"';
+                        }else{
+                            hideFlag = '';
+                        }
+                        that.$node.find('select').append('<option value="{value}" {isHide}>{label}</option>'
+                            .format(
+                            {
+                                value:that.opts.options[idx].value,
+                                label:label,
+                                isHide:hideFlag
+                            }));
                         optionsMap[this.value] = this.label;
                     });
                 } else {

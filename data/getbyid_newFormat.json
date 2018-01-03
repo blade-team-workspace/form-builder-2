@@ -41,6 +41,7 @@
           "options": [
             {
               "label": "选项1asdasdasdsdadadasdadadadadadadadads",
+              "isHide": true,
               "value": 1
             },
             {
@@ -60,6 +61,7 @@
             {
               "label": "选项1asdasdasdsdadadasdadadadadadadadads",
               "value": 1,
+              "isHide": true,
               "description": "菜鸡12312312312312313"
             },
             {
@@ -148,10 +150,12 @@
           "type": "multiselect",
           "options": [
             {
+              "isHide":true,
               "label": "显示multi",
               "value": 1
             },
             {
+              "isHide":true,
               "label": "选项2",
               "value": 2
             },
@@ -179,7 +183,8 @@
             },
             {
               "label": "选项2",
-              "value": 2
+              "value": 2,
+              "isHide":true
             },
             {
               "label": "选项3",
@@ -207,7 +212,7 @@
       "maxlength": 10,
       "minlength": 5
     },
-    "i2": {
+    "s55": {
       "required": true
     }
   },
@@ -234,8 +239,8 @@
 
     "s2": "1",
     "i2": "images:[http://192.168.10.123:9999/data/b.png]",
-    "rec": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]",
-    "s55": "1",
+    "rec1111": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]",
+    "s55": ["1","2"],
     "taNew1": "123",
     "taNew2": "2"
   },

@@ -52,6 +52,7 @@
 			this.$node.find('input').on('change', function(e) {
 				var value = e.target.value;
 				that.setValue(value);
+                $(this).trigger('keyup');
 			});
 
 			// 渲染录音部分
@@ -164,21 +165,25 @@
 			console.log('audio / this.__setValue("' + data + '")');
 
 
-				// 当没有值的时候
-				if(data === '') {
-					this.$node.attr('hidden',true);
-				} else {
+			if(that.opts.isRead){
+                // 当没有值的时候
+                if(data === '') {
+                    this.$node.attr('hidden',true);
+                } else {
                     this.$node.removeAttr('hidden');
-                    this.$node.find('input').val(data);
-                    var url = "";
 
-                    if (data && data.match(/audios:\[(.*)\]/) !== null) {
-                        url = data.match(/audios:\[(.*)\]/)[1].split(',')[0];
-                    }
-
-                    // 给播放部分的audio赋值
-                    this.$node.find('.play-part audio').attr('src', url);
                 }
+			}
+
+            this.$node.find('input').val(data);
+            var url = "";
+
+            if (data && data.match(/audios:\[(.*)\]/) !== null) {
+                url = data.match(/audios:\[(.*)\]/)[1].split(',')[0];
+            }
+
+            // 给播放部分的audio赋值
+            this.$node.find('.play-part audio').attr('src', url);
 
 
             // 给播放部分的audio赋值

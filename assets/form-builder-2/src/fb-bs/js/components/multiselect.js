@@ -22,6 +22,7 @@
         var that = this;
         this.template =
             '<div class = "component">' +
+            '<div class="hidden-value" value-name="{name}" style="display: none"></div>'+
             '<div class="select"><select name="{name}" class="form-control coreinput multiselect" size="2"  multiple></select></div>' +
             '<div class="help-block-error"></div>'+
             '</div>';
@@ -47,7 +48,22 @@
                         } else {
                             label = this.label;
                         }
-                        $select.append('<option value="' + this.value + '">' + label + '</option>');
+                        if(this.isHide) { //
+                            var hide_value = that.$node.find('.hidden-value').html();
+                            var array = hide_value!==''?hide_value.split(','):[];
+                            var value = that.opts.$form.data('fb-form').opts.values[that.opts.name] || [];
+                            if(!$.isArray(value)){
+                                value = value.split(',');
+                            }
+                            if(value.indexOf(this.value.toString())!==-1) { // 证明有值
+                                array.push(this.value);
+                            }
+                            that.$node.find('.hidden-value').html(array.toString()) // 将旧版的值加进来
+
+
+                        } else {
+                            $select.append('<option value="' + this.value + '" style="display: none">' + label + '</option>');
+                        }
                     });
                 } else {
                     $select.append('<option value="">--No-Item--</option>');
@@ -74,6 +90,8 @@
                     $(this).multiselect('refresh');
 
                     that.addSimpleLabel();
+
+                    $(this).trigger('keyup');
                 });
             } else {
                 that.$node = $(that.readTemplate.format(that.opts));

@@ -109,6 +109,7 @@
             this.$node.find('input[name={name}]'.format({name:that.opts.name})).on('change', function(e) {
                 var value = e.target.value;
                 that.setValue(value);
+                $(this).trigger('keyup');
             });
 
             $add.on('changeShowHide',function() {
@@ -184,7 +185,7 @@
                 // 其中uptoken是直接提供上传凭证，uptoken_url是提供了获取上传凭证的地址，如果需要定制获取uptoken的过程则可以设置uptoken_func
                 // uptoken_url: '/token',			//Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
 
-                uptoken : '<TOKEN>',			//若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
+                uptoken : 'pBwzxNPBDAAD9cJaND2xh3TkgtTilQERWHSByAQ_:9CNVM9IegER_FjIbGKw3qcjTvIQ=:eyJzY29wZSI6ImJwbXRlc3QiLCJkZWFkbGluZSI6MTU0OTIxNTMxNX0=',			//若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
 
                 filters : {
                     mime_types:[{title : "Image files", extensions : "jpg,jpeg,png,bmp"}]

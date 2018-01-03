@@ -153,16 +153,7 @@
                     label.removeClass('symbol required');
                 }
             } else { //stream
-                if (required) {
-                    /*if (that.$node.find('.multiselect-native-select').length!=0) { //多选特殊处理
-                        that.$node.find('button').css('border-color', 'red');
-                    } else {
-                        that.$node.find('[name={name}]'.format({name: that.opts.name})).css('border-color', 'red');
-                    }*/
-                    that.$node.addClass('symbol required')
-                } else {
-                    that.$node.removeClass('symbol required');
-                }
+
             }
         }
 
