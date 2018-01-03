@@ -2,7 +2,7 @@
     'use strict';
     if (typeof define === 'function' && define.amd) {
         // AMD模式
-        define(['jQuery'], factory);
+        define(['jquery'], factory);
     } else {
         // 全局模式
         factory(jQuery);
