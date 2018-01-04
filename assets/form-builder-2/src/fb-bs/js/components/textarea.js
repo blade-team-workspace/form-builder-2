@@ -19,7 +19,7 @@
 		this.template =
             '<div class = "component">' +
 				'<span class="textarea-group">' +
-					'<textarea name="{name}" class="form-control" rows="{rows}" value = "{value}"></textarea>'+
+					'<textarea name="{name}" class="form-control" rows="{rows}" ></textarea>'+
              	'</span>' +
            		'<div class="help-block-error"></div>' +
 			'</div>';
@@ -64,8 +64,8 @@
                 } else {
                     that.$node.removeAttr('hidden');
                     that.$node.attr("title",value);
-                    that.$node.find('input').val(value);
-                    that.$node.find('.showValue').html(value);
+                    that.$node.find('textarea').val(value);
+
                 }
 			}
 

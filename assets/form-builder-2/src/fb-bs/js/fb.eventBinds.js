@@ -14,23 +14,42 @@
     $.formb.eventBinds.valueChangeShowHide = {
         listener: 'change',
         callback: function(event) {
+            // 改变显示
+            function checkViewStatus  ($container) {
+                var components = $container.find('.component');
+                var allHidden = true;
+                $.each(components, function (_idx) {
+                    if (!$(components[_idx]).is('[hidden]')) {
+                        allHidden = false;
+                    }
+                });
+                if (allHidden && !$container.hasClass('stream')) {
+                    $container.attr('hidden', true);
+                } else {
+                    $container.removeAttr('hidden');
+                }
+            }
             //formGroup事件绑定
             function __fromGroupEventBind ($form ,itemContainer,itemName,respNames) {
                 // 当前轮询的name在本次应该显示的nameList中
+
                 if (respNames.indexOf(itemName) != -1) {
-                    itemContainer.removeAttr('hidden');
+                    itemContainer.find('.component').removeAttr('hidden');
                     // 启用存值的节点
                     $form.find('[name=' + itemName + ']').prop('disabled', false);
+                    console.log(itemName + ":removehidden");
                 } else {
                     // 隐藏存值的节点
-                    itemContainer.attr('hidden',true);
+                    itemContainer.find('.component').attr('hidden',true);
 
                     // 将要隐藏的组件值赋为空，并触发change事件
                     $form.find('[name=' + itemName + ']').val('').trigger('change');
 
                     // 禁用存值的节点
                     $form.find('[name=' + itemName + ']').prop('disabled', true);
+                    console.log(itemName + ":hidden");
                 }
+                checkViewStatus(itemContainer);
             }
             //multimedia事件绑定
             function __multiMediaEventBind ($form ,itemContainer,itemName,respNames) {

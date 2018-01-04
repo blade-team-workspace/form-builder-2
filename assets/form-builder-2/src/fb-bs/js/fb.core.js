@@ -25,7 +25,7 @@
 
 		// 加校验
 		setFormRules($form , jsonConf.rules);
-        setGroupRules($form, jsonConf.groupRules);
+        setGroupRules($form, jsonConf.groupRules||[]);
 
 		// 加联动
         activeEventBinds($form,jsonConf.events);

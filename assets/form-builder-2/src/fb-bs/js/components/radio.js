@@ -43,7 +43,7 @@
                 // 给用来存值的input对象加change监听，如果值改变，只有可能是setFormValue执行造成的
                 this.$node.find('input').on('change', function (e) {
                     var value = e.target.value;
-                    that.setValue(value);
+                    // that.setValue(value);
                 });
             } else {
                 that.$node = $(that.readTemplate.format(that.opts));
