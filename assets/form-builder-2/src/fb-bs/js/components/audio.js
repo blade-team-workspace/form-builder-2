@@ -79,6 +79,11 @@
 				recorder.stop();
 				recorder.play(audio);
 
+				// 录完音立刻关闭audioContext避免超出最大值
+				recorder.close();
+				// 将临时文件存起来，以备上传使用
+				that.tempFile = recorder.getBlob();
+
 				console.log('当前录音值为:', recorder.getBlob());
 			}
 
@@ -109,8 +114,8 @@
 			$recorderNode.find('.upload-btn').on('click', function() {
 				var opt = {
 					data: {
-						file: recorder.getBlob(),
-						key: 'testUploadAudio1.wav'
+						file: that.tempFile,
+						key: that.opts.name + '_0_' + (new Date()).valueOf() + '.wav'
 					},
 					success: function(res) {
 						console.log('upload success');
