@@ -14,6 +14,9 @@
 	var baseComponent = $.formb.baseComponent;
 
 	var component_text = function(kargs) {
+        this.componentDefaultOpts = {
+            placeholder: ''
+        };
 		baseComponent.apply(this, arguments);
 
 		this.template =

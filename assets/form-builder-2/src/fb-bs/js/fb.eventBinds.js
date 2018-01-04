@@ -37,17 +37,21 @@
                     itemContainer.find('.component').removeAttr('hidden');
                     // 启用存值的节点
                     $form.find('[name=' + itemName + ']').prop('disabled', false);
-                    console.log(itemName + ":removehidden");
                 } else {
                     // 隐藏存值的节点
                     itemContainer.find('.component').attr('hidden',true);
 
                     // 将要隐藏的组件值赋为空，并触发change事件
-                    $form.find('[name=' + itemName + ']').val('').trigger('change');
+                    if($form.find('[name=' + itemName + ']').attr('type')!=='radio' && $form.find('[name=' + itemName + ']').attr('type')!=='checkbox'){
+
+                        $form.find('[name=' + itemName + ']').val('').trigger('change');
+                    }else {
+                        if(!$form.find('[name=' + itemName + ']').is(':disabled'))
+                        $form.find('[name=' + itemName + ']').trigger('change');
+                    }
 
                     // 禁用存值的节点
                     $form.find('[name=' + itemName + ']').prop('disabled', true);
-                    console.log(itemName + ":hidden");
                 }
                 checkViewStatus(itemContainer);
             }
@@ -66,7 +70,13 @@
                     $component.attr('hidden',true);
 
                     // 将要隐藏的组件值赋为空，并触发change事件
-                    $form.find('[name=' + itemName + ']').val('').trigger('change');
+                    if($form.find('[name=' + itemName + ']').attr('type')!=='radio' && $form.find('[name=' + itemName + ']').attr('type')!=='checkbox'){
+
+                        $form.find('[name=' + itemName + ']').val('').trigger('change');
+                    }else {
+                        if(!$form.find('[name=' + itemName + ']').is(':disabled'))
+                        $form.find('[name=' + itemName + ']').trigger('change');
+                    }
 
                     // 禁用存值的节点
                     $form.find('[name=' + itemName + ']').prop('disabled', true);
@@ -98,8 +108,13 @@
                     // 隐藏存值的节点
                     $component.attr('hidden',true);
 
-                    // 将要隐藏的组件值赋为空，并触发change事件
-                    $form.find('[name=' + itemName + ']').val('').trigger('change');
+                    if($form.find('[name=' + itemName + ']').attr('type')!=='radio' && $form.find('[name=' + itemName + ']').attr('type')!=='checkbox'){
+                        // 将要隐藏的组件值赋为空，并触发change事件
+                        $form.find('[name=' + itemName + ']').val('').trigger('change');
+                    } else {
+                        if(!$form.find('[name=' + itemName + ']').is(':disabled'))
+                        $form.find('[name=' + itemName + ']').trigger('change');
+                    }
 
                     // 禁用存值的节点
                     $form.find('[name=' + itemName + ']').prop('disabled', true);
@@ -144,7 +159,7 @@
             var respNames = [];						// 取得当前值对应的所有响应对象(应该显示的对象名)
 
 
-            if ($this.attr('type') == 'checkbox') {
+            if ($this.attr('type') == 'checkbox'||$this.attr('type') == 'radio') {
                 $.each($('[name=' + triggerName + ']:checked', $form), function(){
                     triggerValues.push($(this).val());
                     respNames.add(valueRespMap[$(this).val()]);
