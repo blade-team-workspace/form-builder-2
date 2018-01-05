@@ -14,12 +14,16 @@
 	var baseComponent = $.formb.baseComponent;
 
 	var component_textarea = function(kargs) {
+		this.componentDefaultOpts = {
+			rows: 4
+		};
+
 		baseComponent.apply(this, arguments);
 
 		this.template =
             '<div class = "component">' +
 				'<span class="textarea-group">' +
-					'<textarea name="{name}" class="form-control" rows="{rows}" ></textarea>'+
+					'<textarea name="{name}" class="form-control" rows="{rows}" style="resize: none;"></textarea>'+
              	'</span>' +
            		'<div class="help-block-error"></div>' +
 			'</div>';
