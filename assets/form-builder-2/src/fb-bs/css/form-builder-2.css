@@ -188,3 +188,7 @@
 		color: #333;
 	}
 }
+
+.multiselect-container>li>a>label.radio, .multiselect-container>li>a>label.checkbox {
+	white-space: normal;
+}

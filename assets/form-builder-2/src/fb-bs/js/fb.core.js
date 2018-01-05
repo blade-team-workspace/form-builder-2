@@ -60,20 +60,20 @@
 
         $form.on('submit', function(){
             var inputs = $(':input', $form);
-            // $.each(inputs, function(idx){
-            //     try {
-            //         if ($(inputs[idx]).valid() == false) {
-            //             var offsetTop = $(inputs[idx]).closest('.component').offset().top + ($(inputs[idx]).closest('.component').height() / 2);
-            //             var halfAvailHeight = (window.screen.availHeight / 2);
-            //             $("html, body").animate({
-            //                 scrollTop: (offsetTop - halfAvailHeight)
-            //             }, 0);
-            //             return false;
-            //         }
-            //     } catch (e) {
-            //         // do nothing
-            //     }
-            // });
+            $.each(inputs, function(idx){
+                try {
+                    if ($(inputs[idx]).valid() == false) {
+                        var offsetTop = $(inputs[idx]).closest('.component').offset().top + ($(inputs[idx]).closest('.component').height() / 2);
+                        var halfAvailHeight = (window.screen.availHeight / 2);
+                        $("html, body").animate({
+                            scrollTop: (offsetTop - halfAvailHeight)
+                        }, 0);
+                        return false;
+                    }
+                } catch (e) {
+                    // do nothing
+                }
+            });
 
         });
     }
@@ -135,17 +135,6 @@
 			})
 		})
 
-	}
-    function aa (value, element, param) {
-		var isAllNull = true;
-		$.each(param , function (_idx) {
-			var $form = $(element).closest('form');
-			var values = $form.serializeJson();
-			if(values.param[_idx] !== undefined && values.param[_idx] !== ''){
-                isAllNull = false;
-			}
-		});
-		return isAllNull;
 	}
 	function activeEventBinds($form, ebs) {
 		// 触发器名字和事件详情的map
@@ -309,6 +298,9 @@
         });
         return o;
     }
+    $.fn.getFormData = function () {
+	    return addHideValue($(this),$(this).serializeJson());
+    }
     function addHideValue($form,json) {
         var $hide_div = $form.find('.hidden-value');
         $.each($hide_div , function (_idx) {
@@ -329,7 +321,7 @@
                 }
             }
 
-        });
+        })
         return json;
 
 	}

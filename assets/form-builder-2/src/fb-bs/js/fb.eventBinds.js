@@ -37,6 +37,7 @@
                     itemContainer.find('.component').removeAttr('hidden');
                     // 启用存值的节点
                     $form.find('[name=' + itemName + ']').prop('disabled', false);
+                    console.log('removehidden');
                 } else {
                     // 隐藏存值的节点
                     itemContainer.find('.component').attr('hidden',true);
@@ -52,6 +53,7 @@
 
                     // 禁用存值的节点
                     $form.find('[name=' + itemName + ']').prop('disabled', true);
+                    console.log('hidden');
                 }
                 checkViewStatus(itemContainer);
             }
@@ -134,6 +136,8 @@
                     itemContainer.removeAttr('hidden');
                 }
             }
+
+            // ----------------------------------------------------
             // 当前事件的触发对象
             var $this = $(event.target);
             // 作用域（form）
@@ -147,31 +151,51 @@
             $.each(eb.valueResps, function(value){
                 // 使用自定义组相加方法，是组合并，是内容直接加入组
                 //将数组去重
-                if(allResp.contains(value)){
+                /*if(allResp.contains(eb.valueResps[value])){
                     //do nothing
                 }
                 else{
                     allResp.add(eb.valueResps[value])
+                }*/
+                if($.isArray(this)) {
+                    $.each(this, function(_idx) {
+                       if(  !allResp.contains(this.toString())) {
+                           allResp.add(this.toString());
+                       }
+                    });
+
+                } else {
+                    if( !allResp.contains(this)) {
+                        allResp.add(this.toString());
+                    }
                 }
+
             });
+
+
             var valueRespMap = eb.valueResps;		// {触发器的value: 响应对象的name}的关系
             var triggerValues = [];					// 触发器现在的值(使用数组存储，统一格式方便操作)
             var respNames = [];						// 取得当前值对应的所有响应对象(应该显示的对象名)
 
 
             if ($this.attr('type') == 'checkbox'||$this.attr('type') == 'radio') {
-                $.each($('[name=' + triggerName + ']:checked', $form), function(){
-                    triggerValues.push($(this).val());
-                    respNames.add(valueRespMap[$(this).val()]);
-                });
-            } else {
+                if($('[name=' + triggerName + ']:checked', $form).length!==0){
+                    $.each($('[name=' + triggerName + ']:checked', $form), function(){
+                        triggerValues.push($(this).val());
+                        respNames.add(valueRespMap[$(this).val()]);
+                    });
+                }
+
+            }  else {
 
             // 整理出所有需要显示的name，放到respNames中
             triggerValues.add($this.val());		// 将触发器值转化成数组放入triggerValues
             $.each(triggerValues, function(idx) {
+                if(valueRespMap[triggerValues[idx]] !== undefined)
                 respNames.add(valueRespMap[triggerValues[idx]]);
             });
             }
+
             console.log('Selected: [' + triggerValues.join(', ') + '], respNames:', respNames);
 
             // 轮询所有响应的输入项name
