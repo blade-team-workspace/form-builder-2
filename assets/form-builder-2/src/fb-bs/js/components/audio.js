@@ -133,7 +133,7 @@
 
 			// 清空按钮的绑定
 			$recorderNode.find('.reset-btn').on('click', function() {
-				audio.setAttribute('src', null);
+				audio.setAttribute('src', '');
 				that.$node.find('.help-info').html('');
 
 				$recorderNode.find('.test-btn-part').addClass('hide');

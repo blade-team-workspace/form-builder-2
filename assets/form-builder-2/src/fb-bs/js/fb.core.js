@@ -32,10 +32,26 @@
 
 		// 赋初值
 		setFormValue($form, jsonConf.values);
+        // bindQiniu($form);
+
+        // 初始化获取权限
+        if ($('#HZRecorderRight').length == 0) {
+            HZRecorder.get();
+            $('body').append($('<div style="display: none;" id="HZRecorderRight"></div>'));
+        }
 
 	}
 
 
+	function bindQiniu ($form) {
+	    // var $inputs = $form.find('input[qiniu]');
+	    // $.each($inputs , function (_idx) {
+         //    (function(args) {
+                $.formb.bindQiniu($form);
+        //     })(_idx);
+        //
+        // });
+    }
     // 初始化form校验器
     function initValidator($form) {
         $.validator.setDefaults({

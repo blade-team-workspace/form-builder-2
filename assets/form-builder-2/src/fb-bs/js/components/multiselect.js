@@ -89,7 +89,7 @@
 
                     $(this).multiselect('refresh');
 
-                    that.addSimpleLabel();
+                    // that.addSimpleLabel();
 
                     $(this).trigger('keyup');
                 });
