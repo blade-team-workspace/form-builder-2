@@ -122,10 +122,68 @@
             });
 
             if(!that.opts.isRead){
+
+                var index = 0 ;
+                $add.find('input[type=file]').on('change', function(e) {
+                    if($(this).val()!==''){
+                    var ab_key = that.opts.name + '_' + index + '_' + (new Date()).valueOf();
+                    index++;
+
+                    var opt = {
+                        data: {
+                            file: $(this).get(0).files[0],
+                            key: ab_key + $(this).val().match(/\.?[^.\/]+$/)
+                        }, beforeSend: function (xhr) {
+                            var key = ab_key.split('.')[0].split('_');
+                            var name = key[0];
+                            var index = key[1];
+                            var $container = $('input[name={name}]'.format({name: name})).closest('.component').find('.thumbnails-container');
+                            // 增加占位图
+                            var $waiting = $(that.waitingTemplate);
+                            $waiting.attr('index', index);
+                            // 绑定删除上传中的方法
+                            _bindDelete($waiting);
+                            var $addBtn = $container.find('.thumbnail.add');
+                            $addBtn.before($waiting);
+                            $addBtn.trigger('changeShowHide');
+                        }, success: function (res) {
+                            console.log('upload success');
+                            var domain = $('#qiniuDomain').val();
+                            var sourceLink = domain + res.key;		// 获取上传成功后的文件的Url
+                            var key = res.key.split('.')[0].split('_');
+                            var name = key[0];
+                            var index = key[1];
+                            var $item = $(that.thumbnailTemplate.format({url: sourceLink}));
+                            $item.attr('index', index);
+
+                            // 绑定点击弹出
+                            $item.find('.image-container').bindPopup();
+
+                            _bindDelete($item);
+                            var $container = $('input[name={name}]'.format({name: name})).closest('.component').find('.thumbnails-container');
+                            var $waiting = $container.find('.thumbnail.waiting[index={index}]'.format({index: index}));
+                            $waiting.replaceWith($item);
+                            // 更新已存值
+                            var imageData = {
+                                formId: $container.closest('form').attr('id'),
+                                name: that.opts.name
+                            };
+                            _updateImageItemUrls(imageData);
+                        },
+                        error: function (res) {
+                            console.log('upload error.', res);
+                            // that.$node.find('.help-info').html($.parseJSON(res.responseText)['error']);
+                        }
+
+                    }
+                    qiniu_upload(opt)
+                }
+                });
                 // sb七牛云必须加载到页面后的dom才能初始化
-                setTimeout(function() {
-                    _bindUpload(that.$node);
-                },500);
+                // setTimeout(function() {
+                //     _bindUpload(that.$node);
+                // },500);
+                var opt =
                 $add.css('display','inline-block');
                 // $add.show();
             } else {
@@ -161,11 +219,13 @@
                 var $addBtn = $container.find('.thumbnail.add');
                 $addBtn.before($item);
             });
-            if(urlList.length == 0) {
-                that.$node.attr('hidden',true);
-            } else {
-                that.$node.removeAttr('hidden');
+            if(that.opts.isRead) {
+                if (urlList.length == 0) {
+                    that.$node.attr('hidden', true);
+                } else {
+                    that.$node.removeAttr('hidden');
 
+                }
             }
 
         }
