@@ -68,7 +68,7 @@
                 } else {
                     that.$node.removeAttr('hidden');
                     that.$node.attr("title",value);
-                    that.$node.find('textarea').val(value);
+                    that.$node.find('.showValue').html(value);
 
                 }
 			}

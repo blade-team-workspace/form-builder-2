@@ -31,7 +31,9 @@
         activeEventBinds($form,jsonConf.events);
 
 		// 赋初值
-		setFormValue($form, jsonConf.values);
+		setFormValue($form, jsonConf);
+
+
 
         // 初始化获取权限
         if ($('#HZRecorderRight').length == 0) {
@@ -41,6 +43,15 @@
 
 	}
 
+	function clearComponent ($form) {
+        var $inputs  = $form.find('input[name]');
+        $.each($inputs , function (_idx) {
+            var $input = $($inputs[_idx]);
+            if($input.val() == '') {
+                $input.closest('.component').attr('hidden',true);
+            }
+        });
+    }
 
 
     // 初始化form校验器
@@ -135,8 +146,8 @@
 				obj[rule_name] = each_group;
 				$input.rules('add',obj);
 
-				$input.on('keyup', function() {
-                    $(event.target).closest('form').valid();
+				$input.on('keyup', function(e) {
+                    $(e.target).closest('form').valid();
 				});
 
 			})
@@ -169,7 +180,8 @@
 	// /////////////////////////////////////////////////////////////////////////////
 	// 表单赋值与取值
 	// /////////////////////////////////////////////////////////////////////////////
-	function setFormValue($form, values) {
+	function setFormValue($form, json) {
+	    var values = json.values ;
 		// console.log('>>>length', $(':input').length);
 		$(':input').trigger('change');
 		$.each(values || [], function(name) {
@@ -192,11 +204,17 @@
 				}
 			});
 		});
+
+		if(json.isRead) {
+            clearComponent($form);
+        }
         changeContainerStatus($form);
 	}
 
 	function changeContainerStatus($form) {
         // var $inputs = $form.find('[name=' + that.opts.name + ']');
+
+
         var $containers = $form.find('.outerClass');
         $.each($containers , function (_idx) {
             var $container = $($containers[_idx]);
