@@ -21,6 +21,7 @@
 		this.template = '<div>THIS IS BASE-CONTAINER TEMPLATE</div>';
 		this.opts = undefined;
 		this.groupId = undefined;
+		this.rule = undefined || {};
 
 
 		// 初始化(实例化默认调用)

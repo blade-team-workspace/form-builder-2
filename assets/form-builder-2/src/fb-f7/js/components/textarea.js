@@ -106,6 +106,10 @@
 					'</div>';
 
 			var currentLength = (that.value === undefined ? 0 :that.value.length);
+			//将rule 手动置为不空
+			if(that.rule === undefined) {
+				that.rule = {};
+			}
 			var minLength = (that.rule.minlength === undefined ? 0 :  + that.rule.minlength);
 			myApp.popup(popupTemplate.format({
 				title: that.opts.label,
@@ -118,6 +122,7 @@
 			if(currentLength < minLength) {
                 $('.current-length').addClass('min-number-warn');
 			}
+			
 			// 联动事件绑定
 			$('#textEdit').on('input', function(e) {
 				var minLengthLimit = -1;

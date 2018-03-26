@@ -83,13 +83,13 @@
 		activeEventBinds($form, jsonConf.events);
 
 		// 赋初值
-		setFormValue($form, jsonConf.values);
+		setFormValue($form, jsonConf);
 	}
 
 
 
 	function render($form, jsonConf) {
-        $.each(jsonConf.items , function (_idx) {
+		$.each(jsonConf.items , function (_idx) {
         	var items = jsonConf.items[_idx];
         	$.each(items.items, function (__i) {
         		var item = items.items[__i];
@@ -210,8 +210,30 @@
 
 
 	// 给表单赋值的方法
-	function setFormValue($form, values) {
+	function setFormValue($form, jsonConf) {
 		var formId = $form.attr('id');
+		
+		// 组成name: type的map
+		var keyTypeMap = {};
+		$.each(jsonConf.items, function(idx) {
+			var containerOpts = jsonConf.items[idx];
+			$.each(containerOpts.items, function(_idx) {
+				var item = containerOpts.items[_idx];
+				keyTypeMap[item.name] = item.type;
+			});
+		});
+		
+		// 针对pc端提交多选直选中1个时，值为字符串的bug进行数据重组
+		var values = jsonConf.values || {};
+		$.each(values, function(key) {
+			// 是多选类型 且 值不为空
+			if (['multiselect', 'checkbox'].indexOf(keyTypeMap[key]) != -1 && [undefined, "", null].indexOf(values[key]) == -1) {
+				var tempArray = [];
+				tempArray.add(values[key]);
+				values[key] = tempArray;
+			}
+		});
+		
 		myApp.formFromData('#' + formId, values || {});
 	}
 

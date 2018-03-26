@@ -7,7 +7,7 @@
 	}
 }(function ($, undefined) {
 
-	$.formb = $.formb || {}	;
+	$.formb = $.formb || {};
 
 	$.formb.components = $.formb.components || {};
 	var baseComponent = $.formb.baseComponent;
@@ -80,9 +80,6 @@
 			setTimeout(function(){
                 // var smartSelect=that.$node.find('select');
             	// myApp.smartSelectOpen(that.$node.find('.smart-select'));
-
-
-
                 var smartSelect = that.$node.find('.smart-select');
                 var $select = that.$node.find('select');
                 //当没有选择时，让checkbox没有默认点击
@@ -90,7 +87,6 @@
                     that.__setValue([]);
                 }
                 myApp.smartSelectOpen(smartSelect);
-
 
                 /*在picker退出的时候需要有段动画，这段动画结束后才能正常使用，在这里
                 我们取得最后一项的picker-modal-inner
@@ -104,11 +100,9 @@
                 var minLength = $select[0].length > pickerOptions.length ? pickerOptions.length : $select[0].length;
 
                 for(var i = 0 ; i < minLength ; i++) {
-
                     if($($select[0][i]).css("display")==='none'){
                         $(pickerOptions[i]).closest('li').remove();
                     }
-
                 }
 			}, 0);
 		}

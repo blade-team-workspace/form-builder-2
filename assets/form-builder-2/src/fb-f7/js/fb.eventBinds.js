@@ -35,8 +35,8 @@
 			// 目前不会出现checkbox，出现，以下方法还需要修改(bs不要直接复制此方法)
 			/*if ($this.attr('type') == 'checkbox') {
 				$.each($('[name=' + triggerName + ']:checked', $form), function(){
-					triggerValues.push($(this).val());
-					respNames.add(valueRespMap[$(this).val()]);
+					triggerValues.push($this.val());
+					respNames.add(valueRespMap[$this.val()]);
 				});
 			} else {*/
 
