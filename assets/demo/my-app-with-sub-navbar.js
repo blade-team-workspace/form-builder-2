@@ -20,7 +20,7 @@ if (project == 'bpmApp') {
 } else if (project == 'blade') {
 	// blade用
 	url_getformvaluebyid = "data/getformvaluebyid_4+1.json";
-	url_getbyid = "data/getbyid_newFormat.json";
+	url_getbyid = "data/class.json";
 	url_saveformData = "data/saveformData.json";
 }
 

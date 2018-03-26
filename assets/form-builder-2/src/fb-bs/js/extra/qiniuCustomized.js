@@ -15,6 +15,7 @@
 
 		formData.append('file', opts.data.file);
 		formData.append('key', opts.data.key);
+		formData.append('token','pBwzxNPBDAAD9cJaND2xh3TkgtTilQERWHSByAQ_:9CNVM9IegER_FjIbGKw3qcjTvIQ=:eyJzY29wZSI6ImJwbXRlc3QiLCJkZWFkbGluZSI6MTU0OTIxNTMxNX0=')
 
 		$.ajax({
 			url: 'http://up-z1.qiniu.com',

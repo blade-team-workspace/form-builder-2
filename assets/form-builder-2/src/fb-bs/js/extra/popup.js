@@ -79,7 +79,7 @@
 				$('.easy-show-anime').removeClass('easy-show-anime').addClass('easy-hide-anime');
 				opts.beforeRecover(i, opts);
 
-				setTimeout(function(){
+				setTimeout(function(w){
 					dm.replaceWith(i);
 					i.removeClass('recover');
 					i.data().dummy = '';

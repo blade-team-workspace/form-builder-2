@@ -7,7 +7,7 @@
 	}
 }(function ($, undefined) {
 
-	$.formb = $.formb || {};
+	$.formb = $.formb || {}	;
 
 	$.formb.components = $.formb.components || {};
 	var baseComponent = $.formb.baseComponent;
@@ -78,8 +78,38 @@
 
 		this.editCallback = function(e) {
 			setTimeout(function(){
-				var smartSelect=that.$node.find('select');
-            	myApp.smartSelectOpen(that.$node.find('.smart-select'));
+                // var smartSelect=that.$node.find('select');
+            	// myApp.smartSelectOpen(that.$node.find('.smart-select'));
+
+
+
+                var smartSelect = that.$node.find('.smart-select');
+                var $select = that.$node.find('select');
+                //当没有选择时，让checkbox没有默认点击
+                if(that.value == undefined || that.value === []) {
+                    that.__setValue([]);
+                }
+                myApp.smartSelectOpen(smartSelect);
+
+
+                /*在picker退出的时候需要有段动画，这段动画结束后才能正常使用，在这里
+                我们取得最后一项的picker-modal-inner
+                */
+                var pickerLength = $('.picker-modal-inner').length;
+                var $picker = $($('.picker-modal-inner')[pickerLength - 1]);
+                // 手动将options 带有hide的选项去掉
+
+                var pickerOptions = $picker.find('input');
+                //判断select长度和pickerOptions的长度必须调整成一致
+                var minLength = $select[0].length > pickerOptions.length ? pickerOptions.length : $select[0].length;
+
+                for(var i = 0 ; i < minLength ; i++) {
+
+                    if($($select[0][i]).css("display")==='none'){
+                        $(pickerOptions[i]).closest('li').remove();
+                    }
+
+                }
 			}, 0);
 		}
 

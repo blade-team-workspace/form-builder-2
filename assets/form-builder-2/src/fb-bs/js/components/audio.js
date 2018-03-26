@@ -43,7 +43,7 @@
 					'<p class="help-info form-control-static" style="padding-left: 9px;"></p>' +
 				'</div>';
 
-		var that = this ;
+		var that = this;
 
 		this.__render = function() {
 
@@ -161,8 +161,9 @@
 				this.$node.find('.help-info').html('');
 			} else {
 				this.$node.find('.play-part').addClass('hide');
-				this.$node.find('.record-part').removeClass('hide');
+				this.$node.find('.record-part').addClass('hide');
 			}
+			this.$node.find('.help-block-error').addClass('hide');
 		}
 
 
@@ -171,11 +172,12 @@
 
 
 			if(that.opts.isRead){
+
                 // 当没有值的时候
                 if(data === '') {
-                    this.$node.attr('hidden',true);
+                    that.$node.attr('hidden',true);
                 } else {
-                    this.$node.removeAttr('hidden');
+                    that.$node.removeAttr('hidden');
 
                 }
 			}

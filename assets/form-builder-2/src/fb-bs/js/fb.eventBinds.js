@@ -135,6 +135,9 @@
                 } else {
                     itemContainer.removeAttr('hidden');
                 }
+
+                // 将如果disable的有隐藏
+
             }
 
             // ----------------------------------------------------

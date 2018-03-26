@@ -20,9 +20,11 @@
 	<script src="vendor/jquery-validation/localization/messages_zh_fieldname.js"></script>
 
 	<!-- 日期选择控件 -->
-	<link href="vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-	<script src="vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-	<script src="vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<!--<link href="vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">-->
+	<!--<script src="vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>-->
+	<!--<script src="vendor/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>-->
+	<script src="vendor/My97DatePicker/WdatePicker.js"></script>
+
 
 	<!-- 下拉复选插件 -->
 	<script src="vendor/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
@@ -85,7 +87,7 @@
 	<script src="assets/form-builder-2/src/fb-bs/js/components/audio.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/radio.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/checkbox.js"></script>
-	<script src="assets/form-builder-2/src/fb-bs/js/components/datetimepicker.js"></script>
+	<script src="assets/form-builder-2/src/fb-bs/js/components/date.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/image.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/number.js"></script>
 	<script src="assets/form-builder-2/src/fb-bs/js/components/multiselect.js"></script>
@@ -128,7 +130,7 @@
 
 
             $.ajax({
-				url: '/data/getbyid_newFormat.json',
+				url: '/data/class.json',
 				dataType: 'JSON',
 				success: function(jsonConf) {
                     $('#testForm').renderForm(jsonConf);

@@ -22,7 +22,7 @@
 		this.template =
 			'<div class = "component">'+
 				'<span class="text-group">'+
-					'<input type="text" name="{name}" width="{width}" height="{height}" ' +
+					'<input type="text" name="{name}" width="{width}" height="{height}" onkeyup="this.value=this.value.replace(/[&]/g,\'和\')"' +
 					'class="form-control coreInput" placeholder="{placeholder}"/>'+
 				'</span>'+
             	'<div class="help-block-error"></div>'+

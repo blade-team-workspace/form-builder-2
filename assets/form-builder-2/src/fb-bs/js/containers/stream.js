@@ -37,7 +37,7 @@
             var reSearch = appendData.label.match((/{[^{}]*}/g));
 
             // // 循环查找结果，将其替换；
-            $.each(reSearch, function(idx) {
+            $.each(reSearch || {}, function(idx) {
                 //var opts = that.opts.items;
                 var name = reSearch[idx].match("{([^{}]*)}")[1];	// 去掉左右大括号的
                 appendData.label = appendData.label.replace(reSearch[idx], that.contentTemplate.format({name:name}));
@@ -79,6 +79,7 @@
              this.$node = [$label];
 
              console.log([$label]); // [l] length=1(items行数) Array[0]
+
 
              $.each(appendData.components, function(idx) {
                  var childComponent = appendData.components[idx];

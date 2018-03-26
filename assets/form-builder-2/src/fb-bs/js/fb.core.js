@@ -183,7 +183,7 @@
 	function setFormValue($form, json) {
 	    var values = json.values ;
 		// console.log('>>>length', $(':input').length);
-		$(':input').trigger('change');
+		$(':input',$form).trigger('change');
 		$.each(values || [], function(name) {
 			var value = values[name];
 
@@ -220,11 +220,16 @@
             var $container = $($containers[_idx]);
             var components = $container.find('.component');
             var allHidden = true;
-            $.each(components, function (_idx) {
-                if (!$(components[_idx]).is('[hidden]')) {
-                    allHidden = false;
-                }
-            });
+            if(components.length !== 0) {
+                $.each(components, function (_idx) {
+                    if (!$(components[_idx]).is('[hidden]')) {
+                        allHidden = false;
+                    }
+                });
+            } else {
+                allHidden = false;
+            }
+
             if (allHidden) {
                 $container.attr('hidden', true);
             } else {
@@ -340,7 +345,7 @@
                     var final_value =  show_value.concat(array);
                     json[name] = final_value;
                 } else {
-                    var c = show_value.split('');
+                    var c = show_value.split(',');
                     var final_value = c.concat(array);
                     json[name] = final_value;
                 }

@@ -9,9 +9,7 @@
       "items": [
         {
           "name": "rec1111",
-          "type": "audio",
-          "maxNumber": 1,
-          "minNumber": 1
+          "type": "date"
         }
       ]
     },
@@ -52,6 +50,12 @@
               "value": 3
             }
           ]
+        },
+        {
+          "name": "i3",
+          "type": "image",
+          "maxNumber": 5,
+          "minNumber": 0
         },
         {
           "name": "s3",
@@ -103,19 +107,19 @@
         {
           "label": "目的地",
           "name": "taNew2",
-          "type": "multiselect",
+          "type": "select",
           "options": [
             {
               "label": "选项1",
-              "value": 1
+              "value": 11
             },
             {
               "label": "选项2",
-              "value": 2
+              "value": 22
             },
             {
               "label": "选项3",
-              "value": 3
+              "value": 33
             }
           ]
         },
@@ -182,8 +186,8 @@
             },
             {
               "label": "选项2",
-              "value": 2,
-              "isHide":true
+              "value": 2
+
             },
             {
               "label": "选项3",
@@ -206,12 +210,15 @@
     }
   ],
   "rules": {
-    "ta12": {
+    "multiselect": {
       "required": true,
       "maxlength": 10,
       "minlength": 5
     },
-    "s55": {
+    "rec1111": {
+      "required": true
+    },
+    "taNew2": {
       "required": true
     }
   },
@@ -228,7 +235,7 @@
       "eventType": "valueChangeShowHide",
       "trigger": "taNew2",
       "valueResps": {
-
+        "1": "taNew4"
       }
     }
   ],
@@ -236,10 +243,9 @@
     "ta2":"asdasd",
     "s2": "2",
     "i2": "images:[http://192.168.10.123:9999/data/b.png]",
-    "rec1111": "audios:[http://192.168.10.123:9998/data/556_Butterfly_Kiss.mp3]",
     "s55": ["1","2"],
     "taNew1": "123",
-    "taNew2": "2"
+    "taNew2": "11"
   },
   "isRead": false,
   "groupDefaultSplit": false

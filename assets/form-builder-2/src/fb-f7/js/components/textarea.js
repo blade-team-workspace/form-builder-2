@@ -91,7 +91,7 @@
 											'<div class="item-content">' +
 												'<div class="item-inner">' +
 													'<div class="item-input">' +
-														'<textarea id="textEdit">{value}</textarea>' +
+														'<textarea id="textEdit" onkeyup="this.value=this.value.replace(/[&]/g,\'和\')">{value}</textarea>' +
 													'</div>' +
 												'</div>' +
 											'</div>' +

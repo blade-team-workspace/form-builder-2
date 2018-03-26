@@ -20,7 +20,7 @@
             'f7-icon': 'star'
         };
         this.template = '<div>THIS IS BASE-COMPONENT TEMPLATE</div>';
-        this.readTemplate = '<div class="component form-control-static" title=""><input type="hidden" name="{name}" ><span class="showValue"></span></div>';
+        this.readTemplate = '<div class="component form-control-static" title=""><input type="hidden" name="{name}"  ><span class="showValue"></span></div>';
         this.opts = undefined;
         this.rule = undefined;
         this.value = undefined;
@@ -141,6 +141,7 @@
 
         //增加label必填星星,stream自定义
         this.addSimpleLabel = function () {
+
             var $container = this.$node.closest('.outerClass');
             var rules = that.opts.rule || {};
             var required = rules.required;
@@ -169,6 +170,7 @@
             // do nothing, not necessary
         }
         this.setValue = function (value) {
+
             this.__beforeSetValue();
             this.__setValue(value);
             this.value = value;
