@@ -32,7 +32,7 @@
 
 		this.__render = function() {
 			var childComponents = [];		// 用于存放所有渲染完毕的components
-
+			var flag = 0;
 			$.each(this.opts.items, function(idx){
 				var opt = that.opts.items[idx];
 
@@ -47,7 +47,24 @@
                 if (nameLabelMap === undefined) {
                     nameLabelMap = {};
                 }
-                nameLabelMap[opt.name] = that.opts.label;
+                var alertMsg;
+                if(opt.type == 'text'||opt.type == 'textarea'){
+                	alertMsg = '文本';
+                } else if (opt.type == 'image'){
+                	alertMsg = '图片';
+                } else if (opt.type == 'audio'){
+                	alertMsg = '';
+                } else if (opt.type == 'select'){
+                	alertMsg = '下拉';
+                } else if (opt.type == 'muiltiselect'){
+                	alertMsg = '多选'
+                }
+                
+                if(flag == 0){
+                	alertMsg = that.opts.label+":"+alertMsg
+                	flag = 1;
+                }
+                nameLabelMap[opt.name] = alertMsg;
                 this.$form.data('nameLabelMap', nameLabelMap);
                 var component = new Component(opt);
 				component.render();

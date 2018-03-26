@@ -135,9 +135,6 @@
                 } else {
                     itemContainer.removeAttr('hidden');
                 }
-
-                // 将如果disable的有隐藏
-
             }
 
             // ----------------------------------------------------
@@ -199,7 +196,7 @@
             });
             }
 
-            console.log('Selected: [' + triggerValues.join(', ') + '], respNames:', respNames);
+//            console.log('Selected: [' + triggerValues.join(', ') + '], respNames:', respNames);
 
             // 轮询所有响应的输入项name
             $.each(allResp, function(idx){

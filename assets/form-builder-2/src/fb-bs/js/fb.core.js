@@ -33,15 +33,16 @@
 		// 赋初值
 		setFormValue($form, jsonConf);
 
-
-
-        // 初始化获取权限
-        if ($('#HZRecorderRight').length == 0) {
-            HZRecorder.get();
-            $('body').append($('<div style="display: none;" id="HZRecorderRight"></div>'));
-        }
+//		if(jsonConf.isRead){
+//        // 初始化获取权限
+//           if ($('#HZRecorderRight').length == 0) {
+//               HZRecorder.get();
+//               $('body').append($('<div style="display: none;" id="HZRecorderRight"></div>'));
+//           }
+//		}
 
 	}
+
 
 	function clearComponent ($form) {
         var $inputs  = $form.find('input[name]');
@@ -52,7 +53,6 @@
             }
         });
     }
-
 
     // 初始化form校验器
     function initValidator($form) {
@@ -130,7 +130,7 @@
                 var label = [];
                 var labelMap = $form.data('nameLabelMap');
                 $.each(params , function (_idx) {
-                    if(labelMap[params[_idx]] !== undefined) {
+                    if(labelMap[params[_idx]] !== undefined &&labelMap[params[_idx]] !== '') {
                         label.push(labelMap[params[_idx]])
                     }
                 });
@@ -147,7 +147,13 @@
 				$input.rules('add',obj);
 
 				$input.on('keyup', function(e) {
-                    $(e.target).closest('form').valid();
+					if($("#validFlag").val() == "1"){
+						$.each($(e.target).closest('.outerClass').find(':input[name]'),function() {
+							console.log($(this).valid() + '-----------');
+						})
+//						$(e.target).closest('.outerClass').find(':input[name]').valid();
+//						$(e.target).valid();
+					}
 				});
 
 			})
@@ -181,7 +187,7 @@
 	// 表单赋值与取值
 	// /////////////////////////////////////////////////////////////////////////////
 	function setFormValue($form, json) {
-	    var values = json.values ;
+		var values = json.values;
 		// console.log('>>>length', $(':input').length);
 		$(':input',$form).trigger('change');
 		$.each(values || [], function(name) {
@@ -204,7 +210,6 @@
 				}
 			});
 		});
-
 		if(json.isRead) {
             clearComponent($form);
         }
@@ -213,8 +218,6 @@
 
 	function changeContainerStatus($form) {
         // var $inputs = $form.find('[name=' + that.opts.name + ']');
-
-
         var $containers = $form.find('.outerClass');
         $.each($containers , function (_idx) {
             var $container = $($containers[_idx]);
@@ -229,7 +232,6 @@
             } else {
                 allHidden = false;
             }
-
             if (allHidden) {
                 $container.attr('hidden', true);
             } else {
@@ -355,29 +357,5 @@
         return json;
 
 	}
-	window.addHideValue = function ($form,json) {
-        var $hide_div = $form.find('.hidden-value');
-        $.each($hide_div , function (_idx) {
-            var name = $($hide_div[_idx]).attr('value-name');
-            var hide_value =  $($hide_div[_idx]).html();
-            var array = hide_value!==''?hide_value.split(','):[];
-            var show_value = json[name];
-            if(show_value === undefined){
-                json[name] = array;
-			}else {
-                if($.isArray(show_value)) {
-                   var final_value =  show_value.concat(array);
-                    json[name] = final_value;
-                } else {
-                    var c = show_value.split('');
-                    var final_value = c.concat(array);
-                    json[name] = final_value;
-                }
-			}
-
-        })
-        return json;
-
-    }
 
 }));

@@ -43,7 +43,7 @@
 					'<p class="help-info form-control-static" style="padding-left: 9px;"></p>' +
 				'</div>';
 
-		var that = this;
+		var that = this ;
 
 		this.__render = function() {
 
@@ -121,9 +121,11 @@
 						console.log('upload success');
 						var domain = $('#qiniuDomain').val();
 						that.setValue("audios:[" + domain + res.key + "]");
+						that.$node.find('input').trigger('keyup');
 					},
 					error: function(res) {
 						console.log('upload error.', res);
+						alert("上传录音失败！请刷新页面");
 						that.$node.find('.help-info').html($.parseJSON(res.responseText)['error']);
 					}
 				};
@@ -143,6 +145,7 @@
 			// 删除按钮事件绑定
 			this.$node.find('.play-part .delete').on('click', function(e) {
 				that.setValue('');
+				that.$node.find('input').trigger('keyup');
 			});
 			if(that.opts.isRead) {
 
@@ -172,12 +175,11 @@
 
 
 			if(that.opts.isRead){
-
                 // 当没有值的时候
                 if(data === '') {
-                    that.$node.attr('hidden',true);
+                    this.$node.attr('hidden',true);
                 } else {
-                    that.$node.removeAttr('hidden');
+                    this.$node.removeAttr('hidden');
 
                 }
 			}
@@ -198,11 +200,12 @@
             this.$node.find('.play-part audio').attr('src', url);
             console.log('复制完毕后:', this.$node.find('.play-part audio')[0].outerHTML);
             
-			if (that.opts.isRead) {
-				this.$node.find('.delete').hide();
-			} else {
-				this.$node.find('.delete').show();
-			}
+//			if (that.opts.isRead) {
+//				this.$node.find('.delete').hide();
+//			} else {
+//				this.$node.find('.delete').show();
+//			}
+            this.$node.find('.delete').hide();
 		};
 
 

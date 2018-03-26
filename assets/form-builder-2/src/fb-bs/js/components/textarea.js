@@ -23,7 +23,7 @@
 		this.template =
             '<div class = "component">' +
 				'<span class="textarea-group">' +
-					'<textarea name="{name}" class="form-control" rows="{rows}" style="resize: none;" onkeyup="this.value=this.value.replace(/[&]/g,\'和\')"></textarea>'+
+					'<textarea name="{name}" class="form-control" rows="{rows}" style="resize: none;" onkeyup="this.value=this.value.replace(/[&]/g,\'和\')" ></textarea>'+
              	'</span>' +
            		'<div class="help-block-error"></div>' +
 			'</div>';
